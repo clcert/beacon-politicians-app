@@ -18,9 +18,9 @@ for row in rows:
 			row.div.decompose()	
 
 frows = []
-for i in range(len(rows)):
-	if len(rows[i]) != 0:
-		frows.append(rows[i])
+for row in rows:
+	if len(row) != 0:
+		frows.append(row)
 
 formatted = []
 for row in frows:
@@ -28,6 +28,6 @@ for row in frows:
 	for td in row.findAll('td'):
 		formatted[len(formatted)-1].append(td.getText().strip())
 		
-formatted[0] = ['Diputado', 'Partido', 'Asistencia', 'Porcentaje asistencia']
+formatted[0] = ['Diputado', 'Partido', 'Asistencias', 'Inasistenicas', 'Porcentaje asistencia']
 for form in formatted:
 	print(form)
