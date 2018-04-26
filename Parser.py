@@ -3,17 +3,12 @@ from bs4 import BeautifulSoup
 
 class Parser:
 	def get_deputies(self):
-		dep_list = self.parse_deplist()
+		"""
+		Returns a list of lists containing information for every deputy, in the format:
+		['First Names', 'Surnames', 'Party','District', 'Attendance', 'Birthdate']
+		"""
+		deputies = self.parse_deplist()
 
-		# Deputies list using format
-		# ['First Names', 'Surnames', 'Birthdate', 'Party','Circunscription', 'Regions']
-		deputies = [[dep_list[0][i], dep_list[1][i]] for i in range(len(dep_list[0]))]
-		
-		dep_info = dep_list[2]
-		for i in range(len(deputies)):
-			for j in range(len(dep_info[i])):
-				deputies[i].append(dep_info[i][j])
-		
 		for i in range(len(deputies)):
 			print(deputies[i])
 
@@ -51,19 +46,25 @@ class Parser:
 					first_names.append(name[(i+3):])
 					break
 		
-		# Additional information ['Region', 'District', 'Party']
-		additional_info = []
+		# District and party for every deputy
+		district = []
+		party = []
 		for row in rows:
 			col = row.findAll('td')
 
 			if len(col):
-				district = col[2].getText()
-				party = col[3].getText()
-				additional_info.append([district, party])
+				district.append(col[2].getText()[2:])
+				party.append(col[3].getText())
 
-		return (first_names, surnames, additional_info)
+		dep_list = (first_names, surnames, party, district)
+		deputies = [[] for i in range(len(dep_list[0]))]
+		
+		for i in range(len(deputies)):
+			for j in range(len(dep_list)):
+				deputies[i].append(dep_list[j][i])
+		return deputies
 
-	def parse_depattendance():
+	def parse_depattendance(self):
 		quote_page = 'https://www.camara.cl/trabajamos/sala_asistencia.aspx'
 		page = urllib.request.urlopen(quote_page)
 
@@ -74,17 +75,17 @@ class Parser:
 		my_table = soup.find('table', attrs={'class':'tabla'})
 		rows = my_table.findAll('tr')
 
-
-
+		# Get rows without unecessary info
 		for row in rows:
 			if row.table:
 				row.table.decompose()
 			if row.div:
 					row.div.decompose()	
 
+		# Filter non empty rows
 		frows = []
 		for row in rows:
-			if len(row) != 0:
+			if len(row):
 				frows.append(row)
 
 		formatted = []
@@ -94,8 +95,10 @@ class Parser:
 				formatted[len(formatted)-1].append(td.getText().strip())
 				
 		formatted[0] = ['Diputado', 'Partido', 'Asistencias', 'Inasistenicas', 'Porcentaje asistencia']
+		for i in(range(len(formatted))):
+			print(formatted[i])
 		return formatted
 
 			
 p = Parser()
-p.get_deputies()
+p.parse_depattendance()
