@@ -3,17 +3,21 @@ from bs4 import BeautifulSoup
 
 class Parser:
 	def get_deputies(self):
-		full_names = self.parse_depnames()
+		dep_list = self.parse_deplist()
 
 		# Deputies list using format
 		# ['First Names', 'Surnames', 'Birthdate', 'Party','Circunscription', 'Regions']
-		deputies = [[full_names[0][i], full_names[1][i]] for i in range(len(full_names[0]))]
+		deputies = [[dep_list[0][i], dep_list[1][i]] for i in range(len(dep_list[0]))]
+		
+		dep_info = dep_list[2]
+		for i in range(len(deputies)):
+			for j in range(len(dep_info[i])):
+				deputies[i].append(dep_info[i][j])
+		
+		for i in range(len(deputies)):
+			print(deputies[i])
 
-		for deputie in deputies:
-			print(deputie)
-
-
-	def parse_depnames(self):
+	def parse_deplist(self):
 		quote_page = 'https://www.camara.cl/camara/diputados_print.aspx'
 		page = urllib.request.urlopen(quote_page)
 
@@ -25,9 +29,11 @@ class Parser:
 		full_names = []
 		for row in rows:
 			col = row.findAll('td')
-
+			# If the row isn't empty, get deputy's name
 			if len(col):
 				name = col[0].getText()
+
+				# Name without unecessary spaces or line breaks
 				fixed_name = ""
 				for i in range(len(name)):
 					if name[i] > '!' or (name[i] == ' ' and name[i-1] != '\t'):
@@ -35,6 +41,7 @@ class Parser:
 				fixed_name = fixed_name[1:len(fixed_name)]
 				full_names.append(fixed_name)
 
+		# Lists to separe first names from surnames
 		surnames = []
 		first_names = []
 		for name in full_names:
@@ -44,7 +51,17 @@ class Parser:
 					first_names.append(name[(i+3):])
 					break
 		
-		return (first_names, surnames)
+		# Additional information ['Region', 'District', 'Party']
+		additional_info = []
+		for row in rows:
+			col = row.findAll('td')
+
+			if len(col):
+				district = col[2].getText()
+				party = col[3].getText()
+				additional_info.append([district, party])
+
+		return (first_names, surnames, additional_info)
 
 	def parse_depattendance():
 		quote_page = 'https://www.camara.cl/trabajamos/sala_asistencia.aspx'
@@ -78,7 +95,6 @@ class Parser:
 				
 		formatted[0] = ['Diputado', 'Partido', 'Asistencias', 'Inasistenicas', 'Porcentaje asistencia']
 		return formatted
-
 
 			
 p = Parser()
