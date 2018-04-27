@@ -5,11 +5,17 @@ class Parser:
 	def get_deputies(self):
 		"""
 		Returns a list of lists containing information for every deputy, in the format:
-		['First Names', 'Surnames', 'Party','District', 'Attendance', 'Birthdate']
+		['First Names', 'Surnames', 'Party','District', ['Attendance'], 'Birthdate']
 		"""
-		deputies = self.__merge_depattlist(self.__parse_deplist(), self.__parse_depattendance())
-		for deputy in deputies:
-			print(deputy)
+		deputies = self.__merge_depattinfo(self.__parse_deplist(), 
+											self.__parse_depattendance())
+		
+		self.__parse_depprofile('https://www.camara.cl/camara/diputado_detalle.aspx?prmID=1008')
+		
+		for i in range(len(deputies)):
+			print(deputies[i])
+
+		return deputies
 
 	def __parse_deplist(self):
 		quote_page = 'https://www.camara.cl/camara/diputados_print.aspx'
@@ -93,12 +99,18 @@ class Parser:
 			formatted.append([])
 			for td in row.findAll('td'):
 				formatted[len(formatted)-1].append(td.getText().strip())
-		
 		formatted.pop(0)
+
+		for i in range(1, len(frows)):
+			link = 'https://www.camara.cl' + frows[i].find('td').find('a')['href'][2:]
+			profile = self.__parse_depprofile(link)
+			for j in range(len(profile)):
+				formatted[i-1].append(profile[j])
+
 		return formatted
 
 
-	def __merge_depattlist(self, infolist, attlist):
+	def __merge_depattinfo(self, infolist, attlist):
 		# For every element in infolist and attlist, we search for
 		# a match between the first name in infolist and attlist and 
 		# the first surname for both.
@@ -121,6 +133,23 @@ class Parser:
 					infolist[i].append(attendance)
 
 		return infolist
+
+
+	def __parse_depprofile(self, link):
+		quote_page = link
+		page = urllib.request.urlopen(quote_page)
+
+		soup = BeautifulSoup(page, 'html.parser')
+
+		photo_link = soup.findAll('div', attrs={'class':'imgSet'})[1].find('img')['src']
+		birthdate = soup.find('div', attrs={'class':'birthDate'}).find('p').getText().strip()
+		profession = soup.find('div', attrs={'class':'profession'}).find('p').getText().strip()
+		periods = soup.findAll('div', attrs={'class':'summary'})[1].findAll('li')
+		for i in range(len(periods)):
+			periods[i] = periods[i].getText().strip()
+		
+		profile = (photo_link, birthdate, profession, periods)
+		return profile
 
 p = Parser()
 p.get_deputies()
