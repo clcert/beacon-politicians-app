@@ -7,12 +7,11 @@ class Parser:
 		Returns a list of lists containing information for every deputy, in the format:
 		['First Names', 'Surnames', 'Party','District', 'Attendance', 'Birthdate']
 		"""
-		deputies = self.parse_deplist()
+		deputies = self.__merge_depattlist(self.__parse_deplist(), self.__parse_depattendance())
+		for deputy in deputies:
+			print(deputy)
 
-		for i in range(len(deputies)):
-			print(deputies[i])
-
-	def parse_deplist(self):
+	def __parse_deplist(self):
 		quote_page = 'https://www.camara.cl/camara/diputados_print.aspx'
 		page = urllib.request.urlopen(quote_page)
 
@@ -40,7 +39,7 @@ class Parser:
 		surnames = []
 		first_names = []
 		for name in full_names:
-			for i in range(len(name)):
+			for i in range(len(name)): 
 				if name[i] == ',':
 					surnames.append(name[0:i])
 					first_names.append(name[(i+3):])
@@ -64,7 +63,8 @@ class Parser:
 				deputies[i].append(dep_list[j][i])
 		return deputies
 
-	def parse_depattendance(self):
+
+	def __parse_depattendance(self):
 		quote_page = 'https://www.camara.cl/trabajamos/sala_asistencia.aspx'
 		page = urllib.request.urlopen(quote_page)
 
@@ -80,7 +80,7 @@ class Parser:
 			if row.table:
 				row.table.decompose()
 			if row.div:
-					row.div.decompose()	
+				row.div.decompose()	
 
 		# Filter non empty rows
 		frows = []
@@ -93,12 +93,34 @@ class Parser:
 			formatted.append([])
 			for td in row.findAll('td'):
 				formatted[len(formatted)-1].append(td.getText().strip())
-				
-		formatted[0] = ['Diputado', 'Partido', 'Asistencias', 'Inasistenicas', 'Porcentaje asistencia']
-		for i in(range(len(formatted))):
-			print(formatted[i])
+		
+		formatted.pop(0)
 		return formatted
 
-			
+
+	def __merge_depattlist(self, infolist, attlist):
+		# For every element in infolist and attlist, we search for
+		# a match between the first name in infolist and attlist and 
+		# the first surname for both.
+		for i in range(len(infolist)):
+
+			# Filter only the first surname
+			first_surname = ""
+			for c in infolist[i][1]:
+				if c == " ":
+					break
+				first_surname += c
+
+			for j in range(len(attlist)):
+
+				# If the first name and first surname is in the string, do something.
+				if (infolist[i][0] in attlist[j][0]) and (first_surname in attlist[j][0]):
+					attendance = []
+					for k in range(2, len(attlist[j])):
+						attendance.append(attlist[j][k])
+					infolist[i].append(attendance)
+
+		return infolist
+
 p = Parser()
-p.parse_depattendance()
+p.get_deputies()
