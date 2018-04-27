@@ -128,9 +128,12 @@ class Parser:
 				# If the first name and first surname is in the string, do something.
 				if (infolist[i][0] in attlist[j][0]) and (first_surname in attlist[j][0]):
 					attendance = []
-					for k in range(2, len(attlist[j])):
+					for k in range(2, 5):
 						attendance.append(attlist[j][k])
 					infolist[i].append(attendance)
+
+					for k in range(5, len(attlist[j])):
+						infolist[i].append(attlist[j][k])
 
 		return infolist
 
