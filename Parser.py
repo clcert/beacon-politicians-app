@@ -7,7 +7,7 @@ class Parser:
 		Returns a list of lists containing information for every deputy, in the format:
 		['First Names', 'Surnames', 'Party','District', ['Attendance'], 'Birthdate']
 		"""
-		deputies = self.__merge_depattinfo(self.__parse_deplist(), 
+		deputies = self.__merge_depattinfo(self.__parse_personalinfo(), 
 											self.__parse_depattendance())
 		
 		self.__parse_depprofile('https://www.camara.cl/camara/diputado_detalle.aspx?prmID=1008')
@@ -17,7 +17,7 @@ class Parser:
 
 		return deputies
 
-	def __parse_deplist(self):
+	def __parse_personalinfo(self):
 		quote_page = 'https://www.camara.cl/camara/diputados_print.aspx'
 		page = urllib.request.urlopen(quote_page)
 
