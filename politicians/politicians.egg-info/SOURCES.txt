@@ -1,8 +1,0 @@
-MANIFEST.in
-politicians/__init__.py
-politicians/politicians.py
-politicians.egg-info/PKG-INFO
-politicians.egg-info/SOURCES.txt
-politicians.egg-info/dependency_links.txt
-politicians.egg-info/requires.txt
-politicians.egg-info/top_level.txt

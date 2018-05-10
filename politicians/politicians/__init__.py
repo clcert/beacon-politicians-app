@@ -1,1 +1,0 @@
-from .politicians import app
