@@ -6,8 +6,14 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return render_template('index.html')
+def main_page():
+    title = 'Politico de semana'
+    personalinfo = "Partido por la Procastinación"
+    deputy = "Diputado Pedro Gómez"
+    intro = "Pedro Gómez, nacido 1 de septiempre de 1949, Abogado de profesión y actualmente diputado por la "
+    intro += "5a circunscripción de rancagua"
+
+    return render_template('index.html', title=title, personalinfo=personalinfo, deputy=deputy, intro=intro)
 
 
 if __name__ == '__main__':

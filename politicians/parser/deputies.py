@@ -3,6 +3,7 @@ from tqdm import tqdm
 from bs4 import BeautifulSoup
 import json
 import os
+import datetime
 
 class Parser:
     def get_deputies(self):
@@ -27,8 +28,28 @@ class Parser:
         json_deputies = dict()
         json_deputies["deputies"] = deputies
 
-        with open(os.path.abspath('..') + '/json/deputies.json', 'w') as outfile:
+        # Last modification date and time
+        json_deputies["modified"] = str(datetime.datetime.now())
+
+        # Current selected deputy's index (by default is the first one)
+        json_deputies["current"] = dict(index=0, modified=str(datetime.datetime.now()))
+
+        path = os.path.abspath('..') + '/static/json/deputies.json'
+
+        with open(path, 'r') as infile:
+            # Load file to check if exists a current deputy
+            last_deputies = json.load(infile)
+            if last_deputies["current"]:
+                json_deputies["current"] = last_deputies["current"]
+                infile.close()
+
+        with open(path, 'w'):
+            pass
+
+        with open(path, 'w') as outfile:
             json.dump(json_deputies, outfile)
+            outfile.close()
+
         return json_deputies
 
     def is_not_used(self):
