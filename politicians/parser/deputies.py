@@ -35,27 +35,6 @@ class Parser:
         # Current selected deputy's index (by default is the first one)
         json_deputies["current"] = dict(index=0, modified=str(datetime.datetime.now()))
 
-        path = os.path.abspath('..') + '/static/json/deputies.json'
-
-        with open(path, 'r') as infile:
-            # If file is empty or not json formatted catch exception
-            try:
-                # Load file to check if exists a current deputy
-                last_deputies = json.load(infile)
-                if last_deputies["current"]:
-                    json_deputies["current"] = last_deputies["current"]
-                    infile.close()
-
-            except ValueError:
-                pass
-
-        with open(path, 'w'):
-            pass
-
-        with open(path, 'w') as outfile:
-            json.dump(json_deputies, outfile)
-            outfile.close()
-
         return json_deputies
 
     def is_not_used(self):
