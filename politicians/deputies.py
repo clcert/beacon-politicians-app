@@ -27,6 +27,8 @@ class Deputies:
         modified = None
         deputies_list = dict()
         current = dict()
+
+        # Checks for latest modification
         with open(self.json_path, 'r') as infile:
             try:
                 dict_deputies = json.load(infile)
@@ -42,6 +44,7 @@ class Deputies:
 
                     need_modify = datetime.now() - modified > self.time_interval
 
+            # There is an error with the file, so needs modification
             except ValueError:
                 need_modify = True
 
@@ -58,6 +61,7 @@ class Deputies:
 
                 deputies_list = dict_deputies["deputies"]
 
+                # If there is a current deputy saved, we don't change it
                 if current:
                     dict_deputies["current"] = current
 
