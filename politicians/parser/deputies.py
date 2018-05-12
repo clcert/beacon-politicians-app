@@ -5,6 +5,7 @@ import json
 import os
 import datetime
 
+
 class Parser:
     def get_deputies(self):
         """
@@ -22,7 +23,7 @@ class Parser:
             deputy["photo"] = deputies[i][5]
             deputy["birthday"] = deputies[i][6]
             deputy["profession"] = deputies[i][7]
-            deputy["periods"] = deputies[i][4]
+            deputy["periods"] = deputies[i][8]
             deputies[i] = deputy
 
         json_deputies = dict()
@@ -37,11 +38,16 @@ class Parser:
         path = os.path.abspath('..') + '/static/json/deputies.json'
 
         with open(path, 'r') as infile:
-            # Load file to check if exists a current deputy
-            last_deputies = json.load(infile)
-            if last_deputies["current"]:
-                json_deputies["current"] = last_deputies["current"]
-                infile.close()
+            # If file is empty or not json formatted catch exception
+            try:
+                # Load file to check if exists a current deputy
+                last_deputies = json.load(infile)
+                if last_deputies["current"]:
+                    json_deputies["current"] = last_deputies["current"]
+                    infile.close()
+
+            except ValueError:
+                pass
 
         with open(path, 'w'):
             pass
