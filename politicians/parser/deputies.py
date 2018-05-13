@@ -1,46 +1,39 @@
 import urllib.request
-from tqdm import tqdm
 from bs4 import BeautifulSoup
-import json
-import os
-import datetime
 
 
 class Parser:
+    def get_deputy(self, index):
+        deputies = self.get_deputies()
+        index = index % len(deputies)
+
+        deputy = deputies[index]
+        profile = self.parse_depprofile(deputy['link'])
+        for key in profile:
+            deputy[key] = profile[key]
+        return deputy
+
     def get_deputies(self):
         """
         Returns a list of lists containing information for every deputy, in the format:
         ['First Names', 'Surnames', 'Party','District', ['Attendance'], 'Birthday', 'Profession', ['Periods']]
         """
-        deputies = self.__merge_depattinfo(self.__parse_personalinfo(), self.__parse_depattendance())
+        deputies = self.merge_depattinfo(self.parse_personalinfo(), self.parse_depattendance())
         for i in range(len(deputies)):
             deputy = dict()
-            deputy["name"] = deputies[i][0]
-            deputy["surname"] = deputies[i][1]
-            deputy["party"] = deputies[i][2]
-            deputy["district"] = deputies[i][3]
-            deputy["attendance"] = deputies[i][4]
-            deputy["photo"] = deputies[i][5]
-            deputy["birthday"] = deputies[i][6]
-            deputy["profession"] = deputies[i][7]
-            deputy["periods"] = deputies[i][8]
+            deputy['name'] = deputies[i][0]
+            deputy['surname'] = deputies[i][1]
+            deputy['party'] = deputies[i][2]
+            deputy['district'] = deputies[i][3]
+            deputy['attendance'] = deputies[i][4]
+            deputy['link'] = deputies[i][5]
             deputies[i] = deputy
-
-        json_deputies = dict()
-        json_deputies["deputies"] = deputies
-
-        # Last modification date and time
-        json_deputies["modified"] = str(datetime.datetime.now())
-
-        # Current selected deputy's index (by default is the first one)
-        json_deputies["current"] = dict(index=0, modified=str(datetime.datetime.now()))
-
-        return json_deputies
+        return deputies
 
     def is_not_used(self):
         pass
 
-    def __parse_personalinfo(self):
+    def parse_personalinfo(self):
         self.is_not_used()
         quote_page = 'https://www.camara.cl/camara/diputados_print.aspx'
         page = urllib.request.urlopen(quote_page)
@@ -93,7 +86,7 @@ class Parser:
                 deputies[i].append(dep_list[j][i])
         return deputies
 
-    def __parse_depattendance(self):
+    def parse_depattendance(self):
         quote_page = 'https://www.camara.cl/trabajamos/sala_asistencia.aspx'
         page = urllib.request.urlopen(quote_page)
 
@@ -117,21 +110,16 @@ class Parser:
                 frows.append(row)
 
         formatted = []
-        for row in frows:
+        for i in range(1, len(frows)):
             formatted.append([])
-            for td in row.findAll('td'):
+            for td in frows[i].findAll('td'):
                 formatted[len(formatted)-1].append(td.getText().strip())
-        formatted.pop(0)
-
-        for i in tqdm(range(1, len(frows))):
             link = 'https://www.camara.cl' + frows[i].find('td').find('a')['href'][2:]
-            profile = self.__parse_depprofile(link)
-            for j in range(len(profile)):
-                formatted[i-1].append(profile[j])
-
+            formatted[len(formatted)-1].append(link)
+    
         return formatted
 
-    def __merge_depattinfo(self, infolist, attlist):
+    def merge_depattinfo(self, infolist, attlist):
         self.is_not_used()
         # For every element in infolist and attlist, we search for
         # a match between the first name in infolist and attlist and
@@ -159,7 +147,7 @@ class Parser:
 
         return infolist
 
-    def __parse_depprofile(self, link):
+    def parse_depprofile(self, link):
         self.is_not_used()
         quote_page = link
         page = urllib.request.urlopen(quote_page)
@@ -173,7 +161,7 @@ class Parser:
         periods = soup.findAll('div', attrs={'class': 'summary'})[1].findAll('li')
         for i in range(len(periods)):
             periods[i] = periods[i].getText().strip()
-
-        profile = (photo_link, birthday, profession, periods)
+        
+        profile = dict(photo=photo_link, birthday=birthday, profession=profession, periods=periods)
         return profile
 
