@@ -2080,6 +2080,7 @@
 
 		.image.avatar {
 			border-radius: 100%;
+            width: auto;
 		}
 
 			.image.avatar:before {
@@ -2088,7 +2089,7 @@
 
 			.image.avatar img {
 				border-radius: 100%;
-				width: 150%;
+				width: 10em;
 			}
 
 /* List */
@@ -2504,6 +2505,7 @@
 		}
 
 		#header > .inner {
+            text-align: center;
 			-moz-flex-grow: 1;
 			-webkit-flex-grow: 1;
 			-ms-flex-grow: 1;
@@ -2527,8 +2529,8 @@
 		}
 
 		#header .image.avatar {
-			margin: 0 5em 1em 0;
-			width: 6.25em;
+			margin: 0 0 1em 0;
+			width: auto;
 		}
 
 /* Footer */

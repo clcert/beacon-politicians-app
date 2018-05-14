@@ -7,7 +7,7 @@ import parser.deputies as pd
 
 class Deputy:
     def __init__(self):
-        self.json_path = os.getcwd() + '/static/json/deputies.json'
+        self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/static/json/deputies.json'
 
         # Sets duration of the time interval
         self.time_interval = datetime.timedelta(minutes=1)

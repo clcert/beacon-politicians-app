@@ -6,6 +6,8 @@
 -->
 <html>
 	<head>
+
+
 		<title>{{ title }}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,8 +20,8 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="#" class="image avatar"><img src="{{url_for('static', filename='images/avatar.jpg')}}" alt="" /></a>
-					<h1>{{ personalinfo }}</h1>
+					<a href="#" class="image avatar"><img src="{{ photo }}" alt="" /></a></a>
+					<h1>Diputado {{ name }} {{ surname }}</h1>
 				</div>
 			</header>
 
@@ -29,52 +31,21 @@
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>{{ deputy }}</h2>
+							<h2>{{ name }} {{ surname }}</h2>
 						</header>
-						<p>{{ intro }}</p>
-						<ul class="actions">
-							<li><a href="#" class="button">Learn More</a></li>
-						</ul>
-					</section>
+						<p id="intro">
+                            {{ name }} {{ surname }} ({{ birthday }}). {{ profession }}, actualmente diputado
+                            por la {{ district }}ª circunscripción correspondiente a la TODO: AGREGAR REGIÓN,
+                            durante el periodo {{ lastperiod }}. Perteneciente al partido {{ party }}.
+                        </p>
+                    </section>
 
 				<!-- Two -->
 					<section id="two">
-						<h2>Recent Work</h2>
-						<div class="row">
-							<article class="6u 12u$(xsmall) work-item">
-								<a href="{{url_for('static', filename='images/fulls/01.jpg')}}" class="image fit thumb"><img src="{{url_for('static', filename='images/thumbs/01.jpg')}}" alt="" /></a>
-								<h3>Magna sed consequat tempus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="6u$ 12u$(xsmall) work-item">
-								<a href="{{url_for('static', filename='images/fulls/02.jpg')}}" class="image fit thumb"><img src="{{url_for('static', filename='images/thumbs/02.jpg')}}" alt="" /></a>
-								<h3>Ultricies lacinia interdum</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="6u 12u$(xsmall) work-item">
-								<a href="{{url_for('static', filename='images/fulls/03.jpg')}}" class="image fit thumb"><img src="{{url_for('static', filename='images/thumbs/03.jpg')}}" alt="" /></a>
-								<h3>Tortor metus commodo</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="6u$ 12u$(xsmall) work-item">
-								<a href="{{url_for('static', filename='images/fulls/04.jpg')}}" class="image fit thumb"><img src="{{url_for('static', filename='images/thumbs/04.jpg')}}" alt="" /></a>
-								<h3>Quam neque phasellus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="6u 12u$(xsmall) work-item">
-								<a href="{{url_for('static', filename='images/fulls/05.jpg')}}" class="image fit thumb"><img src="{{url_for('static', filename='images/thumbs/05.jpg')}}" alt="" /></a>
-								<h3>Nunc enim commodo aliquet</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="6u$ 12u$(xsmall) work-item">
-								<a href="{{url_for('static', filename='images/fulls/06.jpg')}}" class="image fit thumb"><img src="{{url_for('static', filename='images/thumbs/06.jpg')}}" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-						</div>
-						<ul class="actions">
-							<li><a href="#" class="button">Full Portfolio</a></li>
-						</ul>
+						<h2>Asistencia</h2>
+						Ha asistido a {{ attendance[0] }} sesiones de cámara, de un total de {{ attendance[2] }}.
+                        Obteniendo así, un {{ attendance[3] }} de asistencia (cálculo hecho según justificaciones
+                        a inasistencias, para más información click aquí TODO AGREGAR LINK). 
 					</section>
 
 				<!-- Three -->

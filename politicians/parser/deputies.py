@@ -25,7 +25,12 @@ class Parser:
             deputy['surname'] = deputies[i][1]
             deputy['party'] = deputies[i][2]
             deputy['district'] = deputies[i][3]
+
             deputy['attendance'] = deputies[i][4]
+            total_sesions = int(deputy['attendance'][0]) + int(deputy['attendance'][1])
+            deputy['attendance'] = [int(deputy['attendance'][0]), int(deputy['attendance'][1]), total_sesions,
+                                    deputy['attendance'][2]]
+
             deputy['link'] = deputies[i][5]
             deputies[i] = deputy
         return deputies
