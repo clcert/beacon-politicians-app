@@ -10,7 +10,7 @@ class Deputy:
         self.json_path = os.getcwd() + '/static/json/deputies.json'
 
         # Sets duration of the time interval
-        self.time_interval = datetime.timedelta(minutes=5)
+        self.time_interval = datetime.timedelta(minutes=1)
 
         # TO DO: Change to beacon random
         self.index = random.randint(0, len(pd.Parser().parse_personalinfo()))
@@ -49,11 +49,10 @@ class Deputy:
             dict_deputy = pd.Parser().get_deputy(self.index)
 
             # Writes new json with updated info
-            with open(self.json_path, 'w') as outfile:
+            with open(self.json_path, 'w', encoding='utf-8') as outfile:
                 modified = datetime.datetime.now()
                 modified = str(modified)
-                dict_json = dict(current=dict_deputy, modified=modified)
-                json.dump(dict_json, outfile)
+                dict_deputy = dict(modified=modified, current=dict_deputy)
+                json.dump(dict_deputy, outfile, ensure_ascii=False)
                 outfile.close()
-
         return dict_deputy
