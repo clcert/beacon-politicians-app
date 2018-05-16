@@ -26,12 +26,15 @@ class Parser:
             deputy['party'] = deputies[i][2]
             deputy['district'] = deputies[i][3]
 
-            deputy['attendance'] = deputies[i][4]
+            deputy['treatment'] = deputies[i][4]
+            deputy['gender'] = 'a' if len(deputies[i][4]) > 2 else 'o'
+
+            deputy['attendance'] = deputies[i][5]
             total_sesions = int(deputy['attendance'][0]) + int(deputy['attendance'][1])
             deputy['attendance'] = [int(deputy['attendance'][0]), int(deputy['attendance'][1]), total_sesions,
                                     deputy['attendance'][2]]
 
-            deputy['link'] = deputies[i][5]
+            deputy['link'] = deputies[i][6]
             deputies[i] = deputy
         return deputies
 
@@ -142,6 +145,13 @@ class Parser:
 
                 # If the first name and first surname is in the string, do something.
                 if (infolist[i][0] in attlist[j][0]) and (first_surname in attlist[j][0]):
+                    treatment = ""
+                    for c in attlist[j][0]:
+                        if c == '.':
+                            break
+                        treatment += c
+                    infolist[i].append(treatment)
+
                     attendance = []
                     for k in range(2, 5):
                         attendance.append(attlist[j][k])
@@ -163,10 +173,22 @@ class Parser:
         photo_link += soup.findAll('div', attrs={'class': 'imgSet'})[1].find('img')['src']
         birthday = soup.find('div', attrs={'class': 'birthDate'}).find('p').getText().strip()
         profession = soup.find('div', attrs={'class': 'profession'}).find('p').getText().strip()
+        if len(profession) > 0 and profession[len(profession)-1] == '.':
+            profession = profession[0:len(profession)-1]
+
+        dregion = soup.findAll('div', attrs={'class': 'summary'})[0].findAll('p')[2].getText().strip()
+        districtregion = ""
+        for i in range(len(dregion)):
+            if dregion[i] > '!':
+                districtregion += dregion[i]
+            elif i > 0 and dregion[i] < '!' < dregion[i-1]:
+                districtregion += ' '
+
         periods = soup.findAll('div', attrs={'class': 'summary'})[1].findAll('li')
         for i in range(len(periods)):
             periods[i] = periods[i].getText().strip()
         
-        profile = dict(photo=photo_link, birthday=birthday, profession=profession, periods=periods)
+        profile = dict(photo=photo_link, birthday=birthday, profession=profession, periods=periods,
+                       districtregion=districtregion)
         return profile
 

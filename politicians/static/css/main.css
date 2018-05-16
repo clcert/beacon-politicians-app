@@ -2489,7 +2489,7 @@
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
-		padding: 8em 4em;
+		padding: 6em 5em 2em 5em;
 		position: fixed;
 		text-align: right;
 		top: 0;
@@ -2511,6 +2511,7 @@
 			-ms-flex-grow: 1;
 			flex-grow: 1;
 			margin: 0 0 2em 0;
+            width: auto;
 		}
 
 		#header strong, #header b {
@@ -2525,11 +2526,11 @@
 			color: rgba(255, 255, 255, 0.5);
 			font-size: 1.35em;
 			line-height: 1.75em;
-			margin: 0;
+			margin: 0 0 2em 0;
 		}
 
 		#header .image.avatar {
-			margin: 0 0 1em 0;
+			margin: 0 0 0 0;
 			width: auto;
 		}
 
@@ -2856,6 +2857,19 @@
 		opacity: 1.0 !important;
 	}
 
+    #summary {
+        text-align: left;
+        width: 100%;
+        display: inline-block;
+    }
+
+    #summary ul {
+        margin-top: -1em;
+    }
+    #summary  li {
+        margin-left: 3em;
+    }
+
 /* XLarge */
 
 	@media screen and (max-width: 1800px) {
@@ -2988,6 +3002,9 @@
 				width: 100%;
 			}
 
+            #summary {
+                width: auto;
+            }
 	}
 
 /* Small */
@@ -3126,4 +3143,6 @@
 				padding-left: 0;
 			}
 
+
 	}
+

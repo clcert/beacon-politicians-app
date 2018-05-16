@@ -20,8 +20,22 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="#" class="image avatar"><img src="{{ photo }}" alt="" /></a></a>
-					<h1>Diputado {{ name }} {{ surname }}</h1>
+					<a href="{{ photo }}" target="_blank" class="image avatar"><img src="{{ photo }}" alt="" /></a>
+
+                    <h6>Foto Oficial</h6>
+
+                    <h1>Diputad{{ gender }} {{ name }} {{ surname }}</h1>
+
+                    <div id="summary">
+                        <p>Partido {{ party }}</p>
+                        <p>Periodos Parlamentarios:</p>
+                        <ul>
+                            {% for period in periods %}
+                                <li>{{ period }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
 				</div>
 			</header>
 
@@ -35,8 +49,8 @@
 						</header>
 						<p id="intro">
                             {{ name }} {{ surname }} ({{ birthday }}). {{ profession }}, actualmente diputado
-                            por la {{ district }}ª circunscripción correspondiente a la TODO: AGREGAR REGIÓN,
-                            durante el periodo {{ lastperiod }}. Perteneciente al partido {{ party }}.
+                            por la {{ district }}ª circunscripción que forma parte de la {{ districtregion }},
+                            durante el periodo {{ lastperiod }}. Militante por el partido {{ party }}.
                         </p>
                     </section>
 
@@ -45,7 +59,7 @@
 						<h2>Asistencia</h2>
 						Ha asistido a {{ attendance[0] }} sesiones de cámara, de un total de {{ attendance[2] }}.
                         Obteniendo así, un {{ attendance[3] }} de asistencia (cálculo hecho según justificaciones
-                        a inasistencias, para más información click aquí TODO AGREGAR LINK). 
+                        a inasistencias, para más información click <a href="https://www.camara.cl/trabajamos/sala_asistencia.aspx" target="_blank">aquí</a>).
 					</section>
 
 				<!-- Three -->

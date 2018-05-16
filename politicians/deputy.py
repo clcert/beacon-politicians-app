@@ -9,9 +9,6 @@ class Deputy:
     def __init__(self):
         self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/static/json/deputies.json'
 
-        # Sets duration of the time interval
-        self.time_interval = datetime.timedelta(minutes=1)
-
         # TO DO: Change to beacon random
         self.index = random.randint(0, len(pd.Parser().parse_personalinfo()))
         self.info = self.update()

@@ -5,7 +5,7 @@ from deputy import Deputy
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def main_page():
     d = Deputy()
     current = d.info['current']
