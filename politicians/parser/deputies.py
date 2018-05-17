@@ -187,8 +187,8 @@ class Parser:
         periods = soup.findAll('div', attrs={'class': 'summary'})[1].findAll('li')
         for i in range(len(periods)):
             periods[i] = periods[i].getText().strip()
-        
+
         profile = dict(photo=photo_link, birthday=birthday, profession=profession, periods=periods,
-                       districtregion=districtregion)
+                       districtregion=districtregion, lastperiod=periods[len(periods)-1])
         return profile
 

@@ -31,14 +31,11 @@ class Deputy:
         update the file and return the information.
         :return:
         """
-        if self.info:
-            return self.info
-
         if self.check_format():
             with open(self.json_path, 'r') as infile:
                 json_file = json.load(infile)
 
-                return json_file['deputy']
+                return json_file
 
         else:
             u = Updater()

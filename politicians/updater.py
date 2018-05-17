@@ -3,7 +3,8 @@ import datetime
 import os
 import parser.deputies as pd
 import random
-
+import schedule
+import time
 
 class Updater:
     def __init__(self):
@@ -39,7 +40,16 @@ class Updater:
         return
 
     def run(self):
-        return
+        """
+        Schedules the update using the index gotten by using the get_index method
+        and then run  the process.
+        :return:
+        """
+        schedule.every().day.at("16:26").do(self.update, self.get_index())
+
+        while True:
+            schedule.run_pending()
+            time.sleep(60)
 
 
 if __name__ == '__main__':

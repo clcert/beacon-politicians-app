@@ -8,8 +8,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def main_page():
     d = Deputy()
-    current = d.info['current']
-    current["lastperiod"] = current["periods"][len(current["periods"])-1]
+    current = d.info['deputy']
     return render_template('index.html', **current)
 
 
