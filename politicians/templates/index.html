@@ -14,6 +14,12 @@
 		<!--[if lte IE 8]><script src="{{url_for('static', filename='js/ie/html5shiv.js')}}"></script><![endif]-->
 		<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="{{url_for('static', filename='css/ie8.css')}}" /><![endif]-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            var attendance = {{ attendance|tojson }};
+        </script>
+        <script type="text/javascript" src ="{{ url_for('static', filename='js/chart.js')}}"></script>
+
 	</head>
 	<body id="top">
 
@@ -25,7 +31,6 @@
                     <h6>Foto Oficial</h6>
 
                     <h1>Diputad{{ gender }} {{ name }} {{ surname }}</h1>
-
                     <div id="summary">
                         <p>Partido {{ party }}</p>
                         <p>Periodos Parlamentarios:</p>
@@ -46,6 +51,7 @@
 					<section id="one">
 						<header class="major">
 							<h2>{{ name }} {{ surname }}</h2>
+                            <h6 style="text-align: right">Última vez actualizado {{ modified }}</h6>
 						</header>
 						<p id="intro">
                             {{ name }} {{ surname }} ({{ birthday }}). {{ profession }}, actualmente diputado
@@ -60,44 +66,12 @@
 						Ha asistido a {{ attendance[0] }} sesiones de cámara, de un total de {{ attendance[2] }}.
                         Obteniendo así, un {{ attendance[3] }} de asistencia (cálculo hecho según justificaciones
                         a inasistencias, para más información click <a href="https://www.camara.cl/trabajamos/sala_asistencia.aspx" target="_blank">aquí</a>).
-					</section>
+					    <div id="attendancechart" style="width: auto; height: 400px;"></div>
+                    </section>
 
 				<!-- Three -->
 					<section id="three">
-						<h2>Get In Touch</h2>
-						<p>Accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque lorem ipsum dolor.</p>
-						<div class="row">
-							<div class="8u 12u$(small)">
-								<form method="post" action="#">
-									<div class="row uniform 50%">
-										<div class="6u 12u$(xsmall)"><input type="text" name="name" id="name" placeholder="Name" /></div>
-										<div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
-										<div class="12u$"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-									</div>
-								</form>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</div>
-							<div class="4u$ 12u$(small)">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon fa-home"><span class="label">Address</span></h3>
-										1234 Somewhere Rd.<br />
-										Nashville, TN 00000<br />
-										United States
-									</li>
-									<li>
-										<h3 class="icon fa-mobile"><span class="label">Phone</span></h3>
-										000-000-0000
-									</li>
-									<li>
-										<h3 class="icon fa-envelope-o"><span class="label">Email</span></h3>
-										<a href="#">hello@untitled.tld</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+                        <h2>Atrasos</h2>
 					</section>
 
 				

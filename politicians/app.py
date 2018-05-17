@@ -9,6 +9,15 @@ app = Flask(__name__)
 def main_page():
     d = Deputy()
     current = d.info['deputy']
+
+    current['modified'] = d.info['modified']
+    length = 0
+    for i in range(len(current['modified'])):
+        if current['modified'][i] == '.':
+            length = i
+            break
+    current['modified'] = current['modified'][0:length]
+
     return render_template('index.html', **current)
 
 
