@@ -52,6 +52,7 @@
 						<header class="major">
 							<h2>{{ name }} {{ surname }}</h2>
                             <h6 style="text-align: right">Última vez actualizado {{ modified }}</h6>
+                            <h6 style="text-align: right">Valor obtenido a partir del siguiente <a href="{{ index_id }}" target="_blank">record</a> </h6>
 						</header>
 						<p id="intro">
                             {{ name }} {{ surname }} ({{ birthday }}). {{ profession }}, actualmente diputado
@@ -63,15 +64,27 @@
 				<!-- Two -->
 					<section id="two">
 						<h2>Asistencia</h2>
-						Ha asistido a {{ attendance[0] }} sesiones de cámara, de un total de {{ attendance[2] }}.
-                        Obteniendo así, un {{ attendance[3] }} de asistencia (cálculo hecho según justificaciones
-                        a inasistencias, para más información click <a href="https://www.camara.cl/trabajamos/sala_asistencia.aspx" target="_blank">aquí</a>).
-					    <div id="attendancechart" style="width: auto; height: 400px;"></div>
+						<p>
+                            Ha asistido a {{ attendance[0] }} sesiones de cámara, de un total de {{ attendance[2] }}.
+                            Obteniendo así, un {{ attendance[3] }} de asistencia. Considerando las inasistencias justificadas
+                            y las no justificadas <sup><a id="text-attendance" href="#ref-attendance">1</a></sup>, se puede
+                            apreciar el siguiente gráfico:
+                        </p>
+                        <div id="attendancechart" style="width: auto; height: 400px;"></div>
                     </section>
 
 				<!-- Three -->
 					<section id="three">
                         <h2>Atrasos</h2>
+					</section>
+
+                <!-- Four -->
+					<section id="four">
+                        <h2>Referencias</h2>
+                        <ol>
+                            <li id="ref-attendance"><sup><a href="#text-attendance">&and;</a></sup> Cálculo hecho según justificaciones a inasistencias, para más información visitar
+                                <a href="https://www.camara.cl/trabajamos/sala_asistencia.aspx" target="_blank">https://www.camara.cl/trabajamos/sala_asistencia.aspx</a></li>
+                        </ol>
 					</section>
 
 				
