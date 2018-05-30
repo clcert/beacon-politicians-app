@@ -22,10 +22,12 @@
 
 	</head>
 	<body id="top">
+        <img src="{{url_for('static', filename='images/arrows/left.svg')}}" alt=""  style="position: fixed; z-index: 100 ;vertical-align: middle" height="42" width="42"/>
+        <img src="{{url_for('static', filename='images/arrows/right.svg')}}" alt="" style="position: fixed; z-index: 100; right: 0" height="42" width="42"/>
 		<!-- Header -->
 			<header id="header">
 
-				<div class="inner">
+                <div class="inner">
 					<a href="{{ photo }}" target="_blank" class="image avatar"><img src="{{ photo }}" alt="" /></a>
 
                     <h6>Foto Oficial</h6>
