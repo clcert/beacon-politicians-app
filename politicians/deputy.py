@@ -1,12 +1,15 @@
 import json
 import os
+import parser.deputies as pd
 from updater import Updater
 
 
 class Deputy:
-    def __init__(self):
+    def __init__(self, json_index):
         self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/static/json/deputies.json'
-        self.info = self.get_info()
+        self.json_index = json_index
+        self.info = None
+        self.load_info()
 
     def check_format(self):
         """
@@ -25,19 +28,21 @@ class Deputy:
 
             return True
 
-    def get_info(self):
+    def load_info(self):
         """
         Get deputy's information if the file is json formatted, else
         update the file and return the information.
         :return:
         """
         if self.check_format():
-            with open(self.json_path, 'r') as infile:
-                json_file = json.load(infile)
+            deputies = Updater().get_list()
+            curr_deputy = deputies[self.json_index]
+            info = pd.Parser().get_deputy(curr_deputy['index'])
+            info = {**info, **curr_deputy}
 
-                return json_file
+            self.info = info
 
         else:
             u = Updater()
-            u.update(u.get_index())
-            return self.get_info()
+            u.update()
+            return self.load_info()

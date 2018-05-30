@@ -22,9 +22,9 @@
 
 	</head>
 	<body id="top">
-
 		<!-- Header -->
 			<header id="header">
+
 				<div class="inner">
 					<a href="{{ photo }}" target="_blank" class="image avatar"><img src="{{ photo }}" alt="" /></a>
 
@@ -51,8 +51,8 @@
 					<section id="one">
 						<header class="major">
 							<h2>{{ name }} {{ surname }}</h2>
-                            <h6 style="text-align: right">Última vez actualizado {{ modified }}</h6>
-                            <h6 style="text-align: right">Valor obtenido a partir del siguiente <a href="{{ index_id }}" target="_blank">record</a> </h6>
+                            <h6 style="text-align: right">Última vez actualizado {{ date }}</h6>
+                            <h6 style="text-align: right">Valor obtenido a partir del siguiente <a href="https://beacon.clcert.cl/viewer/advanced?id={{ record }}" target="_blank">record</a> </h6>
 						</header>
 						<p id="intro">
                             {{ name }} {{ surname }} ({{ birthday }}). {{ profession }}, actualmente diputado

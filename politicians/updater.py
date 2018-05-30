@@ -3,7 +3,6 @@ import datetime
 import os
 import parser.deputies as pd
 import random
-import time
 import requests
 import urllib3
 
@@ -30,41 +29,56 @@ class Updater:
         """
         max_index = len(pd.Parser().parse_personalinfo()) - 1
 
-        index, index_id = self.index_from_json()
+        index, record = self.index_from_json()
         random.seed(index)
 
-        return random.randint(0, max_index), index_id
+        return random.randint(0, max_index), record
 
-    def update(self, index, index_id):
+    def get_list(self):
+        """
+        Returns an ordered list of dictionaries containing the date, index from the deputies list and the beacon id,
+        ordered according to the date.
+        :return:
+        """
+        with open(self.json_path, 'r', encoding='utf-8') as infile:
+            deputies_list = json.load(infile)['deputies']
+            deputies_list = sorted(deputies_list, key=lambda k: datetime.datetime.strptime(k['date'],
+                                                                                           "%Y-%m-%d %H:%M:%S"))
+            return deputies_list
+
+    def update(self):
         """
         Given an index for the position of the deputy at deputies list, modifies the json
         file using deputy's information.
-        :param index:
-        :param index_id:
         :return:
         """
+        index, record = self.get_index()
+        with open(self.json_path, 'r', encoding='utf-8') as infile:
+            try:
+                deputies = json.load(infile)
+            except ValueError:
+                deputies = dict(deputies=list())
+            finally:
+                infile.close()
+
         with open(self.json_path, 'w', encoding='utf-8') as outfile:
-            dict_deputy = pd.Parser().get_deputy(index)
-
-            dict_deputy['index'] = index
-            dict_deputy['index_id'] = "https://beacon.clcert.cl/viewer/advanced?id=" + str(index_id)
-
             modified = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            dict_deputy['modified'] = modified
 
-            json.dump(dict_deputy, outfile, ensure_ascii=False)
+            deputy = dict(date=modified, index=index, record=record)
+
+            deputies['deputies'].append(deputy)
+            json.dump(deputies, outfile, ensure_ascii=False)
 
             outfile.close()
         return
 
     def run(self):
         """
-        Schedules the update using the index gotten by using the get_index method
+        Updates using the index gotten by using the get_index method
         and then run  the process.
         :return:
         """
-        index, index_id = self.get_index()
-        self.update(index, index_id)
+        self.update()
 
 
 if __name__ == '__main__':
