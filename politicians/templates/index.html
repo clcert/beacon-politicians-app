@@ -22,8 +22,18 @@
 
 	</head>
 	<body id="top">
-        <img src="{{url_for('static', filename='images/arrows/left.svg')}}" alt=""  style="position: fixed; z-index: 100 ;vertical-align: middle" height="42" width="42"/>
-        <img src="{{url_for('static', filename='images/arrows/right.svg')}}" alt="" style="position: fixed; z-index: 100; right: 0" height="42" width="42"/>
+        {% if json_index %}
+            <form id="left-arrow" method="post" action={{ url_for("handle_previous", json_index=json_index) }}>
+                <input type="image" src="{{url_for('static', filename='images/arrows/left.svg')}}">
+            </form>
+        {% endif %}
+
+        {% if json_index < ljson_index %}
+            <form id="right-arrow" method="post" action={{ url_for("handle_next", json_index=json_index) }}>
+                <input type="image" src="{{url_for('static', filename='images/arrows/right.svg')}}">
+            </form>
+        {% endif %}
+
 		<!-- Header -->
 			<header id="header">
 
