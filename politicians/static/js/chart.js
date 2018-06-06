@@ -37,5 +37,6 @@ attendance = parseAttendance(attendance);
 
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(function () {
-    drawChart('Asistencia', attendance, 'attendancechart')
+    drawChart('Asistencia', attendance, 'attendancechart');
 });
+

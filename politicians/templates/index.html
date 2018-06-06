@@ -63,8 +63,8 @@
 					<section id="one">
 						<header class="major">
 							<h2>{{ name }} {{ surname }}</h2>
-                            <h6 style="text-align: right">Última vez actualizado {{ date }}</h6>
-                            <h6 style="text-align: right">Valor obtenido a partir del siguiente <a href="https://beacon.clcert.cl/viewer/advanced?id={{ record }}" target="_blank">record</a> </h6>
+                            <h3 style="text-align: right">Valor obtenido en {{ date }} </h3>
+                            <h3 style="text-align: right; margin-top: 20px  ">a partir del siguiente <a href="https://beacon.clcert.cl/viewer/advanced?id={{ record }}" target="_blank">record</a> </h3>
 						</header>
 						<p id="intro">
                             {{ name }} {{ surname }} ({{ birthday }}). {{ profession }}, actualmente diputado
@@ -82,7 +82,7 @@
                             y las no justificadas <sup><a id="text-attendance" href="#ref-attendance">1</a></sup>, se puede
                             apreciar el siguiente gráfico:
                         </p>
-                        <div id="attendancechart" style="width: auto; height: 400px;"></div>
+                        <div id="attendancechart"></div>
                     </section>
 
 				<!-- Three -->

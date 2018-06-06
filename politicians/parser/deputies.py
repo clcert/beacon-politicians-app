@@ -1,172 +1,23 @@
 import urllib.request
+from datetime import datetime
 from bs4 import BeautifulSoup
 
 
 class Parser:
-    def get_deputy(self, index):
-        deputies = self.get_deputies()
-        index = index % len(deputies)
+    def __init__(self):
+        self.profile_url = 'https://www.camara.cl/camara/diputado_detalle.aspx?prmID='
+        self.services_url = 'http://opendata.camara.cl/camaradiputados/WServices/'
 
-        deputy = deputies[index]
-        profile = self.parse_depprofile(deputy['link'])
-        for key in profile:
-            deputy[key] = profile[key]
-        return deputy
+    def get_deputy(self, deputy_index):
+        deputy_id = self.idfindex(deputy_index)
+        profile = self.get_profile(deputy_id)
+        attendance = self.get_all_attendance(deputy_id)
+        profile['attendance'] = attendance
+        return profile
 
-    def get_deputies(self):
-        """
-        Returns a list of lists containing information for every deputy, in the format:
-        ['First Names', 'Surnames', 'Party','District', ['Attendance'], 'Birthday', 'Profession', ['Periods']]
-        """
-        deputies = self.merge_depattinfo(self.parse_personalinfo(), self.parse_depattendance())
-        for i in range(len(deputies)):
-            deputy = dict()
-            deputy['name'] = deputies[i][0]
-            deputy['surname'] = deputies[i][1]
-            deputy['party'] = deputies[i][2]
-            deputy['district'] = deputies[i][3]
-
-            deputy['treatment'] = deputies[i][4]
-            deputy['gender'] = 'a' if len(deputies[i][4]) > 2 else 'o'
-
-            deputy['attendance'] = deputies[i][5]
-            total_sesions = int(deputy['attendance'][0]) + int(deputy['attendance'][1])
-            deputy['attendance'] = [int(deputy['attendance'][0]), int(deputy['attendance'][1]), total_sesions,
-                                    deputy['attendance'][2]]
-
-            deputy['link'] = deputies[i][6]
-            deputies[i] = deputy
-        return deputies
-
-    def is_not_used(self):
-        pass
-
-    def parse_personalinfo(self):
-        self.is_not_used()
-        quote_page = 'https://www.camara.cl/camara/diputados_print.aspx'
-        page = urllib.request.urlopen(quote_page)
-
-        soup = BeautifulSoup(page, 'html.parser')
-
-        deputies_table = soup.find('table', attrs={'class': 'tabla'})
-
-        rows = deputies_table.findAll('tr')
-        full_names = []
-        for row in rows:
-            col = row.findAll('td')
-            # If the row isn't empty, get deputy's name
-            if len(col):
-                name = col[0].getText()
-
-                # Name without unnecessary spaces or line breaks
-                fixed_name = ""
-                for i in range(len(name)):
-                    if name[i] > '!' or (name[i] == ' ' and name[i-1] != '\t'):
-                        fixed_name += name[i]
-                fixed_name = fixed_name[1:len(fixed_name)]
-                full_names.append(fixed_name)
-
-        # Lists to separate first names from surnames
-        surnames = []
-        first_names = []
-        for name in full_names:
-            for i in range(len(name)):
-                if name[i] == ',':
-                    surnames.append(name[0:i])
-                    first_names.append(name[(i+3):])
-                    break
-
-        # District and party for every deputy
-        district = []
-        party = []
-        for row in rows:
-            col = row.findAll('td')
-
-            if len(col):
-                district.append(col[2].getText()[2:])
-                party.append(col[3].getText())
-
-        dep_list = (first_names, surnames, party, district)
-        deputies = [[] for i in range(len(dep_list[0]))]
-
-        for i in range(len(deputies)):
-            for j in range(len(dep_list)):
-                deputies[i].append(dep_list[j][i])
-        return deputies
-
-    def parse_depattendance(self):
-        quote_page = 'https://www.camara.cl/trabajamos/sala_asistencia.aspx'
-        page = urllib.request.urlopen(quote_page)
-
-        soup = BeautifulSoup(page, 'html.parser')
-
-        # Table containing Deputies Attendance Percentage
-        my_table = soup.find('table', attrs={'class': 'tabla'})
-        rows = my_table.findAll('tr')
-
-        # Get rows without unnecessary info
-        for row in rows:
-            if row.table:
-                row.table.decompose()
-            if row.div:
-                row.div.decompose()
-
-        # Filter non empty rows
-        frows = []
-        for row in rows:
-            if len(row):
-                frows.append(row)
-
-        formatted = []
-        for i in range(1, len(frows)):
-            formatted.append([])
-            for td in frows[i].findAll('td'):
-                formatted[len(formatted)-1].append(td.getText().strip())
-            link = 'https://www.camara.cl' + frows[i].find('td').find('a')['href'][2:]
-            formatted[len(formatted)-1].append(link)
-    
-        return formatted
-
-    def merge_depattinfo(self, infolist, attlist):
-        self.is_not_used()
-        # For every element in infolist and attlist, we search for
-        # a match between the first name in infolist and attlist and
-        # the first surname for both.
-        for i in range(len(infolist)):
-
-            # Filter only the first surname
-            first_surname = ""
-            for c in infolist[i][1]:
-                if c == " ":
-                    break
-                first_surname += c
-
-            for j in range(len(attlist)):
-
-                # If the first name and first surname is in the string, do something.
-                if (infolist[i][0] in attlist[j][0]) and (first_surname in attlist[j][0]):
-                    treatment = ""
-                    for c in attlist[j][0]:
-                        if c == '.':
-                            break
-                        treatment += c
-                    infolist[i].append(treatment)
-
-                    attendance = []
-                    for k in range(2, 5):
-                        attendance.append(attlist[j][k])
-                    infolist[i].append(attendance)
-
-                    for k in range(5, len(attlist[j])):
-                        infolist[i].append(attlist[j][k])
-
-        return infolist
-
-    def parse_depprofile(self, link):
-        self.is_not_used()
-        quote_page = link
-        page = urllib.request.urlopen(quote_page)
-
+    def get_profile(self, deputy_id):
+        url = self.profile_url + str(deputy_id)
+        page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'html.parser')
 
         photo_link = 'https://www.camara.cl'
@@ -190,5 +41,139 @@ class Parser:
 
         profile = dict(photo=photo_link, birthday=birthday, profession=profession, periods=periods,
                        districtregion=districtregion, lastperiod=periods[len(periods)-1])
+
+        url = self.services_url + 'WSDiputado.asmx/retornarDiputado?prmDiputadoId=' + str(deputy_id)
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        profile['first_name'] = soup.find('nombre').get_text()
+        profile['second_name'] = soup.find('nombre2').get_text()
+        profile['first_surname'] = soup.find('apellidopaterno').get_text()
+        profile['second_surname'] = soup.find('apellidomaterno').get_text()
+        profile['sex'] = soup.find('sexo')['valor']
+        profile['termination'] = 'o' if profile['sex'] == '1' else 'a'
+        profile['treatment'] = 'Sr' if profile['sex'] == '1' else 'Sra'
         return profile
 
+    def get_legislature(self):
+        url = self.services_url + 'WSLegislativo.asmx/retornarLegislaturaActual'
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        id = int(soup.find('id').get_text().strip())
+
+        start = soup.find('fechainicio').get_text()
+        start = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S")
+
+        end = soup.find('fechatermino').get_text()
+        end = datetime.strptime(end, "%Y-%m-%dT%H:%M:%S")
+        return dict(id=id, start=start, end=end)
+
+    def get_sessions(self):
+        url = self.services_url + 'WSSala.asmx/retornarSesionesXLegislatura?prmLegislaturaId=' + \
+              str(self.get_legislature()['id'])
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        sessions = soup.find_all('sesion')
+
+        # If a session hasn't been celebrated, pop it from the list.
+        for session in sessions:
+            if int(session.find('estado')['valor']) != 1:
+                sessions.pop()
+
+        # Gets only session ids from the list.
+        for i in range(len(sessions)):
+            sessions[i] = int(sessions[i].find('id').get_text().strip())
+        return sessions
+
+    def count_deputies(self):
+        url = self.services_url + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        deputies = soup.find_all('diputado')
+        return len(deputies)
+
+    def get_all_attendance(self, deputy_id):
+        justifications = self.get_justifications()
+
+        sessions = self.get_sessions()
+        url = self.services_url + 'WSSala.asmx/retornarSesionAsistencia?prmSesionId='
+
+        deputy_attendance = dict(presence=0, justified=0, unjustified=0, total=0)
+        for session in sessions:
+            page = urllib.request.urlopen(url + str(session))
+            soup = BeautifulSoup(page, 'lxml')
+
+            attendances = soup.find_all('asistencia')
+            for attendance in attendances:
+                # Get the id of the attendance from the current deputy
+                curr_id = int(attendance.find('id').get_text())
+
+                # If current deputy is the deputy we're looking for, check attendance
+                if curr_id == deputy_id:
+                    attendance_type = attendance.find('tipoasistencia')['valor']
+
+                    # If he has gone to the session, we count it
+                    if attendance_type == '1':
+                        deputy_attendance['presence'] += 1
+
+                    # If not, check the justification
+                    else:
+                        justification = attendance.find('justificacion')
+
+                        if justification:
+                            justification = justification['valor']
+                            is_justified = not(justifications[int(justification)-1]['rebajaasistencia'])
+                        else:
+                            # Isn't justified if there isn't justification .
+                            is_justified = 0
+
+                        if is_justified:
+                            deputy_attendance['justified'] += 1
+                        else:
+                            deputy_attendance['unjustified'] += 1
+                    deputy_attendance['total'] += 1
+                    break
+
+        deputy_attendance['percentage'] = 100.0 * (deputy_attendance['justified'] + deputy_attendance['presence'])
+        deputy_attendance['percentage'] /= deputy_attendance['total']
+        deputy_attendance['percentage'] = round(deputy_attendance['percentage'], 2)
+        return deputy_attendance
+
+    def get_justifications(self):
+        url = self.services_url + 'WSComun.asmx/retornarTiposJustificacionesInasistencia'
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        justifications = soup.find_all('justificacioninasistencia')
+        for i in range(len(justifications)):
+            justification = dict()
+            justification['nombre'] = justifications[i].find('nombre').get_text()
+            justification['rebajaasistencia'] = 1 if justifications[i].find('rebajaasistencia').get_text() == 'true' else 0
+            justification['valor'] = justifications[i]['valor']
+            justifications[i] = justification
+        return justifications
+
+    def idfindex(self, deputy_index):
+        url = self.services_url + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        deputies = soup.find_all('diputado')
+        deputy = deputies[deputy_index]
+        deputy_id = int(deputy.find('id').get_text())
+        return deputy_id
+
+    def get_all_voting(self, year):
+        url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=' + str(year)
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        
+
+
+if __name__ == '__main__':
+    p = Parser()
+    print(p.get_all_voting(2018))
