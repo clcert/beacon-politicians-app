@@ -9,6 +9,12 @@ class Parser:
         self.services_url = 'http://opendata.camara.cl/camaradiputados/WServices/'
 
     def get_deputy(self, deputy_index):
+        """
+        Method used to get all information related to a deputy according to the given index.
+        :param deputy_index: Index of the deputy. Belongs to the interval [0, count_deputies-1]
+        :return: Returns a dictionary containing all deputy's information.
+        TODO: Add the different keys to the return documentation.
+        """
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
         attendance = self.get_all_attendance(deputy_id)
@@ -16,6 +22,12 @@ class Parser:
         return profile
 
     def get_profile(self, deputy_id):
+        """
+        Method used to scrap information from the profile of a deputy, given a deputy id.
+        :param deputy_id: Integer representing the deputy id.
+        :return: Returns basic information of the deputy.
+        TODO: Add the basic information returned.
+        """
         url = self.profile_url + str(deputy_id)
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'html.parser')
@@ -56,6 +68,11 @@ class Parser:
         return profile
 
     def get_legislature(self):
+        """
+        Method used to get the information from the latest legislature.
+        :return: Returns a dictionary containing the id of the latest legislature, and the date of end and start
+                 as a datetime object.
+        """
         url = self.services_url + 'WSLegislativo.asmx/retornarLegislaturaActual'
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
@@ -70,6 +87,10 @@ class Parser:
         return dict(id=id, start=start, end=end)
 
     def get_sessions(self):
+        """
+        Method used to get a list containing the id for every session of the deputies chamber.
+        :return: A list of integers, where each one represents the session id.
+        """
         url = self.services_url + 'WSSala.asmx/retornarSesionesXLegislatura?prmLegislaturaId=' + \
               str(self.get_legislature()['id'])
         page = urllib.request.urlopen(url)
@@ -88,6 +109,10 @@ class Parser:
         return sessions
 
     def count_deputies(self):
+        """
+        Method used to get the total number of deputies on the current legislature.
+        :return: Returns the total number of deputies as an integer.
+        """
         url = self.services_url + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
@@ -96,12 +121,19 @@ class Parser:
         return len(deputies)
 
     def get_all_attendance(self, deputy_id):
+        """
+        Method used to get the attendance of a deputy for all the chamber sessions of the
+        current legislature.
+        :param deputy_id: Integer representing the deputy id.
+        :return: Returns a dictionary containing the number of days attended, unattended justified or not, the total
+        number of days and the official percentage of attended days.
+        """
         justifications = self.get_justifications()
 
         sessions = self.get_sessions()
         url = self.services_url + 'WSSala.asmx/retornarSesionAsistencia?prmSesionId='
 
-        deputy_attendance = dict(presence=0, justified=0, unjustified=0, total=0)
+        deputy_attendance = dict(attended=0, justified=0, unjustified=0, total=0, percentage=100)
         for session in sessions:
             page = urllib.request.urlopen(url + str(session))
             soup = BeautifulSoup(page, 'lxml')
@@ -117,7 +149,7 @@ class Parser:
 
                     # If he has gone to the session, we count it
                     if attendance_type == '1':
-                        deputy_attendance['presence'] += 1
+                        deputy_attendance['attended'] += 1
 
                     # If not, check the justification
                     else:
@@ -125,7 +157,7 @@ class Parser:
 
                         if justification:
                             justification = justification['valor']
-                            is_justified = not(justifications[int(justification)-1]['rebajaasistencia'])
+                            is_justified = not(justifications[int(justification)-1]['reductionattendance'])
                         else:
                             # Isn't justified if there isn't justification .
                             is_justified = 0
@@ -137,12 +169,17 @@ class Parser:
                     deputy_attendance['total'] += 1
                     break
 
-        deputy_attendance['percentage'] = 100.0 * (deputy_attendance['justified'] + deputy_attendance['presence'])
+        deputy_attendance['percentage'] *= (deputy_attendance['justified'] + deputy_attendance['presence'])
         deputy_attendance['percentage'] /= deputy_attendance['total']
         deputy_attendance['percentage'] = round(deputy_attendance['percentage'], 2)
         return deputy_attendance
 
     def get_justifications(self):
+        """
+        Method used to get the list of all possible justifications for non-attendance.
+        :return: Returns a list containing dictionaries objects, where every dictionary contains the information for
+                 a time of attendance value, as name, reduction of days and the value (the id according to the site).
+        """
         url = self.services_url + 'WSComun.asmx/retornarTiposJustificacionesInasistencia'
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
@@ -150,13 +187,18 @@ class Parser:
         justifications = soup.find_all('justificacioninasistencia')
         for i in range(len(justifications)):
             justification = dict()
-            justification['nombre'] = justifications[i].find('nombre').get_text()
-            justification['rebajaasistencia'] = 1 if justifications[i].find('rebajaasistencia').get_text() == 'true' else 0
-            justification['valor'] = justifications[i]['valor']
+            justification['name'] = justifications[i].find('nombre').get_text()
+            justification['reductionattendance'] = 1 if justifications[i].find('rebajaasistencia').get_text() == 'true' else 0
+            justification['value'] = justifications[i]['valor']
             justifications[i] = justification
         return justifications
 
     def idfindex(self, deputy_index):
+        """
+        Given a index between 0 and the total number of deputies, returns the id of a deputy, given a index.
+        :param deputy_index: Index of the deputy, must be between 0 and the total number of deputies minus one.
+        :return: Returns the id of the deputy, used in the deputies chamber.
+        """
         url = self.services_url + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
@@ -166,14 +208,14 @@ class Parser:
         deputy_id = int(deputy.find('id').get_text())
         return deputy_id
 
-    def get_all_voting(self, year):
-        url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=' + str(year)
+    def get_legislature_votes(self, deputy_id):
+        url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno='
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
 
-        
+
 
 
 if __name__ == '__main__':
     p = Parser()
-    print(p.get_all_voting(2018))
+    print(p.get_sessions())
