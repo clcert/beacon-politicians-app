@@ -255,7 +255,7 @@ class Parser:
         voting_list = list()
         for voting in legislature_voting:
             voting_id = int(voting.find('id').get_text())
-            document = voting.find('descripcion').get_text()
+            description = voting.find('descripcion').get_text()
             date = datetime.strptime(voting.find('fecha').get_text(), "%Y-%m-%dT%H:%M:%S")
             type = int(voting.find('tipo')['valor'])
 
@@ -267,11 +267,58 @@ class Parser:
             if type != 1 and type != 4:
                 continue
             else:
-                voting_list.append(dict(voting_id=voting_id, document=document, date=date, type=type))
+                voting_list.append(dict(voting_id=voting_id, description=description, date=date, type=type))
         return voting_list
+
+    def get_document_info(self, voting_id):
+        """
+        Method used to get document information, given a voting id.
+        :param voting_id: Integer representing the voting id from the deputies chamber.
+        :return: Returns a dictionary containing all the information for the voted document.
+        """
+
+        url = self.services_url + 'WSLegislativo.asmx/retornarVotacionDetalle?prmVotacionId=' + str(voting_id)
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        document = dict()
+        votes = soup.find_all('voto')
+        for i in range(len(votes)):
+            deputy_id = int(votes[i].find('id').get_text())
+            vote_option = votes[i].find('opcionvoto').get_text()
+            votes[i] = dict(deputy_id=deputy_id, vote_option=vote_option)
+        document['votes'] = votes
+
+        document['date'] = datetime.strptime(soup.find('fecha').get_text(), "%Y-%m-%dT%H:%M:%S")
+        document['description'] = soup.find('descripcion').get_text()
+        document['total_yes'] = int(soup.find('totalsi').get_text())
+        document['total_no'] = int(soup.find('totalno').get_text())
+        document['total_abstention'] = int(soup.find('totalabstencion').get_text())
+        document['total_dispensed'] = int(soup.find('totaldispensado').get_text())
+        document['quorum'] = soup.find('quorum').get_text()
+        document['result'] = soup.find('resultado').get_text()
+        document['type'] = int(soup.find('tipo')['valor'])
+
+        if document['type'] == 1:    # Proyecto de Ley.
+            # Get bulletin string.
+            bulletin = document['description'][11:len(document['description'])]
+            url = self.services_url + 'WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin=' + bulletin
+            page = urllib.request.urlopen(url)
+            soup = BeautifulSoup(page, 'lxml')
+
+            name = soup.find('nombre').get_text()
+            document['name'] = name
+
+        # elif document['type'] == 2: # Implement if necessary
+        # elif document['type'] == 3: # Implement if necessary
+
+        elif document['type'] == 4: # Otro documento
+            document['name'] = document['description']
+            document['description'] = 'Otros'
+
+        return document
 
 
 if __name__ == '__main__':
     p = Parser()
-    for d in p.get_legislature_voting():
-        print(d)
+    print(p.get_document_info(29116)['name'])
