@@ -18,8 +18,9 @@ class Parser:
         """
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
-        attendance = self.get_all_attendance(deputy_id)
-        profile['attendance'] = attendance
+        profile['deputy_id'] =deputy_id
+        profile['attendance'] = self.get_all_attendance(deputy_id)
+        profile['voting'] = self.get_deputy_votes(deputy_id)
         return profile
 
     def get_profile(self, deputy_id):
@@ -357,12 +358,9 @@ class Parser:
                 if vote['deputy_id'] == deputy_id:
                     voting['vote_option'] = vote['vote_option']
                     break
-            voting['date'] = doc['date']
+            voting['date'] = doc['date'].strftime("%Y-%m-%d")
             voting['name'] = doc['name']
             voting['description'] = doc['description']
+            voting['voting_id'] = doc['voting_id']
             legislature_voting[i] = voting
         return legislature_voting
-
-if __name__ == '__main__':
-    p = Parser()
-    p.get_profile(1009)

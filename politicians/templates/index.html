@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>{{ title }}</title>
+		<title>DiputadosApp</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="{{url_for('static', filename='js/ie/html5shiv.js')}}"></script><![endif]-->
@@ -85,7 +85,27 @@
 
 				<!-- Three -->
 					<section id="three">
-                        <h2>Atrasos</h2>
+                        <h2>Votaciones</h2>
+                        <table>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Documento</th>
+                                <th>Materia</th>
+                                <th>Votación</th>
+                                <th>Detalle</th>
+                            </tr>
+                            {% for i in range(10) %}
+                                <tr>
+                                    <td>{{ voting[i]['date'] }}</td>
+                                    <td>{{ voting[i]['description'] }}</td>
+                                    <td>{{ voting[i]['name'] }}</td>
+                                    <td>{{ voting[i]['vote_option'] }}</td>
+                                    <td><a href="https://www.camara.cl/trabajamos/sala_votacion_detalle.aspx?prmID={{ voting[i]['voting_id'] }}" target="_blank">Ver</a> </td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+
 					</section>
 
                 <!-- Four -->
