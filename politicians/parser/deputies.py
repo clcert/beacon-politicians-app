@@ -281,7 +281,7 @@ class Parser:
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
 
-        document = dict()
+        document = dict(voting_id=voting_id)
         votes = soup.find_all('voto')
         for i in range(len(votes)):
             deputy_id = int(votes[i].find('id').get_text())
@@ -318,7 +318,33 @@ class Parser:
 
         return document
 
+    def get_deputy_votes(self, deputy_id):
+        """
+        Method used to get vote information from all voting of the last legislature,
+        :param deputy_id: Integer representing the deputy id.
+        :return: Returns a list of dictionaries containing each one the name, description, date and the vote_option
+                 for a voting.
+        """
+        legislature_voting = self.get_legislature_voting()
+        for i in range(len(legislature_voting)):
+            voting_id = legislature_voting[i]['voting_id']
+            doc = self.get_document_info(voting_id)
+
+            voting = dict()
+
+            votes = doc['votes']
+            for vote in votes:
+                if vote['deputy_id'] == deputy_id:
+                    voting['vote_option'] = vote['vote_option']
+                    break
+            voting['date'] = doc['date']
+            voting['name'] = doc['name']
+            voting['description'] = doc['description']
+            legislature_voting[i] = voting
+        return legislature_voting
+
 
 if __name__ == '__main__':
     p = Parser()
-    print(p.get_document_info(29116)['name'])
+    for el in p.get_deputy_votes(1009):
+        print(el)
