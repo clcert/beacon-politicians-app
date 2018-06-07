@@ -1,23 +1,11 @@
 
 function parseAttendance(att) {
-    for (var i = 0; i < att[3].length; ++i) {
-        if (att[3][i] === '%')
-            att[3][i] = ' ';
-    }
-    att[3] = parseInt(att[3]);
-
-
-
-    var justified = att[2] * (att[3]/100) - att[0];
-    justified = parseInt(justified.toFixed());
-
-    att[0] = ['Días asistidos', att[0]];
-    att[1] = ['Días no asistidos sin justificar', Math.max(0, att[1] - justified)];
-    att[2] = ['Días no asistidos justificados', justified];
-    att = [['Descripción', 'Asistencia'], ...att];
-    att.pop();
-
-    return att;
+    return [
+        ['Asistencia', 'Valor'],
+        ['Días asistidos', att['attended']],
+        ['Días no asistidos sin justificar', att['unjustified']],
+        ['Días no asistidos justificados', att['justified']]
+    ];
 }
 
 function drawChart(title, array, id) {
@@ -27,7 +15,6 @@ function drawChart(title, array, id) {
         'title': title
     };
 
-    console.log(array);
     var chart = new google.visualization.PieChart(document.getElementById(id));
     chart.draw(data, options);
 }

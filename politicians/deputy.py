@@ -40,7 +40,6 @@ class Deputy:
             info = pd.Parser().get_deputy(curr_deputy['index'])
             info['json_index'] = self.json_index
             info = {**info, **curr_deputy}
-
             self.info = info
 
         else:

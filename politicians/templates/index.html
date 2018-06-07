@@ -6,8 +6,6 @@
 -->
 <html>
 	<head>
-
-
 		<title>{{ title }}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,7 +40,7 @@
 
                     <h6>Foto Oficial</h6>
 
-                    <h1>Diputad{{ gender }} {{ name }} {{ surname }}</h1>
+                    <h1>Diputad{{ termination }} {{ first_name }} {{ first_surname }} </h1>
                     <div id="summary">
                         <p>Partido {{ party }}</p>
                         <p>Periodos Parlamentarios:</p>
@@ -62,13 +60,13 @@
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>{{ name }} {{ surname }}</h2>
+							<h2>{{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }}</h2>
                             <h3 style="text-align: right">Valor obtenido en {{ date }} </h3>
                             <h3 style="text-align: right; margin-top: 20px  ">a partir del siguiente <a href="https://beacon.clcert.cl/viewer/advanced?id={{ record }}" target="_blank">record</a> </h3>
 						</header>
 						<p id="intro">
-                            {{ name }} {{ surname }} ({{ birthday }}). {{ profession }}, actualmente diputado
-                            por la {{ district }}ª circunscripción que forma parte de la {{ districtregion }},
+                            {{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }} ({{ birthday }}). {{ profession }},
+                            actualmente diputad{{ termination }} por la {{ district }}ª circunscripción que forma parte de la {{ districtregion }},
                             durante el periodo {{ lastperiod }}. Militante por el partido {{ party }}.
                         </p>
                     </section>
@@ -77,8 +75,8 @@
 					<section id="two">
 						<h2>Asistencia</h2>
 						<p>
-                            Ha asistido a {{ attendance[0] }} sesiones de cámara, de un total de {{ attendance[2] }}.
-                            Obteniendo así, un {{ attendance[3] }} de asistencia. Considerando las inasistencias justificadas
+                            Ha asistido a {{ attendance['attended'] }} sesiones de cámara, de un total de {{ attendance['total'] }}.
+                            Obteniendo así, un {{ attendance['percentage'] }}% de asistencia. Considerando las inasistencias justificadas
                             y las no justificadas <sup><a id="text-attendance" href="#ref-attendance">1</a></sup>, se puede
                             apreciar el siguiente gráfico:
                         </p>

@@ -7,6 +7,7 @@ class Parser:
     def __init__(self):
         self.profile_url = 'https://www.camara.cl/camara/diputado_detalle.aspx?prmID='
         self.services_url = 'http://opendata.camara.cl/camaradiputados/WServices/'
+        self.deputies_url = 'https://www.camara.cl/camara/diputados_print.aspx'
 
     def get_deputy(self, deputy_index):
         """
@@ -27,6 +28,7 @@ class Parser:
         :param deputy_id: Integer representing the deputy id.
         :return: Returns basic information of the deputy.
         TODO: Add the basic information returned.
+        TODO: Get part from profile
         """
         url = self.profile_url + str(deputy_id)
         page = urllib.request.urlopen(url)
@@ -36,6 +38,8 @@ class Parser:
         photo_link += soup.findAll('div', attrs={'class': 'imgSet'})[1].find('img')['src']
         birthday = soup.find('div', attrs={'class': 'birthDate'}).find('p').getText().strip()
         profession = soup.find('div', attrs={'class': 'profession'}).find('p').getText().strip()
+        if not profession:
+            profession = 'Sin profesión'
         if len(profession) > 0 and profession[len(profession)-1] == '.':
             profession = profession[0:len(profession)-1]
 
@@ -65,6 +69,22 @@ class Parser:
         profile['sex'] = soup.find('sexo')['valor']
         profile['termination'] = 'o' if profile['sex'] == '1' else 'a'
         profile['treatment'] = 'Sr' if profile['sex'] == '1' else 'Sra'
+
+        url = self.deputies_url
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'html.parser')
+
+        rows = soup.find('tbody').find_all('tr')
+        for row in rows:
+            name = row.find('td').get_text()
+            if (profile['first_name'] in name) and (profile['first_surname'] in name):
+                district = row.find_all('td')[2].get_text()
+                district = int(district[2:len(district)])
+                party = row.find_all('td')[3].get_text()
+                profile['district'] = district
+                profile['party'] = party
+                break
+
         return profile
 
     def get_legislature(self):
@@ -133,7 +153,7 @@ class Parser:
         sessions = self.get_sessions()
         url = self.services_url + 'WSSala.asmx/retornarSesionAsistencia?prmSesionId='
 
-        deputy_attendance = dict(attended=0, justified=0, unjustified=0, total=0, percentage=100)
+        deputy_attendance = dict(attended=0, justified=0, unjustified=0, total=0, percentage=100.0)
         for session in sessions:
             page = urllib.request.urlopen(url + str(session))
             soup = BeautifulSoup(page, 'lxml')
@@ -169,7 +189,7 @@ class Parser:
                     deputy_attendance['total'] += 1
                     break
 
-        deputy_attendance['percentage'] *= (deputy_attendance['justified'] + deputy_attendance['presence'])
+        deputy_attendance['percentage'] *= (deputy_attendance['justified'] + deputy_attendance['attended'])
         deputy_attendance['percentage'] /= deputy_attendance['total']
         deputy_attendance['percentage'] = round(deputy_attendance['percentage'], 2)
         return deputy_attendance
@@ -343,8 +363,6 @@ class Parser:
             legislature_voting[i] = voting
         return legislature_voting
 
-
 if __name__ == '__main__':
     p = Parser()
-    for el in p.get_deputy_votes(1009):
-        print(el)
+    p.get_profile(1009)

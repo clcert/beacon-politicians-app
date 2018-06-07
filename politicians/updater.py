@@ -27,7 +27,7 @@ class Updater:
         TO DO: Modify using CLCERT Beacon Random
         :return: An integer in the range of the list described.
         """
-        max_index = len(pd.Parser().parse_personalinfo()) - 1
+        max_index = pd.Parser().count_deputies() - 1
 
         index, record = self.index_from_json()
         random.seed(index)
