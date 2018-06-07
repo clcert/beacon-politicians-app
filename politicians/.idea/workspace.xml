@@ -65,8 +65,8 @@
       <file leaf-file-name="deputies.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/parser/deputies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="210" column="47" selection-start-line="210" selection-start-column="47" selection-end-line="210" selection-end-column="47" />
+            <state relative-caret-position="431">
+              <caret line="275" column="37" selection-start-line="275" selection-start-column="37" selection-end-line="275" selection-end-column="37" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -306,7 +306,7 @@
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.3277487" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6264412" weight="0.3277487" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.36753926" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3842932" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31840795" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
@@ -697,8 +697,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/parser/deputies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="210" column="47" selection-start-line="210" selection-start-column="47" selection-end-line="210" selection-end-column="47" />
+        <state relative-caret-position="431">
+          <caret line="275" column="37" selection-start-line="275" selection-start-column="37" selection-end-line="275" selection-end-column="37" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

@@ -208,14 +208,70 @@ class Parser:
         deputy_id = int(deputy.find('id').get_text())
         return deputy_id
 
-    def get_legislature_votes(self, deputy_id):
-        url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno='
+    def get_legislature_voting(self):
+        """
+        Method used to get all voting from the latest legislature.
+        :return: Returns a list of dictionary representing the information for every legislature, where each one
+                 has the voting_id, document, date and type of the voting.
+        """
+        legislature = self.get_legislature()
+
+        start = legislature['start']
+        start_year = int(start.year)
+
+        url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=' + str(start_year)
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
 
+        legislature_voting = list()
 
+        all_voting = soup.find_all('votacion')
+        if all_voting:
+            for voting in all_voting:
+                voting_date = voting.find('fecha').get_text()
+                voting_date = datetime.strptime(voting_date, "%Y-%m-%dT%H:%M:%S")
+                if voting_date < start:
+                    continue
+                else:
+                    legislature_voting.append(voting)
+
+        end = legislature['end']
+        end_year = int(end.year)
+
+        url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=' + str(end_year)
+        page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(page, 'lxml')
+
+        all_voting = soup.find_all('votacion')
+        if all_voting:
+            for voting in all_voting:
+                voting_date = voting.find('fecha').get_text()
+                voting_date = datetime.strptime(voting_date, "%Y-%m-%dT%H:%M:%S")
+                if voting_date > end:
+                    continue
+                else:
+                    legislature_voting.append(voting)
+
+        voting_list = list()
+        for voting in legislature_voting:
+            voting_id = int(voting.find('id').get_text())
+            document = voting.find('descripcion').get_text()
+            date = datetime.strptime(voting.find('fecha').get_text(), "%Y-%m-%dT%H:%M:%S")
+            type = int(voting.find('tipo')['valor'])
+
+            # type = 1 -> 'Proyecto de Ley' (Boletines)
+            # type = 2 -> 'Proyecto de Resolucion'
+            # type = 3 -> 'Proyecto de acuerdo'
+            # type = 4 -> 'Otros Documentos'
+
+            if type != 1 and type != 4:
+                continue
+            else:
+                voting_list.append(dict(voting_id=voting_id, document=document, date=date, type=type))
+        return voting_list
 
 
 if __name__ == '__main__':
     p = Parser()
-    print(p.get_sessions())
+    for d in p.get_legislature_voting():
+        print(d)
