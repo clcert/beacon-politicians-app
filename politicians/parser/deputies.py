@@ -337,6 +337,12 @@ class Parser:
             document['name'] = document['description']
             document['description'] = 'Otros'
 
+        if len(document['name']) > 150:
+            i = 0
+            while i < 150 or document['name'][i] != ' ':
+                i += 1
+            document['name'] = document['name'][0:i] + "..."
+
         return document
 
     def get_deputy_votes(self, deputy_id):
