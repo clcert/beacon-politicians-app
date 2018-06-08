@@ -12,6 +12,11 @@ class Updater:
         self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/static/json/deputies.json'
 
     def index_from_json(self, date_hour):
+        """
+        Given a datetime object, gets its timestamp and return the beacon record and the output value.
+        :param date_hour: Datetime object used to get the record and output value.
+        :return:
+        """
         url = 'https://beacon.clcert.cl/beacon/1.0/pulse/' + str(int(date_hour.timestamp()))
         page = requests.get(url)
         json_page = page.json()
@@ -91,6 +96,11 @@ class Updater:
 
 
 def valid_date(date):
+    """
+    Checks if a date is valid according to the argument parser.
+    :param date: String representing a date. Format must be YYYY-mm-dd.
+    :return: Datetime object representing the given string.
+    """
     try:
         return datetime.datetime.strptime(date, "%Y-%m-%d")
     except ValueError:
@@ -99,6 +109,11 @@ def valid_date(date):
 
 
 def valid_hour(hour):
+    """
+    Checks if an hour is valid according to the argument parser.
+    :param hour: String representing an hour. Format must be HH:MM.
+    :return: Datetime object representing te given string.
+    """
     try:
         return datetime.datetime.strptime(hour, "%H:%M")
     except ValueError:
@@ -107,11 +122,13 @@ def valid_hour(hour):
 
 
 if __name__ == '__main__':
+    # Declares Argument Parser using the description defined above.
     description = "By default, gets and updates information for the last deputy, or print it. Also, given a date and " \
                   "hour in specific, can get information of the deputy that should be obtained by using the correspo" \
                   "nding record of that date."
     parser = argparse.ArgumentParser(description=description)
 
+    # Defines the different arguments
     parser.add_argument("-p", "--print",
                         help="Display information of the deputy.",
                         action="store_true")
@@ -130,10 +147,12 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    # If print argument isn't given. Just update the json, with the last pulse.
     if not args.print:
         updater = Updater()
         updater.run()
 
+    # Else, checks for the different arguments, and asks for the information according to the documentation.s
     else:
         if args.epoch:
             date = datetime.datetime.fromtimestamp(args.epoch)
