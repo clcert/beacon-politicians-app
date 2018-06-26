@@ -12,7 +12,7 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
 @app.route('/')
-@cache.cached(timeout=0)
+@cache.cached(timeout=60*60)
 def main_page():
     last = len(Updater().get_list()) - 1
     d = Deputy(last)
