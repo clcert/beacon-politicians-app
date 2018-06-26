@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Menu Activity
+ */
 public class MenuActivity extends AppCompatActivity {
 
     @Override
