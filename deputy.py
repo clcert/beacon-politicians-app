@@ -37,10 +37,7 @@ class Deputy:
         if self.check_format():
             deputies = Updater().get_list()
             curr_deputy = deputies[self.json_index]
-            info = pd.Parser().get_deputy(curr_deputy['index'])
-            info['json_index'] = self.json_index
-            info = {**info, **curr_deputy}
-            self.info = info
+            self.info = curr_deputy
 
         else:
             u = Updater()

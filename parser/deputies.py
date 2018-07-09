@@ -9,18 +9,18 @@ class Parser:
         self.services_url = 'http://opendata.camara.cl/camaradiputados/WServices/'
         self.deputies_url = 'https://www.camara.cl/camara/diputados_print.aspx'
 
-    def get_deputy(self, deputy_index):
+    def get_deputy(self, deputy_index, votes=10):
         """
         Method used to get all information related to a deputy according to the given index.
+        :param votes: Number of votes to be returned
         :param deputy_index: Index of the deputy. Belongs to the interval [0, count_deputies-1]
         :return: Returns a dictionary containing all deputy's information.
-        TODO: Add the different keys to the return documentation.
         """
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
         profile['deputy_id'] =deputy_id
         profile['attendance'] = self.get_all_attendance(deputy_id)
-        profile['voting'] = self.get_deputy_votes(deputy_id)
+        profile['voting'] = self.get_deputy_votes(deputy_id, votes)
         return profile
 
     def get_profile(self, deputy_id):
@@ -28,8 +28,6 @@ class Parser:
         Method used to scrap information from the profile of a deputy, given a deputy id.
         :param deputy_id: Integer representing the deputy id.
         :return: Returns basic information of the deputy.
-        TODO: Add the basic information returned.
-        TODO: Get part from profile
         """
         url = self.profile_url + str(deputy_id)
         page = urllib.request.urlopen(url)
@@ -229,7 +227,7 @@ class Parser:
         deputy_id = int(deputy.find('id').get_text())
         return deputy_id
 
-    def get_legislature_voting(self):
+    def get_legislature_voting(self, limit=-1):
         """
         Method used to get all voting from the latest legislature.
         :return: Returns a list of dictionary representing the information for every legislature, where each one
@@ -289,7 +287,11 @@ class Parser:
                 continue
             else:
                 voting_list.append(dict(voting_id=voting_id, description=description, date=date, type=type))
-        return voting_list
+        if limit == -1:
+            return voting_list
+        else:
+            voting_list = sorted(voting_list, key=lambda k: k['date'], reverse=True)
+            return voting_list[0:min(limit, len(voting_list))]
 
     def get_document_info(self, voting_id):
         """
@@ -345,14 +347,14 @@ class Parser:
 
         return document
 
-    def get_deputy_votes(self, deputy_id):
+    def get_deputy_votes(self, deputy_id, limit=-1):
         """
         Method used to get vote information from all voting of the last legislature,
         :param deputy_id: Integer representing the deputy id.
         :return: Returns a list of dictionaries containing each one the name, description, date and the vote_option
                  for a voting.
         """
-        legislature_voting = self.get_legislature_voting()
+        legislature_voting = self.get_legislature_voting(limit)
         for i in range(len(legislature_voting)):
             voting_id = legislature_voting[i]['voting_id']
             doc = self.get_document_info(voting_id)

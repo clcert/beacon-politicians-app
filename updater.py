@@ -71,6 +71,7 @@ class Updater:
 
             with open(self.json_path, 'w', encoding='utf-8') as outfile:
                 deputy = dict(date=date_hour.strftime("%Y-%m-%d %H:%M:%S"), index=index, record=record)
+                deputy = {**deputy, **pd.Parser().get_deputy(index)}
 
                 deputies['deputies'].append(deputy)
                 json.dump(deputies, outfile, ensure_ascii=False)
