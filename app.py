@@ -1,3 +1,7 @@
+#######################################################################################################################
+# python 3.5 o superior
+# otros requerimientos en requirents.txt
+#######################################################################################################################
 from flask import Flask, url_for, redirect
 from flask import abort
 from flask import render_template
