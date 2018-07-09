@@ -10,7 +10,7 @@ from deputy import Deputy
 from updater import Updater
 
 
-app = Flask(__name__, static_url_path='/diputadodeldia/static)
+app = Flask(__name__, static_url_path='/diputadodeldia/static')
 
 
 @app.route('/')
