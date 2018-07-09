@@ -41,11 +41,15 @@ class Updater:
         ordered according to the date.
         :return:
         """
-        with open(self.json_path, 'r', encoding='utf-8') as infile:
-            deputies_list = json.load(infile)['deputies']
-            deputies_list = sorted(deputies_list, key=lambda k: datetime.datetime.strptime(k['date'],
-                                                                                           "%Y-%m-%d %H:%M:%S"))
-            return deputies_list
+        if os.stat(self.json_path).st_size != 0:
+            with open(self.json_path, 'r', encoding='utf-8') as infile:
+                try:
+                    deputies_list = json.load(infile)['deputies']
+                    deputies_list = sorted(deputies_list, key=lambda k: datetime.datetime.strptime(k['date'],
+                                                                                                   "%Y-%m-%d %H:%M:%S"))
+                    return deputies_list
+                except ValueError:
+                    return None
 
     def update(self, using_json=True, date_hour=None):
         """
@@ -54,6 +58,10 @@ class Updater:
         :param; Boolean used for testing, must be True for update in json and false if testing.
         :return:
         """
+        json_index = 0
+        if self.get_list() != None:
+            json_index = len(self.get_list())
+
         if not date_hour:
             url = 'https://beacon.clcert.cl/beacon/1.0/pulse/last'
             page = requests.get(url)
@@ -69,9 +77,11 @@ class Updater:
                 finally:
                     infile.close()
 
+
+
             with open(self.json_path, 'w', encoding='utf-8') as outfile:
                 deputy = dict(date=date_hour.strftime("%Y-%m-%d %H:%M:%S"), index=index,
-                              record=record, json_index=len(deputies)-1)
+                              record=record, json_index=json_index)
                 deputy = {**deputy, **pd.Parser().get_deputy(index)}
 
                 deputies['deputies'].append(deputy)

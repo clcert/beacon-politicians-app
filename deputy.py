@@ -1,6 +1,5 @@
 import json
 import os
-import parser.deputies as pd
 from updater import Updater
 
 
