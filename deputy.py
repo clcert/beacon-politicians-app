@@ -36,8 +36,7 @@ class Deputy:
         """
         if self.check_format():
             deputies = Updater().get_list()
-            curr_deputy = deputies[self.json_index]
-            self.info = curr_deputy
+            self.info = deputies[self.json_index]
 
         else:
             u = Updater()

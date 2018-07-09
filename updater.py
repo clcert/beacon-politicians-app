@@ -70,7 +70,8 @@ class Updater:
                     infile.close()
 
             with open(self.json_path, 'w', encoding='utf-8') as outfile:
-                deputy = dict(date=date_hour.strftime("%Y-%m-%d %H:%M:%S"), index=index, record=record)
+                deputy = dict(date=date_hour.strftime("%Y-%m-%d %H:%M:%S"), index=index,
+                              record=record, json_index=len(deputies)-1)
                 deputy = {**deputy, **pd.Parser().get_deputy(index)}
 
                 deputies['deputies'].append(deputy)
