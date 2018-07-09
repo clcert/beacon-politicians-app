@@ -13,7 +13,7 @@ from updater import Updater
 app = Flask(__name__, static_url_path='/diputadodeldia/static')
 
 
-@app.route('/')
+@app.route('/diputadodeldia')
 def main_page():
     last = len(Updater().get_list()) - 1
     d = Deputy(last)
@@ -22,7 +22,7 @@ def main_page():
     return render_template('index.html', **current)
 
 
-@app.route('/diputado/<int:json_index>')
+@app.route('/diputadodeldia/diputado/<int:json_index>')
 def record(json_index):
     last = len(Updater().get_list()) - 1
     if json_index < 0 or json_index > last:
@@ -34,13 +34,13 @@ def record(json_index):
     return render_template('index.html', **current)
 
 
-@app.route('/handle_previous', methods=['POST'])
+@app.route('/diputadodeldia/handle_previous', methods=['POST'])
 def handle_previous():
     json_index = int(request.args['json_index']) - 1
     return redirect(url_for("record", json_index=json_index))
 
 
-@app.route('/handle_next', methods=['POST'])
+@app.route('/diputadodeldia/handle_next', methods=['POST'])
 def handle_next():
     json_index = int(request.args['json_index']) + 1
     last = len(Updater().get_list()) - 1
