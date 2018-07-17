@@ -62,12 +62,13 @@
 					<section id="one">
 						<header class="major">
 							<h2>{{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }}</h2>
-                            <h4 style="text-align: right">Escogido en {{ date }} en base al <a href="https://beacon.clcert.cl/viewer/advanced?id={{ record }}" target="_blank">record</a> </h4>
+                            <p style="text-align: right; font-size: 0.8em">Escogido el {{ date }} en base al Pulso <a href="https://beacon.clcert.cl/viewer/advanced?id={{ record }}" target="_blank"># {{ record }}</a>
+                                <br/>Comprueba la elección utilizando nuestro script (Python) <a href="#" target="_blank">disponible aquí</a>.</p>
 						</header>
 						<p id="intro">
-                            {{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }} ({{ birthday }}). {{ profession }},
-                            actualmente diputad{{ termination }} por la {{ district }}ª circunscripción que forma parte de la {{ districtregion }},
-                            durante el periodo {{ lastperiod }}. Militante por el partido {{ party }}.
+                            <strong>{{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }}</strong>, nacid{{ termination }} el <strong>{{ birthday }}</strong>, es de profesión <strong>{{ profession }}</strong>,
+                            actualmente diputad{{ termination }} por la <strong>{{ district }}ª circunscripción</strong> que forma parte de la {{ districtregion }},
+                            durante el período {{ lastperiod }}. Militante por el partido <strong>{{ party }}</strong>.
                         </p>
                     </section>
 
@@ -75,9 +76,9 @@
 					<section id="two">
 						<h2>Asistencia</h2>
 						<p>
-                            Ha asistido a {{ attendance['attended'] }} sesiones de cámara, de un total de {{ attendance['total'] }}.
-                            Obteniendo así, un {{ attendance['percentage'] }}% de asistencia. Considerando las inasistencias justificadas
-                            y las no justificadas <sup><a id="text-attendance" href="#ref-attendance">1</a></sup>, se puede
+                            A la fecha de consulta, ha asistido a <strong>{{ attendance['attended'] }} sesiones de cámara</strong>, de un total de {{ attendance['total'] }} sesiones,
+                            obteniendo así un <strong>{{ attendance['percentage'] }}% de asistencia justificada</strong>. Considerando las inasistencias justificadas
+                            y las no justificadas<sup><a id="text-attendance" href="#ref-attendance">1</a></sup>, se puede
                             apreciar el siguiente gráfico:
                         </p>
                         <div id="attendancechart"></div>
@@ -112,7 +113,7 @@
 					<section id="four">
                         <h2>Referencias</h2>
                         <ol>
-                            <li id="ref-attendance"><sup><a href="#text-attendance">&and;</a></sup> Cálculo hecho según justificaciones a inasistencias, para más información visitar
+                            <li id="ref-attendance" style="font-size: 0.8em"><sup><a href="#text-attendance"></a></sup> Cálculo hecho según justificaciones a inasistencias, para más información visitar:
                                 <a href="https://www.camara.cl/trabajamos/sala_asistencia.aspx" target="_blank">https://www.camara.cl/trabajamos/sala_asistencia.aspx</a></li>
                         </ol>
 					</section>
@@ -123,17 +124,12 @@
 
 		<!-- Footer -->
 			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-					</ul>
+{#				<div class="inner">#}
+					<p style="font-size: 0.7em; margin: 0">¿Quieres saber como funciona la elección del #DiputadoDelDía? <a href="#" target="_blank"> Descúbrelo aquí</a>.</p>
 					<ul class="copyright">
-						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>
-				</div>
+{#				</div>#}
 			</footer>
 
 		<!-- Scripts -->
