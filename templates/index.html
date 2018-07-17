@@ -7,7 +7,7 @@
 <html>
 	<head>
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-		<title>DiputadosApp</title>
+		<title>#DiputadoDelDia</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="{{url_for('static', filename='js/ie/html5shiv.js')}}"></script><![endif]-->
@@ -68,7 +68,7 @@
 						<p id="intro">
                             <strong>{{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }}</strong>, nacid{{ termination }} el <strong>{{ birthday }}</strong>, es de profesión <strong>{{ profession }}</strong>,
                             actualmente diputad{{ termination }} por la <strong>{{ district }}ª circunscripción</strong> que forma parte de la {{ districtregion }},
-                            durante el período {{ lastperiod }}. Militante por el partido <strong>{{ party }}</strong>.
+                            durante el período {{ lastperiod }}. Militante por <strong>{{ party }}</strong>.
                         </p>
                     </section>
 

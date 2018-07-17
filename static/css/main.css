@@ -2511,7 +2511,7 @@
 			-ms-flex-grow: 1;
 			flex-grow: 1;
 			margin: auto;
-            margin-bottom: 2em;
+            /*margin-bottom: 2em;*/
             width: auto;
 		}
 
