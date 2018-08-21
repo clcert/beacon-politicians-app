@@ -1,29 +1,19 @@
-
-function parseAttendance(att) {
-    return [
-        ['Asistencia', 'Valor'],
-        ['Días asistidos', att['attended']],
-        ['Días no asistidos sin justificar', att['unjustified']],
-        ['Días no asistidos justificados', att['justified']]
-    ];
-}
-
-function drawChart(title, array, id) {
-    var data = google.visualization.arrayToDataTable(array);
-
-    var options = {
-        'title': title
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById(id));
-    chart.draw(data, options);
-}
-
-attendance = parseAttendance(attendance);
-
-
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(function () {
-    drawChart('Asistencia', attendance, 'attendancechart');
+var ctx = document.getElementById("myChart").getContext('2d');
+var att = [attendance['attended'], attendance['justified'], attendance['unjustified']];
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ["Días Asistidos", "Días no asistidos justificados", "Días no asistidos no justificados"],
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3cba9f", "#3e95cd", "#FF0000"],
+        data: att,
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Asistencia'
+      }
+    }
 });
-

@@ -13,11 +13,12 @@
 		<!--[if lte IE 8]><script src="{{url_for('static', filename='js/ie/html5shiv.js')}}"></script><![endif]-->
 		<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="{{url_for('static', filename='css/ie8.css')}}" /><![endif]-->
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/Chart.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
         <script type="text/javascript" nonce="YmVhY29uIGlzdCBzY2jDtm4K">
             var attendance = {{ attendance|tojson }};
+
         </script>
-        <script type="text/javascript" src ="{{ url_for('static', filename='js/chart.js')}}"></script>
 
 	</head>
 	<body id="top">
@@ -81,7 +82,8 @@
                             y las no justificadas<sup><a id="text-attendance" href="#ref-attendance">1</a></sup>, se puede
                             apreciar el siguiente gráfico:
                         </p>
-                        <div id="attendancechart"></div>
+                        <canvas id="myChart" width="auto" height="150"></canvas>
+                        <script type="text/javascript" src ="{{ url_for('static', filename='js/chart.js')}}"></script>
                     </section>
 
 				<!-- Three -->
