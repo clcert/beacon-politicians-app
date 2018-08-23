@@ -17,11 +17,10 @@ class Updater:
         :param date_hour: Datetime object used to get the record and output value.
         :return:
         """
-        # url = 'https://beacon.clcert.cl/beacon/1.0/pulse/' + str(int(date_hour.timestamp()))
-        url = 'https://beacon.clcert.cl/beacon/2.0/pulse/time/' + str(int(date_hour.timestamp()))
+        url = 'https://beacon.clcert.cl/beacon/2.0/pulse/time/' + str(int(date_hour.timestamp()) * 1000)
         page = requests.get(url)
         json_page = page.json()
-        # return json_page['outputValue'], json_page['id']
+
         return json_page['pulse']['outputValue'], json_page['pulse']['pulseIndex']
 
     def get_index(self, date_hour):
@@ -65,11 +64,10 @@ class Updater:
             json_index = len(self.get_list())
 
         if not date_hour:
-            # url = 'https://beacon.clcert.cl/beacon/1.0/pulse/last'
             url = 'https://beacon.clcert.cl/beacon/2.0/pulse/last'
             page = requests.get(url)
-            # date_hour = datetime.datetime.fromtimestamp(page.json()['time'])
-            date_hour = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ')
+            date_hour = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
+                tzinfo=datetime.timezone.utc)
 
         index, record = self.get_index(date_hour)
         if using_json:
@@ -80,8 +78,6 @@ class Updater:
                     deputies = dict(deputies=list())
                 finally:
                     infile.close()
-
-
 
             with open(self.json_path, 'w', encoding='utf-8') as outfile:
                 deputy = dict(date=date_hour.strftime("%Y-%m-%d %H:%M:%S"), index=index,
@@ -174,12 +170,11 @@ if __name__ == '__main__':
             date = datetime.datetime.fromtimestamp(args.epoch)
 
         else:
-            # url = 'https://beacon.clcert.cl/beacon/1.0/pulse/last'
             url = 'https://beacon.clcert.cl/beacon/2.0/pulse/last'
             page = requests.get(url)
 
-            # date = datetime.datetime.fromtimestamp(page.json()['time'])  # TODO: CHANGE THIS
-            date = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ')
+            date = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
+                tzinfo=datetime.timezone.utc)
             if args.date:
                 date = datetime.datetime(year=args.date.year, month=args.date.month, day=args.date.day)
             if args.time:
