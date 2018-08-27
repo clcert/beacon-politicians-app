@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import urllib.request
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -227,7 +229,7 @@ class Parser:
         deputy_id = int(deputy.find('id').get_text())
         return deputy_id
 
-    def get_legislature_voting(self, limit=-1):
+    def get_legislature_voting(self):
         """
         Method used to get all voting from the latest legislature.
         :return: Returns a list of dictionary representing the information for every legislature, where each one
@@ -287,11 +289,8 @@ class Parser:
                 continue
             else:
                 voting_list.append(dict(voting_id=voting_id, description=description, date=date, type=type))
-        if limit == -1:
-            return voting_list
-        else:
-            voting_list = sorted(voting_list, key=lambda k: k['date'], reverse=True)
-            return voting_list[0:min(limit, len(voting_list))]
+
+        return voting_list
 
     def get_document_info(self, voting_id):
         """
@@ -354,8 +353,18 @@ class Parser:
         :return: Returns a list of dictionaries containing each one the name, description, date and the vote_option
                  for a voting.
         """
-        legislature_voting = self.get_legislature_voting(limit)
+        legislature_voting = self.get_legislature_voting()
+        legislature_voting = sorted(legislature_voting, key=lambda k: k['date'], reverse=True)
+
+        voting_limit = len(legislature_voting)
+        if limit != -1:
+            voting_limit = min(voting_limit, limit)
+
+        ans = list()
         for i in range(len(legislature_voting)):
+            if voting_limit == 0:
+                break
+
             voting_id = legislature_voting[i]['voting_id']
             doc = self.get_document_info(voting_id)
 
@@ -370,5 +379,29 @@ class Parser:
             voting['name'] = doc['name']
             voting['description'] = doc['description']
             voting['voting_id'] = doc['voting_id']
-            legislature_voting[i] = voting
-        return legislature_voting
+
+            # Voting filter
+            # Blacklist of keywords
+            blacklist = list()
+            blacklist.append([])
+            blacklist[0].append('modifica')
+            blacklist[0].append('ley')
+            blacklist[0].append('n°')
+
+            blacklist.append([])
+            blacklist[1].append('solicita')
+            blacklist[1].append('presidente')
+
+            is_valid = True
+            for i in range(len(blacklist)):
+                cond = True
+                for j in range(len(blacklist[i])):
+                    cond = cond and (blacklist[i][j] in voting['name'].lower())
+                if cond:
+                    is_valid = False
+
+            if is_valid:
+                ans.append(voting)
+                voting_limit -= 1
+
+        return ans
