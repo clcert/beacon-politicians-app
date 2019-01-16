@@ -20,13 +20,17 @@
 	</head>
 	<body id="top">
 
-        <form id="left-arrow" method="get" action={{ prev }}>
+{#        <form id="left-arrow" method="get" action={{ prev }}>#}
+          <a id="left-arrow" href="{{ prev }}">
             <input type="image" src="static/images/arrows/left.svg">
-        </form>
+          </a>
+{#        </form>#}
 
-        <form id="right-arrow" method="get" action={{ post }}>
+{#        <a id="right-arrow" method="get" action={{ post }}>#}
+        <a id="right-arrow" href="{{ post }}">
             <input type="image" src="static/images/arrows/right.svg">
-        </form>
+        </a>
+{#        </form>#}
 
 		<!-- Header -->
 			<header id="header">
