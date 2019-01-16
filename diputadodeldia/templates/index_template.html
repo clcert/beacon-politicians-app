@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<link rel="shortcut icon" href="static/favicon.ico">
+        <title>#DiputadoDelDia</title>
+        <link rel="stylesheet" href="static/css/main.css" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="static/js/Chart.js"></script>
+        <script type="text/javascript" src="static/js/Chart.min.js"></script>
+        <script type="text/javascript" nonce="YmVhY29uIGlzdCBzY2jDtm4K">
+            var attendance = {{ attendance|tojson }};
+        </script>
+
+	</head>
+	<body id="top">
+
+        <form id="left-arrow" method="get" action={{ prev }}>
+            <input type="image" src="static/images/arrows/left.svg">
+        </form>
+
+        <form id="right-arrow" method="get" action={{ post }}>
+            <input type="image" src="static/images/arrows/right.svg">
+        </form>
+
+		<!-- Header -->
+			<header id="header">
+
+                <div class="inner">
+					<a href="{{ photo }}" target="_blank" class="image avatar"><img src="{{ photo }}" alt="" /></a>
+
+                    <h6>Foto Oficial</h6>
+
+                    <h1>Diputad{{ termination }} {{ first_name }} {{ first_surname }} </h1>
+                    <div id="summary">
+                        <p>Partido {{ party }}</p>
+                        <p>Periodos Parlamentarios:</p>
+                        <ul>
+                            {% for period in periods %}
+                                <li>{{ period }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h2>{{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }}</h2>
+                            <p style="text-align: right; font-size: 0.8em">Escogido el {{ date }} en base al Pulso <a href="https://beacon.clcert.cl/viewer/advanced?id={{ record }}" target="_blank"># {{ record }}</a>
+                                <br/>Comprueba la elección utilizando nuestro script (Python) <a href="https://github.com/clcert/beacon-politicians-app" target="_blank">disponible en GitHub</a>.</p>
+						</header>
+						<p id="intro">
+                            <strong>{{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }}</strong>, nacid{{ termination }} el <strong>{{ birthday }}</strong>, es de profesión <strong>{{ profession }}</strong>,
+                            actualmente diputad{{ termination }} por el <strong>distrito N° {{ district }}</strong> que forma parte de la <strong>{{ districtregion }}</strong>,
+                            durante el período {{ lastperiod }}. Militante por <strong>{{ party }}</strong>.
+                        </p>
+                    </section>
+
+				<!-- Two -->
+					<section id="two">
+						<h2>Asistencia</h2>
+						<p>
+                            A la fecha de consulta, ha asistido a <strong>{{ attendance['attended'] }} sesiones de cámara</strong>, de un total de {{ attendance['total'] }} sesiones,
+                            obteniendo así un <strong>{{ attendance['percentage'] }}% de asistencia justificada</strong>. Considerando las inasistencias justificadas
+                            y las no justificadas<sup><a id="text-attendance" href="#ref-attendance">1</a></sup>, se puede
+                            apreciar el siguiente gráfico:
+                        </p>
+                        <canvas id="myChart" width="auto" height="150"></canvas>
+                        <script type="text/javascript" src ="static/js/chart.js"></script>
+                    </section>
+
+				<!-- Three -->
+					<section id="three">
+                        <h2>Votaciones</h2>
+                        <table>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Documento</th>
+                                <th>Materia</th>
+                                <th>Votación</th>
+                                <th>Detalle</th>
+                            </tr>
+                            {% for i in range(10) %}
+                                <tr>
+                                    <td>{{ voting[i]['date'] }}</td>
+                                    <td>{{ voting[i]['description'] }}</td>
+                                    <td>{{ voting[i]['name'] }}</td>
+                                    <td>{{ voting[i]['vote_option'] }}</td>
+                                    <td><a href="https://www.camara.cl/trabajamos/sala_votacion_detalle.aspx?prmID={{ voting[i]['voting_id'] }}" target="_blank">Ver</a> </td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+
+					</section>
+
+                <!-- Four -->
+					<section id="four">
+                        <h2>Referencias</h2>
+                        <ol>
+                            <li id="ref-attendance" style="font-size: 0.8em"><sup><a href="#text-attendance"></a></sup> Cálculo hecho según justificaciones a inasistencias, para más información visitar:
+                                <a href="https://www.camara.cl/trabajamos/sala_asistencia.aspx" target="_blank">https://www.camara.cl/trabajamos/sala_asistencia.aspx</a></li>
+                        </ol>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+                <p style="font-size: 0.7em; margin: 0">¿Quieres saber como funciona la elección del #DiputadoDelDía? <a href="#" target="_blank"> Descúbrelo aquí</a>.</p>
+                <ul class="copyright">
+                    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.poptrox.min.js"></script>
+			<script src="static/js/skel.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+	</body>
+</html>
