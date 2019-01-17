@@ -29,6 +29,9 @@ class Generator:
         else:
             return str(value)
 
+    def date_html_name(self, d):
+        return str(d.year) + self.format_date(d.month) + self.format_date(d.day) + '.html'
+
     def run(self):
         url = 'https://beacon.clcert.cl/beacon/2.0/pulse/last'
         page = requests.get(url)
@@ -36,8 +39,9 @@ class Generator:
         record_id = page.json()['pulse']['pulseIndex']
         date = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
             tzinfo=datetime.timezone.utc)
-        yesterday = date - datetime.timedelta(days=1)
-        tomorrow = date + datetime.timedelta(days=1)
+        delta = datetime.timedelta(days=1)
+        previous = date - delta
+        next = date + delta
 
         index = self.get_index(output_value)
 
@@ -45,11 +49,9 @@ class Generator:
         deputy = parser.get_deputy(index)
 
         template = env.get_template('index_template.html')
-        curr_html_name = str(date.year) + self.format_date(date.month) + self.format_date(date.day) + '.html'
-        prev_html_name = str(yesterday.year) + self.format_date(yesterday.month) + self.format_date(
-            yesterday.day) + '.html'
-        post_html_name = str(tomorrow.year) + self.format_date(tomorrow.month) + self.format_date(
-            tomorrow.day) + '.html'
+        curr_html_name = self.date_html_name(date)
+        prev_html_name = self.date_html_name(previous)
+        post_html_name = self.date_html_name(next)
 
         with open('public/' + curr_html_name, 'w') as html_file:
             html_file.write(template.render(**deputy, date=date, record=record_id, prev=prev_html_name,
