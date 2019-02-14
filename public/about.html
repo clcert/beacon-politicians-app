@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<link rel="shortcut icon" href="static/favicon.ico">
+        <title>#DiputadoDelDia - Descripción</title>
+        <link rel="stylesheet" href="static/css/main.css" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+
+    <body>
+        <h1>¿Cómo funciona #DiputadoDelDia?</h1>
+        Cada día a las 00:01 la aplicación #DiputadoDelDía escoje, aleatoriamente, un número entre 1 y 155 (relacionando cada número con uno de los 155 diputados en ejercicio actualmente). Luego de esto, recolecta y despliega información pública del diputado escogido proporcionada por la página oficial de la Cámara de Diputados.
+        <h2>¿Cómo se escoge aleatoriamente al #DiputadoDelDía?</h2>
+        Para escojer un número de manera aleatoria entre 1 y 155, #DiputadoDelDía extrae, a las 00:01 de cada día, el último valor generado por el Faro de Aleatoriedad de la Universidad de Chile (https://random.uchile.cl). Ese valor (512 bits aleatorios) es utilizado como 'semilla' para correr un proceso 'pseudo-aleatorio' que tiene como finalidad escoger un número, al azar, entre 1 y 155.
+        <h2>¿Semilla? ¿Pseudo-aleatorio? ¿Qué significa eso?</h2>
+        Ningún sistema computacional puede escoger un número realmente aleatorio. Lo que pueden hacer es escoger un número 'pseudo-aleatoriamente'. Esto consiste en que si se tiene un valor inicial (denominado 'semilla') lo bastantemente impredecible (en términos matemáticos, que posee una alta entropía), entonces el número escogido también sera bastantemente impredecible (para todos los efectos prácticos, escogido al azar).
+        <br>
+        Para más información sobre como verificar la selección del #DiputadoDelDia dirígete a nuestro repositorio de Github: https://github.com/clcert/beacon-politicians-app
+    </body>
+</html> 
