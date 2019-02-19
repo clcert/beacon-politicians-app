@@ -4,4 +4,5 @@ __pycache__/
 .idea
 public/*.html
 !public/about.html
+!public/404.html
 venv/
