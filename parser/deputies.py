@@ -1,13 +1,14 @@
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timezone
 from bs4 import BeautifulSoup
 
 
 class Parser:
-    def __init__(self):
+    def __init__(self, pulse_date):
         self.profile_url = 'https://www.camara.cl/camara/diputado_detalle.aspx?prmID='
         self.services_url = 'http://opendata.camara.cl/camaradiputados/WServices/'
         self.deputies_url = 'https://www.camara.cl/camara/diputados_print.aspx'
+        self.pulse_date = pulse_date
 
     def get_deputy(self, deputy_index, votes=10):
         """
@@ -18,7 +19,7 @@ class Parser:
         """
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
-        profile['deputy_id'] =deputy_id
+        profile['deputy_id'] = deputy_id
         profile['attendance'] = self.get_all_attendance(deputy_id)
         profile['voting'] = self.get_deputy_votes(deputy_id, votes)
         return profile
@@ -88,21 +89,30 @@ class Parser:
 
     def get_legislature(self):
         """
-        Method used to get the information from the latest legislature.
-        :return: Returns a dictionary containing the id of the latest legislature, and the date of end and start
+        Method used to get the information from the legislature according to the date of the pulse used to perform the request.
+        :return: Returns a dictionary containing the id of the legislature, and the date of end and start
                  as a datetime object.
         """
-        url = self.services_url + 'WSLegislativo.asmx/retornarLegislaturaActual'
+        # url = self.services_url + 'WSLegislativo.asmx/retornarLegislaturaActual'
+        url = 'http://opendata.camara.cl/wscamaradiputados.asmx/getLegislaturas'
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
 
-        id = int(soup.find('id').get_text().strip())
+        id = start = end = ''
+        for legislatura in soup.findAll('legislatura'):
+            id = legislatura.find('id').get_text().strip()
+            start = datetime.strptime(legislatura.find('fechainicio').get_text(), "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+            end = datetime.strptime(legislatura.find('fechatermino').get_text(), "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+            if start < self.pulse_date < end:
+                break
 
-        start = soup.find('fechainicio').get_text()
-        start = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S")
+        # id = int(soup.find('id').get_text().strip())
 
-        end = soup.find('fechatermino').get_text()
-        end = datetime.strptime(end, "%Y-%m-%dT%H:%M:%S")
+        # start = soup.find('fechainicio').get_text()
+        # start = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S")
+
+        # end = soup.find('fechatermino').get_text()
+        # end = datetime.strptime(end, "%Y-%m-%dT%H:%M:%S")
         return dict(id=id, start=start, end=end)
 
     def get_sessions(self):
@@ -119,7 +129,9 @@ class Parser:
 
         # If a session hasn't been celebrated, pop it from the list.
         for session in sessions:
-            if int(session.find('estado')['valor']) != 1:
+            session_start = datetime.strptime(session.find('fechainicio').get_text(), "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+            session_end = datetime.strptime(session.find('fechatermino').get_text(), "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+            if int(session.find('estado')['valor']) != 1 or not(session_start < self.pulse_date):
                 sessions.pop()
 
         # Gets only session ids from the list.
@@ -248,7 +260,7 @@ class Parser:
         if all_voting:
             for voting in all_voting:
                 voting_date = voting.find('fecha').get_text()
-                voting_date = datetime.strptime(voting_date, "%Y-%m-%dT%H:%M:%S")
+                voting_date = datetime.strptime(voting_date, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
                 if voting_date < start:
                     continue
                 else:
@@ -265,7 +277,7 @@ class Parser:
         if all_voting:
             for voting in all_voting:
                 voting_date = voting.find('fecha').get_text()
-                voting_date = datetime.strptime(voting_date, "%Y-%m-%dT%H:%M:%S")
+                voting_date = datetime.strptime(voting_date, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
                 if voting_date > end:
                     continue
                 else:
