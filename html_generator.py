@@ -49,7 +49,8 @@ class Generator:
 
         page = requests.get(url)
         output_value = page.json()['pulse']['outputValue']
-        record_id = page.json()['pulse']['pulseIndex']
+        record_chainIndex = page.json()['pulse']['chainIndex']
+        record_pulseIndex = page.json()['pulse']['pulseIndex']
 
         date = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
                tzinfo=datetime.timezone.utc)
@@ -68,12 +69,12 @@ class Generator:
         post_html_name = self.date_html_name(next)
 
         with open('public/' + curr_html_name, 'w') as html_file:
-            html_file.write(template.render(**deputy, date=date, record=record_id, prev=prev_html_name,
+            html_file.write(template.render(**deputy, date=date, chainIndex=record_chainIndex, pulseIndex=record_pulseIndex, prev=prev_html_name,
                                             post=post_html_name))
             html_file.close()
 
         with open('public/index.html', 'w') as html_file:
-            html_file.write(template.render(**deputy, date=date, record=record_id, prev=prev_html_name,
+            html_file.write(template.render(**deputy, date=date, chainIndex=record_chainIndex, pulseIndex=record_pulseIndex, prev=prev_html_name,
                                             post='#'))
             html_file.close()
 
