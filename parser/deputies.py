@@ -89,14 +89,14 @@ class Parser:
         """
         url = self.services_url + 'WSLegislativo.asmx/retornarLegislaturaActual'
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
-        id = int(soup.find('id').get_text().strip())
+        id = int(soup.find('Id').get_text().strip())
 
-        start = soup.find('fechainicio').get_text()
+        start = soup.find('FechaInicio').get_text()
         start = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S")
 
-        end = soup.find('fechatermino').get_text()
+        end = soup.find('FechaTermino').get_text()
         end = datetime.strptime(end, "%Y-%m-%dT%H:%M:%S")
         return dict(id=id, start=start, end=end)
 
@@ -108,19 +108,23 @@ class Parser:
         url = self.services_url + 'WSSala.asmx/retornarSesionesXLegislatura?prmLegislaturaId=' + \
               str(self.get_legislature()['id'])
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
-        sessions = soup.find_all('sesion')
+        sessions = soup.find_all('Sesion')
 
         # If a session hasn't been celebrated, pop it from the list.
-        for session in sessions:
-            if int(session.find('estado')['valor']) != 1:
-                sessions.pop()
+        celebrated_sessions = list(filter(
+            lambda session: session.find('Estado')['Valor'] == '1',
+            sessions
+        ))
 
         # Gets only session ids from the list.
-        for i in range(len(sessions)):
-            sessions[i] = int(sessions[i].find('id').get_text().strip())
-        return sessions
+        ids_cessions = list(map(
+            lambda session: int(session.find('Id').get_text().strip()),
+            celebrated_sessions
+        ))
+
+        return ids_cessions
 
     def count_deputies(self):
         """
@@ -148,44 +152,48 @@ class Parser:
         url = self.services_url + 'WSSala.asmx/retornarSesionAsistencia?prmSesionId='
 
         deputy_attendance = dict(attended=0, justified=0, unjustified=0, total=0, percentage=100.0)
+
         for session in sessions:
-            page = urllib.request.urlopen(url + str(session))
-            soup = BeautifulSoup(page, 'lxml')
+            session_url = url + str(session)
+            page = urllib.request.urlopen(session_url)
+            soup = BeautifulSoup(page, 'xml')
 
-            attendances = soup.find_all('asistencia')
-            for attendance in attendances:
-                # Get the id of the attendance from the current deputy
-                curr_id = int(attendance.find('id').get_text())
+            # Only check attendance of the deputy we are looking for
+            attendance = list(filter(
+                lambda attendance: int(attendance.find('Id').get_text()) == deputy_id,
+                soup.find_all('Asistencia')
+            ))[0]
+            
+            attendance_type = attendance.find('TipoAsistencia')['Valor']
 
-                # If current deputy is the deputy we're looking for, check attendance
-                if curr_id == deputy_id:
-                    attendance_type = attendance.find('tipoasistencia')['valor']
+            # If deputy has gone to the session, we count it
+            if attendance_type == '1':
+                deputy_attendance['attended'] += 1
 
-                    # If he has gone to the session, we count it
-                    if attendance_type == '1':
-                        deputy_attendance['attended'] += 1
+            # If not, check the justification
+            else:
+                justification = attendance.find('Justificacion')
 
-                    # If not, check the justification
-                    else:
-                        justification = attendance.find('justificacion')
+                if justification:
+                    is_justified = not(
+                        justifications[int(justification['Valor'])-1]['ReductionAttendance']
+                    )
+                else:
+                    # Isn't justified if there isn't justification .
+                    is_justified = 0
 
-                        if justification:
-                            justification = justification['valor']
-                            is_justified = not(justifications[int(justification)-1]['reductionattendance'])
-                        else:
-                            # Isn't justified if there isn't justification .
-                            is_justified = 0
+                if is_justified:
+                    deputy_attendance['justified'] += 1
+                else:
+                    deputy_attendance['unjustified'] += 1
 
-                        if is_justified:
-                            deputy_attendance['justified'] += 1
-                        else:
-                            deputy_attendance['unjustified'] += 1
-                    deputy_attendance['total'] += 1
-                    break
+        percentage = round(
+            (deputy_attendance['justified'] + deputy_attendance['attended']) / len(sessions),
+            2
+        )    
+        deputy_attendance['total'] = len(sessions)
+        deputy_attendance['percentage'] *= percentage
 
-        deputy_attendance['percentage'] *= (deputy_attendance['justified'] + deputy_attendance['attended'])
-        deputy_attendance['percentage'] /= deputy_attendance['total']
-        deputy_attendance['percentage'] = round(deputy_attendance['percentage'], 2)
         return deputy_attendance
 
     def get_justifications(self):
@@ -196,14 +204,14 @@ class Parser:
         """
         url = self.services_url + 'WSComun.asmx/retornarTiposJustificacionesInasistencia'
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
-        justifications = soup.find_all('justificacioninasistencia')
+        justifications = soup.find_all('JustificacionInasistencia')
         for i in range(len(justifications)):
             justification = dict()
-            justification['name'] = justifications[i].find('nombre').get_text()
-            justification['reductionattendance'] = 1 if justifications[i].find('rebajaasistencia').get_text() == 'true' else 0
-            justification['value'] = justifications[i]['valor']
+            justification['name'] = justifications[i].find('Nombre').get_text()
+            justification['reductionattendance'] = 1 if justifications[i].find('RebajaAsistencia').get_text() == 'true' else 0
+            justification['value'] = justifications[i]['Valor']
             justifications[i] = justification
         return justifications
 
@@ -235,7 +243,7 @@ class Parser:
 
         url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=' + str(start_year)
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
         legislature_voting = list()
 
