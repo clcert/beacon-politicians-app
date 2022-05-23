@@ -245,41 +245,37 @@ class Parser:
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'xml')
 
-        legislature_voting = list()
-
-        all_voting = soup.find_all('votacion')
-        if all_voting:
-            for voting in all_voting:
-                voting_date = voting.find('fecha').get_text()
-                voting_date = datetime.strptime(voting_date, "%Y-%m-%dT%H:%M:%S")
-                if voting_date < start:
-                    continue
-                else:
-                    legislature_voting.append(voting)
+        legislature_voting_start = list(filter(
+            lambda v: datetime.strptime(
+                v.find('Fecha').get_text(),
+                "%Y-%m-%dT%H:%M:%S"
+            ) >= start,
+            soup.find_all('Votacion')
+        ))
 
         end = legislature['end']
         end_year = int(end.year)
 
         url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=' + str(end_year)
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
-        all_voting = soup.find_all('votacion')
-        if all_voting:
-            for voting in all_voting:
-                voting_date = voting.find('fecha').get_text()
-                voting_date = datetime.strptime(voting_date, "%Y-%m-%dT%H:%M:%S")
-                if voting_date > end:
-                    continue
-                else:
-                    legislature_voting.append(voting)
+        legislature_voting_end = list(filter(
+            lambda v: datetime.strptime(
+                v.find('Fecha').get_text(),
+                "%Y-%m-%dT%H:%M:%S"
+            ) <= end,
+            soup.find_all('Votacion')
+        ))
 
+        legislature_voting = legislature_voting_start + legislature_voting_end
+        
         voting_list = list()
         for voting in legislature_voting:
-            voting_id = int(voting.find('id').get_text())
-            description = voting.find('descripcion').get_text()
-            date = datetime.strptime(voting.find('fecha').get_text(), "%Y-%m-%dT%H:%M:%S")
-            type = int(voting.find('tipo')['valor'])
+            voting_id = int(voting.find('Id').get_text())
+            description = voting.find('Descripcion').get_text()
+            date = datetime.strptime(voting.find('Fecha').get_text(), "%Y-%m-%dT%H:%M:%S")
+            type = int(voting.find('Tipo')['Valor'])
 
             # type = 1 -> 'Proyecto de Ley' (Boletines)
             # type = 2 -> 'Proyecto de Resolucion'
@@ -302,34 +298,34 @@ class Parser:
 
         url = self.services_url + 'WSLegislativo.asmx/retornarVotacionDetalle?prmVotacionId=' + str(voting_id)
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
         document = dict(voting_id=voting_id)
-        votes = soup.find_all('voto')
+        votes = soup.find_all('Voto')
         for i in range(len(votes)):
-            deputy_id = int(votes[i].find('id').get_text())
-            vote_option = votes[i].find('opcionvoto').get_text()
+            deputy_id = int(votes[i].find('Id').get_text())
+            vote_option = votes[i].find('OpcionVoto').get_text()
             votes[i] = dict(deputy_id=deputy_id, vote_option=vote_option)
         document['votes'] = votes
 
-        document['date'] = datetime.strptime(soup.find('fecha').get_text(), "%Y-%m-%dT%H:%M:%S")
-        document['description'] = soup.find('descripcion').get_text()
-        document['total_yes'] = int(soup.find('totalsi').get_text())
-        document['total_no'] = int(soup.find('totalno').get_text())
-        document['total_abstention'] = int(soup.find('totalabstencion').get_text())
-        document['total_dispensed'] = int(soup.find('totaldispensado').get_text())
-        document['quorum'] = soup.find('quorum').get_text()
-        document['result'] = soup.find('resultado').get_text()
-        document['type'] = int(soup.find('tipo')['valor'])
+        document['date'] = datetime.strptime(soup.find('Fecha').get_text(), "%Y-%m-%dT%H:%M:%S")
+        document['description'] = soup.find('Descripcion').get_text()
+        document['total_yes'] = int(soup.find('TotalSi').get_text())
+        document['total_no'] = int(soup.find('TotalNo').get_text())
+        document['total_abstention'] = int(soup.find('TotalAbstencion').get_text())
+        document['total_dispensed'] = int(soup.find('TotalDispensado').get_text())
+        document['quorum'] = soup.find('Quorum').get_text()
+        document['result'] = soup.find('Resultado').get_text()
+        document['type'] = int(soup.find('Tipo')['Valor'])
 
         if document['type'] == 1:    # Proyecto de Ley.
             # Get bulletin string.
             bulletin = document['description'][11:len(document['description'])]
             url = self.services_url + 'WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin=' + bulletin
             page = urllib.request.urlopen(url)
-            soup = BeautifulSoup(page, 'lxml')
+            soup = BeautifulSoup(page, 'xml')
 
-            name = soup.find('nombre').get_text()
+            name = soup.find('Nombre').get_text()
             document['name'] = name
 
         # elif document['type'] == 2: # Implement if necessary
