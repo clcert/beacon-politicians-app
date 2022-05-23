@@ -7,9 +7,9 @@ from bs4 import BeautifulSoup
 
 class Parser:
     def __init__(self):
-        self.profile_url = 'https://www.camara.cl/camara/diputado_detalle.aspx?prmID='
+        self.profile_url = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
         self.services_url = 'http://opendata.camara.cl/camaradiputados/WServices/'
-        self.deputies_url = 'https://www.camara.cl/camara/diputados_print.aspx'
+        # self.deputies_url = 'https://www.camara.cl/camara/diputados_print.aspx' 404
 
     def get_deputy(self, deputy_index, votes=10):
         """
@@ -20,7 +20,7 @@ class Parser:
         """
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
-        profile['deputy_id'] =deputy_id
+        profile['deputy_id'] = deputy_id
         profile['attendance'] = self.get_all_attendance(deputy_id)
         profile['voting'] = self.get_deputy_votes(deputy_id, votes)
         return profile
@@ -35,56 +35,49 @@ class Parser:
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'html.parser')
 
-        photo_link = 'https://www.camara.cl'
-        photo_link += soup.findAll('div', attrs={'class': 'imgSet'})[1].find('img')['src']
-        birthday = soup.find('div', attrs={'class': 'birthDate'}).find('p').getText().strip()
-        profession = soup.find('div', attrs={'class': 'profession'}).find('p').getText().strip()
-        if not profession:
-            profession = 'Sin profesión'
-        if len(profession) > 0 and profession[len(profession)-1] == '.':
-            profession = profession[0:len(profession)-1]
+        profile = {}
 
-        dregion = soup.findAll('div', attrs={'class': 'summary'})[0].findAll('p')[2].getText().strip()
-        districtregion = ""
-        for i in range(len(dregion)):
-            if dregion[i] > '!':
-                districtregion += dregion[i]
-            elif i > 0 and dregion[i] < '!' < dregion[i-1]:
-                districtregion += ' '
+        profile['photo'] = 'https://www.camara.cl/img.aspx?prmID=GRCL' + str(deputy_id)
 
-        periods = soup.findAll('div', attrs={'class': 'summary'})[1].findAll('li')
-        for i in range(len(periods)):
-            periods[i] = periods[i].getText().strip()
+        general_section = soup.find('section', attrs={'id': 'info-ficha'})
+        biography_section = soup.find('div', attrs={'class': 'biografia'})
 
-        profile = dict(photo=photo_link, birthday=birthday, profession=profession, periods=periods,
-                       districtregion=districtregion, lastperiod=periods[len(periods)-1])
+        try:
+            profession = biography_section.findAll('p')[2].getText().split('▪')[1].strip()
+        except:
+            profession = 'Sin Información'
+
+        if len(profession) == 0:
+            profession = 'Sin Información'
+        profile['profession'] = profession.strip('.')
+
+        main_info = general_section.find('div', attrs={'class': 'grid-3'}).getText().strip()
+        main_info_list = list(map(str.strip, main_info.split('\r\n')))
+
+        comunas = main_info_list[0].split(':')[1].strip()
+        profile['district'] = main_info_list[1].split(':')[1].strip()
+        profile['districtregion'] = main_info_list[2].split(':')[1].strip()
+        profile['party'] = main_info_list[5].split(':')[1].strip()
+
+        raw_periods = general_section.findAll('div', attrs={'class': 'grid-2 aleft m-left14'})[-1].findAll('li')[1:]
+        profile['periods'] = list(map(BeautifulSoup.getText, raw_periods))
+        profile['lastperiod'] = profile['periods'][-1]
 
         url = self.services_url + 'WSDiputado.asmx/retornarDiputado?prmDiputadoId=' + str(deputy_id)
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
-        profile['first_name'] = soup.find('nombre').get_text()
-        profile['second_name'] = soup.find('nombre2').get_text()
-        profile['first_surname'] = soup.find('apellidopaterno').get_text()
-        profile['second_surname'] = soup.find('apellidomaterno').get_text()
-        profile['sex'] = soup.find('sexo')['valor']
+        profile['first_name'] = soup.find('Nombre').get_text()
+        profile['second_name'] = soup.find('Nombre2').get_text()
+
+        profile['first_surname'] = soup.find('ApellidoPaterno').get_text()
+        profile['second_surname'] = soup.find('ApellidoMaterno').get_text()
+
+        profile['birthday'] = soup.find('FechaNacimiento').get_text()
+
+        profile['sex'] = soup.find('Sexo')['Valor']
         profile['termination'] = 'o' if profile['sex'] == '1' else 'a'
         profile['treatment'] = 'Sr' if profile['sex'] == '1' else 'Sra'
-
-        url = self.deputies_url
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'html.parser')
-
-        rows = soup.find('tbody').find_all('tr')
-        for row in rows:
-            name = row.find('td').get_text()
-            if (profile['first_name'] in name) and (profile['first_surname'] in name):
-                district = row.find_all('td')[2].get_text()
-                district = int(district[2:len(district)])
-                party = row.find_all('td')[3].get_text()
-                profile['district'] = district
-                profile['party'] = party
-                break
 
         return profile
 
@@ -136,9 +129,9 @@ class Parser:
         """
         url = self.services_url + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
-        deputies = soup.find_all('diputado')
+        deputies = soup.find_all('Diputado')
         return len(deputies)
 
     def get_all_attendance(self, deputy_id):
@@ -222,11 +215,11 @@ class Parser:
         """
         url = self.services_url + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
         page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
+        soup = BeautifulSoup(page, 'xml')
 
-        deputies = soup.find_all('diputado')
+        deputies = soup.find_all('Diputado')
         deputy = deputies[deputy_index]
-        deputy_id = int(deputy.find('id').get_text())
+        deputy_id = int(deputy.find('Id').get_text())
         return deputy_id
 
     def get_legislature_voting(self):
