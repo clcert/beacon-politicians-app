@@ -1,3 +1,7 @@
+# ⚠️ Scrapper en Mantención ⚠️
+
+Se está realizando un proceso de ajuste a la actual página de la cámara de diputados 😅
+
 ![](https://www.clcert.cl/img/logo-clcert.png)
 
 # CLCERT #DiputadoDelDia
