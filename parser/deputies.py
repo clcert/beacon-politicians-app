@@ -176,7 +176,7 @@ class Parser:
 
                 if justification:
                     is_justified = not(
-                        justifications[int(justification['Valor'])-1]['ReductionAttendance']
+                        justifications[int(justification['Valor'])-1]['reductionattendance']
                     )
                 else:
                     # Isn't justified if there isn't justification .
@@ -301,13 +301,16 @@ class Parser:
         soup = BeautifulSoup(page, 'xml')
 
         document = dict(voting_id=voting_id)
-        votes = soup.find_all('Voto')
-        for i in range(len(votes)):
-            deputy_id = int(votes[i].find('Id').get_text())
-            vote_option = votes[i].find('OpcionVoto').get_text()
-            votes[i] = dict(deputy_id=deputy_id, vote_option=vote_option)
-        document['votes'] = votes
 
+        votes = list(map(
+            lambda vote: dict(
+                deputy_id = int(vote.find('Id').get_text()),
+                vote_option = vote.find('OpcionVoto').get_text()
+            ),
+            soup.find_all('Voto')
+        ))
+        
+        document['votes'] = votes
         document['date'] = datetime.strptime(soup.find('Fecha').get_text(), "%Y-%m-%dT%H:%M:%S")
         document['description'] = soup.find('Descripcion').get_text()
         document['total_yes'] = int(soup.find('TotalSi').get_text())
@@ -320,13 +323,13 @@ class Parser:
 
         if document['type'] == 1:    # Proyecto de Ley.
             # Get bulletin string.
-            bulletin = document['description'][11:len(document['description'])]
+            bulletin = document['description'][11:]
+
             url = self.services_url + 'WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin=' + bulletin
             page = urllib.request.urlopen(url)
             soup = BeautifulSoup(page, 'xml')
 
-            name = soup.find('Nombre').get_text()
-            document['name'] = name
+            document['name'] = soup.find('Nombre').get_text()
 
         # elif document['type'] == 2: # Implement if necessary
         # elif document['type'] == 3: # Implement if necessary
@@ -335,11 +338,9 @@ class Parser:
             document['name'] = document['description']
             document['description'] = 'Otros'
 
-        if len(document['name']) > 150:
-            i = 0
-            while i < 150 or document['name'][i] != ' ':
-                i += 1
-            document['name'] = document['name'][0:i] + "..."
+        name_length = len(document['name'])
+        if name_length > 150:
+            document['name'] = document['name'][0:150] + "..."
 
         return document
 
@@ -367,11 +368,16 @@ class Parser:
 
             voting = dict()
 
-            votes = doc['votes']
-            for vote in votes:
-                if vote['deputy_id'] == deputy_id:
-                    voting['vote_option'] = vote['vote_option']
-                    break
+            try:
+                deputy_vote = list(filter(
+                    lambda vote: vote['deputy_id'] == deputy_id,
+                    doc['votes']
+                ))[0]
+            except:
+                # No votó
+                continue
+
+            voting['vote_option'] = deputy_vote['vote_option']
             voting['date'] = doc['date'].strftime("%Y-%m-%d")
             voting['name'] = doc['name']
             voting['description'] = doc['description']
@@ -379,25 +385,20 @@ class Parser:
 
             # Voting filter
             # Blacklist of keywords
-            blacklist = list()
-            blacklist.append([])
-            blacklist[0].append('modifica')
-            blacklist[0].append('ley')
-            blacklist[0].append('n°')
+            blacklist = [
+                'modifica',
+                'ley',
+                'n°',
+                'solicita',
+                'presidente'
+            ]
 
-            blacklist.append([])
-            blacklist[1].append('solicita')
-            blacklist[1].append('presidente')
+            blacklist_matches = list(filter(
+                lambda word: word in voting['name'].lower(), 
+                blacklist
+            ))
 
-            is_valid = True
-            for i in range(len(blacklist)):
-                cond = True
-                for j in range(len(blacklist[i])):
-                    cond = cond and (blacklist[i][j] in voting['name'].lower())
-                if cond:
-                    is_valid = False
-
-            if is_valid:
+            if len(blacklist_matches) == 0:
                 ans.append(voting)
                 voting_limit -= 1
 
