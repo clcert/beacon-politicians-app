@@ -73,7 +73,11 @@ class Parser:
         profile['first_surname'] = soup.find('ApellidoPaterno').get_text()
         profile['second_surname'] = soup.find('ApellidoMaterno').get_text()
 
-        profile['birthday'] = soup.find('FechaNacimiento').get_text()
+        raw_birthday = datetime.strptime(
+            soup.find('FechaNacimiento').get_text(),
+            '%Y-%m-%dT%H:%M:%S'
+        )
+        profile['birthday'] = datetime.strftime(raw_birthday, '%d/%m/%Y')
 
         profile['sex'] = soup.find('Sexo')['Valor']
         profile['termination'] = 'o' if profile['sex'] == '1' else 'a'
@@ -339,8 +343,8 @@ class Parser:
             document['description'] = 'Otros'
 
         name_length = len(document['name'])
-        if name_length > 150:
-            document['name'] = document['name'][0:150] + "..."
+        # if name_length > 200:
+        #     document['name'] = document['name'][0:200] + "..."
 
         return document
 

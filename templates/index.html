@@ -17,7 +17,6 @@
         <script type="text/javascript" src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
         <script type="text/javascript" nonce="YmVhY29uIGlzdCBzY2jDtm4K">
             var attendance = {{ attendance|tojson }};
-
         </script>
 
 	</head>
@@ -68,8 +67,8 @@
 						</header>
 						<p id="intro">
                             <strong>{{ first_name }} {{ second_name }} {{ first_surname }} {{ second_surname }}</strong>, nacid{{ termination }} el <strong>{{ birthday }}</strong>, es de profesión <strong>{{ profession }}</strong>,
-                            actualmente diputad{{ termination }} por el <strong>distrito N° {{ district }}</strong> que forma parte de la <strong>{{ districtregion }}</strong>,
-                            durante el período {{ lastperiod }}. Militante por <strong>{{ party }}</strong>.
+                            actualmente diputad{{ termination }} por el <strong>distrito {{ district }}</strong> que forma parte de la <strong>{{ districtregion }}</strong>,
+                            durante el período {{ lastperiod }}. Pertenece a la bancada <strong>{{ party }}</strong>.
                         </p>
                     </section>
 
