@@ -17,7 +17,7 @@ class Updater:
         :param date_hour: Datetime object used to get the record and output value.
         :return:
         """
-        url = 'https://beacon.clcert.cl/beacon/2.0/pulse/time/' + str(int(date_hour.timestamp()) * 1000)
+        url = 'https://random.uchile.cl/beacon/2.0-beta1/pulse/time/' + str(int(date_hour.timestamp()) * 1000)
         page = requests.get(url)
         json_page = page.json()
 
@@ -64,7 +64,7 @@ class Updater:
             json_index = len(self.get_list())
 
         if not date_hour:
-            url = 'https://beacon.clcert.cl/beacon/2.0/pulse/last'
+            url = 'https://random.uchile.cl/beacon/2.0-beta1/pulse/last'
             page = requests.get(url)
             date_hour = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
                 tzinfo=datetime.timezone.utc)
@@ -170,7 +170,7 @@ if __name__ == '__main__':
             date = datetime.datetime.fromtimestamp(args.epoch)
 
         else:
-            url = 'https://beacon.clcert.cl/beacon/2.0/pulse/last'
+            url = 'https://random.uchile.cl/beacon/2.0-beta1/pulse/last'
             page = requests.get(url)
 
             date = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
