@@ -158,8 +158,8 @@ class Parser:
 
         for session in sessions:
             session_url = url + str(session)
-            page = urllib.request.urlopen(session_url)
-            soup = BeautifulSoup(page, 'xml')
+            response = req.get(session_url)
+            soup = BeautifulSoup(response.content, 'xml')
 
             # Only check attendance of the deputy we are looking for
             attendance = list(filter(
@@ -321,7 +321,7 @@ class Parser:
         document['total_abstention'] = int(soup.find('TotalAbstencion').get_text())
         document['total_dispensed'] = int(soup.find('TotalDispensado').get_text())
         document['quorum'] = soup.find('Quorum').get_text()
-        document['result'] = soup.find('Resultado').get_text()
+        document['result'] = soup.find('Resultado').get_text() if soup.find('Resultado') != None else 'Desconocido'
         document['type'] = int(soup.find('Tipo')['Valor'])
 
         if document['type'] == 1:    # Proyecto de Ley.
