@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-import urllib.request
+import requests as req
 from datetime import datetime
 from bs4 import BeautifulSoup
 
@@ -32,8 +31,8 @@ class Parser:
         :return: Returns basic information of the deputy.
         """
         url = self.profile_url + str(deputy_id)
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'html.parser')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'html.parser')
 
         profile = {}
 
@@ -64,8 +63,8 @@ class Parser:
         profile['lastperiod'] = profile['periods'][-1]
 
         url = self.services_url + 'WSDiputado.asmx/retornarDiputado?prmDiputadoId=' + str(deputy_id)
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         profile['first_name'] = soup.find('Nombre').get_text()
         profile['second_name'] = soup.find('Nombre2').get_text()
@@ -92,8 +91,8 @@ class Parser:
                  as a datetime object.
         """
         url = self.services_url + 'WSLegislativo.asmx/retornarLegislaturaActual'
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         id = int(soup.find('Id').get_text().strip())
 
@@ -111,8 +110,8 @@ class Parser:
         """
         url = self.services_url + 'WSSala.asmx/retornarSesionesXLegislatura?prmLegislaturaId=' + \
               str(self.get_legislature()['id'])
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         sessions = soup.find_all('Sesion')
 
@@ -136,8 +135,8 @@ class Parser:
         :return: Returns the total number of deputies as an integer.
         """
         url = self.services_url + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         deputies = soup.find_all('Diputado')
         return len(deputies)
@@ -207,8 +206,8 @@ class Parser:
                  a time of attendance value, as name, reduction of days and the value (the id according to the site).
         """
         url = self.services_url + 'WSComun.asmx/retornarTiposJustificacionesInasistencia'
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         justifications = soup.find_all('JustificacionInasistencia')
         for i in range(len(justifications)):
@@ -226,8 +225,8 @@ class Parser:
         :return: Returns the id of the deputy, used in the deputies chamber.
         """
         url = self.services_url + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         deputies = soup.find_all('Diputado')
         deputy = deputies[deputy_index]
@@ -246,8 +245,8 @@ class Parser:
         start_year = int(start.year)
 
         url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=' + str(start_year)
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         legislature_voting_start = list(filter(
             lambda v: datetime.strptime(
@@ -261,8 +260,8 @@ class Parser:
         end_year = int(end.year)
 
         url = self.services_url + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=' + str(end_year)
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         legislature_voting_end = list(filter(
             lambda v: datetime.strptime(
@@ -301,8 +300,8 @@ class Parser:
         """
 
         url = self.services_url + 'WSLegislativo.asmx/retornarVotacionDetalle?prmVotacionId=' + str(voting_id)
-        page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(page, 'xml')
+        response = req.get(url)
+        soup = BeautifulSoup(response.content, 'xml')
 
         document = dict(voting_id=voting_id)
 
@@ -330,8 +329,8 @@ class Parser:
             bulletin = document['description'][11:]
 
             url = self.services_url + 'WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin=' + bulletin
-            page = urllib.request.urlopen(url)
-            soup = BeautifulSoup(page, 'xml')
+            response = req.get(url)
+            soup = BeautifulSoup(response.content, 'xml')
 
             document['name'] = soup.find('Nombre').get_text()
 

@@ -6,7 +6,7 @@ Se está realizando un proceso de ajuste a la actual página de la cámara de di
 
 # CLCERT #DiputadoDelDia
 
-La aplicación #DiputadoDelDia elige al azar un(a) Diputado(a) del Congreso Nacional de Chile utilizando el valor aleatorio generado por el Faro de Aleatoriedad de la Universidad de Chile (https://beacon.clcert.cl) a las 00:01 horas (Chile Continental GMT -04:00 durante hora de invierno) de cada día (el Faro utiliza huso horario GMT). A dicha hora se revela la siguiente información del congresista elegido:
+La aplicación #DiputadoDelDia elige al azar un(a) Diputado(a) del Congreso Nacional de Chile utilizando el valor aleatorio generado por el Faro de Aleatoriedad de la Universidad de Chile (https://random.uchile.cl) a las 00:01 horas (Chile Continental GMT -04:00 durante hora de invierno) de cada día (el Faro utiliza huso horario GMT). A dicha hora se revela la siguiente información del congresista elegido:
 * Fecha de Nacimiento.
 * Profesión.
 * Circunscripción y Región que representa.
