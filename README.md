@@ -1,12 +1,9 @@
-# ⚠️ Scrapper en Mantención ⚠️
+<h1 style="line-height: 50px; display: flex">
+  <img src="https://www.clcert.cl//img/clcert_oscuro.svg" style="width: 150px; padding-right: 20px"/>
+  <div>#DiputadxDelDia</div>
+</h1>
 
-Se está realizando un proceso de ajuste a la actual página de la cámara de diputados 😅
-
-![](https://www.clcert.cl/img/logo-clcert.png)
-
-# CLCERT #DiputadoDelDia
-
-La aplicación #DiputadoDelDia elige al azar un(a) Diputado(a) del Congreso Nacional de Chile utilizando el valor aleatorio generado por el Faro de Aleatoriedad de la Universidad de Chile (https://random.uchile.cl) a las 00:01 horas (Chile Continental GMT -04:00 durante hora de invierno) de cada día (el Faro utiliza huso horario GMT). A dicha hora se revela la siguiente información del congresista elegido:
+La aplicación #DiputadxDelDia elige al azar un(a) Diputado(a) del Congreso Nacional de Chile utilizando el valor aleatorio generado por el Faro de Aleatoriedad de la Universidad de Chile (https://random.uchile.cl) a las 00:01 horas (Chile Continental GMT -04:00 durante hora de invierno) de cada día (el Faro utiliza huso horario GMT). A dicha hora se revela la siguiente información del congresista elegido:
 * Fecha de Nacimiento.
 * Profesión.
 * Circunscripción y Región que representa.
@@ -15,13 +12,13 @@ La aplicación #DiputadoDelDia elige al azar un(a) Diputado(a) del Congreso Naci
 * Votaciones en los últimos 10 boletines publicados.
 Toda la información anterior se obtiene a partir de los datos entregados por la página oficial de la Cámara de Diputados www.camara.cl.
 
-## Comprobar Elección del #DiputadoDelDia
+## Comprobar Elección del #DiputadxDelDia
 
-Dentro del actual repositorio se dispone de un script de verificación que recrea el proceso que el CLCERT lleva a cabo todos los días a las 00:01 horas (Chile Continental) para elegir al #DiputadoDelDia.
+Dentro del actual repositorio se dispone de un script de verificación que recrea el proceso que el CLCERT lleva a cabo todos los días a las 00:01 horas (Chile Continental) para elegir al #DiputadxDelDia.
 
 ### Descarga última versión
 
-Descarga la última versión de la aplicación [aquí](https://github.com/clcert/beacon-politicians-app/archive/v0.1.zip) (.zip).
+Soon
 
 ### Requisitos
 
@@ -42,7 +39,7 @@ Options:
 
 ### Ejemplo de uso
 
-Si quiere verificar el #DiputadoDelDia del **18 de Julio de 2018** puede ejecutar uno de los siguientes dos comandos:
+Si quiere verificar el #DiputadxDelDia del **18 de Julio de 2018** puede ejecutar uno de los siguientes dos comandos:
 
 ```
 $ python updater.py -p -d 2018-07-18 -t 00:01
