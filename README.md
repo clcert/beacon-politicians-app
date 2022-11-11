@@ -1,5 +1,5 @@
 <h1 style="line-height: 50px; display: flex">
-  <img src="https://www.clcert.cl//img/clcert_oscuro.svg" style="width: 150px; padding-right: 20px"/>
+  <img src="https://www.clcert.cl/img/clcert_oscuro.svg" style="width: 150px; padding-right: 20px"/>
   <div>#DiputadxDelDia</div>
 </h1>
 
