@@ -31,7 +31,7 @@ const Overview = ({deputyInfo}) => {
         </div>
         <div className='col-9 col-8-large col-12-medium'>
           <header>
-            <h1>
+            <h1 className={styles.name}>
               Diputad{ deputyInfo.termination } <strong>{ deputyInfo.first_name } { deputyInfo.first_surname }</strong>.
             </h1>
           </header>

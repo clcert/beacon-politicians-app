@@ -64,10 +64,8 @@ class Updater:
             json_index = len(self.get_list())
 
         if not date_hour:
-            url = 'https://random.uchile.cl/beacon/2.0-beta1/pulse/last'
-            page = requests.get(url)
-            date_hour = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
-                tzinfo=datetime.timezone.utc)
+            [year, month, day] = str(datetime.date.today()).split('-')
+            date_hour = datetime.datetime(year=int(year), month=int(month), day=int(day), hour=0, minute=0)
 
         index, record = self.get_index(date_hour)
         if using_json:
@@ -169,17 +167,15 @@ if __name__ == '__main__':
         if args.epoch:
             date = datetime.datetime.fromtimestamp(args.epoch)
 
-        else:
-            url = 'https://random.uchile.cl/beacon/2.0-beta1/pulse/last'
-            page = requests.get(url)
+        elif args.date:
+            date = datetime.datetime(year=args.date.year, month=args.date.month, day=args.date.day)
 
-            date = datetime.datetime.strptime(page.json()['pulse']['timeStamp'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
-                tzinfo=datetime.timezone.utc)
-            if args.date:
-                date = datetime.datetime(year=args.date.year, month=args.date.month, day=args.date.day)
             if args.time:
                 date = datetime.datetime(year=date.year, month=date.month, day=date.day,
                                          hour=args.time.hour, minute=args.time.minute)
 
+        else:
+            date = None
+            
         updater = Updater()
         updater.update(using_json=False, date_hour=date)

@@ -25,3 +25,7 @@
   color: white;
   font-weight: 600;
 }
+
+.name {
+  line-height: 1em;
+}
