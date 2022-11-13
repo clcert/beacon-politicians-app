@@ -1,5 +1,5 @@
 <h1 style="line-height: 50px; display: flex">
-  <img src="https://www.clcert.cl//img/clcert_oscuro.svg" style="width: 150px; padding-right: 20px"/>
+  <img src="https://www.clcert.cl/img/clcert_oscuro.svg" style="width: 150px; padding-right: 20px"/>
   <div>#DiputadxDelDia</div>
 </h1>
 
@@ -14,7 +14,7 @@ Toda la información anterior se obtiene a partir de los datos entregados por la
 
 ## Comprobar Elección del #DiputadxDelDia
 
-Dentro del actual repositorio se dispone de un script de verificación que recrea el proceso que el CLCERT lleva a cabo todos los días a las 00:01 horas (Chile Continental) para elegir al #DiputadxDelDia.
+Dentro del actual repositorio se dispone de un script de verificación que recrea el proceso que el CLCERT lleva a cabo todos los días a las 00:00 horas (Chile Continental) para elegir al #DiputadxDelDia.
 
 ### Descarga última versión
 
@@ -39,11 +39,11 @@ Options:
 
 ### Ejemplo de uso
 
-Si quiere verificar el #DiputadxDelDia del **18 de Julio de 2018** puede ejecutar uno de los siguientes dos comandos:
+Si quiere verificar el #DiputadxDelDia del **12 de Noviembre de 2022** puede ejecutar uno de los siguientes dos comandos:
 
 ```
-$ python updater.py -p -d 2018-07-18 -t 00:01
+$ python3 updater.py -p -d 2022-11-12 -t 00:00
 ```
 ```
-$ python updater.py -p -e 1531886460
+$ python3 updater.py -p -e 1668222000
 ```
