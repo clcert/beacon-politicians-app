@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleRight, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
@@ -113,7 +114,7 @@ export default function Home() {
 
               <footer>
                 <p>¿Quieres saber como funciona la elección del #DiputadoDelDía?&nbsp;
-                  <a href='#' target='_blank'>Descúbrelo aquí</a>.
+                  <Link href='/about'>Descúbrelo aquí</Link>.
                 </p>
                 <ul id='copyright'>
                   <li>&copy;Design: <a href='http://html5up.net'>HTML5 UP</a></li>
