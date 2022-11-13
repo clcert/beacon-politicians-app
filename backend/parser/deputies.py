@@ -46,8 +46,9 @@ class Parser:
         except:
             profession = 'Sin Información'
 
-        if len(profession) == 0:
+        if len(profession) == 0 or len(profession) > 50:
             profession = 'Sin Información'
+
         profile['profession'] = profession.strip('.')
 
         main_info = general_section.find('div', attrs={'class': 'grid-3'}).getText().strip()
