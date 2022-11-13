@@ -5,7 +5,7 @@ from updater import Updater
 
 class Deputy:
     def __init__(self, json_index):
-        self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/static/json/deputies.json'
+        self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/json/deputies.json'
         self.json_index = json_index
         self.info = None
         self.load_info()

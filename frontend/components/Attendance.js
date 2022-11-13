@@ -47,7 +47,7 @@ const Attendance = ({deputyInfo}) => {
       </header>
       <div className={styles.chartContainer}>
         <div id='graphicContainer'>
-          <canvas id='attendanceChart' width='500' height='auto'></canvas>
+          <canvas id='attendanceChart' width='400' height='auto'></canvas>
         </div>
       </div>
     </div>

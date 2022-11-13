@@ -6,12 +6,14 @@ from flask import Flask, jsonify
 from flask import abort
 from deputy import Deputy
 from updater import Updater
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app)
 
 
-@app.route('/diputadodeldia')
+@app.route('/api/diputadodeldia')
 def main_page():
     last = len(Updater().get_list()) - 1
     d = Deputy(last)
@@ -20,7 +22,7 @@ def main_page():
     return jsonify(current)
 
 
-@app.route('/diputadodeldia/diputado/<int:json_index>')
+@app.route('/api/diputado/<int:json_index>')
 def record(json_index):
     last = len(Updater().get_list()) - 1
     if json_index < 0 or json_index > last:

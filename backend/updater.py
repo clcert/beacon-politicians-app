@@ -9,7 +9,7 @@ import argparse
 
 class Updater:
     def __init__(self):
-        self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/static/json/deputies.json'
+        self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/json/deputies.json'
 
     def index_from_json(self, date_hour):
         """
