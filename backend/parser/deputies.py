@@ -2,13 +2,13 @@
 import requests as req
 from datetime import datetime
 from bs4 import BeautifulSoup
+from .expenses.operational import main as get_operational_expenses
 
 
 class Parser:
     def __init__(self):
         self.profile_url = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
         self.services_url = 'http://opendata.camara.cl/camaradiputados/WServices/'
-        # self.deputies_url = 'https://www.camara.cl/camara/diputados_print.aspx' 404
 
     def get_deputy(self, deputy_index, votes=10):
         """
@@ -20,6 +20,7 @@ class Parser:
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
         profile['deputy_id'] = deputy_id
+        profile['operational_expenses'] = get_operational_expenses(deputy_id)
         profile['attendance'] = self.get_all_attendance(deputy_id)
         profile['voting'] = self.get_deputy_votes(deputy_id, votes)
         return profile
@@ -57,7 +58,7 @@ class Parser:
         comunas = main_info_list[0].split(':')[1].strip()
         profile['district'] = main_info_list[1].split(':')[1].strip()
         profile['districtregion'] = main_info_list[2].split(':')[1].strip()
-        profile['party'] = main_info_list[5].split(':')[1].strip()
+        #profile['party'] = main_info_list[5].split(':')[1].strip()
 
         raw_periods = general_section.findAll('div', attrs={'class': 'grid-2 aleft m-left14'})[-1].findAll('li')[1:]
         profile['periods'] = list(map(BeautifulSoup.getText, raw_periods))
@@ -72,6 +73,10 @@ class Parser:
 
         profile['first_surname'] = soup.find('ApellidoPaterno').get_text()
         profile['second_surname'] = soup.find('ApellidoMaterno').get_text()
+        current_party = soup.find_all('Militancia')[0]
+        profile['party'] = current_party.find('Nombre').get_text()
+        profile['party_alias'] = current_party.find('Alias').get_text()
+
 
         raw_birthday = datetime.strptime(
             soup.find('FechaNacimiento').get_text(),
