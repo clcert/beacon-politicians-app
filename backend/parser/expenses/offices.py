@@ -28,7 +28,7 @@ def get_deputy_offices_expenses(deputy_name, driver):
 				filter(lambda x: x['deputy'] == deputy_name, parse_html_table(month_expenses_table))
 			)
 			if month_expenses != []:
-				office_expenses[month] = list(map(lambda x: x.pop('deputy'), month_expenses))
+				office_expenses[month] = month_expenses
 				print(f'Got expenses for {month}')
 			else:
 				print(f'Could not find expenses for {month}')
@@ -50,7 +50,7 @@ def parse_html_table(table):
 		})
 	return offices
 
-def main(dep_name):
+if __name__ == '__main__':
 	options = webdriver.ChromeOptions()
 	# Location of Goofle Chrome binary
 	options.binary_location = '/opt/google/chrome/google-chrome'
@@ -58,10 +58,5 @@ def main(dep_name):
 	driver = webdriver.Chrome('chromedriver', options=options)
 
 	# Using the driver we obtain the expenses
-	expenses = get_deputy_offices_expenses(dep_name, driver)
+	expenses = get_deputy_offices_expenses('Naranjo O., Jaime', driver)
 	driver.close()
-	return expenses
-
-
-if __name__ == '__main__':
-	main('Naranjo O., Jaime')

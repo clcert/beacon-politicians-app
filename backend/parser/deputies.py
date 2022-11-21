@@ -2,7 +2,7 @@
 import requests as req
 from datetime import datetime
 from bs4 import BeautifulSoup
-from .expenses.operational import main as get_operational_expenses
+from .expenses import get_deputy_expenses
 
 
 class Parser:
@@ -20,7 +20,8 @@ class Parser:
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
         profile['deputy_id'] = deputy_id
-        profile['operational_expenses'] = get_operational_expenses(deputy_id)
+        full_name = f'{profile["first_surname"]} {profile["second_surname"][0]}., {profile["first_name"]}'
+        profile['operational_expenses'] = get_deputy_expenses(deputy_id, full_name)
         profile['attendance'] = self.get_all_attendance(deputy_id)
         profile['voting'] = self.get_deputy_votes(deputy_id, votes)
         return profile

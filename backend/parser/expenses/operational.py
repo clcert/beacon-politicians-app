@@ -36,7 +36,7 @@ def parse_html_table(table):
     expenses[title] = int(amount.strip().replace('.', ''))
   return expenses
 
-def main(dep_id):
+if __name__ == '__main__':
   options = webdriver.ChromeOptions()
   # Location of Goofle Chrome binary
   options.binary_location = '/opt/google/chrome/google-chrome'
@@ -44,10 +44,5 @@ def main(dep_id):
   driver = webdriver.Chrome('chromedriver', options=options)
 
   # Using the driver we obtain the expenses
-  expenses = get_deputy_operational_expenses(dep_id, driver)
+  expenses = get_deputy_operational_expenses(74, driver)
   driver.close()
-  return expenses
-
-
-if __name__ == '__main__':
-  main(74)

@@ -1,248 +1,273 @@
 {
-  "deputies": [
-    {
-      "date": "2022-11-20 00:00:00",
-      "index": 92,
-      "record": 103979,
-      "json_index": 0,
-      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1150",
-      "profession": "Ingeniero Agrónomo",
-      "district": "Nº 17",
-      "districtregion": "Región del Maule",
-      "periods": [
-        "2022-2026"
-      ],
-      "lastperiod": "2022-2026",
-      "first_name": "Benjamín",
-      "second_name": "",
-      "first_surname": "Moreno",
-      "second_surname": "Bascur",
-      "party": "Partido Republicano",
-      "party_alias": "PREP",
-      "birthday": "02/04/1993",
-      "sex": "1",
-      "termination": "o",
-      "treatment": "Sr",
-      "deputy_id": 1150,
-      "operational_expenses": {
-        "marzo": {
-          "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-          "TELEFONÍA": 0,
-          "TRASLACIÓN": 477726,
-          "DIFUSIÓN": 0,
-          "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-          "ARRIENDO DE INMUEBLE": 0,
-          "CONSUMOS BÁSICOS": 0,
-          "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
-          "MATERIALES DE OFICINA": 2219,
-          "CORRESPONDENCIA": 0,
-          "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-          "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-          "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-          "SEGUROS DE BIENES": 0,
-          "ARRIENDO DE OFICINAS VIRTUALES": 0,
-          "SERVICIOS WEB": 0,
-          "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-          "ARRIENDO DE OFICINA MÓVIL": 0,
-          "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-          "SERVICIOS MENORES": 333333,
-          "COVID-19 PERSONAL DE APOYO": 0
-        },
-        "abril": {
-          "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-          "TELEFONÍA": 50542,
-          "TRASLACIÓN": 776589,
-          "DIFUSIÓN": 69993,
-          "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-          "ARRIENDO DE INMUEBLE": 682950,
-          "CONSUMOS BÁSICOS": 0,
-          "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
-          "MATERIALES DE OFICINA": 143218,
-          "CORRESPONDENCIA": 0,
-          "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-          "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-          "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-          "SEGUROS DE BIENES": 0,
-          "ARRIENDO DE OFICINAS VIRTUALES": 0,
-          "SERVICIOS WEB": 0,
-          "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-          "ARRIENDO DE OFICINA MÓVIL": 0,
-          "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-          "SERVICIOS MENORES": 500000,
-          "COVID-19 PERSONAL DE APOYO": 0
-        },
-        "mayo": {
-          "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-          "TELEFONÍA": 69723,
-          "TRASLACIÓN": 924831,
-          "DIFUSIÓN": 1383175,
-          "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-          "ARRIENDO DE INMUEBLE": 1249649,
-          "CONSUMOS BÁSICOS": 40260,
-          "EQUIPAMIENTO OFICINA PARLAMENTARIA": 66661,
-          "MATERIALES DE OFICINA": 476899,
-          "CORRESPONDENCIA": 0,
-          "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-          "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-          "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-          "SEGUROS DE BIENES": 0,
-          "ARRIENDO DE OFICINAS VIRTUALES": 0,
-          "SERVICIOS WEB": 15000,
-          "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-          "ARRIENDO DE OFICINA MÓVIL": 0,
-          "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-          "SERVICIOS MENORES": 500000,
-          "COVID-19 PERSONAL DE APOYO": 0
-        },
-        "junio": {
-          "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-          "TELEFONÍA": 77329,
-          "TRASLACIÓN": 713459,
-          "DIFUSIÓN": 619000,
-          "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-          "ARRIENDO DE INMUEBLE": 1082736,
-          "CONSUMOS BÁSICOS": 135343,
-          "EQUIPAMIENTO OFICINA PARLAMENTARIA": 66661,
-          "MATERIALES DE OFICINA": 19852,
-          "CORRESPONDENCIA": 0,
-          "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-          "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-          "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-          "SEGUROS DE BIENES": 0,
-          "ARRIENDO DE OFICINAS VIRTUALES": 0,
-          "SERVICIOS WEB": 0,
-          "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-          "ARRIENDO DE OFICINA MÓVIL": 0,
-          "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-          "SERVICIOS MENORES": 500000,
-          "COVID-19 PERSONAL DE APOYO": 0
-        },
-        "julio": {
-          "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-          "TELEFONÍA": 81673,
-          "TRASLACIÓN": 1761945,
-          "DIFUSIÓN": 900000,
-          "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-          "ARRIENDO DE INMUEBLE": 1095136,
-          "CONSUMOS BÁSICOS": 418186,
-          "EQUIPAMIENTO OFICINA PARLAMENTARIA": 66661,
-          "MATERIALES DE OFICINA": 210366,
-          "CORRESPONDENCIA": 0,
-          "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-          "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-          "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-          "SEGUROS DE BIENES": 0,
-          "ARRIENDO DE OFICINAS VIRTUALES": 0,
-          "SERVICIOS WEB": 0,
-          "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-          "ARRIENDO DE OFICINA MÓVIL": 0,
-          "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-          "SERVICIOS MENORES": 500000,
-          "COVID-19 PERSONAL DE APOYO": 0
-        },
-        "agosto": {
-          "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 1279991,
-          "TELEFONÍA": 81323,
-          "TRASLACIÓN": 2365474,
-          "DIFUSIÓN": 565000,
-          "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-          "ARRIENDO DE INMUEBLE": 1104715,
-          "CONSUMOS BÁSICOS": 380263,
-          "EQUIPAMIENTO OFICINA PARLAMENTARIA": 66661,
-          "MATERIALES DE OFICINA": 31144,
-          "CORRESPONDENCIA": 0,
-          "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-          "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-          "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-          "SEGUROS DE BIENES": 0,
-          "ARRIENDO DE OFICINAS VIRTUALES": 0,
-          "SERVICIOS WEB": 16342,
-          "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-          "ARRIENDO DE OFICINA MÓVIL": 0,
-          "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-          "SERVICIOS MENORES": 490312,
-          "COVID-19 PERSONAL DE APOYO": 0
+    "deputies": [
+        {
+            "date": "2022-11-21 00:00:00",
+            "index": 72,
+            "record": 105419,
+            "json_index": 0,
+            "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1139",
+            "profession": "Sin Información",
+            "district": "Nº 1",
+            "districtregion": "Región de Arica y Parinacota",
+            "periods": [
+                "2022-2026"
+            ],
+            "lastperiod": "2022-2026",
+            "first_name": "Enrique",
+            "second_name": "",
+            "first_surname": "Lee",
+            "second_surname": "Flores",
+            "party": "Partido Regionalista Independiente",
+            "party_alias": "PRI",
+            "birthday": "16/12/1967",
+            "sex": "1",
+            "termination": "o",
+            "treatment": "Sr",
+            "deputy_id": 1139,
+            "operational_expenses": {
+                "offices": {
+                    "marzo": [
+                        "Lee F., Enrique"
+                    ],
+                    "abril": [
+                        "Lee F., Enrique"
+                    ],
+                    "mayo": [
+                        "Lee F., Enrique"
+                    ],
+                    "junio": [
+                        "Lee F., Enrique"
+                    ],
+                    "julio": [
+                        "Lee F., Enrique"
+                    ],
+                    "agosto": [
+                        "Lee F., Enrique"
+                    ],
+                    "septiembre": [
+                        "Lee F., Enrique"
+                    ]
+                },
+                "operational": {
+                    "marzo": {
+                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 2406,
+                        "TELEFONÍA": 0,
+                        "TRASLACIÓN": 614894,
+                        "DIFUSIÓN": 10213,
+                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
+                        "ARRIENDO DE INMUEBLE": 1023525,
+                        "CONSUMOS BÁSICOS": 0,
+                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
+                        "MATERIALES DE OFICINA": 245384,
+                        "CORRESPONDENCIA": 0,
+                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
+                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
+                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
+                        "SEGUROS DE BIENES": 0,
+                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
+                        "SERVICIOS WEB": 0,
+                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
+                        "ARRIENDO DE OFICINA MÓVIL": 0,
+                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
+                        "SERVICIOS MENORES": 326135,
+                        "COVID-19 PERSONAL DE APOYO": 0
+                    },
+                    "abril": {
+                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 3609,
+                        "TELEFONÍA": 1053417,
+                        "TRASLACIÓN": 1237397,
+                        "DIFUSIÓN": 143246,
+                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
+                        "ARRIENDO DE INMUEBLE": 1678713,
+                        "CONSUMOS BÁSICOS": 0,
+                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 1962313,
+                        "MATERIALES DE OFICINA": 119128,
+                        "CORRESPONDENCIA": 0,
+                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
+                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
+                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
+                        "SEGUROS DE BIENES": 0,
+                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
+                        "SERVICIOS WEB": 0,
+                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
+                        "ARRIENDO DE OFICINA MÓVIL": 0,
+                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
+                        "SERVICIOS MENORES": 500000,
+                        "COVID-19 PERSONAL DE APOYO": 0
+                    },
+                    "mayo": {
+                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 1338364,
+                        "TELEFONÍA": 51979,
+                        "TRASLACIÓN": 1612874,
+                        "DIFUSIÓN": 154098,
+                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
+                        "ARRIENDO DE INMUEBLE": 1694913,
+                        "CONSUMOS BÁSICOS": 0,
+                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
+                        "MATERIALES DE OFICINA": 0,
+                        "CORRESPONDENCIA": 0,
+                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
+                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
+                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
+                        "SEGUROS DE BIENES": 0,
+                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
+                        "SERVICIOS WEB": 0,
+                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
+                        "ARRIENDO DE OFICINA MÓVIL": 0,
+                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
+                        "SERVICIOS MENORES": 500000,
+                        "COVID-19 PERSONAL DE APOYO": 0
+                    },
+                    "junio": {
+                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 1218615,
+                        "TELEFONÍA": 51981,
+                        "TRASLACIÓN": 1256563,
+                        "DIFUSIÓN": 357000,
+                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
+                        "ARRIENDO DE INMUEBLE": 1717818,
+                        "CONSUMOS BÁSICOS": 0,
+                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
+                        "MATERIALES DE OFICINA": 0,
+                        "CORRESPONDENCIA": 0,
+                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
+                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
+                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
+                        "SEGUROS DE BIENES": 0,
+                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
+                        "SERVICIOS WEB": 0,
+                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
+                        "ARRIENDO DE OFICINA MÓVIL": 0,
+                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
+                        "SERVICIOS MENORES": 500000,
+                        "COVID-19 PERSONAL DE APOYO": 0
+                    },
+                    "julio": {
+                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 1235486,
+                        "TELEFONÍA": 51980,
+                        "TRASLACIÓN": 1580368,
+                        "DIFUSIÓN": 198135,
+                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
+                        "ARRIENDO DE INMUEBLE": 1735953,
+                        "CONSUMOS BÁSICOS": 0,
+                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 145980,
+                        "MATERIALES DE OFICINA": 34605,
+                        "CORRESPONDENCIA": 0,
+                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
+                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
+                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
+                        "SEGUROS DE BIENES": 0,
+                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
+                        "SERVICIOS WEB": 0,
+                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
+                        "ARRIENDO DE OFICINA MÓVIL": 0,
+                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
+                        "SERVICIOS MENORES": 369721,
+                        "COVID-19 PERSONAL DE APOYO": 0
+                    },
+                    "agosto": {
+                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 30150,
+                        "TELEFONÍA": 87893,
+                        "TRASLACIÓN": 1664542,
+                        "DIFUSIÓN": 357000,
+                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
+                        "ARRIENDO DE INMUEBLE": 1749667,
+                        "CONSUMOS BÁSICOS": 0,
+                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 48990,
+                        "MATERIALES DE OFICINA": 1365,
+                        "CORRESPONDENCIA": 0,
+                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
+                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
+                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
+                        "SEGUROS DE BIENES": 0,
+                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
+                        "SERVICIOS WEB": 0,
+                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
+                        "ARRIENDO DE OFICINA MÓVIL": 0,
+                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
+                        "SERVICIOS MENORES": 500000,
+                        "COVID-19 PERSONAL DE APOYO": 0
+                    }
+                }
+            },
+            "attendance": {
+                "attended": 93,
+                "justified": 2,
+                "unjustified": 5,
+                "total": 100,
+                "percentage": 95.0
+            },
+            "voting": [
+                {
+                    "vote_option": "Afirmativo",
+                    "date": "2022-11-21",
+                    "name": "Establece un régimen de protección, y reparación integral en favor de las víctimas de femicidio y sus familias",
+                    "description": "Boletín N° 14013-34",
+                    "voting_id": 39759
+                },
+                {
+                    "vote_option": "Afirmativo",
+                    "date": "2022-11-09",
+                    "name": "Extiende transitoriamente el permiso postnatal parental.",
+                    "description": "Boletín N° 15418-13",
+                    "voting_id": 39447
+                },
+                {
+                    "vote_option": "Afirmativo",
+                    "date": "2022-11-09",
+                    "name": "Extiende transitoriamente el permiso postnatal parental.",
+                    "description": "Boletín N° 15418-13",
+                    "voting_id": 39448
+                },
+                {
+                    "vote_option": "Abstención",
+                    "date": "2022-11-09",
+                    "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
+                    "description": "Boletín N° 15433-10",
+                    "voting_id": 39446
+                },
+                {
+                    "vote_option": "Afirmativo",
+                    "date": "2022-11-09",
+                    "name": "Aprueba el Convenio 190, sobre la Violencia y el Acoso, adoptado por la Organización Internacional del Trabajo el 21 de junio de 2019",
+                    "description": "Boletín N° 15307-10",
+                    "voting_id": 39442
+                },
+                {
+                    "vote_option": "Afirmativo",
+                    "date": "2022-11-09",
+                    "name": "Autoriza la búsqueda activa de casos en la comunidad y el diagnóstico precoz del Covid-19 en mayores de 14 años, sin el consentimiento de los padres o curadores.",
+                    "description": "Boletín N° 15097-11",
+                    "voting_id": 39441
+                },
+                {
+                    "vote_option": "Afirmativo",
+                    "date": "2022-10-26",
+                    "name": "Extiende transitoriamente el permiso postnatal parental.",
+                    "description": "Boletín N° 15418-13",
+                    "voting_id": 39383
+                },
+                {
+                    "vote_option": "Afirmativo",
+                    "date": "2022-10-26",
+                    "name": "Extiende transitoriamente el permiso postnatal parental.",
+                    "description": "Boletín N° 15418-13",
+                    "voting_id": 39382
+                },
+                {
+                    "vote_option": "Abstención",
+                    "date": "2022-10-26",
+                    "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
+                    "description": "Boletín N° 15433-10",
+                    "voting_id": 39381
+                },
+                {
+                    "vote_option": "Afirmativo",
+                    "date": "2022-10-26",
+                    "name": "OTROS-Renuncia de los miembros de la Mesa.",
+                    "description": "Otros",
+                    "voting_id": 39371
+                }
+            ]
         }
-      },
-      "attendance": {
-        "attended": 95,
-        "justified": 2,
-        "unjustified": 2,
-        "total": 99,
-        "percentage": 98.0
-      },
-      "voting": [
-        {
-          "vote_option": "Afirmativo",
-          "date": "2022-11-09",
-          "name": "Extiende transitoriamente el permiso postnatal parental.",
-          "description": "Boletín N° 15418-13",
-          "voting_id": 39447
-        },
-        {
-          "vote_option": "Afirmativo",
-          "date": "2022-11-09",
-          "name": "Extiende transitoriamente el permiso postnatal parental.",
-          "description": "Boletín N° 15418-13",
-          "voting_id": 39448
-        },
-        {
-          "vote_option": "En Contra",
-          "date": "2022-11-09",
-          "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
-          "description": "Boletín N° 15433-10",
-          "voting_id": 39446
-        },
-        {
-          "vote_option": "En Contra",
-          "date": "2022-11-09",
-          "name": "Aprueba el Convenio 190, sobre la Violencia y el Acoso, adoptado por la Organización Internacional del Trabajo el 21 de junio de 2019",
-          "description": "Boletín N° 15307-10",
-          "voting_id": 39442
-        },
-        {
-          "vote_option": "En Contra",
-          "date": "2022-11-09",
-          "name": "Autoriza la búsqueda activa de casos en la comunidad y el diagnóstico precoz del Covid-19 en mayores de 14 años, sin el consentimiento de los padres o curadores.",
-          "description": "Boletín N° 15097-11",
-          "voting_id": 39441
-        },
-        {
-          "vote_option": "Afirmativo",
-          "date": "2022-10-26",
-          "name": "Extiende transitoriamente el permiso postnatal parental.",
-          "description": "Boletín N° 15418-13",
-          "voting_id": 39383
-        },
-        {
-          "vote_option": "Abstención",
-          "date": "2022-10-26",
-          "name": "Extiende transitoriamente el permiso postnatal parental.",
-          "description": "Boletín N° 15418-13",
-          "voting_id": 39382
-        },
-        {
-          "vote_option": "En Contra",
-          "date": "2022-10-26",
-          "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
-          "description": "Boletín N° 15433-10",
-          "voting_id": 39381
-        },
-        {
-          "vote_option": "Afirmativo",
-          "date": "2022-10-26",
-          "name": "OTROS-Renuncia de los miembros de la Mesa.",
-          "description": "Otros",
-          "voting_id": 39371
-        },
-        {
-          "vote_option": "Afirmativo",
-          "date": "2022-10-24",
-          "name": "Introduce un nuevo Párrafo en el Título VII del Libro II del Código Penal, relativo a la explotación sexual comercial y material pornográfico de niños, niñas y adolescentes",
-          "description": "Boletín N° 14440-07",
-          "voting_id": 39343
-        }
-      ]
-    }
-  ]
+    ]
 }
