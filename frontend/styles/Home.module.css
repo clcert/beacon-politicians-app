@@ -1,0 +1,52 @@
+.navBar {
+  display: flex;
+}
+
+.logo {
+  width: 20%;
+}
+
+.navItems {
+  width: 60%;
+}
+
+.changeDeputy {
+  width: 20%;
+  justify-content: right;
+  padding: 0 40px;
+  display: flex;
+}
+
+.changeDeputy > div {
+  width: 40px;
+}
+
+.changeDeputy svg {
+  color: white;
+  margin-top: 20px;
+  max-width: 20px;
+  cursor: pointer;
+}
+
+.disabledButton svg {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .navBar {
+    flex-direction: column;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .navItems {
+    width: 100%;
+  }
+
+  .changeDeputy {
+    display: none;
+  }  
+}
