@@ -1,0 +1,1 @@
+01 03 * * * python /app/updater.py

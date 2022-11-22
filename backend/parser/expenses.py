@@ -11,7 +11,9 @@ class ExpensesParser:
   def __init__(self):
     options = webdriver.ChromeOptions()
     # Location of Goofle Chrome binary
-    options.binary_location = '/opt/google/chrome/google-chrome'
+    # options.binary_location = '/opt/google/chrome/google-chrome'
+    options.binary_location = '/usr/bin/chromium-browser'
+    options.add_argument("--no-sandbox")
     options.add_argument("--headless") # We don't need a GUI
     driver = webdriver.Chrome('chromedriver', options=options)
     self.driver = driver
