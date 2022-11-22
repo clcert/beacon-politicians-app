@@ -22,9 +22,8 @@ def get_deputy_operational_expenses(deputy_id, driver):
       sleep(1) # wait for page to load
       month_expenses_table = driver.find_element(By.XPATH, '//*[@class="tabla"]').text
       expenses[month] = parse_html_table(month_expenses_table) # Obtain table with expenses
-      print(f'Got expenses for {month}')
     except Exception as e:
-      print(f'Could not find expenses for {month}')
+      continue
 
   return expenses
 

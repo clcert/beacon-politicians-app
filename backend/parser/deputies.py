@@ -20,8 +20,7 @@ class Parser:
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
         profile['deputy_id'] = deputy_id
-        full_name = f'{profile["first_surname"]} {profile["second_surname"][0]}., {profile["first_name"]}'
-        profile['operational_expenses'] = get_deputy_expenses(deputy_id, full_name)
+        profile['expenses'] = get_deputy_expenses(profile)
         profile['attendance'] = self.get_all_attendance(deputy_id)
         profile['voting'] = self.get_deputy_votes(deputy_id, votes)
         return profile
