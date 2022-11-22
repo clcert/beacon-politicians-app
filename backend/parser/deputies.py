@@ -2,7 +2,8 @@
 import requests as req
 from datetime import datetime
 from bs4 import BeautifulSoup
-from .expenses import get_deputy_expenses
+from .expenses import OfficesExpensesParser, OperationalExpensesParser, StaffExpensesParser
+from time import perf_counter
 
 
 class Parser:
@@ -17,12 +18,17 @@ class Parser:
         :param deputy_index: Index of the deputy. Belongs to the interval [0, count_deputies-1]
         :return: Returns a dictionary containing all deputy's information.
         """
+        t_0 = perf_counter()
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
         profile['deputy_id'] = deputy_id
-        profile['expenses'] = get_deputy_expenses(profile)
+        print('Main profile obtained @', perf_counter() - t_0)
+        profile['expenses'] = self.get_deputy_expenses(profile)
+        print('Deputy expenses obtained @', perf_counter() - t_0)
         profile['attendance'] = self.get_all_attendance(deputy_id)
+        print('Deputy attendance obtained @', perf_counter() - t_0)
         profile['voting'] = self.get_deputy_votes(deputy_id, votes)
+        print('Deputy voting obtained @', perf_counter() - t_0)
         return profile
 
     def get_profile(self, deputy_id):
@@ -412,3 +418,14 @@ class Parser:
                 voting_limit -= 1
 
         return ans
+
+    def get_deputy_expenses(self, profile):
+        operational_parser = OperationalExpensesParser(profile)
+        offices_parser = OfficesExpensesParser(profile)
+        staff_parser = StaffExpensesParser(profile)
+
+        return {
+            'operational': operational_parser.get_deputy_expenses(),
+            'offices': offices_parser.get_deputy_expenses(),
+            'staff': staff_parser.get_deputy_expenses(),
+        }
