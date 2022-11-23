@@ -9,12 +9,12 @@ const Overview = ({deputyInfo}) => {
           <header className='major'>
             <p className={styles.selectionInfo}>
               Escogid{ deputyInfo.termination } el { deputyInfo.date } en base al Pulso&nbsp;
-              <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/1/pulse/${ deputyInfo.record }`} target='_blank'>
+              <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/1/pulse/${ deputyInfo.record }`} target='_blank' rel="noreferrer">
                 #{ deputyInfo.record }
               </a>
               <br/>
               Comprueba la elección utilizando nuestro script (Python)&nbsp;
-              <a href='https://github.com/clcert/beacon-politicians-app' target='_blank'>
+              <a href='https://github.com/clcert/beacon-politicians-app' target='_blank' rel="noreferrer">
                 disponible en GitHub
               </a>.
             </p>
@@ -24,7 +24,7 @@ const Overview = ({deputyInfo}) => {
       <div className='row'>
         <div className='col-3 col-4-large col-12-medium'>
           <span className='image fit'>
-            <a href={deputyInfo.photo} target='_blank' className='image avatar'>
+            <a href={deputyInfo.photo} target='_blank' rel="noreferrer" className='image avatar'>
               <img src={deputyInfo.photo} alt={`Diputad${ deputyInfo.termination } ${ deputyInfo.first_name } ${ deputyInfo.first_surname }`} />
             </a>
           </span>

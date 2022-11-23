@@ -40,7 +40,7 @@ const SingleVote = ({vote}) => {
           <div><b>{ vote.vote_option }</b></div>
       }
       <div className={styles.link}>
-        <a href={`https://www.camara.cl/legislacion/sala_sesiones/votacion_detalle.aspx?prmIdVotacion=${vote.voting_id}`} target='_blank'>
+        <a href={`https://www.camara.cl/legislacion/sala_sesiones/votacion_detalle.aspx?prmIdVotacion=${vote.voting_id}`} target='_blank' rel="noreferrer">
           <button>
             Ver detalle
           </button>

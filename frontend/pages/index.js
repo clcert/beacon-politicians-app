@@ -105,7 +105,7 @@ export default function Home() {
                     <li id='ref-attendance'>
                       <sup><a href='#text-attendance'></a></sup> 
                       Cálculo hecho según justificaciones a inasistencias, para más información visitar:&nbsp;
-                      <a href='https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx' target='_blank'>
+                      <a href='https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx' target='_blank' rel='noreferrer'>
                         https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx
                       </a>
                     </li>
