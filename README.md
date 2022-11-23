@@ -47,3 +47,19 @@ $ python3 updater.py -p -d 2022-11-12 -t 00:00
 ```
 $ python3 updater.py -p -e 1668222000
 ```
+
+### Ejecutar usando Docker
+
+1. Construir imágenes del frontend y backend
+```
+$ cd backend 
+$ docker build -t diputadodeldia-back .
+$ cd ../frontend
+$ docker build -t diputadodeldia-front .
+```
+
+2. Correr contenedores
+```
+$ docker run -p 5000:5000 diputadodeldia-back
+$ docker run -p 3000:3000 diputadodeldia-front
+```
