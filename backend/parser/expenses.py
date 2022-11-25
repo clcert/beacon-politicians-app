@@ -10,12 +10,16 @@ class ExpensesParser:
 
   def __init__(self):
     options = webdriver.ChromeOptions()
-    # Location of Goofle Chrome binary
-    # options.binary_location = '/opt/google/chrome/google-chrome'
-    options.binary_location = '/usr/bin/chromium-browser'
+    # Location of Google Chrome binary
     options.add_argument("--no-sandbox")
     options.add_argument("--headless") # We don't need a GUI
-    driver = webdriver.Chrome('chromedriver', options=options)
+    try: # Inside Docker
+      options.binary_location = '/usr/bin/chromium-browser'
+      driver = webdriver.Chrome('chromedriver', options=options)
+    except: # Outside Docker
+      options.binary_location = '/usr/bin/google-chrome-stable'
+      driver = webdriver.Chrome('chromedriver', options=options)
+    
     self.driver = driver
     self.url = ''
     self.month_selector_id = ''
