@@ -23,12 +23,12 @@ class Parser:
         profile = self.get_profile(deputy_id)
         profile['deputy_id'] = deputy_id
         print('Main profile obtained @', perf_counter() - t_0)
-        profile['expenses'] = self.get_deputy_expenses(profile)
-        print('Deputy expenses obtained @', perf_counter() - t_0)
         profile['attendance'] = self.get_all_attendance(deputy_id)
         print('Deputy attendance obtained @', perf_counter() - t_0)
         profile['voting'] = self.get_deputy_votes(deputy_id, votes)
         print('Deputy voting obtained @', perf_counter() - t_0)
+        profile['expenses'] = self.get_deputy_expenses(profile)
+        print('Deputy expenses obtained @', perf_counter() - t_0)
         return profile
 
     def get_profile(self, deputy_id):

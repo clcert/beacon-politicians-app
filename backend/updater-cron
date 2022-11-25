@@ -1,1 +1,1 @@
-01 03 * * * python /app/updater.py
+01 03 * * * python /app/updater.py >> /app/log/updater_log.txt

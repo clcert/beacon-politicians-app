@@ -12,4 +12,6 @@ COPY . /app
 
 COPY updater-cron /var/spool/cron/crontabs/root
 
+RUN mkdir log
+
 CMD crond -b && python app.py
