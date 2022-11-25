@@ -10,6 +10,7 @@ import Overview from '../components/Overview'
 import Votings from '../components/Votings'
 
 import styles from '../styles/Home.module.css'
+import Expenses from '../components/Expenses'
 
 
 const getLastDeputyInfo = async () => {
@@ -93,7 +94,11 @@ export default function Home() {
             <Attendance deputyInfo={deputyInfo} />
           </article>
 
-          <article id='votes' className='wrapper style3'>
+          <article id='expenses' className='wrapper style3'>
+            <Expenses deputyInfo={deputyInfo} />
+          </article>
+
+          <article id='votes' className='wrapper style2'>
             <Votings deputyInfo={deputyInfo} />
           </article>
 
