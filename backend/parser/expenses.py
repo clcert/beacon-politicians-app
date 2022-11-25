@@ -29,7 +29,7 @@ class ExpensesParser:
   def get_deputy_expenses(self):
     # Get the expenses page
     self.driver.get(self.url)
-    expenses = dict()
+    expenses = []
     for month in MONTHS:
       try:
         # Change the month in form
@@ -40,7 +40,8 @@ class ExpensesParser:
         month_expenses_table = self.driver.find_element(By.XPATH, '//*[@class="tabla"]').text
         current_expenses = self.parse_and_filter_table(month_expenses_table) # Obtain table with expenses
         if current_expenses != None:
-          expenses[month] = current_expenses
+          current_expenses['month'] = month
+          expenses.append(current_expenses)
       except Exception as e:
         continue
 
@@ -89,7 +90,7 @@ class OfficesExpensesParser(ExpensesParser):
           'region': region.strip(),
           'amount': int(amount.strip().replace('.', '')),
         })
-    return offices if len(offices) > 0 else None
+    return { 'offices': offices } if len(offices) > 0 else None
 
 
 class StaffExpensesParser(ExpensesParser):
@@ -111,4 +112,4 @@ class StaffExpensesParser(ExpensesParser):
           'job': fields[2].strip(),
           'amount': int(fields[3].strip().replace('.', '')),
         })
-    return staff if len(staff) > 0 else None
+    return { 'staff' : staff } if len(staff) > 0 else None
