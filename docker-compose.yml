@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  diputadodeldia-back:
+    container_name: diputadodeldia-back
+    build: ./backend
+    ports:
+      - "5000:5000"
+  
+  diputadodeldia-front:
+    container_name: diputadodeldia-front
+    build: ./frontend
+    ports:
+      - "3000:3000"
