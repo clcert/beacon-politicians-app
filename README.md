@@ -50,16 +50,8 @@ $ python3 updater.py -p -e 1668222000
 
 ### Ejecutar usando Docker
 
-1. Construir imágenes del frontend y backend
+1. Para lanzar las aplicaciones se utiliza `docker compose`
 ```
-$ cd backend 
-$ docker build -t diputadodeldia-back .
-$ cd ../frontend
-$ docker build -t diputadodeldia-front .
+$ docker compose up --build -d
 ```
-
-2. Correr contenedores
-```
-$ docker run -p 5000:5000 diputadodeldia-back
-$ docker run -p 3000:3000 diputadodeldia-front
-```
+La aplicación quedará corriendo en `localhost:3000`
