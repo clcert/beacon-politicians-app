@@ -1,514 +1,267 @@
 {
-    "deputies": [
+  "deputies": [
+    {
+      "date": "2022-11-27 00:00:00",
+      "index": 54,
+      "record": 114059,
+      "json_index": 0,
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1034",
+      "profession": "Sin Información",
+      "district": "Nº 20",
+      "districtregion": "Región del Bío Bío",
+      "periods": [
+        "2018-2022",
+        "2022-2026"
+      ],
+      "lastperiod": "2022-2026",
+      "first_name": "Félix",
+      "second_name": "",
+      "first_surname": "González",
+      "second_surname": "Gatica",
+      "party": "Partido Ecologista Verde",
+      "party_alias": "PEV",
+      "birthday": "26/05/1972",
+      "sex": "1",
+      "termination": "o",
+      "treatment": "Sr",
+      "deputy_id": 1034,
+      "attendance": {
+        "attended": 86,
+        "justified": 16,
+        "unjustified": 0,
+        "total": 102,
+        "percentage": 100.0
+      },
+      "voting": [
         {
-            "date": "2022-11-25 00:00:00",
-            "index": 106,
-            "record": 111179,
-            "json_index": 1,
-            "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1157",
-            "profession": "Sin Información",
-            "district": "Nº 20",
-            "districtregion": "Región del Bío Bío",
-            "periods": [
-                "2022-2026"
-            ],
-            "lastperiod": "2022-2026",
-            "first_name": "Marlene",
-            "second_name": "",
-            "first_surname": "Pérez",
-            "second_surname": "Cartes",
-            "party": "Independientes",
-            "party_alias": "IND",
-            "birthday": "10/05/1973",
-            "sex": "0",
-            "termination": "a",
-            "treatment": "Sra",
-            "deputy_id": 1157,
-            "attendance": {
-                "attended": 98,
-                "justified": 4,
-                "unjustified": 0,
-                "total": 102,
-                "percentage": 100.0
-            },
-            "voting": [
-                {
-                    "vote_option": "Afirmativo",
-                    "date": "2022-11-23",
-                    "name": "Da por cumplidas las metas sanitarias y de atención de usuarios por parte de los funcionarios de la salud que indica, para efectos del pago de las asignaciones y bonificaciones que corresponda, con ocasión del estado de excepción de catástrofe por la pandemia de Covid-19",
-                    "description": "Boletín N° 14257-11",
-                    "voting_id": 39790
-                },
-                {
-                    "vote_option": "Afirmativo",
-                    "date": "2022-11-21",
-                    "name": "Establece un régimen de protección, y reparación integral en favor de las víctimas de femicidio y sus familias",
-                    "description": "Boletín N° 14013-34",
-                    "voting_id": 39759
-                },
-                {
-                    "vote_option": "Afirmativo",
-                    "date": "2022-11-09",
-                    "name": "Extiende transitoriamente el permiso postnatal parental.",
-                    "description": "Boletín N° 15418-13",
-                    "voting_id": 39447
-                },
-                {
-                    "vote_option": "Afirmativo",
-                    "date": "2022-11-09",
-                    "name": "Extiende transitoriamente el permiso postnatal parental.",
-                    "description": "Boletín N° 15418-13",
-                    "voting_id": 39448
-                },
-                {
-                    "vote_option": "Afirmativo",
-                    "date": "2022-11-09",
-                    "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
-                    "description": "Boletín N° 15433-10",
-                    "voting_id": 39446
-                },
-                {
-                    "vote_option": "Afirmativo",
-                    "date": "2022-11-09",
-                    "name": "Aprueba el Convenio 190, sobre la Violencia y el Acoso, adoptado por la Organización Internacional del Trabajo el 21 de junio de 2019",
-                    "description": "Boletín N° 15307-10",
-                    "voting_id": 39442
-                },
-                {
-                    "vote_option": "Abstención",
-                    "date": "2022-11-09",
-                    "name": "Autoriza la búsqueda activa de casos en la comunidad y el diagnóstico precoz del Covid-19 en mayores de 14 años, sin el consentimiento de los padres o curadores.",
-                    "description": "Boletín N° 15097-11",
-                    "voting_id": 39441
-                },
-                {
-                    "vote_option": "Afirmativo",
-                    "date": "2022-10-26",
-                    "name": "Extiende transitoriamente el permiso postnatal parental.",
-                    "description": "Boletín N° 15418-13",
-                    "voting_id": 39383
-                },
-                {
-                    "vote_option": "Afirmativo",
-                    "date": "2022-10-26",
-                    "name": "Extiende transitoriamente el permiso postnatal parental.",
-                    "description": "Boletín N° 15418-13",
-                    "voting_id": 39382
-                },
-                {
-                    "vote_option": "En Contra",
-                    "date": "2022-10-26",
-                    "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
-                    "description": "Boletín N° 15433-10",
-                    "voting_id": 39381
-                }
-            ],
-            "expenses": {
-                "operational": [
-                    {
-                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-                        "TELEFONÍA": 0,
-                        "TRASLACIÓN": 787074,
-                        "DIFUSIÓN": 0,
-                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-                        "ARRIENDO DE INMUEBLE": 0,
-                        "CONSUMOS BÁSICOS": 0,
-                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 1947982,
-                        "MATERIALES DE OFICINA": 9398,
-                        "CORRESPONDENCIA": 0,
-                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-                        "SEGUROS DE BIENES": 0,
-                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
-                        "SERVICIOS WEB": 0,
-                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-                        "ARRIENDO DE OFICINA MÓVIL": 0,
-                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-                        "SERVICIOS MENORES": 333333,
-                        "COVID-19 PERSONAL DE APOYO": 0,
-                        "month": "marzo"
-                    },
-                    {
-                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-                        "TELEFONÍA": 794339,
-                        "TRASLACIÓN": 1422138,
-                        "DIFUSIÓN": 0,
-                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-                        "ARRIENDO DE INMUEBLE": 1166667,
-                        "CONSUMOS BÁSICOS": 0,
-                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 1710183,
-                        "MATERIALES DE OFICINA": 0,
-                        "CORRESPONDENCIA": 0,
-                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 246330,
-                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-                        "SEGUROS DE BIENES": 0,
-                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
-                        "SERVICIOS WEB": 0,
-                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-                        "ARRIENDO DE OFICINA MÓVIL": 0,
-                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-                        "SERVICIOS MENORES": 500000,
-                        "COVID-19 PERSONAL DE APOYO": 0,
-                        "month": "abril"
-                    },
-                    {
-                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 385501,
-                        "TELEFONÍA": 18193,
-                        "TRASLACIÓN": 1843761,
-                        "DIFUSIÓN": 0,
-                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-                        "ARRIENDO DE INMUEBLE": 1125000,
-                        "CONSUMOS BÁSICOS": 82862,
-                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 921993,
-                        "MATERIALES DE OFICINA": 7578,
-                        "CORRESPONDENCIA": 0,
-                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 134470,
-                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-                        "SEGUROS DE BIENES": 0,
-                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
-                        "SERVICIOS WEB": 79990,
-                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-                        "ARRIENDO DE OFICINA MÓVIL": 0,
-                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-                        "SERVICIOS MENORES": 500000,
-                        "COVID-19 PERSONAL DE APOYO": 0,
-                        "month": "mayo"
-                    },
-                    {
-                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-                        "TELEFONÍA": 75382,
-                        "TRASLACIÓN": 1880913,
-                        "DIFUSIÓN": 1150959,
-                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 18809,
-                        "ARRIENDO DE INMUEBLE": 1125000,
-                        "CONSUMOS BÁSICOS": 69752,
-                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 353034,
-                        "MATERIALES DE OFICINA": 201750,
-                        "CORRESPONDENCIA": 18873,
-                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-                        "SEGUROS DE BIENES": 0,
-                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
-                        "SERVICIOS WEB": 0,
-                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-                        "ARRIENDO DE OFICINA MÓVIL": 0,
-                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-                        "SERVICIOS MENORES": 500000,
-                        "COVID-19 PERSONAL DE APOYO": 0,
-                        "month": "junio"
-                    },
-                    {
-                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-                        "TELEFONÍA": 18192,
-                        "TRASLACIÓN": 1903355,
-                        "DIFUSIÓN": 899980,
-                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 28489,
-                        "ARRIENDO DE INMUEBLE": 1125000,
-                        "CONSUMOS BÁSICOS": 146175,
-                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
-                        "MATERIALES DE OFICINA": 3982,
-                        "CORRESPONDENCIA": 794,
-                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-                        "SEGUROS DE BIENES": 0,
-                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
-                        "SERVICIOS WEB": 0,
-                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-                        "ARRIENDO DE OFICINA MÓVIL": 0,
-                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-                        "SERVICIOS MENORES": 500000,
-                        "COVID-19 PERSONAL DE APOYO": 0,
-                        "month": "julio"
-                    },
-                    {
-                        "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 143691,
-                        "TELEFONÍA": 18193,
-                        "TRASLACIÓN": 2005092,
-                        "DIFUSIÓN": 1823500,
-                        "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 23643,
-                        "ARRIENDO DE INMUEBLE": 1125000,
-                        "CONSUMOS BÁSICOS": 84495,
-                        "EQUIPAMIENTO OFICINA PARLAMENTARIA": 39990,
-                        "MATERIALES DE OFICINA": 96628,
-                        "CORRESPONDENCIA": 25942,
-                        "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-                        "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-                        "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-                        "SEGUROS DE BIENES": 0,
-                        "ARRIENDO DE OFICINAS VIRTUALES": 0,
-                        "SERVICIOS WEB": 0,
-                        "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-                        "ARRIENDO DE OFICINA MÓVIL": 0,
-                        "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-                        "SERVICIOS MENORES": 399000,
-                        "COVID-19 PERSONAL DE APOYO": 0,
-                        "month": "agosto"
-                    }
-                ],
-                "offices": [
-                    {
-                        "offices": [
-                            {
-                                "city": "Concepción",
-                                "region": "VIII",
-                                "amount": 666667
-                            }
-                        ],
-                        "month": "abril"
-                    },
-                    {
-                        "offices": [
-                            {
-                                "city": "Concepción",
-                                "region": "VIII",
-                                "amount": 1000000
-                            }
-                        ],
-                        "month": "mayo"
-                    },
-                    {
-                        "offices": [
-                            {
-                                "city": "Concepción",
-                                "region": "VIII",
-                                "amount": 1000000
-                            }
-                        ],
-                        "month": "junio"
-                    },
-                    {
-                        "offices": [
-                            {
-                                "city": "Concepción",
-                                "region": "VIII",
-                                "amount": 1000000
-                            }
-                        ],
-                        "month": "julio"
-                    },
-                    {
-                        "offices": [
-                            {
-                                "city": "Concepción",
-                                "region": "VIII",
-                                "amount": 1000000
-                            }
-                        ],
-                        "month": "agosto"
-                    },
-                    {
-                        "offices": [
-                            {
-                                "city": "Concepción",
-                                "region": "VIII",
-                                "amount": 1000000
-                            }
-                        ],
-                        "month": "septiembre"
-                    }
-                ],
-                "staff": [
-                    {
-                        "staff": [
-                            {
-                                "job": "Profesional",
-                                "amount": 1926667
-                            },
-                            {
-                                "job": "Profesional",
-                                "amount": 666667
-                            },
-                            {
-                                "job": "Asesor",
-                                "amount": 400000
-                            },
-                            {
-                                "job": "Asesoría Comunicaci",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesoría Comunicacio",
-                                "amount": 1000000
-                            }
-                        ],
-                        "month": "marzo"
-                    },
-                    {
-                        "staff": [
-                            {
-                                "job": "Profesional",
-                                "amount": 2890000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 900000
-                            },
-                            {
-                                "job": "Profesional",
-                                "amount": 1000000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesor",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesoría Legislativa",
-                                "amount": 700000
-                            }
-                        ],
-                        "month": "abril"
-                    },
-                    {
-                        "staff": [
-                            {
-                                "job": "Profesional",
-                                "amount": 2890000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 700000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 900000
-                            },
-                            {
-                                "job": "Profesional",
-                                "amount": 1000000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesor",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesoría Legislativa",
-                                "amount": 700000
-                            },
-                            {
-                                "job": "Asesoria Comunicacio",
-                                "amount": 500000
-                            }
-                        ],
-                        "month": "mayo"
-                    },
-                    {
-                        "staff": [
-                            {
-                                "job": "Profesional",
-                                "amount": 2890000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 700000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 900000
-                            },
-                            {
-                                "job": "Profesional",
-                                "amount": 1000000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesor",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesoría Jurídica D",
-                                "amount": 700000
-                            }
-                        ],
-                        "month": "junio"
-                    },
-                    {
-                        "staff": [
-                            {
-                                "job": "Profesional",
-                                "amount": 2890000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 700000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 900000
-                            },
-                            {
-                                "job": "Profesional",
-                                "amount": 1100000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesor",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesor",
-                                "amount": 750000
-                            }
-                        ],
-                        "month": "agosto"
-                    },
-                    {
-                        "staff": [
-                            {
-                                "job": "Profesional",
-                                "amount": 2890000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 700000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 900000
-                            },
-                            {
-                                "job": "Profesional",
-                                "amount": 1100000
-                            },
-                            {
-                                "job": "Administrativo",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesor",
-                                "amount": 600000
-                            },
-                            {
-                                "job": "Asesor",
-                                "amount": 750000
-                            },
-                            {
-                                "job": "Asesoría Comunicacio",
-                                "amount": 250000
-                            }
-                        ],
-                        "month": "septiembre"
-                    }
-                ]
-            }
+          "vote_option": "Afirmativo",
+          "date": "2022-11-23",
+          "name": "Da por cumplidas las metas sanitarias y de atención de usuarios por parte de los funcionarios de la salud que indica, para efectos del pago de las asignaciones y bonificaciones que corresponda, con ocasión del estado de excepción de catástrofe por la pandemia de Covid-19",
+          "description": "Boletín N° 14257-11",
+          "voting_id": 39790
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-11-21",
+          "name": "Establece un régimen de protección, y reparación integral en favor de las víctimas de femicidio y sus familias",
+          "description": "Boletín N° 14013-34",
+          "voting_id": 39759
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-11-09",
+          "name": "Extiende transitoriamente el permiso postnatal parental.",
+          "description": "Boletín N° 15418-13",
+          "voting_id": 39447
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-11-09",
+          "name": "Extiende transitoriamente el permiso postnatal parental.",
+          "description": "Boletín N° 15418-13",
+          "voting_id": 39448
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-11-09",
+          "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
+          "description": "Boletín N° 15433-10",
+          "voting_id": 39446
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-11-09",
+          "name": "Aprueba el Convenio 190, sobre la Violencia y el Acoso, adoptado por la Organización Internacional del Trabajo el 21 de junio de 2019",
+          "description": "Boletín N° 15307-10",
+          "voting_id": 39442
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-11-09",
+          "name": "Autoriza la búsqueda activa de casos en la comunidad y el diagnóstico precoz del Covid-19 en mayores de 14 años, sin el consentimiento de los padres o curadores.",
+          "description": "Boletín N° 15097-11",
+          "voting_id": 39441
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-10-26",
+          "name": "Extiende transitoriamente el permiso postnatal parental.",
+          "description": "Boletín N° 15418-13",
+          "voting_id": 39383
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-10-26",
+          "name": "Extiende transitoriamente el permiso postnatal parental.",
+          "description": "Boletín N° 15418-13",
+          "voting_id": 39382
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-10-26",
+          "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
+          "description": "Boletín N° 15433-10",
+          "voting_id": 39381
         }
-    ]
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 1248400,
+            "Web y Almacenamiento": 0,
+            "Otros": 789874,
+            "Telefonía": 115982,
+            "Traslación": 1746595,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3900851,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1231200,
+            "Web y Almacenamiento": 0,
+            "Otros": 780679,
+            "Telefonía": 115982,
+            "Traslación": 1832107,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3959968,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 2255810,
+            "Web y Almacenamiento": 0,
+            "Otros": 801622,
+            "Telefonía": 115982,
+            "Traslación": 1593389,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 4766803,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1200000,
+            "Web y Almacenamiento": 0,
+            "Otros": 801612,
+            "Telefonía": 119116,
+            "Traslación": 530194,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 2650922,
+            "month": "mayo",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1200000,
+            "Web y Almacenamiento": 0,
+            "Otros": 621502,
+            "Telefonía": 129007,
+            "Traslación": 1096522,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3047031,
+            "month": "abril",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 912903,
+            "Web y Almacenamiento": 0,
+            "Otros": 14567,
+            "Telefonía": 155809,
+            "Traslación": 1021737,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 2105016,
+            "month": "marzo",
+            "year": 2022
+          }
+        ],
+        "offices": [
+          {
+            "num_oficinas": 1,
+            "total": 1259518,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1231200,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1231200,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1231200,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1200000,
+            "month": "mayo",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1200000,
+            "month": "abril",
+            "year": 2022
+          }
+        ],
+        "staff": [
+          {
+            "num_personal": 4,
+            "total": 6040000,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 7366667,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 7880000,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 7640000,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 8140000,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 8140000,
+            "month": "mayo",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  ]
 }
