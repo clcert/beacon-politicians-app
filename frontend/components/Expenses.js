@@ -7,6 +7,23 @@ const formatAmount = (amount) => {
   return '$'+amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+const getMonthsForHistoryChart = (expenses) => {
+  const operational_months = expenses.operational.map((expense) => expense.month).reverse()
+  const offices_months = expenses.offices.map((expense) => expense.month).reverse()
+  const staff_months = expenses.staff.map((expense) => expense.month).reverse()
+  const months = [...new Set([...operational_months,...offices_months, ...staff_months])]
+  return months
+}
+
+const getExpensesForHistoryChart = (expenses, months) => {
+  let expenses_by_month = {}
+  for (let expense of expenses) {
+    expenses_by_month[expense.month] = expense.total
+  }
+  console.log(expenses_by_month)
+  return months.map((month) => expenses_by_month[month] || undefined)
+}
+
 
 const Expenses = ({deputyInfo}) => {
 
@@ -27,13 +44,15 @@ const Expenses = ({deputyInfo}) => {
     'Relacionados a Oficina Parlamentaria',
     'Web y Almacenamiento',
     'Otros',
-  ]
+  ];
   
-  Object.keys(deputyInfo.expenses.operational[0]).filter(key => key != 'month' && key != 'total' && key != 'year');
+  const months_for_chart = getMonthsForHistoryChart(deputyInfo.expenses)
+  
 
   useEffect(() => {
     const mainExpensesContainer = document.getElementById('mainExpensesChart').getContext('2d');
     const operationalExpensesContainer = document.getElementById('operationalExpensesChart').getContext('2d');
+    const historyExpensesContainer = document.getElementById('historyExpensesChart').getContext('2d');
 
     const charts = [
       new Chart(mainExpensesContainer, {
@@ -91,6 +110,53 @@ const Expenses = ({deputyInfo}) => {
             },
           }
         }
+      }),
+      new Chart(historyExpensesContainer, {
+        type: 'line',
+        data: {
+          labels: months_for_chart,
+          datasets: [
+            {
+              label: "Gastos Operacionales",
+              data: getExpensesForHistoryChart(deputyInfo.expenses.operational, months_for_chart),
+              backgroundColor: '#ff6961',
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+            },
+            {
+              label: "Arriendo de Oficinas",
+              data: getExpensesForHistoryChart(deputyInfo.expenses.offices, months_for_chart),
+              backgroundColor: '#ffb480',
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+            },
+            {
+              label: "Personal de Apoyo",
+              data: getExpensesForHistoryChart(deputyInfo.expenses.staff, months_for_chart),
+              backgroundColor: '#42d6a4',
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+            },
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+            },
+            title: {
+              display: true,
+              text: 'Gastos Operacionales ('+formatAmount(show_operational)+')',
+              font: {
+                size: 18,
+              }
+            },
+          }
+        }
       })
     ];
 
@@ -107,8 +173,8 @@ const Expenses = ({deputyInfo}) => {
           El último mes donde existe un registro completo de los gastos { deputyInfo.sex == 0 ? 'de la' : 'del' }
           {' '} diputad{deputyInfo.termination} <strong>{ deputyInfo.first_name } { deputyInfo.first_surname }</strong> corresponde a
           {' '} <strong>{deputyInfo.expenses.operational[0].month} de { deputyInfo.expenses.operational[0].year }</strong>,
-          {' '} destinando un total de <strong>{ show_total }</strong> entre gastos operacionales, de oficina y personal de apoyo. En particular,
-          se distribuyen de la siguiente manera:
+          {' '} destinando un total de <strong>{ show_total }</strong><a href='#op-expenses'><sup>2,3,4</sup></a> entre gastos operacionales, 
+          {' '} de oficina y personal de apoyo. En particular, se distribuyen de la siguiente manera:
         </p>
       </header>
       <div className={styles.chartContainer}>
@@ -117,6 +183,16 @@ const Expenses = ({deputyInfo}) => {
         </div>
         <div id='operationalExpensesContainer'>
           <canvas id='operationalExpensesChart' height='400' width='400'></canvas>
+        </div>
+      </div>
+      <div className={styles.expensesHistoryIntroduction}>
+        <p>
+          Se presenta además la evolución de los gastos en los <strong>últimos 6 meses</strong><a href='#ref-expenses'><sup>5</sup></a>:
+        </p>
+      </div>
+      <div className={styles.chartContainer}>
+        <div id='historyExpensesContainer'>
+          <canvas id='historyExpensesChart' height='400' width='400'></canvas>
         </div>
       </div>
     </div>
