@@ -3,29 +3,6 @@ import Chart from 'chart.js/auto';
 
 import styles from '../styles/home/Expenses.module.css';
 
-const obtainLastMonth = (expenses) => {
-  return expenses[expenses.length - 1].month;
-}
-
-const totalOperationalExpensesMonth = (expenses) => {
-  let total = 0;
-  for (const [key, amount] of Object.entries(expenses)) {
-    if ( key != 'month' ) {
-      total += amount;
-    }
-  }
-  return total;
-}
-
-const totalOfficesExpensesMonth = (offices) => {
-  let total = 0;
-  for (let office of offices) {
-    total += office.amount;
-  }
-  return total;
-}
-
-
 const formatAmount = (amount) => {
   return '$'+amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
@@ -33,41 +10,91 @@ const formatAmount = (amount) => {
 
 const Expenses = ({deputyInfo}) => {
 
-  const last_operational_month = obtainLastMonth(deputyInfo.expenses.operational);
-  const total_operational_month = formatAmount(
-    totalOperationalExpensesMonth(deputyInfo.expenses.operational[deputyInfo.expenses.operational.length - 1])
-  );
-  const last_offices_month = obtainLastMonth(deputyInfo.expenses.offices);
-  const total_offices_month = formatAmount(
-    totalOfficesExpensesMonth(deputyInfo.expenses.offices[deputyInfo.expenses.offices.length - 1].offices)
-  );
+  const show_month = deputyInfo.expenses.operational[0].month
+
+  const show_operational = deputyInfo.expenses.operational[0].total;
+  const show_offices = deputyInfo.expenses.offices.filter(expenses => expenses.month == show_month)[0].total;
+  const show_staff = deputyInfo.expenses.staff.filter(expenses => expenses.month == show_month)[0].total;
+
+  const show_total = formatAmount(show_operational + show_offices + show_staff);
+
+  const op_keys = [
+    'Telefonía',
+    'Traslación',
+    'Difusión',
+    'Actividades destinadas a la interacción con la comunidad',
+    'Correspondencia',
+    'Relacionados a Oficina Parlamentaria',
+    'Web y Almacenamiento',
+    'Otros',
+  ]
+  
+  Object.keys(deputyInfo.expenses.operational[0]).filter(key => key != 'month' && key != 'total' && key != 'year');
 
   useEffect(() => {
-    var ctx = document.getElementById('expensesChart').getContext('2d');
-    var att = [
-      deputyInfo.attendance.attended, 
-      deputyInfo.attendance.justified, 
-      deputyInfo.attendance.unjustified
-    ];
-    var myChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ["Días Asistidos", "Días no asistidos justificados", "Días no asistidos no justificados"],
-        datasets: [{
-          label: "Expenses",
-          backgroundColor: ["#3cba9f", "#3e95cd", "#FF0000"],
-          data: att,
-        }]
-      },
-      options: {
-        title: {
-          display: true,
-          text: 'Asistencia'
-        }
-      }
-    });
+    const mainExpensesContainer = document.getElementById('mainExpensesChart').getContext('2d');
+    const operationalExpensesContainer = document.getElementById('operationalExpensesChart').getContext('2d');
 
-    return () => myChart.destroy();
+    const charts = [
+      new Chart(mainExpensesContainer, {
+        type: 'doughnut',
+        data: {
+          labels: ["Gastos Operacionales", "Oficinas Parlamentarias", "Personal de Apoyo"],
+          datasets: [{
+            label: "Expenses",
+            backgroundColor: ["#BA5DE8", "#5961FF", "#02B4F5"],
+            data: [ show_operational, show_offices, show_staff ],
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+            },
+            title: {
+              display: true,
+              text: 'Gastos de ' + show_month,
+              font: {
+                size: 18,
+              }
+            }
+          }
+        }
+      }),
+      new Chart(operationalExpensesContainer, {
+        type: 'bar',
+        data: {
+          labels: ['Telefonía','Traslación','Difusión','Interacción con Comunidad','Correspondencia','Oficina Parlamentaria','Web y Almacenamiento','Otros'],
+          datasets: [{
+            label: "Expenses",
+            data: op_keys.map((op_key) => deputyInfo.expenses.operational[0][op_key]),
+            backgroundColor: ['#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8'],
+            borderWidth: 2,
+            borderRadius: 10,
+            borderSkipped: false,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              display: false,
+            },
+            title: {
+              display: true,
+              text: 'Gastos Operacionales ('+formatAmount(show_operational)+')',
+              font: {
+                size: 18,
+              }
+            },
+          }
+        }
+      })
+    ];
+
+    return () => charts.map(chart => chart.destroy());
   
   }, [])
 
@@ -77,16 +104,19 @@ const Expenses = ({deputyInfo}) => {
       <header>
         <h2>Gastos</h2>
         <p>
-          El último mes con registro de gastos operacionales corresponde a <strong>{last_operational_month}</strong>,
-          &nbsp;donde { deputyInfo.sex == 0 ? 'la' : 'el' } diputad{deputyInfo.termination}
-          &nbsp;<strong>{ deputyInfo.first_name } { deputyInfo.first_surname }</strong> destinó <strong>{ total_operational_month }</strong>
-          &nbsp;para dicho fin. Respecto a los gastos de oficina, el último mes con registro corresponde a <strong>{last_offices_month}</strong>,
-          &nbsp;incurriendo en un gasto de <strong>{ total_offices_month }</strong>.
+          El último mes donde existe un registro completo de los gastos { deputyInfo.sex == 0 ? 'de la' : 'del' }
+          {' '} diputad{deputyInfo.termination} <strong>{ deputyInfo.first_name } { deputyInfo.first_surname }</strong> corresponde a
+          {' '} <strong>{deputyInfo.expenses.operational[0].month} de { deputyInfo.expenses.operational[0].year }</strong>,
+          {' '} destinando un total de <strong>{ show_total }</strong> entre gastos operacionales, de oficina y personal de apoyo. En particular,
+          se distribuyen de la siguiente manera:
         </p>
       </header>
       <div className={styles.chartContainer}>
-        <div id='graphicContainer'>
-          <canvas id='expensesChart' width='400' height='auto'></canvas>
+        <div id='mainExpensesContainer'>
+          <canvas id='mainExpensesChart' width='400' height='auto'></canvas>
+        </div>
+        <div id='operationalExpensesContainer'>
+          <canvas id='operationalExpensesChart' height='400' width='400'></canvas>
         </div>
       </div>
     </div>
