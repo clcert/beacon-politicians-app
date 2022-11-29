@@ -36,7 +36,7 @@ const Overview = ({deputyInfo}) => {
             </h1>
           </header>
           <p className={styles.partyDetail}>
-            De la bancada { deputyInfo.party }.
+            Militante de { deputyInfo.party }.
           </p>
           <p id='intro'>
             <strong>{ deputyInfo.first_name } { deputyInfo.second_name } { deputyInfo.first_surname } { deputyInfo.second_surname }</strong>, 

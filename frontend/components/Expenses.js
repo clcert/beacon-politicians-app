@@ -20,7 +20,6 @@ const getExpensesForHistoryChart = (expenses, months) => {
   for (let expense of expenses) {
     expenses_by_month[expense.month] = expense.total
   }
-  console.log(expenses_by_month)
   return months.map((month) => expenses_by_month[month] || undefined)
 }
 

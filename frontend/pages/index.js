@@ -51,7 +51,7 @@ export default function Home() {
 
       <nav id='nav' className={styles.navBar}>
         <div className={styles.logo}>
-          Diputadx del Día
+          <img src='images/logo.png' alt='Diputadx del Día'/>
         </div>
         <ul className={styles.navItems}>
           <li><a href='#top'>Principal</a></li>

@@ -10,6 +10,11 @@
   width: 60%;
 }
 
+.logo img {
+  padding: 10px 20px;
+  height: 100%;
+}
+
 .changeDeputy {
   width: 20%;
   justify-content: right;
