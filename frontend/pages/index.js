@@ -10,6 +10,7 @@ import Overview from '../components/Overview'
 import Votings from '../components/Votings'
 
 import styles from '../styles/Home.module.css'
+import Expenses from '../components/Expenses'
 
 
 const getLastDeputyInfo = async () => {
@@ -93,7 +94,11 @@ export default function Home() {
             <Attendance deputyInfo={deputyInfo} />
           </article>
 
-          <article id='votes' className='wrapper style3'>
+          <article id='expenses' className='wrapper style3'>
+            <Expenses deputyInfo={deputyInfo} />
+          </article>
+
+          <article id='votes' className='wrapper style2'>
             <Votings deputyInfo={deputyInfo} />
           </article>
 
@@ -103,11 +108,31 @@ export default function Home() {
                 <h2>Referencias</h2>
                   <ol>
                     <li id='ref-attendance'>
-                      <sup><a href='#text-attendance'></a></sup> 
-                      Cálculo hecho según justificaciones a inasistencias, para más información visitar:&nbsp;
+                      Cálculo hecho según justificaciones a inasistencias, para más información visitar: <br />
                       <a href='https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx' target='_blank' rel='noreferrer'>
                         https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx
-                      </a>
+                      </a>.
+                    </li>
+                    <li id='op-expenses'>
+                      Los datos acerca de los gastos operacionales fueron obtenidos desde:<br />
+                      <a href={`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyInfo.deputy_id}`} target='_blank' rel='noreferrer'>
+                        {`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyInfo.deputy_id}`}
+                      </a>.
+                    </li>
+                    <li id='of-expenses'>
+                      Los datos acerca de los gastos en oficinas parlamentarias fueron obtenidos desde:<br />
+                      <a href='https://www.camara.cl/transparencia/oficinasparlamentarias.aspx' target='_blank' rel='noreferrer'>
+                        https://www.camara.cl/transparencia/oficinasparlamentarias.aspx
+                      </a>.
+                    </li>
+                    <li id='st-expenses'>
+                      Los datos acerca de los gastos de personal de apoyo fueron obtenidos desde:<br />
+                      <a href='https://www.camara.cl/transparencia/personalapoyogral.aspx' target='_blank' rel='noreferrer'>
+                        https://www.camara.cl/transparencia/personalapoyogral.aspx
+                      </a>.
+                    </li>
+                    <li id='ref-expenses'>
+                      Existen desfases con respecto a los meses con gastos declarados.
                     </li>
                   </ol>
               </header>

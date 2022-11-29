@@ -1,397 +1,45 @@
 {
   "deputies": [
     {
-      "date": "2022-11-22 00:00:00",
-      "index": 84,
-      "record": 106859,
+      "date": "2022-11-27 00:00:00",
+      "index": 54,
+      "record": 114059,
       "json_index": 0,
-      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL990",
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1034",
       "profession": "Sin Información",
-      "district": "Nº 13",
-      "districtregion": "Región Metropolitana de Santiago",
+      "district": "Nº 20",
+      "districtregion": "Región del Bío Bío",
       "periods": [
-        "2014-2018",
+        "2018-2022",
         "2022-2026"
       ],
       "lastperiod": "2022-2026",
-      "first_name": "Daniel",
+      "first_name": "Félix",
       "second_name": "",
-      "first_surname": "Melo",
-      "second_surname": "Contreras",
-      "party": "Partido Socialista",
-      "party_alias": "PS",
-      "birthday": "18/02/1979",
+      "first_surname": "González",
+      "second_surname": "Gatica",
+      "party": "Partido Ecologista Verde",
+      "party_alias": "PEV",
+      "birthday": "26/05/1972",
       "sex": "1",
       "termination": "o",
       "treatment": "Sr",
-      "deputy_id": 990,
-      "expenses": {
-        "operational": {
-          "marzo": {
-            "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 0,
-            "TELEFONÍA": 0,
-            "TRASLACIÓN": 615479,
-            "DIFUSIÓN": 0,
-            "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-            "ARRIENDO DE INMUEBLE": 1331434,
-            "CONSUMOS BÁSICOS": 0,
-            "EQUIPAMIENTO OFICINA PARLAMENTARIA": 919909,
-            "MATERIALES DE OFICINA": 0,
-            "CORRESPONDENCIA": 0,
-            "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-            "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-            "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-            "SEGUROS DE BIENES": 0,
-            "ARRIENDO DE OFICINAS VIRTUALES": 0,
-            "SERVICIOS WEB": 0,
-            "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-            "ARRIENDO DE OFICINA MÓVIL": 0,
-            "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-            "SERVICIOS MENORES": 332000,
-            "COVID-19 PERSONAL DE APOYO": 0
-          },
-          "abril": {
-            "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 42417,
-            "TELEFONÍA": 1542669,
-            "TRASLACIÓN": 1316760,
-            "DIFUSIÓN": 0,
-            "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-            "ARRIENDO DE INMUEBLE": 793730,
-            "CONSUMOS BÁSICOS": 0,
-            "EQUIPAMIENTO OFICINA PARLAMENTARIA": 687746,
-            "MATERIALES DE OFICINA": 136119,
-            "CORRESPONDENCIA": 0,
-            "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-            "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-            "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-            "SEGUROS DE BIENES": 0,
-            "ARRIENDO DE OFICINAS VIRTUALES": 0,
-            "SERVICIOS WEB": 0,
-            "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-            "ARRIENDO DE OFICINA MÓVIL": 0,
-            "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-            "SERVICIOS MENORES": 500000,
-            "COVID-19 PERSONAL DE APOYO": 0
-          },
-          "mayo": {
-            "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 441470,
-            "TELEFONÍA": 1091435,
-            "TRASLACIÓN": 1333759,
-            "DIFUSIÓN": 0,
-            "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-            "ARRIENDO DE INMUEBLE": 807446,
-            "CONSUMOS BÁSICOS": 43340,
-            "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
-            "MATERIALES DE OFICINA": 219752,
-            "CORRESPONDENCIA": 0,
-            "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-            "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-            "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-            "SEGUROS DE BIENES": 0,
-            "ARRIENDO DE OFICINAS VIRTUALES": 0,
-            "SERVICIOS WEB": 0,
-            "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-            "ARRIENDO DE OFICINA MÓVIL": 0,
-            "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-            "SERVICIOS MENORES": 500000,
-            "COVID-19 PERSONAL DE APOYO": 0
-          },
-          "junio": {
-            "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 413460,
-            "TELEFONÍA": 81860,
-            "TRASLACIÓN": 1522698,
-            "DIFUSIÓN": 0,
-            "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-            "ARRIENDO DE INMUEBLE": 819557,
-            "CONSUMOS BÁSICOS": 36579,
-            "EQUIPAMIENTO OFICINA PARLAMENTARIA": 29990,
-            "MATERIALES DE OFICINA": 247429,
-            "CORRESPONDENCIA": 0,
-            "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-            "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-            "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-            "SEGUROS DE BIENES": 0,
-            "ARRIENDO DE OFICINAS VIRTUALES": 0,
-            "SERVICIOS WEB": 0,
-            "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-            "ARRIENDO DE OFICINA MÓVIL": 0,
-            "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-            "SERVICIOS MENORES": 500000,
-            "COVID-19 PERSONAL DE APOYO": 0
-          },
-          "julio": {
-            "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 393010,
-            "TELEFONÍA": 81860,
-            "TRASLACIÓN": 1233539,
-            "DIFUSIÓN": 13209,
-            "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-            "ARRIENDO DE INMUEBLE": 829147,
-            "CONSUMOS BÁSICOS": 42804,
-            "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
-            "MATERIALES DE OFICINA": 48177,
-            "CORRESPONDENCIA": 0,
-            "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-            "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-            "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-            "SEGUROS DE BIENES": 0,
-            "ARRIENDO DE OFICINAS VIRTUALES": 0,
-            "SERVICIOS WEB": 0,
-            "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-            "ARRIENDO DE OFICINA MÓVIL": 0,
-            "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-            "SERVICIOS MENORES": 500000,
-            "COVID-19 PERSONAL DE APOYO": 0
-          },
-          "agosto": {
-            "TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO": 377031,
-            "TELEFONÍA": 81860,
-            "TRASLACIÓN": 1552824,
-            "DIFUSIÓN": 166980,
-            "ACTIVIDADES DESTINADAS A LA INTERACCIÓN CON LA COMUNIDAD": 0,
-            "ARRIENDO DE INMUEBLE": 836398,
-            "CONSUMOS BÁSICOS": 137354,
-            "EQUIPAMIENTO OFICINA PARLAMENTARIA": 0,
-            "MATERIALES DE OFICINA": 64374,
-            "CORRESPONDENCIA": 0,
-            "GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)": 0,
-            "REPARACIONES LOCATIVAS DEL INMUEBLE": 0,
-            "HABILITACIÓN DE SEDES PARLAMENTARIAS (CON AUTORIZACIÓN DE CRAP)": 0,
-            "SEGUROS DE BIENES": 0,
-            "ARRIENDO DE OFICINAS VIRTUALES": 0,
-            "SERVICIOS WEB": 0,
-            "CONTRATACIÓN SERVICIO DE ALMACENAMIENTO": 0,
-            "ARRIENDO DE OFICINA MÓVIL": 0,
-            "MANTENCION Y REPARACIÓN DE OFICINA MÓVIL": 0,
-            "SERVICIOS MENORES": 500000,
-            "COVID-19 PERSONAL DE APOYO": 0
-          }
-        },
-        "offices": {
-          "marzo": [
-            {
-              "city": "El Bosque",
-              "region": "RM",
-              "amount": 537780
-            }
-          ],
-          "abril": [
-            {
-              "city": "El Bosque",
-              "region": "RM",
-              "amount": 793730
-            }
-          ],
-          "mayo": [
-            {
-              "city": "El Bosque",
-              "region": "RM",
-              "amount": 807446
-            }
-          ],
-          "junio": [
-            {
-              "city": "El Bosque",
-              "region": "RM",
-              "amount": 819557
-            }
-          ],
-          "julio": [
-            {
-              "city": "El Bosque",
-              "region": "RM",
-              "amount": 829147
-            }
-          ],
-          "agosto": [
-            {
-              "city": "El Bosque",
-              "region": "RM",
-              "amount": 836398
-            }
-          ],
-          "septiembre": [
-            {
-              "city": "El Bosque",
-              "region": "RM",
-              "amount": 848573
-            }
-          ]
-        },
-        "staff": {
-          "marzo": [
-            {
-              "job": "Administrativo",
-              "amount": 400000
-            },
-            {
-              "job": "Profesional",
-              "amount": 906667
-            },
-            {
-              "job": "Asesor",
-              "amount": 633333
-            },
-            {
-              "job": "Profesional",
-              "amount": 1140000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1000000
-            }
-          ],
-          "abril": [
-            {
-              "job": "Administrativo",
-              "amount": 600000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1360000
-            },
-            {
-              "job": "Asesor",
-              "amount": 950000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1710000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1500000
-            },
-            {
-              "job": "Administrativo",
-              "amount": 630000
-            },
-            {
-              "job": "Profesional",
-              "amount": 666667
-            }
-          ],
-          "mayo": [
-            {
-              "job": "Administrativo",
-              "amount": 600000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1360000
-            },
-            {
-              "job": "Asesor",
-              "amount": 950000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1710000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1500000
-            },
-            {
-              "job": "Administrativo",
-              "amount": 700000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1000000
-            },
-            {
-              "job": "Asesoría Prestada A",
-              "amount": 250000
-            }
-          ],
-          "agosto": [
-            {
-              "job": "Administrativo",
-              "amount": 600000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1360000
-            },
-            {
-              "job": "Asesor",
-              "amount": 950000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1500000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1000000
-            },
-            {
-              "job": "Asesoría Prestada A",
-              "amount": 1050000
-            }
-          ],
-          "septiembre": [
-            {
-              "job": "Administrativo",
-              "amount": 600000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1360000
-            },
-            {
-              "job": "Asesor",
-              "amount": 950000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1500000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1000000
-            },
-            {
-              "job": "Asesoría Prestada A",
-              "amount": 1050000
-            }
-          ],
-          "octubre": [
-            {
-              "job": "Administrativo",
-              "amount": 600000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1360000
-            },
-            {
-              "job": "Asesor",
-              "amount": 950000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1500000
-            },
-            {
-              "job": "Profesional",
-              "amount": 1000000
-            },
-            {
-              "job": "Asesoría Prestada A",
-              "amount": 1050000
-            }
-          ]
-        }
-      },
+      "deputy_id": 1034,
       "attendance": {
-        "attended": 99,
-        "justified": 1,
+        "attended": 86,
+        "justified": 16,
         "unjustified": 0,
-        "total": 100,
+        "total": 102,
         "percentage": 100.0
       },
       "voting": [
+        {
+          "vote_option": "Afirmativo",
+          "date": "2022-11-23",
+          "name": "Da por cumplidas las metas sanitarias y de atención de usuarios por parte de los funcionarios de la salud que indica, para efectos del pago de las asignaciones y bonificaciones que corresponda, con ocasión del estado de excepción de catástrofe por la pandemia de Covid-19",
+          "description": "Boletín N° 14257-11",
+          "voting_id": 39790
+        },
         {
           "vote_option": "Afirmativo",
           "date": "2022-11-21",
@@ -454,15 +102,166 @@
           "name": "Aprueba el ´Convenio Constitutivo de la Corporación Andina de Fomento´, el ´Convenio de suscripción de acciones de capital ordinario entre la Corporación Andina de Fomento y la República de Chile e incorporación de la República de Chile como país miembro´ y el ´Convenio de suscripción de acciones de capital de garantía entre la Corporación Andina de Fomento y la República de Chile´ adoptado el 7 de febrero de 1968 y suscritos con fecha 23 de junio de 2022, respectivamente.",
           "description": "Boletín N° 15433-10",
           "voting_id": 39381
-        },
-        {
-          "vote_option": "Afirmativo",
-          "date": "2022-10-26",
-          "name": "OTROS-Renuncia de los miembros de la Mesa.",
-          "description": "Otros",
-          "voting_id": 39371
         }
-      ]
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 1248400,
+            "Web y Almacenamiento": 0,
+            "Otros": 789874,
+            "Telefonía": 115982,
+            "Traslación": 1746595,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3900851,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1231200,
+            "Web y Almacenamiento": 0,
+            "Otros": 780679,
+            "Telefonía": 115982,
+            "Traslación": 1832107,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3959968,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 2255810,
+            "Web y Almacenamiento": 0,
+            "Otros": 801622,
+            "Telefonía": 115982,
+            "Traslación": 1593389,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 4766803,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1200000,
+            "Web y Almacenamiento": 0,
+            "Otros": 801612,
+            "Telefonía": 119116,
+            "Traslación": 530194,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 2650922,
+            "month": "mayo",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1200000,
+            "Web y Almacenamiento": 0,
+            "Otros": 621502,
+            "Telefonía": 129007,
+            "Traslación": 1096522,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3047031,
+            "month": "abril",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 912903,
+            "Web y Almacenamiento": 0,
+            "Otros": 14567,
+            "Telefonía": 155809,
+            "Traslación": 1021737,
+            "Difusión": 0,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 2105016,
+            "month": "marzo",
+            "year": 2022
+          }
+        ],
+        "offices": [
+          {
+            "num_oficinas": 1,
+            "total": 1259518,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1231200,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1231200,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1231200,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1200000,
+            "month": "mayo",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1200000,
+            "month": "abril",
+            "year": 2022
+          }
+        ],
+        "staff": [
+          {
+            "num_personal": 4,
+            "total": 6040000,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 7366667,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 7880000,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 7640000,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 8140000,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 8140000,
+            "month": "mayo",
+            "year": 2022
+          }
+        ]
+      }
     }
   ]
 }
