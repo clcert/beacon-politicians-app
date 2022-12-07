@@ -86,7 +86,7 @@ export default function Home() {
       {
         loading ? <div>Cargando...</div>
         :
-        <>
+        <div className='articles'>
           <article id='top' className='wrapper style1'>
             <Overview deputyInfo={deputyInfo} />
           </article>
@@ -148,7 +148,7 @@ export default function Home() {
               </footer>
             </div>
           </article>
-        </>
+        </div>
       }
     </div>
   )

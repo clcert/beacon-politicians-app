@@ -2172,7 +2172,7 @@ input, select, textarea {
 		/* Basic */
 
 			body {
-				padding-top: 44px;
+				padding-top: 0px;
 			}
 
 			body, input, textarea, select {
@@ -2310,14 +2310,14 @@ input, select, textarea {
 		/* Wrappers */
 
 			.wrapper {
-				padding: 3em 0;
+				padding: 100px 0;
 				text-align: center;
 			}
 
 		/* Nav */
 
 			#nav {
-				height: 44px;
+				height: 88px;
 				line-height: 44px;
 			}
 
@@ -2335,7 +2335,7 @@ input, select, textarea {
 		/* Articles */
 
 			#top {
-				padding: 3em 0;
+				padding: 100px 0;
 			}
 
 				#top .image {
