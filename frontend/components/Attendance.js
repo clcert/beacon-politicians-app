@@ -5,6 +5,8 @@ import styles from '../styles/home/Attendance.module.css';
 
 const Attendance = ({deputyInfo}) => {
 
+  const size = window.innerWidth < 600 ? 300 : 400;
+
   useEffect(() => {
     var ctx = document.getElementById("attendanceChart").getContext('2d');
     var att = [
@@ -23,9 +25,18 @@ const Attendance = ({deputyInfo}) => {
         }]
       },
       options: {
-        title: {
-          display: true,
-          text: 'Asistencia'
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+          title: {
+            display: true,
+            text: 'Asistencia',
+            font: {
+              size: 18,
+            }
+          }
         }
       }
     });
@@ -47,7 +58,7 @@ const Attendance = ({deputyInfo}) => {
       </header>
       <div className={styles.chartContainer}>
         <div id='graphicContainer'>
-          <canvas id='attendanceChart' width='400' height='auto'></canvas>
+          <canvas id='attendanceChart' width={size} height={size}></canvas>
         </div>
       </div>
     </div>

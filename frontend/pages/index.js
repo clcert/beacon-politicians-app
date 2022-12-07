@@ -56,6 +56,7 @@ export default function Home() {
         <ul className={styles.navItems}>
           <li><a href='#top'>Principal</a></li>
           <li><a href='#attendance'>Asistencia</a></li>
+          <li><a href='#expenses'>Gastos</a></li>
           <li><a href='#votes'>Votaciones</a></li>
         </ul>
         <div className={styles.changeDeputy}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 
 import styles from '../styles/home/Expenses.module.css';
@@ -33,6 +33,7 @@ const Expenses = ({deputyInfo}) => {
   const show_staff = deputyInfo.expenses.staff.filter(expenses => expenses.month == show_month)[0].total;
 
   const show_total = formatAmount(show_operational + show_offices + show_staff);
+  const size = window.innerWidth < 600 ? 300 : 400;
 
   const op_keys = [
     'Telefonía',
@@ -149,7 +150,7 @@ const Expenses = ({deputyInfo}) => {
             },
             title: {
               display: true,
-              text: 'Gastos Operacionales ('+formatAmount(show_operational)+')',
+              text: 'Historial de Gastos',
               font: {
                 size: 18,
               }
@@ -178,10 +179,10 @@ const Expenses = ({deputyInfo}) => {
       </header>
       <div className={styles.chartContainer}>
         <div id='mainExpensesContainer'>
-          <canvas id='mainExpensesChart' width='400' height='auto'></canvas>
+          <canvas id='mainExpensesChart' width={size} height={size}></canvas>
         </div>
         <div id='operationalExpensesContainer'>
-          <canvas id='operationalExpensesChart' height='400' width='400'></canvas>
+          <canvas id='operationalExpensesChart' height={size} width={size}></canvas>
         </div>
       </div>
       <div className={styles.expensesHistoryIntroduction}>
@@ -191,7 +192,7 @@ const Expenses = ({deputyInfo}) => {
       </div>
       <div className={styles.chartContainer}>
         <div id='historyExpensesContainer'>
-          <canvas id='historyExpensesChart' height='400' width='400'></canvas>
+          <canvas id='historyExpensesChart' height={size} width={size}></canvas>
         </div>
       </div>
     </div>
