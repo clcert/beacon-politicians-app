@@ -18,17 +18,24 @@ class Parser:
         :param deputy_index: Index of the deputy. Belongs to the interval [0, count_deputies-1]
         :return: Returns a dictionary containing all deputy's information.
         """
+        print(f'{datetime.today()}\nLoading new deputy...\n')
         t_0 = perf_counter()
+
         deputy_id = self.idfindex(deputy_index)
         profile = self.get_profile(deputy_id)
+        print(f'Obtaining Information for: {profile["first_name"]} {profile["first_surname"]}')
         profile['deputy_id'] = deputy_id
-        print('Main profile obtained @', perf_counter() - t_0)
+        print(f'Main profile obtained\n-- Elapsed time: {round(perf_counter() - t_0, 3)}s')
+
         profile['attendance'] = self.get_all_attendance(deputy_id)
-        print('Deputy attendance obtained @', perf_counter() - t_0)
+        print(f'Deputy attendance obtained\n-- Elapsed time: {round(perf_counter() - t_0, 3) }s')
+
         profile['voting'] = self.get_deputy_votes(deputy_id, votes)
-        print('Deputy voting obtained @', perf_counter() - t_0)
+        print(f'Deputy voting obtained\n-- Elapsed time: {round(perf_counter() - t_0, 3)}s')
+
         profile['expenses'] = self.get_deputy_expenses(profile)
-        print('Deputy expenses obtained @', perf_counter() - t_0)
+        print(f'Deputy expenses obtained\n-- Elapsed time: {round(perf_counter() - t_0, 3)}s')
+
         return profile
 
     def get_profile(self, deputy_id):
