@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowAltCircleRight, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import DatePicker from 'react-datepicker'
 
 import Attendance from '../components/Attendance'
@@ -16,10 +16,12 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 const BACKEND_URI = 'http://127.0.0.1:5000'
 
-const getLastDeputyInfo = async () => {
-  const jsonData = await fetch(`${BACKEND_URI}/api/diputadodeldia`).then((res) => res.json());
-  return jsonData;
-}
+const CusomDatePicker = forwardRef(({ value, onClick }, ref) => (
+  <button className="custom-datepicker-button" onClick={onClick} ref={ref}>
+    <FontAwesomeIcon icon={faCalendarAlt} />
+    {value}
+  </button>
+));
 
 export default function Home() {
 
@@ -27,6 +29,11 @@ export default function Home() {
   const [ loading, setLoading ] = useState(true);
   const [ startDate, setStartDate ] = useState(new Date());
   const [ error, setError ] = useState(false);
+  const [ availableDates, setAvailableDates ] = useState([]);
+
+  const isValidDate = (date) => {
+    return availableDates.filter((d) => d.toISOString().split('T')[0] === date.toISOString().split('T')[0]).length > 0;
+  };
 
   const getData = async (url) => {
     const dataJson = fetch(url)
@@ -35,11 +42,9 @@ export default function Home() {
           setError(false);
           return res.json();
         }
-        setError(true);
         return null;
       })
       .catch(() => {
-        setError(true)
         return null;
       });
     return dataJson;
@@ -49,13 +54,31 @@ export default function Home() {
     setLoading(true);
     setTimeout(async () => {
       const jsonData = await getData(url);
-      setDeputyInfo(jsonData);
+      if (jsonData === null) {
+        setError(true);
+      } else {
+        setError(false);
+        setDeputyInfo(jsonData);
+      }
       setLoading(false);
+    }, 1000);
+  }
+
+  const getAvailableDates = () => {
+    setTimeout(async () => {
+      const jsonData = await getData(`${BACKEND_URI}/api/dates`);
+      if (jsonData === null) {
+        setError(true);
+      } else {
+        setError(false);
+        setAvailableDates(jsonData.dates.map((date) => new Date(date)));
+      }
     }, 1000);
   }
 
   useEffect(() => {
     getDeputyInfo(`${BACKEND_URI}/api/diputadodeldia`);
+    getAvailableDates();
   }, []);
 
   const changeDeputy = (date) => {
@@ -83,12 +106,17 @@ export default function Home() {
           <li><a href='#votes'>Votaciones</a></li>
         </ul>
         <div className={styles.changeDeputy}>
-          <DatePicker 
-            className='datepicker'
-            dateFormat="dd/MM/yyyy"
-            selected={startDate}
-            onChange={changeDeputy}
-          />
+          {
+            availableDates.length > 0 &&
+            <DatePicker 
+              className='datepicker'
+              dateFormat="dd/MM/yyyy"
+              selected={startDate}
+              onChange={changeDeputy}
+              customInput={<CusomDatePicker />}
+              filterDate={isValidDate}
+            />
+          }
         </div>
       </nav>
 

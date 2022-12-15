@@ -73,6 +73,23 @@ input, select, textarea {
 	line-height: 1rem;
 }
 
+.react-datepicker-wrapper {
+	width: 100px !important;
+}
+
+.custom-datepicker-button {
+	background-color: transparent;
+	color: white;
+	border-radius: 5px;
+	border: 1px solid white;
+	cursor: pointer;
+	margin: 5px;
+}
+
+.react-datepicker__tab-loop {
+	width: 0px !important;
+}
+
 /* Basic */
 
 	html {
@@ -2149,6 +2166,10 @@ input, select, textarea {
 					height: 15em;
 					margin: 0;
 				}
+		
+				.custom-datepicker-button {
+					margin: 2px !important;
+				}
 
 	}
 
@@ -2171,7 +2192,7 @@ input, select, textarea {
 
 /* Small */
 
-	@media screen and (max-width: 736px) {
+	@media screen and (max-width: 767px) {
 
 		/* Basic */
 
