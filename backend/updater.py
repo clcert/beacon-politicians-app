@@ -78,14 +78,21 @@ class Updater:
                     infile.close()
 
             with open(self.json_path, 'w', encoding='utf-8') as outfile:
-                deputy = dict(date=date_hour.strftime("%Y-%m-%d %H:%M:%S"), index=index,
-                              record=record, json_index=json_index)
-                deputy = {**deputy, **pd.Parser().get_deputy(index)}
-
-                deputies['deputies'].append(deputy)
-                json.dump(deputies, outfile, ensure_ascii=False)
-
-                outfile.close()
+                deputy = dict(
+                    date=date_hour.strftime("%Y-%m-%d %H:%M:%S"),
+                    index=index,
+                    record=record,
+                    json_index=json_index
+                )
+                # If something goes wrong, the json file is not modified.
+                try:
+                    deputy = {**deputy, **pd.Parser().get_deputy(index)}
+                    deputies['deputies'].append(deputy)
+                except:
+                    print('Unexpected error getting deputy information.')
+                finally:
+                    json.dump(deputies, outfile, ensure_ascii=False)
+                    outfile.close()
         else:
             parser = pd.Parser()
             deputy = parser.get_profile(parser.idfindex(index))
