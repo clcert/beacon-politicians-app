@@ -50,7 +50,8 @@ def dateRecord(selection_date):
 @app.route('/api/dates')
 def dates():
     deputies_list = Updater().get_list()
-    dates = list(map(lambda x: x['date'], deputies_list)).sort()
+    dates = list(map(lambda x: x['date'], deputies_list))
+    dates.sort()
     return jsonify({'dates': dates})
 
 
