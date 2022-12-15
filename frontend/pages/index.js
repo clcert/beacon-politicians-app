@@ -28,35 +28,40 @@ export default function Home() {
   const [ startDate, setStartDate ] = useState(new Date());
   const [ error, setError ] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      getLastDeputyInfo().then((data) => {
-        setDeputyInfo(data);
-        setStartDate(new Date(data.date));
-        setLoading(false);
+  const getData = async (url) => {
+    const dataJson = fetch(url)
+      .then((res) => {
+        if (res.status === 200) {
+          setError(false);
+          return res.json();
+        }
+        setError(true);
+        return null;
+      })
+      .catch(() => {
+        setError(true)
+        return null;
       });
+    return dataJson;
+  }
+
+  const getDeputyInfo = (url) => {
+    setLoading(true);
+    setTimeout(async () => {
+      const jsonData = await getData(url);
+      setDeputyInfo(jsonData);
+      setLoading(false);
     }, 1000);
+  }
+
+  useEffect(() => {
+    getDeputyInfo(`${BACKEND_URI}/api/diputadodeldia`);
   }, []);
 
   const changeDeputy = (date) => {
     setStartDate(date);
     const dateStr = date.toISOString().split('T')[0];
-
-    setLoading(true);
-    setTimeout(async () => {
-      fetch(`${BACKEND_URI}/api/diputado/date/${dateStr}`)
-        .then((res) => {
-          if (res.status === 200) {
-            setDeputyInfo(res.json())
-            return;
-          }
-          setError(true);
-        })
-        .catch(() => {
-          setError(true)
-        });
-      setLoading(false);
-    }, 1000);
+    getDeputyInfo(`${BACKEND_URI}/api/diputado/date/${dateStr}`);
   }
 
   return (
