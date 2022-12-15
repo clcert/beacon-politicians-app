@@ -16,6 +16,9 @@ CORS(app)
 @app.route('/api/diputadodeldia')
 def main_page():
     last = len(Updater().get_list()) - 1
+    if last == -1:
+        abort(404)
+        return
     d = Deputy(last)
     current = d.info
     current['ljson_index'] = last
