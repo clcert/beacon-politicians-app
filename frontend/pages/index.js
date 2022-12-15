@@ -121,7 +121,14 @@ export default function Home() {
       </nav>
 
       {
-        loading ? <div>Cargando...</div>
+        loading ? 
+          <div className='loading-spinner'>
+            <div className='lds-facebook'>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
         :
         error ? <div>Hubo un error al cargar los datos</div>
         :
