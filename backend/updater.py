@@ -88,6 +88,8 @@ class Updater:
                 try:
                     deputy = {**deputy, **pd.Parser().get_deputy(index)}
                     deputies['deputies'].append(deputy)
+                    # Keeps only the last 7 deputies
+                    deputies = deputies[-7:]
                 except:
                     print('Unexpected error getting deputy information.')
                 finally:

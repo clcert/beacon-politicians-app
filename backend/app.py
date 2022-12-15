@@ -34,21 +34,12 @@ def record(json_index):
     return jsonify(current)
 
 
-# @app.route('/diputadodeldia/handle_previous', methods=['POST'])
-# def handle_previous():
-#     json_index = int(request.args['json_index']) - 1
-#     return redirect(url_for("record", json_index=json_index))
-
-
-# @app.route('/diputadodeldia/handle_next', methods=['POST'])
-# def handle_next():
-#     json_index = int(request.args['json_index']) + 1
-#     last = len(Updater().get_list()) - 1
-#     if json_index == last:
-#         return redirect(url_for("main_page"))
-#     else:
-#         return redirect(url_for("record", json_index=json_index))
-
+@app.route('/api/dates')
+def dates():
+    deputies_list = Updater().get_list()
+    dates = list(map(lambda x: x['date'], deputies_list)).sort()
+    return jsonify({'dates': dates})
+    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
