@@ -22,8 +22,8 @@ def main_page():
     return jsonify(current)
 
 
-@app.route('/api/diputado/<int:json_index>')
-def record(json_index):
+@app.route('/api/diputado/index/<int:json_index>')
+def indexRecord(json_index):
     last = len(Updater().get_list()) - 1
     if json_index < 0 or json_index > last:
         abort(404)
@@ -34,12 +34,25 @@ def record(json_index):
     return jsonify(current)
 
 
+@app.route('/api/diputado/date/<string:selection_date>')
+def dateRecord(selection_date):
+    deputies_list = Updater().get_list()
+    deputy = list(filter(lambda d: d['date'].split(' ')[0] == selection_date, deputies_list))
+    if len(deputy) == 0:
+        abort(404)
+        return
+    d = Deputy(int(deputy[0]['json_index']))
+    current = d.info
+    current['ljson_index'] = len(deputies_list) - 1
+    return jsonify(current)
+
+
 @app.route('/api/dates')
 def dates():
     deputies_list = Updater().get_list()
     dates = list(map(lambda x: x['date'], deputies_list)).sort()
     return jsonify({'dates': dates})
-    
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
