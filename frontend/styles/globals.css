@@ -69,6 +69,10 @@ input, select, textarea {
 	appearance: none;
 }
 
+.react-datepicker * {
+	line-height: 1rem;
+}
+
 /* Basic */
 
 	html {

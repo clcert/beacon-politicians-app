@@ -4,17 +4,20 @@ import Link from 'next/link'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleRight, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import DatePicker from 'react-datepicker'
 
 import Attendance from '../components/Attendance'
 import Overview from '../components/Overview'
 import Votings from '../components/Votings'
 
-import styles from '../styles/Home.module.css'
 import Expenses from '../components/Expenses'
+import styles from '../styles/Home.module.css'
+import 'react-datepicker/dist/react-datepicker.css'
 
+const BACKEND_URI = 'http://127.0.0.1:5000'
 
 const getLastDeputyInfo = async () => {
-  const jsonData = await fetch(`http://127.0.0.1:5000/api/diputadodeldia`).then((res) => res.json());
+  const jsonData = await fetch(`${BACKEND_URI}/api/diputadodeldia`).then((res) => res.json());
   return jsonData;
 }
 
@@ -22,21 +25,36 @@ export default function Home() {
 
   const [ deputyInfo, setDeputyInfo ] = useState({});
   const [ loading, setLoading ] = useState(true);
+  const [ startDate, setStartDate ] = useState(new Date());
+  const [ error, setError ] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       getLastDeputyInfo().then((data) => {
         setDeputyInfo(data);
+        setStartDate(new Date(data.date));
         setLoading(false);
       });
     }, 1000);
   }, []);
 
-  const changeDeputy = (deputyId) => {
+  const changeDeputy = (date) => {
+    setStartDate(date);
+    const dateStr = date.toISOString().split('T')[0];
+
     setLoading(true);
     setTimeout(async () => {
-      const jsonData = await fetch(`http://127.0.0.1:5000/api/diputado/${deputyId}`).then((res) => res.json());
-      setDeputyInfo(jsonData);
+      fetch(`${BACKEND_URI}/api/diputado/date/${dateStr}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setDeputyInfo(res.json())
+            return;
+          }
+          setError(true);
+        })
+        .catch(() => {
+          setError(true)
+        });
       setLoading(false);
     }, 1000);
   }
@@ -60,31 +78,19 @@ export default function Home() {
           <li><a href='#votes'>Votaciones</a></li>
         </ul>
         <div className={styles.changeDeputy}>
-          { 
-            deputyInfo.json_index > 0 ?
-            <div>
-              <FontAwesomeIcon icon={faArrowAltCircleLeft} onClick={() => changeDeputy(deputyInfo.json_index - 1)} />
-            </div>
-            :
-            <div className={styles.disabledButton}>
-              <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-            </div>
-          }
-          { 
-            deputyInfo.json_index < deputyInfo.ljson_index ?
-            <div>
-              <FontAwesomeIcon icon={faArrowAltCircleRight} onClick={() => changeDeputy(deputyInfo.json_index + 1)} />
-            </div>
-            :
-            <div className={styles.disabledButton}>
-              <FontAwesomeIcon icon={faArrowAltCircleRight} />
-            </div>
-          }
+          <DatePicker 
+            className='datepicker'
+            dateFormat="dd/MM/yyyy"
+            selected={startDate}
+            onChange={changeDeputy}
+          />
         </div>
       </nav>
 
       {
         loading ? <div>Cargando...</div>
+        :
+        error ? <div>Hubo un error al cargar los datos</div>
         :
         <div className='articles'>
           <article id='top' className='wrapper style1'>
