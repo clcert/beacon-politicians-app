@@ -89,8 +89,9 @@ class Updater:
                     deputy = {**deputy, **pd.Parser().get_deputy(index)}
                     deputies['deputies'].append(deputy)
                     # Keeps only the last 7 deputies
-                    deputies = deputies[-7:]
-                except:
+                    deputies['deputies'] = deputies['deputies'][-7:]
+                except Exception as e:
+                    print(e)
                     print('Unexpected error getting deputy information.')
                 finally:
                     json.dump(deputies, outfile, ensure_ascii=False)

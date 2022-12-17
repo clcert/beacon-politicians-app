@@ -427,12 +427,31 @@ class Parser:
         return ans
 
     def get_deputy_expenses(self, profile):
+        print('Getting expenses for deputy: ' + profile['first_name'])
+
         operational_parser = OperationalExpensesParser(profile)
+        operational_expenses = operational_parser.get_deputy_expenses()
+        if operational_expenses == []:
+            print('(1/3) !! No operational expenses where found.')
+        else:
+            print('(1/3) Operational expenses obtained.')
+
         offices_parser = OfficesExpensesParser(profile)
+        offices_expenses = offices_parser.get_deputy_expenses()
+        if offices_expenses == []:
+            print('(2/3) !! No offices expenses where found.')
+        else:
+            print('(2/3) Offices expenses obtained.')
+
         staff_parser = StaffExpensesParser(profile)
+        staff_expenses = staff_parser.get_deputy_expenses()
+        if staff_expenses == []:
+            print('(3/3) !! No staff expenses where found.')
+        else:
+            print('(3/3) Staff expenses obtained.')
 
         return {
-            'operational': operational_parser.get_deputy_expenses(),
-            'offices': offices_parser.get_deputy_expenses(),
-            'staff': staff_parser.get_deputy_expenses(),
+            'operational': operational_expenses,
+            'offices': offices_expenses,
+            'staff': staff_expenses,
         }

@@ -39,6 +39,9 @@ class ExpensesParser:
       if month_index == 0:
         change_year = True
         year -= 1
+        if year < get_current_year() - 2:
+          return []
+
       month_index = (month_index - 1) % 12
       month = MONTHS[month_index]
       try:
