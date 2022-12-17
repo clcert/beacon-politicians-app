@@ -15,9 +15,17 @@ import Expenses from '../components/Expenses';
 import styles from '../styles/Home.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import logo from '../public/images/logo.png'
+import logo from '../public/images/logo.png';
 
-const BACKEND_URI = 'http://127.0.0.1:5000'
+const BACKEND_URI = 'http://127.0.0.1:5000';
+
+const CustomDatePicker = forwardRef(({ value, onClick }, ref) => (
+  <button className="custom-datepicker-button" onClick={onClick} ref={ref}>
+    <FontAwesomeIcon icon={faCalendarAlt} />
+    {value}
+  </button>
+));
+CustomDatePicker.displayName = 'CustomDatePicker';
 
 export default function Home() {
 
@@ -26,13 +34,6 @@ export default function Home() {
   const [ startDate, setStartDate ] = useState(new Date());
   const [ error, setError ] = useState(false);
   const [ availableDates, setAvailableDates ] = useState([]);
-
-  const CusomDatePicker = forwardRef(({ value, onClick }, ref) => (
-    <button className="custom-datepicker-button" onClick={onClick} ref={ref}>
-      <FontAwesomeIcon icon={faCalendarAlt} />
-      {value}
-    </button>
-  ));
 
   const isValidDate = (date) => {
     return availableDates.filter((d) => d.toISOString().split('T')[0] === date.toISOString().split('T')[0]).length > 0;
@@ -120,7 +121,7 @@ export default function Home() {
               dateFormat="dd/MM/yyyy"
               selected={startDate}
               onChange={changeDeputy}
-              customInput={<CusomDatePicker />}
+              customInput={<CustomDatePicker />}
               filterDate={isValidDate}
             />
           }
