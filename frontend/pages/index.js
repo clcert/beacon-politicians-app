@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -53,7 +53,7 @@ export default function Home() {
     return dataJson;
   }
 
-  const getDeputyInfo = (url) => {
+  const getDeputyInfo = useCallback((url) => {
     setLoading(true);
     setTimeout(async () => {
       const jsonData = await getData(url);
@@ -65,28 +65,32 @@ export default function Home() {
       }
       setLoading(false);
     }, 1000);
-  }
+  }, [setError, setDeputyInfo, setLoading]);
 
-  const getAvailableDates = () => {
+  const getAvailableDates = useCallback(() => {
     setTimeout(async () => {
       const jsonData = await getData(`${BACKEND_URI}/api/dates`);
       if (jsonData === null) {
         setError(true);
       } else {
         setError(false);
-        setAvailableDates(jsonData.dates.map((date) => new Date(date)));
+        const data = jsonData.dates.map((date) => new Date(date));
+        setAvailableDates(data);
+        setStartDate(data[data.length - 1])
       }
     }, 1000);
-  }
+  }, [setError, setAvailableDates]);
 
   useEffect(() => {
     getDeputyInfo(`${BACKEND_URI}/api/diputadodeldia`);
     getAvailableDates();
-  }, []);
+  }, [getDeputyInfo, getAvailableDates]);
 
   const changeDeputy = (date) => {
-    setStartDate(date);
-    const dateStr = date.toISOString().split('T')[0];
+    const offset = date.getTimezoneOffset()
+    const offsetDate = new Date(date.getTime() - (offset*60*1000))
+    setStartDate(offsetDate);
+    const dateStr = offsetDate.toISOString().split('T')[0];
     getDeputyInfo(`${BACKEND_URI}/api/diputado/date/${dateStr}`);
   }
 

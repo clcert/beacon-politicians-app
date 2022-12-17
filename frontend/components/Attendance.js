@@ -43,7 +43,7 @@ const Attendance = ({deputyInfo}) => {
 
     return () => myChart.destroy();
   
-  }, [])
+  }, [deputyInfo])
 
   return (
     <div className='container'>

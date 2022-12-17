@@ -34,22 +34,21 @@ const Expenses = ({deputyInfo}) => {
 
   const show_total = formatAmount(show_operational + show_offices + show_staff);
   const size = window.innerWidth < 600 ? 300 : 400;
-
-  const op_keys = [
-    'Telefonía',
-    'Traslación',
-    'Difusión',
-    'Actividades destinadas a la interacción con la comunidad',
-    'Correspondencia',
-    'Relacionados a Oficina Parlamentaria',
-    'Web y Almacenamiento',
-    'Otros',
-  ];
   
   const months_for_chart = getMonthsForHistoryChart(deputyInfo.expenses)
-  
 
   useEffect(() => {
+    const op_keys = [
+      'Telefonía',
+      'Traslación',
+      'Difusión',
+      'Actividades destinadas a la interacción con la comunidad',
+      'Correspondencia',
+      'Relacionados a Oficina Parlamentaria',
+      'Web y Almacenamiento',
+      'Otros',
+    ];
+
     const mainExpensesContainer = document.getElementById('mainExpensesChart').getContext('2d');
     const operationalExpensesContainer = document.getElementById('operationalExpensesChart').getContext('2d');
     const historyExpensesContainer = document.getElementById('historyExpensesChart').getContext('2d');
@@ -162,7 +161,14 @@ const Expenses = ({deputyInfo}) => {
 
     return () => charts.map(chart => chart.destroy());
   
-  }, [])
+  }, [
+    deputyInfo,
+    months_for_chart, 
+    show_operational, 
+    show_offices, 
+    show_staff, 
+    show_month
+  ]);
 
 
   return (
