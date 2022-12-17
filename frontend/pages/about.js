@@ -1,13 +1,20 @@
-import React from 'react'
-import Head from 'next/head'
-import Link from 'next/link'
+import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import styles from '../styles/About.module.css'
+import styles from '../styles/About.module.css';
+import homeStyles from '../styles/Home.module.css';
+
+import logo from '../public/images/logo.png'
 
 const about = () => {
   return (
     <div>
       <nav id='nav'>
+        <div className={homeStyles.logo}>
+          <Image src={logo} alt='Diputadx del Día' />
+        </div>
         <ul>
           <li><Link href='/'>Volver</Link></li>
         </ul>

@@ -1,27 +1,23 @@
-import { forwardRef, useEffect, useState } from 'react'
-import Head from 'next/head'
-import Link from 'next/link'
+import { forwardRef, useEffect, useState } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
-import DatePicker from 'react-datepicker'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import DatePicker from 'react-datepicker';
 
-import Attendance from '../components/Attendance'
-import Overview from '../components/Overview'
-import Votings from '../components/Votings'
+import Attendance from '../components/Attendance';
+import Overview from '../components/Overview';
+import Votings from '../components/Votings';
 
-import Expenses from '../components/Expenses'
-import styles from '../styles/Home.module.css'
-import 'react-datepicker/dist/react-datepicker.css'
+import Expenses from '../components/Expenses';
+import styles from '../styles/Home.module.css';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import logo from '../public/images/logo.png'
 
 const BACKEND_URI = 'http://127.0.0.1:5000'
-
-const CusomDatePicker = forwardRef(({ value, onClick }, ref) => (
-  <button className="custom-datepicker-button" onClick={onClick} ref={ref}>
-    <FontAwesomeIcon icon={faCalendarAlt} />
-    {value}
-  </button>
-));
 
 export default function Home() {
 
@@ -30,6 +26,13 @@ export default function Home() {
   const [ startDate, setStartDate ] = useState(new Date());
   const [ error, setError ] = useState(false);
   const [ availableDates, setAvailableDates ] = useState([]);
+
+  const CusomDatePicker = forwardRef(({ value, onClick }, ref) => (
+    <button className="custom-datepicker-button" onClick={onClick} ref={ref}>
+      <FontAwesomeIcon icon={faCalendarAlt} />
+      {value}
+    </button>
+  ));
 
   const isValidDate = (date) => {
     return availableDates.filter((d) => d.toISOString().split('T')[0] === date.toISOString().split('T')[0]).length > 0;
@@ -97,7 +100,7 @@ export default function Home() {
 
       <nav id='nav' className={styles.navBar}>
         <div className={styles.logo}>
-          <img src='images/logo.png' alt='Diputadx del Día'/>
+          <Image src={logo} alt='Diputadx del Día' />
         </div>
         <ul className={styles.navItems}>
           <li><a href='#top'>Principal</a></li>
