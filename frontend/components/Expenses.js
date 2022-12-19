@@ -28,9 +28,14 @@ const Expenses = ({deputyInfo}) => {
 
   const show_month = deputyInfo.expenses.operational[0].month
 
-  const show_operational = deputyInfo.expenses.operational[0].total;
-  const show_offices = deputyInfo.expenses.offices.filter(expenses => expenses.month == show_month)[0].total;
-  const show_staff = deputyInfo.expenses.staff.filter(expenses => expenses.month == show_month)[0].total;
+  const opExp_month = deputyInfo.expenses.operational.filter(expenses => expenses.month == show_month);
+  const show_operational = opExp_month.length > 0 ? opExp_month[0].total : 0;
+
+  const ofExp_month = deputyInfo.expenses.offices.filter(expenses => expenses.month == show_month);
+  const show_offices = ofExp_month.length > 0 ? ofExp_month[0].total : 0;
+  
+  const stExp_month = deputyInfo.expenses.staff.filter(expenses => expenses.month == show_month);
+  const show_staff = stExp_month.length > 0 ? stExp_month[0].total : 0;
 
   const show_total = formatAmount(show_operational + show_offices + show_staff);
   const size = window.innerWidth < 600 ? 300 : 400;
