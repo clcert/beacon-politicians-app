@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import styles from '../styles/home/Overview.module.css';
 
 const Overview = ({deputyInfo}) => {
@@ -26,7 +25,7 @@ const Overview = ({deputyInfo}) => {
         <div className='col-3 col-4-large col-12-medium'>
           <span className='image fit'>
             <a href={deputyInfo.photo} target='_blank' rel="noreferrer" className='image avatar'>
-              <Image src={deputyInfo.photo} alt={`Diputad${ deputyInfo.termination } ${ deputyInfo.first_name } ${ deputyInfo.first_surname }`} width={300} height={300} />
+              <img src={deputyInfo.photo} alt={`Diputad${ deputyInfo.termination } ${ deputyInfo.first_name } ${ deputyInfo.first_surname }`} />
             </a>
           </span>
         </div>
