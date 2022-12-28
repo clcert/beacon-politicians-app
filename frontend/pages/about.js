@@ -11,11 +11,11 @@ import logo from '../public/images/logo.png'
 const about = () => {
   return (
     <div>
-      <nav id='nav'>
-        <div className={homeStyles.logo}>
+      <nav id='nav' className='nav-bar'>
+        <div className='app-logo'>
           <Image src={logo} alt='Diputadx del Día' />
         </div>
-        <ul>
+        <ul className='nav-items'>
           <li><Link href='/'>Volver</Link></li>
         </ul>
       </nav>

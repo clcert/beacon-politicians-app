@@ -69,6 +69,47 @@ input, select, textarea {
 	appearance: none;
 }
 
+.app-logo {
+  height: inherit;
+  width: 20%;
+}
+
+.nav-bar {
+  display: flex;
+}
+
+
+.nav-items {
+  width: 60%;
+}
+
+.app-logo img {
+  padding: 10px 20px;
+  height: 100%;
+  width: auto !important;
+}
+
+@media screen and (max-width: 768px) {
+  .app-logo {
+		height: 50%;
+		width: auto;
+	}
+
+	.nav-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-items {
+    width: 100%;
+  }
+
+	#contact li {
+		max-width: 100%;
+    overflow-wrap: anywhere;
+	}
+}
+
 .react-datepicker * {
 	line-height: 1rem;
 }

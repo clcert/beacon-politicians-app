@@ -1,19 +1,9 @@
-.navBar {
-  display: flex;
-}
-
-.logo {
+.app-logo {
   width: 20%;
 }
 
 .navItems {
   width: 60%;
-}
-
-.logo img {
-  padding: 10px 20px;
-  height: 100%;
-  width: auto;
 }
 
 .changeDeputy {
@@ -39,20 +29,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navBar {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .logo {
-    height: 44px;
-    width: 100%;
-  }
-
-  .navItems {
-    width: 100%;
-  }
-
   .changeDeputy {
     display: none;
   }  

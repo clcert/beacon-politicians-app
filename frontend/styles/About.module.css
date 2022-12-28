@@ -1,5 +1,4 @@
 .aboutSection {
-  padding-top: 88px;
   margin: 4em;
 }
 
@@ -30,5 +29,6 @@
 @media screen and (max-width: 768px) {
   .aboutSection {
     margin: .5em;
+    padding-top: 88px;
   }
 }

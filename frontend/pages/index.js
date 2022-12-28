@@ -103,11 +103,11 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
       </Head>
 
-      <nav id='nav' className={styles.navBar}>
-        <div className={styles.logo}>
+      <nav id='nav' className='nav-bar'>
+        <div className='app-logo'>
           <Image src={logo} alt='Diputadx del Día' />
         </div>
-        <ul className={styles.navItems}>
+        <ul className='nav-items'>
           <li><a href='#top'>Principal</a></li>
           <li><a href='#attendance'>Asistencia</a></li>
           <li><a href='#expenses'>Gastos</a></li>
