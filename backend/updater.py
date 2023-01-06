@@ -168,25 +168,30 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # If print argument isn't given. Just update the json, with the last pulse.
-    if not args.print:
-        updater = Updater()
-        updater.run()
+    
+    if args.epoch:
+        date = datetime.datetime.fromtimestamp(args.epoch)
 
-    # Else, checks for the different arguments, and asks for the information according to the documentation.s
+    elif args.date:
+        date = datetime.datetime(
+            year=args.date.year, 
+            month=args.date.month, 
+            day=args.date.day
+        )
+
+        if args.time: # also include time
+            date = datetime.datetime(
+                year=date.year, 
+                month=date.month, 
+                day=date.day,
+                hour=args.time.hour, 
+                minute=args.time.minute
+            )
+
     else:
-        if args.epoch:
-            date = datetime.datetime.fromtimestamp(args.epoch)
+        date = None
 
-        elif args.date:
-            date = datetime.datetime(year=args.date.year, month=args.date.month, day=args.date.day)
-
-            if args.time:
-                date = datetime.datetime(year=date.year, month=date.month, day=date.day,
-                                         hour=args.time.hour, minute=args.time.minute)
-
-        else:
-            date = None
-            
-        updater = Updater()
-        updater.update(using_json=False, date_hour=date)
+    # If print argument isn't given. Just update the json, with the last pulse.
+    # Else, checks for the different arguments, and asks for the information according to the documentation.s
+    updater = Updater()
+    updater.update(using_json=(not args.print), date_hour=date)
