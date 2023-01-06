@@ -90,9 +90,10 @@ class Updater:
                     deputies['deputies'].append(deputy)
                     # Keeps only the last 7 deputies
                     deputies['deputies'] = deputies['deputies'][-7:]
+                    print(f'Done.\n\n\n')
                 except Exception as e:
                     print(e)
-                    print('Unexpected error getting deputy information.')
+                    print(f'Unexpected error getting deputy information.\n\n\n')
                 finally:
                     json.dump(deputies, outfile, ensure_ascii=False)
                     outfile.close()

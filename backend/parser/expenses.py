@@ -45,14 +45,15 @@ class ExpensesParser:
       month_index = (month_index - 1) % 12
       month = MONTHS[month_index]
       try:
-        # Change month in form
-        month_selector = Select(self.driver.find_element(By.ID, self.month_selector_id))
-        month_selector.select_by_visible_text(month) # Set corresponding month
-
         if change_year: # Only change year if necessary
           year_selector = Select(self.driver.find_element(By.ID, self.year_selector_id))
           year_selector.select_by_visible_text(str(year)) # Set corresponding year
           change_year = False
+          sleep(1) # wait for page to load
+
+        # Change month in form
+        month_selector = Select(self.driver.find_element(By.ID, self.month_selector_id))
+        month_selector.select_by_visible_text(month) # Set corresponding month
 
         sleep(1) # wait for page to load
 
