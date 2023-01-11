@@ -8,7 +8,7 @@ const Overview = ({deputyInfo}) => {
         <div className='col-12'>
           <header className='major'>
             <p className={styles.selectionInfo}>
-              Escogid{ deputyInfo.termination } el { deputyInfo.date } en base al Pulso&nbsp;
+              Escogid{ deputyInfo.termination } el { deputyInfo.date } (horario UTC) en base al Pulso&nbsp;
               <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/1/pulse/${ deputyInfo.record }`} target='_blank' rel="noreferrer">
                 #{ deputyInfo.record }
               </a>
