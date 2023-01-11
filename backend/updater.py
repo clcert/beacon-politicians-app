@@ -5,6 +5,7 @@ import parser.deputies as pd
 import random
 import requests
 import argparse
+import pytz
 
 
 class Updater:
@@ -67,6 +68,10 @@ class Updater:
             [year, month, day] = str(datetime.date.today()).split('-')
             date_hour = datetime.datetime(year=int(year), month=int(month), day=int(day), hour=0, minute=0)
 
+        # Convert to UTC time
+        local_dt = pytz.timezone('America/Santiago').localize(date_hour, is_dst=None)
+        date_hour = local_dt.astimezone(pytz.utc)
+
         index, record = self.get_index(date_hour)
         if using_json:
             with open(self.json_path, 'r', encoding='utf-8') as infile:
@@ -101,7 +106,7 @@ class Updater:
             parser = pd.Parser()
             deputy = parser.get_profile(parser.idfindex(index))
             print('Record: ', record)
-            print('Fecha: ', date_hour)
+            print('Fecha: ', date_hour.strftime("%Y-%m-%d %H:%M:%S"), 'UTC')
             print('Indice obtenido: ', index)
             print('Diputado: ', deputy['first_name'], deputy['first_surname'])
 
