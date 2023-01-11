@@ -73,6 +73,13 @@ class Updater:
         date_hour = local_dt.astimezone(pytz.utc)
 
         index, record = self.get_index(date_hour)
+
+        print('---------------------')
+        print('Record:', record)
+        print('Pulse Date:', date_hour.strftime("%Y-%m-%d %H:%M:%S"), 'UTC')
+        print('Deputy Index:', index)
+        print('---------------------')
+
         if using_json:
             with open(self.json_path, 'r', encoding='utf-8') as infile:
                 try:
@@ -105,10 +112,7 @@ class Updater:
         else:
             parser = pd.Parser()
             deputy = parser.get_profile(parser.idfindex(index))
-            print('Record: ', record)
-            print('Fecha: ', date_hour.strftime("%Y-%m-%d %H:%M:%S"), 'UTC')
-            print('Indice obtenido: ', index)
-            print('Diputado: ', deputy['first_name'], deputy['first_surname'])
+            print('Deputy: ', deputy['first_name'], deputy['first_surname'])
 
         return
 
