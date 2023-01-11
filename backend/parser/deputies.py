@@ -180,6 +180,10 @@ class Parser:
             response = req.get(session_url)
             soup = BeautifulSoup(response.content, 'xml')
 
+            # If there is no register of attendance we skip this session
+            if not soup.find('Asistencia'):
+                continue
+
             # Only check attendance of the deputy we are looking for
             attendance = list(filter(
                 lambda attendance: int(attendance.find('Id').get_text()) == deputy_id,
