@@ -60,10 +60,6 @@ class Updater:
         :param; Boolean used for testing, must be True for update in json and false if testing.
         :return:
         """
-        json_index = 0
-        if self.get_list() != None:
-            json_index = len(self.get_list())
-
         if not date_hour:
             [year, month, day] = str(datetime.date.today()).split('-')
             date_hour = datetime.datetime(year=int(year), month=int(month), day=int(day), hour=0, minute=0)
@@ -94,14 +90,11 @@ class Updater:
                     date=date_hour.strftime("%Y-%m-%d %H:%M:%S"),
                     index=index,
                     record=record,
-                    json_index=json_index
                 )
                 # If something goes wrong, the json file is not modified.
                 try:
                     deputy = {**deputy, **pd.Parser().get_deputy(index)}
-                    deputies['deputies'].append(deputy)
-                    # Keeps only the last 7 deputies
-                    deputies['deputies'] = deputies['deputies'][-7:]
+                    deputies['deputies'] = self.save_or_update(deputies['deputies'], deputy)
                     print(f'Done.\n\n\n')
                 except Exception as e:
                     print(e)
@@ -115,6 +108,22 @@ class Updater:
             print('Deputy: ', deputy['first_name'], deputy['first_surname'])
 
         return
+
+    def save_or_update(self, deputies, deputy_data):
+        """
+        Saves or updates the deputy data in the deputies list.
+        :param deputies: List of deputies.
+        :param deputy_data: Deputy data.
+        :return: The updated list of the last 7 deputies.
+        """
+        filtered_deputies = list(
+            filter(
+                lambda deputy: deputy['index'] != deputy_data['index'],
+                deputies,
+            )
+        )
+        filtered_deputies.append(deputy_data)
+        return filtered_deputies[-7:]
 
     def run(self):
         """

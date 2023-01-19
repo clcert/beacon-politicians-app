@@ -15,26 +15,12 @@ CORS(app)
 
 @app.route('/api/diputadodeldia')
 def main_page():
-    last = len(Updater().get_list()) - 1
-    if last == -1:
+    deputies_list = Updater().get_list()
+    if len(deputies_list) == 0:
         abort(404)
         return
-    d = Deputy(last)
-    current = d.info
-    current['ljson_index'] = last
-    return jsonify(current)
-
-
-@app.route('/api/diputado/index/<int:json_index>')
-def indexRecord(json_index):
-    last = len(Updater().get_list()) - 1
-    if json_index < 0 or json_index > last:
-        abort(404)
-        return
-    d = Deputy(json_index)
-    current = d.info
-    current['ljson_index'] = last
-    return jsonify(current)
+    last_deputy = Updater().get_list()[0]
+    return jsonify(last_deputy)
 
 
 @app.route('/api/diputado/date/<string:selection_date>')
@@ -44,9 +30,8 @@ def dateRecord(selection_date):
     if len(deputy) == 0:
         abort(404)
         return
-    d = Deputy(int(deputy[0]['json_index']))
+    d = Deputy(int(deputy[0]['index']))
     current = d.info
-    current['ljson_index'] = len(deputies_list) - 1
     return jsonify(current)
 
 

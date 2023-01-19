@@ -1,1 +1,1799 @@
-{"deputies": [{"date": "2023-01-05 03:00:00", "index": 23, "record": 170219, "json_index": 0, "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1113", "profession": "Sin Información", "district": "Nº 19", "districtregion": "Región de Ñuble", "periods": ["2022-2026"], "lastperiod": "2022-2026", "first_name": "Marta", "second_name": "", "first_surname": "Bravo", "second_surname": "Salinas", "party": "Unión Demócrata Independiente", "party_alias": "UDI", "birthday": "25/02/1976", "sex": "0", "termination": "a", "treatment": "Sra", "deputy_id": 1113, "attendance": {"attended": 117, "justified": 0, "unjustified": 0, "total": 118, "percentage": 99.0}, "voting": [{"vote_option": "Afirmativo", "date": "2023-01-10", "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación", "description": "Boletín N° 14879-04", "voting_id": 40121}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n", "description": "Otros", "voting_id": 40104}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-Reclamación de la declaración de inadmisibilidad de la moción de las diputadas señoras Romero, doña Natalia, Bravo, doña Marta, y Pérez, doña Marlene, y de los diputados señores Bórquez; Cornejo; Labbé y Lilayu, que &quot;Establece la obligación de contar con salas cuna en establecimientos de educación superior&quot;.\n", "description": "Otros", "voting_id": 40102}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40099}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40098}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40097}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40076}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40075}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40074}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40073}], "expenses": {"operational": [{"Relacionados a Oficina Parlamentaria": 883652, "Web y Almacenamiento": 0, "Otros": 1116988, "Telefonía": 17792, "Traslación": 1663347, "Difusión": 1231065, "Actividades destinadas a la interacción con la comunidad": 600000, "Correspondencia": 0, "total": 5512844, "month": "octubre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 953295, "Web y Almacenamiento": 0, "Otros": 1833930, "Telefonía": 17792, "Traslación": 1606239, "Difusión": 857762, "Actividades destinadas a la interacción con la comunidad": 356910, "Correspondencia": 6470, "total": 5632398, "month": "septiembre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1262941, "Web y Almacenamiento": 0, "Otros": 1657878, "Telefonía": 17792, "Traslación": 1683355, "Difusión": 720000, "Actividades destinadas a la interacción con la comunidad": 383500, "Correspondencia": 802, "total": 5726268, "month": "agosto", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 861196, "Web y Almacenamiento": 0, "Otros": 1785761, "Telefonía": 17792, "Traslación": 1622954, "Difusión": 1119900, "Actividades destinadas a la interacción con la comunidad": 239369, "Correspondencia": 7277, "total": 5654249, "month": "julio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 824802, "Web y Almacenamiento": 0, "Otros": 1500000, "Telefonía": 17792, "Traslación": 1323311, "Difusión": 620000, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 784, "total": 4286689, "month": "junio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1045464, "Web y Almacenamiento": 0, "Otros": 540790, "Telefonía": 17792, "Traslación": 1253746, "Difusión": 1127357, "Actividades destinadas a la interacción con la comunidad": 36000, "Correspondencia": 12527, "total": 4033676, "month": "mayo", "year": 2022}], "offices": [{"num_oficinas": 1, "total": 872308, "month": "noviembre", "year": 2022}, {"num_oficinas": 1, "total": 863652, "month": "octubre", "year": 2022}, {"num_oficinas": 1, "total": 854003, "month": "septiembre", "year": 2022}, {"num_oficinas": 1, "total": 841751, "month": "agosto", "year": 2022}, {"num_oficinas": 1, "total": 834453, "month": "julio", "year": 2022}, {"num_oficinas": 1, "total": 824802, "month": "junio", "year": 2022}], "staff": [{"num_personal": 9, "total": 8190000, "month": "noviembre", "year": 2022}, {"num_personal": 7, "total": 7590000, "month": "octubre", "year": 2022}, {"num_personal": 7, "total": 7590000, "month": "septiembre", "year": 2022}, {"num_personal": 7, "total": 7540000, "month": "agosto", "year": 2022}, {"num_personal": 7, "total": 7540000, "month": "julio", "year": 2022}, {"num_personal": 5, "total": 6540000, "month": "junio", "year": 2022}]}}, {"date": "2023-01-06 03:00:00", "index": 54, "record": 171659, "json_index": 1, "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1034", "profession": "Sin Información", "district": "Nº 20", "districtregion": "Región del Bío Bío", "periods": ["2018-2022", "2022-2026"], "lastperiod": "2022-2026", "first_name": "Félix", "second_name": "", "first_surname": "González", "second_surname": "Gatica", "party": "Partido Ecologista Verde", "party_alias": "PEV", "birthday": "26/05/1972", "sex": "1", "termination": "o", "treatment": "Sr", "deputy_id": 1034, "attendance": {"attended": 100, "justified": 17, "unjustified": 0, "total": 118, "percentage": 99.0}, "voting": [{"vote_option": "Afirmativo", "date": "2023-01-10", "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación", "description": "Boletín N° 14879-04", "voting_id": 40121}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n", "description": "Otros", "voting_id": 40104}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-Reclamación de la declaración de inadmisibilidad de la moción de las diputadas señoras Romero, doña Natalia, Bravo, doña Marta, y Pérez, doña Marlene, y de los diputados señores Bórquez; Cornejo; Labbé y Lilayu, que &quot;Establece la obligación de contar con salas cuna en establecimientos de educación superior&quot;.\n", "description": "Otros", "voting_id": 40102}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40099}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40098}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40097}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40076}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40075}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40074}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40073}], "expenses": {"operational": [{"Relacionados a Oficina Parlamentaria": 1303856, "Web y Almacenamiento": 0, "Otros": 870811, "Telefonía": 115981, "Traslación": 2098934, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 4389582, "month": "octubre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1458630, "Web y Almacenamiento": 0, "Otros": 869341, "Telefonía": 115982, "Traslación": 1744568, "Difusión": 7866, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 4196387, "month": "septiembre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1248400, "Web y Almacenamiento": 0, "Otros": 789874, "Telefonía": 115982, "Traslación": 1746595, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 3900851, "month": "agosto", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1231200, "Web y Almacenamiento": 0, "Otros": 780679, "Telefonía": 115982, "Traslación": 1832107, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 3959968, "month": "julio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 2255810, "Web y Almacenamiento": 0, "Otros": 801622, "Telefonía": 115982, "Traslación": 1593389, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 4766803, "month": "junio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1200000, "Web y Almacenamiento": 0, "Otros": 801612, "Telefonía": 119116, "Traslación": 530194, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 2650922, "month": "mayo", "year": 2022}], "offices": [{"num_oficinas": 1, "total": 1259518, "month": "noviembre", "year": 2022}, {"num_oficinas": 1, "total": 1259518, "month": "octubre", "year": 2022}, {"num_oficinas": 1, "total": 1259518, "month": "septiembre", "year": 2022}, {"num_oficinas": 1, "total": 1231200, "month": "agosto", "year": 2022}, {"num_oficinas": 1, "total": 1231200, "month": "julio", "year": 2022}, {"num_oficinas": 1, "total": 1231200, "month": "junio", "year": 2022}], "staff": [{"num_personal": 7, "total": 8249746, "month": "enero", "year": 2023}, {"num_personal": 5, "total": 7103333, "month": "noviembre", "year": 2022}, {"num_personal": 4, "total": 6040000, "month": "octubre", "year": 2022}, {"num_personal": 6, "total": 7366667, "month": "septiembre", "year": 2022}, {"num_personal": 6, "total": 7880000, "month": "agosto", "year": 2022}, {"num_personal": 6, "total": 7640000, "month": "julio", "year": 2022}]}}, {"date": "2023-01-07 03:00:00", "index": 38, "record": 173099, "json_index": 2, "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1119", "profession": "Sin Información", "district": "Nº 19", "districtregion": "Región de Ñuble", "periods": ["2022-2026"], "lastperiod": "2022-2026", "first_name": "Sara", "second_name": "", "first_surname": "Concha", "second_surname": "Smith", "party": "Partido Conservador Cristiano", "party_alias": "PCC", "birthday": "09/09/1995", "sex": "0", "termination": "a", "treatment": "Sra", "deputy_id": 1119, "attendance": {"attended": 114, "justified": 3, "unjustified": 0, "total": 118, "percentage": 99.0}, "voting": [{"vote_option": "Afirmativo", "date": "2023-01-10", "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación", "description": "Boletín N° 14879-04", "voting_id": 40121}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n", "description": "Otros", "voting_id": 40104}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-Reclamación de la declaración de inadmisibilidad de la moción de las diputadas señoras Romero, doña Natalia, Bravo, doña Marta, y Pérez, doña Marlene, y de los diputados señores Bórquez; Cornejo; Labbé y Lilayu, que &quot;Establece la obligación de contar con salas cuna en establecimientos de educación superior&quot;.\n", "description": "Otros", "voting_id": 40102}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40099}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40098}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40097}, {"vote_option": "En Contra", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40076}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40075}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40074}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40073}], "expenses": {"operational": [{"Relacionados a Oficina Parlamentaria": 1097992, "Web y Almacenamiento": 0, "Otros": 1673867, "Telefonía": 32034, "Traslación": 1955864, "Difusión": 178940, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 4938697, "month": "octubre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1004086, "Web y Almacenamiento": 0, "Otros": 2997814, "Telefonía": 32034, "Traslación": 1778979, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5812913, "month": "septiembre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1023706, "Web y Almacenamiento": 0, "Otros": 2907308, "Telefonía": 32034, "Traslación": 1849865, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5812913, "month": "agosto", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 956150, "Web y Almacenamiento": 0, "Otros": 2774501, "Telefonía": 32034, "Traslación": 2024444, "Difusión": 24990, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 794, "total": 5812913, "month": "julio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1611516, "Web y Almacenamiento": 0, "Otros": 2895249, "Telefonía": 32034, "Traslación": 1176462, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 15878, "total": 5731139, "month": "junio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 985308, "Web y Almacenamiento": 0, "Otros": 2857794, "Telefonía": 32034, "Traslación": 1905612, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 32165, "total": 5812913, "month": "mayo", "year": 2022}], "offices": [{"num_oficinas": 1, "total": 720000, "month": "noviembre", "year": 2022}, {"num_oficinas": 1, "total": 720000, "month": "octubre", "year": 2022}, {"num_oficinas": 1, "total": 720000, "month": "septiembre", "year": 2022}, {"num_oficinas": 1, "total": 720000, "month": "agosto", "year": 2022}, {"num_oficinas": 1, "total": 720000, "month": "julio", "year": 2022}, {"num_oficinas": 1, "total": 720000, "month": "junio", "year": 2022}], "staff": [{"num_personal": 6, "total": 6771286, "month": "noviembre", "year": 2022}, {"num_personal": 6, "total": 6771286, "month": "octubre", "year": 2022}, {"num_personal": 9, "total": 9732572, "month": "septiembre", "year": 2022}, {"num_personal": 9, "total": 9732572, "month": "agosto", "year": 2022}, {"num_personal": 9, "total": 9732572, "month": "julio", "year": 2022}, {"num_personal": 9, "total": 9732572, "month": "junio", "year": 2022}]}}, {"date": "2023-01-08 03:00:00", "index": 101, "record": 174539, "json_index": 3, "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1057", "profession": "Sin Información", "district": "Nº 9", "districtregion": "Región Metropolitana de Santiago", "periods": ["2018-2022", "2022-2026"], "lastperiod": "2022-2026", "first_name": "Erika", "second_name": "", "first_surname": "Olivera", "second_surname": "De La Fuente", "party": "Independientes", "party_alias": "IND", "birthday": "04/01/1976", "sex": "0", "termination": "a", "treatment": "Sra", "deputy_id": 1057, "attendance": {"attended": 113, "justified": 1, "unjustified": 3, "total": 118, "percentage": 97.0}, "voting": [{"vote_option": "Afirmativo", "date": "2023-01-10", "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación", "description": "Boletín N° 14879-04", "voting_id": 40121}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n", "description": "Otros", "voting_id": 40104}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-Reclamación de la declaración de inadmisibilidad de la moción de las diputadas señoras Romero, doña Natalia, Bravo, doña Marta, y Pérez, doña Marlene, y de los diputados señores Bórquez; Cornejo; Labbé y Lilayu, que &quot;Establece la obligación de contar con salas cuna en establecimientos de educación superior&quot;.\n", "description": "Otros", "voting_id": 40102}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40099}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40098}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40097}, {"vote_option": "Afirmativo", "date": "2022-12-21", "name": "Aprueba las enmiendas al artículo 8 del Estatuto de Roma de la Corte Penal Internacional, adoptadas por la asamblea de Estados Partes, el 14 de diciembre de 2017", "description": "Boletín N° 15329-10", "voting_id": 39980}, {"vote_option": "Afirmativo", "date": "2022-12-20", "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN ESPECIAL INVESTIGADORA ENCARGADA DE REUNIR ANTECEDENTES SOBRES LOS HECHOS OCURRIDOS EN DEPENDENCIAS DE LA EMPRESA KAYSER (CEI 12), CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n\n- BORIS BARRERA MORENO (PC)\n- TOMÁS HIRSCH GOLDSHMIDT (PC)\n- CLARA SAGARDIA CABEZAS (FA)\n- ANDRÉS GIORDANO SALAZAR (FA)\n- ALBERTO UNDURRAGA VICUÑA (DC)\n- MAURO GONZÁLEZ VILLARROEL (RN)\n- JORGE DURÁN ESPINOZA (RN)\n- JORGE ALESSANDRI VERGARA (UDI)\n- JUAN ANTONIO COLOMA ÁLAMOS (UDI)\n- MARCO ILABACA CERDA (PS)\n- CRISTIÁN TAPIA RAMOS (PPD)\n- JOSÉ MEZA PEREIRA (PREP)\n- YOVANA AHUMADA PALMA (PDG)\n", "description": "Otros", "voting_id": 39952}, {"vote_option": "Afirmativo", "date": "2022-12-19", "name": "Aprueba el Acuerdo entre el Gobierno de la República de Chile y el Gobierno de los Estados Unidos de América para la Investigación, Desarrollo, Prueba y Evaluación de Proyectos en Materia de Defensa, suscrito en Puerto España, Trinidad y Tobago, el 11 de octubre de 2016", "description": "Boletín N° 12041-10", "voting_id": 39947}, {"vote_option": "Afirmativo", "date": "2022-12-14", "name": "Establece la obligación de instalar mudadores en baños de hombres y mujeres en los recintos de uso público", "description": "Boletín N° 15119-34", "voting_id": 39906}], "expenses": {"operational": [{"Relacionados a Oficina Parlamentaria": 0, "Web y Almacenamiento": 0, "Otros": 2757045, "Telefonía": 227280, "Traslación": 1437160, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 314790, "Correspondencia": 0, "total": 4736275, "month": "octubre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 0, "Web y Almacenamiento": 0, "Otros": 2721164, "Telefonía": 157290, "Traslación": 1381115, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 476706, "Correspondencia": 0, "total": 4736275, "month": "septiembre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 0, "Web y Almacenamiento": 0, "Otros": 2631164, "Telefonía": 157435, "Traslación": 1571846, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 744205, "Correspondencia": 0, "total": 5104650, "month": "agosto", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 0, "Web y Almacenamiento": 0, "Otros": 2631164, "Telefonía": 157434, "Traslación": 1379302, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 800000, "Correspondencia": 0, "total": 4967900, "month": "julio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 27015, "Web y Almacenamiento": 0, "Otros": 2631164, "Telefonía": 157289, "Traslación": 1458094, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 800000, "Correspondencia": 0, "total": 5073562, "month": "junio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 10647, "Web y Almacenamiento": 0, "Otros": 2501705, "Telefonía": 157289, "Traslación": 1368340, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 800000, "Correspondencia": 0, "total": 4837981, "month": "mayo", "year": 2022}], "offices": [], "staff": [{"num_personal": 7, "total": 9357632, "month": "enero", "year": 2023}, {"num_personal": 7, "total": 3119210, "month": "marzo", "year": 2022}, {"num_personal": 7, "total": 9357632, "month": "febrero", "year": 2022}, {"num_personal": 7, "total": 9357632, "month": "enero", "year": 2022}, {"num_personal": 7, "total": 8963248, "month": "diciembre", "year": 2021}, {"num_personal": 7, "total": 8963248, "month": "noviembre", "year": 2021}]}}, {"date": "2023-01-09 03:00:00", "index": 43, "record": 175979, "json_index": 4, "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1124", "profession": "Sin Información", "district": "Nº 7", "districtregion": "Región de Valparaíso", "periods": ["2022-2026"], "lastperiod": "2022-2026", "first_name": "Tomás", "second_name": "", "first_surname": "De Rementería", "second_surname": "Venegas", "party": "Independientes", "party_alias": "IND", "birthday": "17/03/1987", "sex": "1", "termination": "o", "treatment": "Sr", "deputy_id": 1124, "attendance": {"attended": 107, "justified": 0, "unjustified": 10, "total": 118, "percentage": 91.0}, "voting": [{"vote_option": "Afirmativo", "date": "2023-01-10", "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación", "description": "Boletín N° 14879-04", "voting_id": 40121}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40099}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40098}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40097}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40076}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40075}, {"vote_option": "Abstención", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40074}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40073}, {"vote_option": "Afirmativo", "date": "2022-12-21", "name": "Aprueba las enmiendas al artículo 8 del Estatuto de Roma de la Corte Penal Internacional, adoptadas por la asamblea de Estados Partes, el 14 de diciembre de 2017", "description": "Boletín N° 15329-10", "voting_id": 39980}, {"vote_option": "Afirmativo", "date": "2022-12-20", "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN ESPECIAL INVESTIGADORA ENCARGADA DE REUNIR ANTECEDENTES SOBRES LOS HECHOS OCURRIDOS EN DEPENDENCIAS DE LA EMPRESA KAYSER (CEI 12), CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n\n- BORIS BARRERA MORENO (PC)\n- TOMÁS HIRSCH GOLDSHMIDT (PC)\n- CLARA SAGARDIA CABEZAS (FA)\n- ANDRÉS GIORDANO SALAZAR (FA)\n- ALBERTO UNDURRAGA VICUÑA (DC)\n- MAURO GONZÁLEZ VILLARROEL (RN)\n- JORGE DURÁN ESPINOZA (RN)\n- JORGE ALESSANDRI VERGARA (UDI)\n- JUAN ANTONIO COLOMA ÁLAMOS (UDI)\n- MARCO ILABACA CERDA (PS)\n- CRISTIÁN TAPIA RAMOS (PPD)\n- JOSÉ MEZA PEREIRA (PREP)\n- YOVANA AHUMADA PALMA (PDG)\n", "description": "Otros", "voting_id": 39952}], "expenses": {"operational": [{"Relacionados a Oficina Parlamentaria": 808636, "Web y Almacenamiento": 0, "Otros": 1923023, "Telefonía": 105324, "Traslación": 1176766, "Difusión": 923440, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 9721, "total": 4946910, "month": "octubre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 833863, "Web y Almacenamiento": 0, "Otros": 1823023, "Telefonía": 105144, "Traslación": 1406973, "Difusión": 923440, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5092443, "month": "septiembre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 425436, "Web y Almacenamiento": 0, "Otros": 1820293, "Telefonía": 105521, "Traslación": 2037724, "Difusión": 923440, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5312414, "month": "agosto", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 738818, "Web y Almacenamiento": 0, "Otros": 550844, "Telefonía": 105505, "Traslación": 1639910, "Difusión": 804440, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 3839517, "month": "julio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 916056, "Web y Almacenamiento": 0, "Otros": 550844, "Telefonía": 105146, "Traslación": 1390000, "Difusión": 804440, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 3766486, "month": "junio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 265439, "Web y Almacenamiento": 0, "Otros": 523817, "Telefonía": 347629, "Traslación": 1231432, "Difusión": 1101940, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 3470257, "month": "mayo", "year": 2022}], "offices": [{"num_oficinas": 2, "total": 678636, "month": "noviembre", "year": 2022}, {"num_oficinas": 2, "total": 678636, "month": "octubre", "year": 2022}, {"num_oficinas": 2, "total": 678636, "month": "septiembre", "year": 2022}, {"num_oficinas": 1, "total": 400000, "month": "agosto", "year": 2022}, {"num_oficinas": 1, "total": 400000, "month": "julio", "year": 2022}, {"num_oficinas": 1, "total": 306667, "month": "junio", "year": 2022}], "staff": [{"num_personal": 11, "total": 7641960, "month": "noviembre", "year": 2022}, {"num_personal": 10, "total": 7641960, "month": "octubre", "year": 2022}, {"num_personal": 10, "total": 7641960, "month": "septiembre", "year": 2022}, {"num_personal": 10, "total": 7593960, "month": "agosto", "year": 2022}, {"num_personal": 9, "total": 6499000, "month": "julio", "year": 2022}, {"num_personal": 9, "total": 6499000, "month": "junio", "year": 2022}]}}, {"date": "2023-01-10 03:00:00", "index": 81, "record": 177419, "json_index": 5, "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1145", "profession": "Sin Información", "district": "Nº 21", "districtregion": "Región del Bío Bío", "periods": ["2022-2026"], "lastperiod": "2022-2026", "first_name": "Karen", "second_name": "", "first_surname": "Medina", "second_surname": "Vásquez", "party": "Partido de la Gente", "party_alias": "PDG", "birthday": "10/05/1982", "sex": "0", "termination": "a", "treatment": "Sra", "deputy_id": 1145, "attendance": {"attended": 114, "justified": 3, "unjustified": 1, "total": 118, "percentage": 99.0}, "voting": [{"vote_option": "Afirmativo", "date": "2023-01-10", "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación", "description": "Boletín N° 14879-04", "voting_id": 40121}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n", "description": "Otros", "voting_id": 40104}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-Reclamación de la declaración de inadmisibilidad de la moción de las diputadas señoras Romero, doña Natalia, Bravo, doña Marta, y Pérez, doña Marlene, y de los diputados señores Bórquez; Cornejo; Labbé y Lilayu, que &quot;Establece la obligación de contar con salas cuna en establecimientos de educación superior&quot;.\n", "description": "Otros", "voting_id": 40102}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40099}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40098}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40097}, {"vote_option": "Abstención", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40076}, {"vote_option": "Abstención", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40075}, {"vote_option": "En Contra", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40074}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40073}], "expenses": {"operational": [{"Relacionados a Oficina Parlamentaria": 2128821, "Web y Almacenamiento": 0, "Otros": 1331734, "Telefonía": 145078, "Traslación": 1482764, "Difusión": 208250, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5296647, "month": "octubre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 2177544, "Web y Almacenamiento": 0, "Otros": 1387620, "Telefonía": 145078, "Traslación": 1758262, "Difusión": 74970, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5543474, "month": "septiembre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 2337452, "Web y Almacenamiento": 0, "Otros": 1533875, "Telefonía": 146727, "Traslación": 1762671, "Difusión": 83300, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5864025, "month": "agosto", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 2109376, "Web y Almacenamiento": 0, "Otros": 1508745, "Telefonía": 143763, "Traslación": 1386629, "Difusión": 104720, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5253233, "month": "julio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 2067462, "Web y Almacenamiento": 0, "Otros": 1711428, "Telefonía": 121265, "Traslación": 1148559, "Difusión": 536690, "Actividades destinadas a la interacción con la comunidad": 135000, "Correspondencia": 784, "total": 5721188, "month": "junio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1879779, "Web y Almacenamiento": 0, "Otros": 1618554, "Telefonía": 121265, "Traslación": 1685051, "Difusión": 0, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 74709, "total": 5379358, "month": "mayo", "year": 2022}], "offices": [{"num_oficinas": 3, "total": 1660000, "month": "noviembre", "year": 2022}, {"num_oficinas": 3, "total": 1660000, "month": "octubre", "year": 2022}, {"num_oficinas": 3, "total": 1660000, "month": "septiembre", "year": 2022}, {"num_oficinas": 3, "total": 1660000, "month": "agosto", "year": 2022}, {"num_oficinas": 3, "total": 1660000, "month": "julio", "year": 2022}, {"num_oficinas": 3, "total": 1660000, "month": "junio", "year": 2022}], "staff": [{"num_personal": 7, "total": 8140000, "month": "noviembre", "year": 2022}, {"num_personal": 7, "total": 8140000, "month": "octubre", "year": 2022}, {"num_personal": 7, "total": 8140000, "month": "septiembre", "year": 2022}, {"num_personal": 7, "total": 8140000, "month": "agosto", "year": 2022}, {"num_personal": 7, "total": 8140000, "month": "julio", "year": 2022}, {"num_personal": 7, "total": 8140000, "month": "junio", "year": 2022}]}}, {"date": "2023-01-11 03:00:00", "index": 19, "record": 178859, "json_index": 6, "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1110", "profession": "Sin Información", "district": "Nº 28", "districtregion": "Región de Magallanes y de la Antártica Chilena", "periods": ["2022-2026"], "lastperiod": "2022-2026", "first_name": "Carlos", "second_name": "", "first_surname": "Bianchi", "second_surname": "Chelech", "party": "Independientes", "party_alias": "IND", "birthday": "04/11/1960", "sex": "1", "termination": "o", "treatment": "Sr", "deputy_id": 1110, "attendance": {"attended": 117, "justified": 1, "unjustified": 0, "total": 118, "percentage": 100.0}, "voting": [{"vote_option": "Afirmativo", "date": "2023-01-10", "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación", "description": "Boletín N° 14879-04", "voting_id": 40121}, {"vote_option": "Afirmativo", "date": "2023-01-09", "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n", "description": "Otros", "voting_id": 40104}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40099}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40098}, {"vote_option": "Afirmativo", "date": "2023-01-05", "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala", "description": "Boletín N° 14943-11", "voting_id": 40097}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40076}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Regula a las aplicaciones de transporte remunerado de pasajeros y los servicios que a través de ellas se presten", "description": "Boletín N° 11934-15", "voting_id": 40075}, {"vote_option": "Afirmativo", "date": "2023-01-04", "name": "Fortalece el vínculo entre el Hospital Clínico de la Universidad de Chile `Dr. José Joaquín Aguirre´ y el Sistema Nacional de Servicios de Salud", "description": "Boletín N° 15486-11", "voting_id": 40073}, {"vote_option": "Afirmativo", "date": "2022-12-21", "name": "Aprueba las enmiendas al artículo 8 del Estatuto de Roma de la Corte Penal Internacional, adoptadas por la asamblea de Estados Partes, el 14 de diciembre de 2017", "description": "Boletín N° 15329-10", "voting_id": 39980}, {"vote_option": "Afirmativo", "date": "2022-12-14", "name": "Establece la obligación de instalar mudadores en baños de hombres y mujeres en los recintos de uso público", "description": "Boletín N° 15119-34", "voting_id": 39906}], "expenses": {"operational": [{"Relacionados a Oficina Parlamentaria": 1171735, "Web y Almacenamiento": 0, "Otros": 1885020, "Telefonía": 67075, "Traslación": 1712231, "Difusión": 741808, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 90311, "total": 5668180, "month": "octubre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1154563, "Web y Almacenamiento": 0, "Otros": 2194088, "Telefonía": 67190, "Traslación": 1526629, "Difusión": 725710, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5668180, "month": "septiembre", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1152660, "Web y Almacenamiento": 0, "Otros": 2236888, "Telefonía": 66892, "Traslación": 1587290, "Difusión": 570000, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5613730, "month": "agosto", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1167386, "Web y Almacenamiento": 0, "Otros": 2094088, "Telefonía": 66928, "Traslación": 1765506, "Difusión": 350000, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 0, "total": 5443908, "month": "julio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1175551, "Web y Almacenamiento": 0, "Otros": 1694080, "Telefonía (**monto ajustado por nota de crédito recibida)": 66701, "Traslación": 2131057, "Difusión": 550000, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 784, "total": 5618173, "month": "junio", "year": 2022}, {"Relacionados a Oficina Parlamentaria": 1145555, "Web y Almacenamiento": 0, "Otros": 1713088, "Telefonía (**monto ajustado por nota de crédito recibida)": 75215, "Traslación": 2129165, "Difusión": 458611, "Actividades destinadas a la interacción con la comunidad": 0, "Correspondencia": 13214, "total": 5534848, "month": "mayo", "year": 2022}], "offices": [{"num_oficinas": 1, "total": 1040000, "month": "noviembre", "year": 2022}, {"num_oficinas": 1, "total": 1040000, "month": "octubre", "year": 2022}, {"num_oficinas": 1, "total": 1040000, "month": "septiembre", "year": 2022}, {"num_oficinas": 1, "total": 1040000, "month": "agosto", "year": 2022}, {"num_oficinas": 1, "total": 1040000, "month": "julio", "year": 2022}, {"num_oficinas": 1, "total": 1040000, "month": "junio", "year": 2022}], "staff": [{"num_personal": 5, "total": 9000000, "month": "noviembre", "year": 2022}, {"num_personal": 5, "total": 9000000, "month": "octubre", "year": 2022}, {"num_personal": 5, "total": 9000000, "month": "septiembre", "year": 2022}, {"num_personal": 5, "total": 9000000, "month": "agosto", "year": 2022}, {"num_personal": 5, "total": 9000000, "month": "julio", "year": 2022}, {"num_personal": 5, "total": 9000000, "month": "junio", "year": 2022}]}}]}
+{
+  "deputies": [
+    {
+      "date": "2023-01-13 03:00:00",
+      "index": 117,
+      "record": 181739,
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1067",
+      "profession": "Sin Información",
+      "district": "Nº 17",
+      "districtregion": "Región del Maule",
+      "periods": [
+        "2018-2022",
+        "2022-2026"
+      ],
+      "lastperiod": "2022-2026",
+      "first_name": "Hugo",
+      "second_name": "",
+      "first_surname": "Rey",
+      "second_surname": "Martínez",
+      "party": "Renovación Nacional",
+      "party_alias": "RN",
+      "birthday": "06/12/1973",
+      "sex": "1",
+      "termination": "o",
+      "treatment": "Sr",
+      "deputy_id": 1067,
+      "attendance": {
+        "attended": 119,
+        "justified": 0,
+        "unjustified": 3,
+        "total": 122,
+        "percentage": 98.0
+      },
+      "voting": [
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-Admisibilidad de la acusación constitucional deducida por diez diputadas y diputados en contra del Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago.",
+          "description": "Otros",
+          "voting_id": 40177
+        },
+        {
+          "vote_option": "En Contra",
+          "date": "2023-01-19",
+          "name": "OTROS-Cuestión previa deducida por el Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago, de que la acusación constitucional no cumple con los requisitos que la Constitución Política señala.\n",
+          "description": "Otros",
+          "voting_id": 40176
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN BICAMERAL QUE DEBE SER CONSTITUIDA PARA APROBAR EL REGLAMENTO DEL CONSEJO CONSTITUCIONAL Y LOS DEMÁS ÓRGANOS QUE PARTICIPARAN EN LA ELABORACIÓN DE UNA NUEVA CONSTITUCIÓN POLITICA DE LA REPÚBLICA, CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n- DIEGO SCHALPER\n- JUAN ANTONIO COLOMA\n- RAÚL SOTO\n- LUIS CUELLO\n- CATALINA PÉREZ\n- TOMÁS DE REMENTERÍA\n- MIGUEL ÁNGEL CALISTO\n- LUIS SANCHEZ\n- ERIC AEDO\n",
+          "description": "Otros",
+          "voting_id": 40175
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Consagra el derecho al olvido en materia financiera",
+          "description": "Boletín N° 15407-03",
+          "voting_id": 40171
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Asigna nombres que indica a la primera comisaría de La Serena y a la subcomisaría de La Florida, ambas de la región de Coquimbo",
+          "description": "Boletín N° 15500-24",
+          "voting_id": 40169
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-17",
+          "name": "Entrega facilidades de pago para los derechos de aseo municipal y faculta al Servicio de Tesorerías su cobro, en los casos que indica",
+          "description": "Boletín N° 10858-06",
+          "voting_id": 40154
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "INFORME COMISION INVESTIGADORA-Informe de la Comisión Especial Investigadora de los actos del Gobierno relativos a eventuales irregularidades cometidas por la Empresa Nacional del Petróleo desde el año 2014 a la fecha, en diversas actuaciones administrativas y comerciales que han generado conflictos laborales, altos niveles de gasto en asesorías, denuncias de corrupción, entre otros, y de  eventuales irregularidades en las inversiones realizadas entre los años 2014 y 2018 y su efecto en el estado financiero de dicha empresa estatal. (CEI 7).\n",
+          "description": "Otros",
+          "voting_id": 40139
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "Aprueba el ´Tratado de Extradición entre la República de Chile y la República de Colombia´, suscrito en la ciudad de Cartagena de Indias, República de Colombia, el 24 de septiembre de 2021.",
+          "description": "Boletín N° 15335-10",
+          "voting_id": 40138
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-10",
+          "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación",
+          "description": "Boletín N° 14879-04",
+          "voting_id": 40121
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-09",
+          "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n",
+          "description": "Otros",
+          "voting_id": 40104
+        }
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 534155,
+            "Web y Almacenamiento": 0,
+            "Otros": 2416954,
+            "Telefonía": 174290,
+            "Traslación": 1376697,
+            "Difusión": 905500,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5407596,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 579455,
+            "Web y Almacenamiento": 0,
+            "Otros": 2717042,
+            "Telefonía": 174291,
+            "Traslación": 1330162,
+            "Difusión": 599000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 7646,
+            "total": 5407596,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 489795,
+            "Web y Almacenamiento": 0,
+            "Otros": 2689481,
+            "Telefonía": 194798,
+            "Traslación": 1688289,
+            "Difusión": 599000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5661363,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 497425,
+            "Web y Almacenamiento": 0,
+            "Otros": 2643681,
+            "Telefonía": 77987,
+            "Traslación": 1441183,
+            "Difusión": 999000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5659276,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1210015,
+            "Web y Almacenamiento": 0,
+            "Otros": 2643681,
+            "Telefonía": 96125,
+            "Traslación": 1278878,
+            "Difusión": 1882108,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 7110807,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 0,
+            "Web y Almacenamiento": 0,
+            "Otros": 2638767,
+            "Telefonía": 181997,
+            "Traslación": 984621,
+            "Difusión": 499000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 4304385,
+            "month": "mayo",
+            "year": 2022
+          }
+        ],
+        "offices": [
+          {
+            "num_oficinas": 1,
+            "total": 507575,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 502538,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 496924,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 489795,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 485548,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 484006,
+            "month": "junio",
+            "year": 2022
+          }
+        ],
+        "staff": [
+          {
+            "num_personal": 11,
+            "total": 9129781,
+            "month": "enero",
+            "year": 2023
+          },
+          {
+            "num_personal": 11,
+            "total": 10192301,
+            "month": "diciembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 11,
+            "total": 9414084,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 9175001,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 9175001,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 9175001,
+            "month": "agosto",
+            "year": 2022
+          }
+        ]
+      }
+    },
+    {
+      "date": "2023-01-14 03:00:00",
+      "index": 43,
+      "record": 183179,
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1124",
+      "profession": "Sin Información",
+      "district": "Nº 7",
+      "districtregion": "Región de Valparaíso",
+      "periods": [
+        "2022-2026"
+      ],
+      "lastperiod": "2022-2026",
+      "first_name": "Tomás",
+      "second_name": "",
+      "first_surname": "De Rementería",
+      "second_surname": "Venegas",
+      "party": "Independientes",
+      "party_alias": "IND",
+      "birthday": "17/03/1987",
+      "sex": "1",
+      "termination": "o",
+      "treatment": "Sr",
+      "deputy_id": 1124,
+      "attendance": {
+        "attended": 111,
+        "justified": 1,
+        "unjustified": 10,
+        "total": 122,
+        "percentage": 92.0
+      },
+      "voting": [
+        {
+          "vote_option": "En Contra",
+          "date": "2023-01-19",
+          "name": "OTROS-Admisibilidad de la acusación constitucional deducida por diez diputadas y diputados en contra del Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago.",
+          "description": "Otros",
+          "voting_id": 40177
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-Cuestión previa deducida por el Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago, de que la acusación constitucional no cumple con los requisitos que la Constitución Política señala.\n",
+          "description": "Otros",
+          "voting_id": 40176
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN BICAMERAL QUE DEBE SER CONSTITUIDA PARA APROBAR EL REGLAMENTO DEL CONSEJO CONSTITUCIONAL Y LOS DEMÁS ÓRGANOS QUE PARTICIPARAN EN LA ELABORACIÓN DE UNA NUEVA CONSTITUCIÓN POLITICA DE LA REPÚBLICA, CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n- DIEGO SCHALPER\n- JUAN ANTONIO COLOMA\n- RAÚL SOTO\n- LUIS CUELLO\n- CATALINA PÉREZ\n- TOMÁS DE REMENTERÍA\n- MIGUEL ÁNGEL CALISTO\n- LUIS SANCHEZ\n- ERIC AEDO\n",
+          "description": "Otros",
+          "voting_id": 40175
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Consagra el derecho al olvido en materia financiera",
+          "description": "Boletín N° 15407-03",
+          "voting_id": 40171
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Asigna nombres que indica a la primera comisaría de La Serena y a la subcomisaría de La Florida, ambas de la región de Coquimbo",
+          "description": "Boletín N° 15500-24",
+          "voting_id": 40169
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-17",
+          "name": "Entrega facilidades de pago para los derechos de aseo municipal y faculta al Servicio de Tesorerías su cobro, en los casos que indica",
+          "description": "Boletín N° 10858-06",
+          "voting_id": 40154
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-10",
+          "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación",
+          "description": "Boletín N° 14879-04",
+          "voting_id": 40121
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-05",
+          "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala",
+          "description": "Boletín N° 14943-11",
+          "voting_id": 40099
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-05",
+          "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala",
+          "description": "Boletín N° 14943-11",
+          "voting_id": 40098
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-05",
+          "name": "Establece un derecho a descanso reparatorio para trabajadores de la salud del sector privado, como reconocimiento a su labor durante la pandemia de Covid-19, en las condiciones y con los efectos que señala",
+          "description": "Boletín N° 14943-11",
+          "voting_id": 40097
+        }
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 808636,
+            "Web y Almacenamiento": 0,
+            "Otros": 1923023,
+            "Telefonía": 105324,
+            "Traslación": 1176766,
+            "Difusión": 923440,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 9721,
+            "total": 4946910,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 833863,
+            "Web y Almacenamiento": 0,
+            "Otros": 1823023,
+            "Telefonía": 105144,
+            "Traslación": 1406973,
+            "Difusión": 923440,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5092443,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 425436,
+            "Web y Almacenamiento": 0,
+            "Otros": 1820293,
+            "Telefonía": 105521,
+            "Traslación": 2037724,
+            "Difusión": 923440,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5312414,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 738818,
+            "Web y Almacenamiento": 0,
+            "Otros": 550844,
+            "Telefonía": 105505,
+            "Traslación": 1639910,
+            "Difusión": 804440,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3839517,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 916056,
+            "Web y Almacenamiento": 0,
+            "Otros": 550844,
+            "Telefonía": 105146,
+            "Traslación": 1390000,
+            "Difusión": 804440,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3766486,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 265439,
+            "Web y Almacenamiento": 0,
+            "Otros": 523817,
+            "Telefonía": 347629,
+            "Traslación": 1231432,
+            "Difusión": 1101940,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 3470257,
+            "month": "mayo",
+            "year": 2022
+          }
+        ],
+        "offices": [
+          {
+            "num_oficinas": 2,
+            "total": 678636,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 2,
+            "total": 678636,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 2,
+            "total": 678636,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 400000,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 400000,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 306667,
+            "month": "junio",
+            "year": 2022
+          }
+        ],
+        "staff": [
+          {
+            "num_personal": 11,
+            "total": 7641960,
+            "month": "diciembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 11,
+            "total": 7641960,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 7641960,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 7641960,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 7593960,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_personal": 9,
+            "total": 6499000,
+            "month": "julio",
+            "year": 2022
+          }
+        ]
+      }
+    },
+    {
+      "date": "2023-01-15 03:00:00",
+      "index": 22,
+      "record": 184619,
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1112",
+      "profession": "Sin Información",
+      "district": "Nº 24",
+      "districtregion": "Región de Los Ríos",
+      "periods": [
+        "2022-2026"
+      ],
+      "lastperiod": "2022-2026",
+      "first_name": "Ana María",
+      "second_name": "",
+      "first_surname": "Bravo",
+      "second_surname": "Castro",
+      "party": "Partido Socialista",
+      "party_alias": "PS",
+      "birthday": "03/12/1973",
+      "sex": "0",
+      "termination": "a",
+      "treatment": "Sra",
+      "deputy_id": 1112,
+      "attendance": {
+        "attended": 117,
+        "justified": 5,
+        "unjustified": 0,
+        "total": 122,
+        "percentage": 100.0
+      },
+      "voting": [
+        {
+          "vote_option": "En Contra",
+          "date": "2023-01-19",
+          "name": "OTROS-Admisibilidad de la acusación constitucional deducida por diez diputadas y diputados en contra del Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago.",
+          "description": "Otros",
+          "voting_id": 40177
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-Cuestión previa deducida por el Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago, de que la acusación constitucional no cumple con los requisitos que la Constitución Política señala.\n",
+          "description": "Otros",
+          "voting_id": 40176
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN BICAMERAL QUE DEBE SER CONSTITUIDA PARA APROBAR EL REGLAMENTO DEL CONSEJO CONSTITUCIONAL Y LOS DEMÁS ÓRGANOS QUE PARTICIPARAN EN LA ELABORACIÓN DE UNA NUEVA CONSTITUCIÓN POLITICA DE LA REPÚBLICA, CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n- DIEGO SCHALPER\n- JUAN ANTONIO COLOMA\n- RAÚL SOTO\n- LUIS CUELLO\n- CATALINA PÉREZ\n- TOMÁS DE REMENTERÍA\n- MIGUEL ÁNGEL CALISTO\n- LUIS SANCHEZ\n- ERIC AEDO\n",
+          "description": "Otros",
+          "voting_id": 40175
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Consagra el derecho al olvido en materia financiera",
+          "description": "Boletín N° 15407-03",
+          "voting_id": 40171
+        },
+        {
+          "vote_option": "Abstención",
+          "date": "2023-01-18",
+          "name": "Asigna nombres que indica a la primera comisaría de La Serena y a la subcomisaría de La Florida, ambas de la región de Coquimbo",
+          "description": "Boletín N° 15500-24",
+          "voting_id": 40169
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-17",
+          "name": "Entrega facilidades de pago para los derechos de aseo municipal y faculta al Servicio de Tesorerías su cobro, en los casos que indica",
+          "description": "Boletín N° 10858-06",
+          "voting_id": 40154
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "INFORME COMISION INVESTIGADORA-Informe de la Comisión Especial Investigadora de los actos del Gobierno relativos a eventuales irregularidades cometidas por la Empresa Nacional del Petróleo desde el año 2014 a la fecha, en diversas actuaciones administrativas y comerciales que han generado conflictos laborales, altos niveles de gasto en asesorías, denuncias de corrupción, entre otros, y de  eventuales irregularidades en las inversiones realizadas entre los años 2014 y 2018 y su efecto en el estado financiero de dicha empresa estatal. (CEI 7).\n",
+          "description": "Otros",
+          "voting_id": 40139
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "Aprueba el ´Tratado de Extradición entre la República de Chile y la República de Colombia´, suscrito en la ciudad de Cartagena de Indias, República de Colombia, el 24 de septiembre de 2021.",
+          "description": "Boletín N° 15335-10",
+          "voting_id": 40138
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-10",
+          "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación",
+          "description": "Boletín N° 14879-04",
+          "voting_id": 40121
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-09",
+          "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n",
+          "description": "Otros",
+          "voting_id": 40104
+        }
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 1084714,
+            "Web y Almacenamiento": 0,
+            "Otros": 406765,
+            "Telefonía": 145078,
+            "Traslación": 2210832,
+            "Difusión": 1437560,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5284949,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1072596,
+            "Web y Almacenamiento": 0,
+            "Otros": 644229,
+            "Telefonía": 145078,
+            "Traslación": 1729866,
+            "Difusión": 1437560,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 812,
+            "total": 5030141,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1346157,
+            "Web y Almacenamiento": 0,
+            "Otros": 561633,
+            "Telefonía": 145078,
+            "Traslación": 1936505,
+            "Difusión": 1171000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 17129,
+            "total": 5177502,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1171801,
+            "Web y Almacenamiento": 0,
+            "Otros": 548643,
+            "Telefonía": 145078,
+            "Traslación": 1785451,
+            "Difusión": 1349500,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 19036,
+            "total": 5019509,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1545910,
+            "Web y Almacenamiento": 0,
+            "Otros": 560073,
+            "Telefonía": 145078,
+            "Traslación": 1888753,
+            "Difusión": 1368500,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5508314,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1370602,
+            "Web y Almacenamiento": 0,
+            "Otros": 548643,
+            "Telefonía": 179237,
+            "Traslación": 1483395,
+            "Difusión": 1249500,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 4831377,
+            "month": "mayo",
+            "year": 2022
+          }
+        ],
+        "offices": [
+          {
+            "num_oficinas": 1,
+            "total": 1095585,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1084714,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1072596,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1057207,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1048041,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 1035920,
+            "month": "junio",
+            "year": 2022
+          }
+        ],
+        "staff": [
+          {
+            "num_personal": 7,
+            "total": 6931700,
+            "month": "diciembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 6931700,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 7340700,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 7340700,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 7340700,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 7340700,
+            "month": "julio",
+            "year": 2022
+          }
+        ]
+      }
+    },
+    {
+      "date": "2023-01-16 03:00:00",
+      "index": 79,
+      "record": 186059,
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1048",
+      "profession": "Sin Información",
+      "district": "Nº 6",
+      "districtregion": "Región de Valparaíso",
+      "periods": [
+        "2018-2022",
+        "2022-2026"
+      ],
+      "lastperiod": "2022-2026",
+      "first_name": "Carolina",
+      "second_name": "",
+      "first_surname": "Marzán",
+      "second_surname": "Pinto",
+      "party": "Partido Por la Democracia",
+      "party_alias": "PPD",
+      "birthday": "22/12/1963",
+      "sex": "0",
+      "termination": "a",
+      "treatment": "Sra",
+      "deputy_id": 1048,
+      "attendance": {
+        "attended": 111,
+        "justified": 4,
+        "unjustified": 7,
+        "total": 122,
+        "percentage": 94.0
+      },
+      "voting": [
+        {
+          "vote_option": "En Contra",
+          "date": "2023-01-19",
+          "name": "OTROS-Admisibilidad de la acusación constitucional deducida por diez diputadas y diputados en contra del Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago.",
+          "description": "Otros",
+          "voting_id": 40177
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-Cuestión previa deducida por el Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago, de que la acusación constitucional no cumple con los requisitos que la Constitución Política señala.\n",
+          "description": "Otros",
+          "voting_id": 40176
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN BICAMERAL QUE DEBE SER CONSTITUIDA PARA APROBAR EL REGLAMENTO DEL CONSEJO CONSTITUCIONAL Y LOS DEMÁS ÓRGANOS QUE PARTICIPARAN EN LA ELABORACIÓN DE UNA NUEVA CONSTITUCIÓN POLITICA DE LA REPÚBLICA, CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n- DIEGO SCHALPER\n- JUAN ANTONIO COLOMA\n- RAÚL SOTO\n- LUIS CUELLO\n- CATALINA PÉREZ\n- TOMÁS DE REMENTERÍA\n- MIGUEL ÁNGEL CALISTO\n- LUIS SANCHEZ\n- ERIC AEDO\n",
+          "description": "Otros",
+          "voting_id": 40175
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Consagra el derecho al olvido en materia financiera",
+          "description": "Boletín N° 15407-03",
+          "voting_id": 40171
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Asigna nombres que indica a la primera comisaría de La Serena y a la subcomisaría de La Florida, ambas de la región de Coquimbo",
+          "description": "Boletín N° 15500-24",
+          "voting_id": 40169
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-17",
+          "name": "Entrega facilidades de pago para los derechos de aseo municipal y faculta al Servicio de Tesorerías su cobro, en los casos que indica",
+          "description": "Boletín N° 10858-06",
+          "voting_id": 40154
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "INFORME COMISION INVESTIGADORA-Informe de la Comisión Especial Investigadora de los actos del Gobierno relativos a eventuales irregularidades cometidas por la Empresa Nacional del Petróleo desde el año 2014 a la fecha, en diversas actuaciones administrativas y comerciales que han generado conflictos laborales, altos niveles de gasto en asesorías, denuncias de corrupción, entre otros, y de  eventuales irregularidades en las inversiones realizadas entre los años 2014 y 2018 y su efecto en el estado financiero de dicha empresa estatal. (CEI 7).\n",
+          "description": "Otros",
+          "voting_id": 40139
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "Aprueba el ´Tratado de Extradición entre la República de Chile y la República de Colombia´, suscrito en la ciudad de Cartagena de Indias, República de Colombia, el 24 de septiembre de 2021.",
+          "description": "Boletín N° 15335-10",
+          "voting_id": 40138
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-10",
+          "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación",
+          "description": "Boletín N° 14879-04",
+          "voting_id": 40121
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-09",
+          "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n",
+          "description": "Otros",
+          "voting_id": 40104
+        }
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 291666,
+            "Web y Almacenamiento": 0,
+            "Otros": 3062574,
+            "Telefonía": 149803,
+            "Traslación": 1763553,
+            "Difusión": 440000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5707596,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 310710,
+            "Web y Almacenamiento": 0,
+            "Otros": 3063276,
+            "Telefonía": 149215,
+            "Traslación": 1744395,
+            "Difusión": 440000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5707596,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 340921,
+            "Web y Almacenamiento": 0,
+            "Otros": 2907632,
+            "Telefonía": 149215,
+            "Traslación": 1856861,
+            "Difusión": 440000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 12967,
+            "total": 5707596,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 420736,
+            "Web y Almacenamiento": 0,
+            "Otros": 2962574,
+            "Telefonía": 149515,
+            "Traslación": 1974771,
+            "Difusión": 200000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5707596,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 77505,
+            "Web y Almacenamiento": 0,
+            "Otros": 2953311,
+            "Telefonía": 149215,
+            "Traslación": 1688680,
+            "Difusión": 1152000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 17007,
+            "total": 6037718,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 70686,
+            "Web y Almacenamiento": 0,
+            "Otros": 2959738,
+            "Telefonía": 859110,
+            "Traslación": 1279916,
+            "Difusión": 200000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 8024,
+            "total": 5377474,
+            "month": "mayo",
+            "year": 2022
+          }
+        ],
+        "offices": [],
+        "staff": [
+          {
+            "num_personal": 6,
+            "total": 7495202,
+            "month": "enero",
+            "year": 2023
+          },
+          {
+            "num_personal": 7,
+            "total": 10027994,
+            "month": "diciembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 10027994,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 10027994,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 10027994,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 10027994,
+            "month": "agosto",
+            "year": 2022
+          }
+        ]
+      }
+    },
+    {
+      "date": "2023-01-17 03:00:00",
+      "index": 83,
+      "record": 187499,
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1050",
+      "profession": "Ingeniero Comercial",
+      "district": "Nº 23",
+      "districtregion": "Región de La Araucanía",
+      "periods": [
+        "2018-2022",
+        "2022-2026"
+      ],
+      "lastperiod": "2022-2026",
+      "first_name": "Miguel",
+      "second_name": "",
+      "first_surname": "Mellado",
+      "second_surname": "Suazo",
+      "party": "Renovación Nacional",
+      "party_alias": "RN",
+      "birthday": "29/12/1958",
+      "sex": "1",
+      "termination": "o",
+      "treatment": "Sr",
+      "deputy_id": 1050,
+      "attendance": {
+        "attended": 122,
+        "justified": 0,
+        "unjustified": 0,
+        "total": 122,
+        "percentage": 100.0
+      },
+      "voting": [
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-Admisibilidad de la acusación constitucional deducida por diez diputadas y diputados en contra del Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago.",
+          "description": "Otros",
+          "voting_id": 40177
+        },
+        {
+          "vote_option": "En Contra",
+          "date": "2023-01-19",
+          "name": "OTROS-Cuestión previa deducida por el Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago, de que la acusación constitucional no cumple con los requisitos que la Constitución Política señala.\n",
+          "description": "Otros",
+          "voting_id": 40176
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN BICAMERAL QUE DEBE SER CONSTITUIDA PARA APROBAR EL REGLAMENTO DEL CONSEJO CONSTITUCIONAL Y LOS DEMÁS ÓRGANOS QUE PARTICIPARAN EN LA ELABORACIÓN DE UNA NUEVA CONSTITUCIÓN POLITICA DE LA REPÚBLICA, CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n- DIEGO SCHALPER\n- JUAN ANTONIO COLOMA\n- RAÚL SOTO\n- LUIS CUELLO\n- CATALINA PÉREZ\n- TOMÁS DE REMENTERÍA\n- MIGUEL ÁNGEL CALISTO\n- LUIS SANCHEZ\n- ERIC AEDO\n",
+          "description": "Otros",
+          "voting_id": 40175
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Consagra el derecho al olvido en materia financiera",
+          "description": "Boletín N° 15407-03",
+          "voting_id": 40171
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Asigna nombres que indica a la primera comisaría de La Serena y a la subcomisaría de La Florida, ambas de la región de Coquimbo",
+          "description": "Boletín N° 15500-24",
+          "voting_id": 40169
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-17",
+          "name": "Entrega facilidades de pago para los derechos de aseo municipal y faculta al Servicio de Tesorerías su cobro, en los casos que indica",
+          "description": "Boletín N° 10858-06",
+          "voting_id": 40154
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "INFORME COMISION INVESTIGADORA-Informe de la Comisión Especial Investigadora de los actos del Gobierno relativos a eventuales irregularidades cometidas por la Empresa Nacional del Petróleo desde el año 2014 a la fecha, en diversas actuaciones administrativas y comerciales que han generado conflictos laborales, altos niveles de gasto en asesorías, denuncias de corrupción, entre otros, y de  eventuales irregularidades en las inversiones realizadas entre los años 2014 y 2018 y su efecto en el estado financiero de dicha empresa estatal. (CEI 7).\n",
+          "description": "Otros",
+          "voting_id": 40139
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "Aprueba el ´Tratado de Extradición entre la República de Chile y la República de Colombia´, suscrito en la ciudad de Cartagena de Indias, República de Colombia, el 24 de septiembre de 2021.",
+          "description": "Boletín N° 15335-10",
+          "voting_id": 40138
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-10",
+          "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación",
+          "description": "Boletín N° 14879-04",
+          "voting_id": 40121
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-09",
+          "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n",
+          "description": "Otros",
+          "voting_id": 40104
+        }
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 636679,
+            "Web y Almacenamiento": 0,
+            "Otros": 789783,
+            "Telefonía": 116844,
+            "Traslación": 2560285,
+            "Difusión": 757000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 9792,
+            "total": 4870383,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 576465,
+            "Web y Almacenamiento": 0,
+            "Otros": 819493,
+            "Telefonía": 116844,
+            "Traslación": 2683011,
+            "Difusión": 638000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 4833813,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 589752,
+            "Web y Almacenamiento": 0,
+            "Otros": 784924,
+            "Telefonía": 117294,
+            "Traslación": 2541287,
+            "Difusión": 519000,
+            "Actividades destinadas a la interacción con la comunidad": 54800,
+            "Correspondencia": 0,
+            "total": 4607057,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 563000,
+            "Web y Almacenamiento": 0,
+            "Otros": 1092610,
+            "Telefonía": 116844,
+            "Traslación": 2508948,
+            "Difusión": 519000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 4800402,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 571151,
+            "Web y Almacenamiento": 0,
+            "Otros": 674755,
+            "Telefonía": 116844,
+            "Traslación": 2266190,
+            "Difusión": 519000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 16953,
+            "total": 4164893,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 550000,
+            "Web y Almacenamiento": 0,
+            "Otros": 657343,
+            "Telefonía": 1169779,
+            "Traslación": 2446794,
+            "Difusión": 621816,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5445732,
+            "month": "mayo",
+            "year": 2022
+          }
+        ],
+        "offices": [
+          {
+            "num_oficinas": 1,
+            "total": 524799,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 524799,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 524799,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 513000,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 513000,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 513000,
+            "month": "junio",
+            "year": 2022
+          }
+        ],
+        "staff": [
+          {
+            "num_personal": 5,
+            "total": 4285269,
+            "month": "enero",
+            "year": 2023
+          },
+          {
+            "num_personal": 7,
+            "total": 7526500,
+            "month": "diciembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 7526500,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 7526500,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 7526500,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 7526500,
+            "month": "agosto",
+            "year": 2022
+          }
+        ]
+      }
+    },
+    {
+      "date": "2023-01-18 03:00:00",
+      "index": 143,
+      "record": 188939,
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1003",
+      "profession": "Abogado",
+      "district": "Nº 2",
+      "districtregion": "Región de Tarapacá",
+      "periods": [
+        "2014-2018",
+        "2018-2022",
+        "2022-2026"
+      ],
+      "lastperiod": "2022-2026",
+      "first_name": "Renzo",
+      "second_name": "",
+      "first_surname": "Trisotti",
+      "second_surname": "Martínez",
+      "party": "Unión Demócrata Independiente",
+      "party_alias": "UDI",
+      "birthday": "15/03/1976",
+      "sex": "1",
+      "termination": "o",
+      "treatment": "Sr",
+      "deputy_id": 1003,
+      "attendance": {
+        "attended": 119,
+        "justified": 3,
+        "unjustified": 0,
+        "total": 122,
+        "percentage": 100.0
+      },
+      "voting": [
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-Admisibilidad de la acusación constitucional deducida por diez diputadas y diputados en contra del Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago.",
+          "description": "Otros",
+          "voting_id": 40177
+        },
+        {
+          "vote_option": "En Contra",
+          "date": "2023-01-19",
+          "name": "OTROS-Cuestión previa deducida por el Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago, de que la acusación constitucional no cumple con los requisitos que la Constitución Política señala.\n",
+          "description": "Otros",
+          "voting_id": 40176
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN BICAMERAL QUE DEBE SER CONSTITUIDA PARA APROBAR EL REGLAMENTO DEL CONSEJO CONSTITUCIONAL Y LOS DEMÁS ÓRGANOS QUE PARTICIPARAN EN LA ELABORACIÓN DE UNA NUEVA CONSTITUCIÓN POLITICA DE LA REPÚBLICA, CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n- DIEGO SCHALPER\n- JUAN ANTONIO COLOMA\n- RAÚL SOTO\n- LUIS CUELLO\n- CATALINA PÉREZ\n- TOMÁS DE REMENTERÍA\n- MIGUEL ÁNGEL CALISTO\n- LUIS SANCHEZ\n- ERIC AEDO\n",
+          "description": "Otros",
+          "voting_id": 40175
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Consagra el derecho al olvido en materia financiera",
+          "description": "Boletín N° 15407-03",
+          "voting_id": 40171
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Asigna nombres que indica a la primera comisaría de La Serena y a la subcomisaría de La Florida, ambas de la región de Coquimbo",
+          "description": "Boletín N° 15500-24",
+          "voting_id": 40169
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-17",
+          "name": "Entrega facilidades de pago para los derechos de aseo municipal y faculta al Servicio de Tesorerías su cobro, en los casos que indica",
+          "description": "Boletín N° 10858-06",
+          "voting_id": 40154
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "INFORME COMISION INVESTIGADORA-Informe de la Comisión Especial Investigadora de los actos del Gobierno relativos a eventuales irregularidades cometidas por la Empresa Nacional del Petróleo desde el año 2014 a la fecha, en diversas actuaciones administrativas y comerciales que han generado conflictos laborales, altos niveles de gasto en asesorías, denuncias de corrupción, entre otros, y de  eventuales irregularidades en las inversiones realizadas entre los años 2014 y 2018 y su efecto en el estado financiero de dicha empresa estatal. (CEI 7).\n",
+          "description": "Otros",
+          "voting_id": 40139
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "Aprueba el ´Tratado de Extradición entre la República de Chile y la República de Colombia´, suscrito en la ciudad de Cartagena de Indias, República de Colombia, el 24 de septiembre de 2021.",
+          "description": "Boletín N° 15335-10",
+          "voting_id": 40138
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-10",
+          "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación",
+          "description": "Boletín N° 14879-04",
+          "voting_id": 40121
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-09",
+          "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n",
+          "description": "Otros",
+          "voting_id": 40104
+        }
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 800000,
+            "Web y Almacenamiento": 0,
+            "Otros": 617600,
+            "Telefonía": 122575,
+            "Traslación": 2871779,
+            "Difusión": 499800,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 8332,
+            "total": 4920086,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1318857,
+            "Web y Almacenamiento": 0,
+            "Otros": 649838,
+            "Telefonía": 125806,
+            "Traslación": 2724887,
+            "Difusión": 238000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 15786,
+            "total": 5073174,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 830531,
+            "Web y Almacenamiento": 0,
+            "Otros": 542780,
+            "Telefonía": 124956,
+            "Traslación": 2867250,
+            "Difusión": 499800,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 4865317,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 858481,
+            "Web y Almacenamiento": 0,
+            "Otros": 585010,
+            "Telefonía": 124883,
+            "Traslación": 2980610,
+            "Difusión": 499800,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5048784,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 863034,
+            "Web y Almacenamiento": 0,
+            "Otros": 539970,
+            "Telefonía": 149030,
+            "Traslación": 2381608,
+            "Difusión": 499800,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 30565,
+            "total": 4464007,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 947203,
+            "Web y Almacenamiento": 0,
+            "Otros": 562597,
+            "Telefonía": 396476,
+            "Traslación": 2642124,
+            "Difusión": 536205,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 12494,
+            "total": 5097099,
+            "month": "mayo",
+            "year": 2022
+          }
+        ],
+        "offices": [
+          {
+            "num_oficinas": 1,
+            "total": 800000,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 800000,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 800000,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 800000,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 800000,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 800000,
+            "month": "junio",
+            "year": 2022
+          }
+        ],
+        "staff": [
+          {
+            "num_personal": 6,
+            "total": 6401468,
+            "month": "enero",
+            "year": 2023
+          },
+          {
+            "num_personal": 6,
+            "total": 6104094,
+            "month": "diciembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 6454094,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 7,
+            "total": 6454094,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 6104094,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 6,
+            "total": 6104094,
+            "month": "agosto",
+            "year": 2022
+          }
+        ]
+      }
+    },
+    {
+      "date": "2023-01-19 03:00:00",
+      "index": 16,
+      "record": 190379,
+      "photo": "https://www.camara.cl/img.aspx?prmID=GRCL1109",
+      "profession": "Sin Información",
+      "district": "Nº 18",
+      "districtregion": "Región del Maule",
+      "periods": [
+        "2022-2026"
+      ],
+      "lastperiod": "2022-2026",
+      "first_name": "Gustavo",
+      "second_name": "",
+      "first_surname": "Benavente",
+      "second_surname": "Vergara",
+      "party": "Unión Demócrata Independiente",
+      "party_alias": "UDI",
+      "birthday": "13/08/1966",
+      "sex": "1",
+      "termination": "o",
+      "treatment": "Sr",
+      "deputy_id": 1109,
+      "attendance": {
+        "attended": 110,
+        "justified": 11,
+        "unjustified": 1,
+        "total": 122,
+        "percentage": 99.0
+      },
+      "voting": [
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-Admisibilidad de la acusación constitucional deducida por diez diputadas y diputados en contra del Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago.",
+          "description": "Otros",
+          "voting_id": 40177
+        },
+        {
+          "vote_option": "En Contra",
+          "date": "2023-01-19",
+          "name": "OTROS-Cuestión previa deducida por el Ministro de Desarrollo Social y Familia, señor Kenneth Giorgio Jackson Drago, de que la acusación constitucional no cumple con los requisitos que la Constitución Política señala.\n",
+          "description": "Otros",
+          "voting_id": 40176
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-19",
+          "name": "OTROS-INTEGRACIÓN DE LA COMISIÓN BICAMERAL QUE DEBE SER CONSTITUIDA PARA APROBAR EL REGLAMENTO DEL CONSEJO CONSTITUCIONAL Y LOS DEMÁS ÓRGANOS QUE PARTICIPARAN EN LA ELABORACIÓN DE UNA NUEVA CONSTITUCIÓN POLITICA DE LA REPÚBLICA, CON LOS SIGUIENTES DIPUTADOS Y DIPUTADAS:\n\n- DIEGO SCHALPER\n- JUAN ANTONIO COLOMA\n- RAÚL SOTO\n- LUIS CUELLO\n- CATALINA PÉREZ\n- TOMÁS DE REMENTERÍA\n- MIGUEL ÁNGEL CALISTO\n- LUIS SANCHEZ\n- ERIC AEDO\n",
+          "description": "Otros",
+          "voting_id": 40175
+        },
+        {
+          "vote_option": "En Contra",
+          "date": "2023-01-18",
+          "name": "Consagra el derecho al olvido en materia financiera",
+          "description": "Boletín N° 15407-03",
+          "voting_id": 40171
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-18",
+          "name": "Asigna nombres que indica a la primera comisaría de La Serena y a la subcomisaría de La Florida, ambas de la región de Coquimbo",
+          "description": "Boletín N° 15500-24",
+          "voting_id": 40169
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-17",
+          "name": "Entrega facilidades de pago para los derechos de aseo municipal y faculta al Servicio de Tesorerías su cobro, en los casos que indica",
+          "description": "Boletín N° 10858-06",
+          "voting_id": 40154
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "INFORME COMISION INVESTIGADORA-Informe de la Comisión Especial Investigadora de los actos del Gobierno relativos a eventuales irregularidades cometidas por la Empresa Nacional del Petróleo desde el año 2014 a la fecha, en diversas actuaciones administrativas y comerciales que han generado conflictos laborales, altos niveles de gasto en asesorías, denuncias de corrupción, entre otros, y de  eventuales irregularidades en las inversiones realizadas entre los años 2014 y 2018 y su efecto en el estado financiero de dicha empresa estatal. (CEI 7).\n",
+          "description": "Otros",
+          "voting_id": 40139
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-16",
+          "name": "Aprueba el ´Tratado de Extradición entre la República de Chile y la República de Colombia´, suscrito en la ciudad de Cartagena de Indias, República de Colombia, el 24 de septiembre de 2021.",
+          "description": "Boletín N° 15335-10",
+          "voting_id": 40138
+        },
+        {
+          "vote_option": "Afirmativo",
+          "date": "2023-01-10",
+          "name": "Posibilita la incorporación de la Escuela de Gendarmería de Chile dentro de aquellas instituciones de educación superior que el Estado reconoce oficialmente e incorpora reglas especiales para su proceso de acreditación",
+          "description": "Boletín N° 14879-04",
+          "voting_id": 40121
+        },
+        {
+          "vote_option": "Abstención",
+          "date": "2023-01-09",
+          "name": "OTROS-En votación el Informe de la Comisión Especial Investigadora encargada de fiscalizar los actos del Gobierno relacionados con el perfeccionamiento presuntamente irregular de derechos de aprovechamiento de aguas en la cuenca del Río Huasco, en especial, respecto del Río Matancilla”. (CEI 1).\n",
+          "description": "Otros",
+          "voting_id": 40104
+        }
+      ],
+      "expenses": {
+        "operational": [
+          {
+            "Relacionados a Oficina Parlamentaria": 1475437,
+            "Web y Almacenamiento": 0,
+            "Otros": 605310,
+            "Telefonía": 49284,
+            "Traslación": 1685278,
+            "Difusión": 1248195,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 7415,
+            "total": 5070919,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 828591,
+            "Web y Almacenamiento": 0,
+            "Otros": 542680,
+            "Telefonía": 49181,
+            "Traslación": 2053989,
+            "Difusión": 1200000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 4674441,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1355227,
+            "Web y Almacenamiento": 0,
+            "Otros": 502320,
+            "Telefonía": 49183,
+            "Traslación": 2628235,
+            "Difusión": 1419972,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5954937,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 1254183,
+            "Web y Almacenamiento": 0,
+            "Otros": 502320,
+            "Telefonía": 49294,
+            "Traslación": 2243822,
+            "Difusión": 1200000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 0,
+            "total": 5249619,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 798002,
+            "Web y Almacenamiento": 0,
+            "Otros": 505030,
+            "Telefonía": 49182,
+            "Traslación": 2038793,
+            "Difusión": 1310566,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 784,
+            "total": 4702357,
+            "month": "junio",
+            "year": 2022
+          },
+          {
+            "Relacionados a Oficina Parlamentaria": 925561,
+            "Web y Almacenamiento": 0,
+            "Otros": 500000,
+            "Telefonía": 26017,
+            "Traslación": 2184269,
+            "Difusión": 1200000,
+            "Actividades destinadas a la interacción con la comunidad": 0,
+            "Correspondencia": 18426,
+            "total": 4854273,
+            "month": "mayo",
+            "year": 2022
+          }
+        ],
+        "offices": [
+          {
+            "num_oficinas": 3,
+            "total": 883333,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 2,
+            "total": 670000,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 2,
+            "total": 670000,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 2,
+            "total": 670000,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 2,
+            "total": 670000,
+            "month": "julio",
+            "year": 2022
+          },
+          {
+            "num_oficinas": 1,
+            "total": 450000,
+            "month": "junio",
+            "year": 2022
+          }
+        ],
+        "staff": [
+          {
+            "num_personal": 10,
+            "total": 6288000,
+            "month": "diciembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 6255000,
+            "month": "noviembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 6255000,
+            "month": "octubre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 6255000,
+            "month": "septiembre",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 6255000,
+            "month": "agosto",
+            "year": 2022
+          },
+          {
+            "num_personal": 10,
+            "total": 6255000,
+            "month": "julio",
+            "year": 2022
+          }
+        ]
+      }
+    }
+  ]
+}

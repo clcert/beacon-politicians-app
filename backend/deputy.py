@@ -4,9 +4,9 @@ from updater import Updater
 
 
 class Deputy:
-    def __init__(self, json_index):
+    def __init__(self, index):
         self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/json/deputies.json'
-        self.json_index = json_index
+        self.index = index
         self.info = None
         self.load_info()
 
@@ -35,7 +35,14 @@ class Deputy:
         """
         if self.check_format():
             deputies = Updater().get_list()
-            self.info = deputies[self.json_index]
+            print(deputies)
+            print(self.index)
+            self.info = list(
+                filter(
+                    lambda deputy: deputy['index'] == self.index,
+                    deputies,
+                )
+            )[0]
 
         else:
             u = Updater()
