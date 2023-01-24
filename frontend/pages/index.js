@@ -33,6 +33,7 @@ export default function Home() {
   const [ loading, setLoading ] = useState(true);
   const [ startDate, setStartDate ] = useState(new Date());
   const [ error, setError ] = useState(false);
+  const [ datesError, setDatesError ] = useState(false);
   const [ availableDates, setAvailableDates ] = useState([]);
 
   const isValidDate = (date) => {
@@ -43,7 +44,6 @@ export default function Home() {
     const dataJson = fetch(url)
       .then((res) => {
         if (res.status === 200) {
-          setError(false);
           return res.json();
         }
         return null;
@@ -72,15 +72,15 @@ export default function Home() {
     setTimeout(async () => {
       const jsonData = await getData(`${BACKEND_URI}/api/dates`);
       if (jsonData === null) {
-        setError(true);
+        setDatesError(true);
       } else {
-        setError(false);
+        setDatesError(false);
         const data = jsonData.dates.map((date) => new Date(date));
         setAvailableDates(data);
         setStartDate(data[data.length - 1])
       }
     }, 1000);
-  }, [setError, setAvailableDates]);
+  }, [setDatesError, setAvailableDates]);
 
   useEffect(() => {
     getDeputyInfo(`${BACKEND_URI}/api/diputadodeldia`);
@@ -138,7 +138,7 @@ export default function Home() {
             </div>
           </div>
         :
-        error ? <div>Hubo un error al cargar los datos</div>
+        (error || datesError) ? <div>Hubo un error al cargar los datos</div>
         :
         <div className='articles'>
           <article id='top' className='wrapper style1'>

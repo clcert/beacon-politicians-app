@@ -43,7 +43,7 @@ class Updater:
         ordered according to the date.
         :return:
         """
-        if os.stat(self.json_path).st_size != 0:
+        if os.path.exists(self.json_path) and os.stat(self.json_path).st_size != 0:
             with open(self.json_path, 'r', encoding='utf-8') as infile:
                 try:
                     deputies_list = json.load(infile)['deputies']
@@ -51,7 +51,8 @@ class Updater:
                                                                                                    "%Y-%m-%d %H:%M:%S"))
                     return deputies_list
                 except ValueError:
-                    return None
+                    return []
+        return []
 
     def update(self, using_json=True, date_hour=None):
         """
