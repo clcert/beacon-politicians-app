@@ -35,8 +35,6 @@ class Deputy:
         """
         if self.check_format():
             deputies = Updater().get_list()
-            print(deputies)
-            print(self.index)
             self.info = list(
                 filter(
                     lambda deputy: deputy['index'] == self.index,

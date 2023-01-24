@@ -19,7 +19,7 @@ def main_page():
     if len(deputies_list) == 0:
         abort(404)
         return
-    last_deputy = Updater().get_list()[0]
+    last_deputy = deputies_list[-1]
     return jsonify(last_deputy)
 
 
