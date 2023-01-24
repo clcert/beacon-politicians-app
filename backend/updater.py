@@ -10,7 +10,7 @@ import pytz
 
 class Updater:
     def __init__(self):
-        self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/json/deputies.json'
+        self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/deputies.json'
 
     def index_from_json(self, date_hour):
         """
@@ -78,6 +78,10 @@ class Updater:
         print('---------------------')
 
         if using_json:
+            if not os.path.exists(self.json_path):
+                dep_json = open(self.json_path, "x")
+                dep_json.close()
+
             with open(self.json_path, 'r', encoding='utf-8') as infile:
                 try:
                     deputies = json.load(infile)
