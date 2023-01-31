@@ -197,7 +197,7 @@ export default function Home() {
                   <Link href='/about'>Descúbrelo aquí</Link>.
                 </p>
                 <ul id='copyright'>
-                  <li>&copy;Design: <a href='http://html5up.net'>HTML5 UP</a></li>
+                  <li>&copy;Design: <a href='https://html5up.net/miniport'>HTML5 UP - Miniport</a>, template adaptado.</li>
                 </ul>
               </footer>
             </div>
