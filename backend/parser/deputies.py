@@ -356,6 +356,12 @@ class Parser:
             soup = BeautifulSoup(response.content, 'xml')
 
             document['name'] = soup.find('Nombre').get_text()
+            voting_instance = list(filter(
+                lambda voting: voting.find('Id').get_text() == str(voting_id), 
+                soup.findAll('VotacionProyectoLey')
+            ))
+            if len(voting_instance) > 0:
+                document['article'] = voting_instance[0].find('Articulo').get_text().replace('\n', '')
 
         # elif document['type'] == 2: # Implement if necessary
         # elif document['type'] == 3: # Implement if necessary
@@ -407,7 +413,13 @@ class Parser:
             voting['date'] = doc['date'].strftime("%Y-%m-%d")
             voting['name'] = doc['name']
             voting['description'] = doc['description']
+            voting['article'] = doc['article'] if 'article' in doc else 'No se encontró el artículo'
             voting['voting_id'] = doc['voting_id']
+            voting['result'] = doc['result']
+            voting['total_yes'] = doc['total_yes']
+            voting['total_no'] = doc['total_no']
+            voting['total_abstention'] = doc['total_abstention']
+        
 
             # Voting filter
             # Blacklist of keywords
