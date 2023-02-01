@@ -30,6 +30,11 @@ const SingleVote = ({vote}) => {
       </div>
       
       <div className={styles.matters}>{ vote.name }</div>
+      { 
+        vote.article !== '' && 
+        vote.article !== 'No se encontró el artículo' && 
+        <p>{vote.article}</p>
+      }
       {
         vote.vote_option === 'Afirmativo' ?
           <div className={styles.greenVote}><b>{ vote.vote_option }</b></div>
