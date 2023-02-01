@@ -1,6 +1,6 @@
-<h1 style="line-height: 50px; display: flex">
+<h1>
   <img src="https://www.clcert.cl/img/clcert_oscuro.svg" style="width: 150px; padding-right: 20px"/>
-  <div>#DiputadxDelDia</div>
+  <a href="https://diputado.labs.clcert.cl">#DiputadxDelDia</a>
 </h1>
 
 La aplicación **#DiputadxDelDia** elige al azar un(a) Diputado(a) del Congreso Nacional de Chile utilizando el valor aleatorio generado por el [Faro de Aleatoriedad de la Universidad de Chile](https://random.uchile.cl) a las 00:01 horas (Chile Continental GMT -04:00 durante hora de invierno) de cada día (el Faro utiliza huso horario GMT). A dicha hora se revela la siguiente información del congresista elegido:
@@ -65,7 +65,7 @@ La aplicación quedará corriendo en `localhost:3000`.
 Primero será necesario levantar el backend, para ello seguimos los siguientes pasos:
 ```bash
 # Cambio de directorio
-$ cd back
+$ cd backend
 
 # Instalación de requisitos
 $ pip3 install -r requirements.txt
@@ -80,9 +80,11 @@ $ python3 app.py
 Para levantar el frontend, habrá que usar *node package manager*:
 ```
 # Cambio de directorio
-$ cd front
+$ cd frontend
+
 # Instalación de paquetes
 $ npm install
+
 # Servir Frontend
 $ npm run serve
 ```
