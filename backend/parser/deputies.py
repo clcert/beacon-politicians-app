@@ -368,9 +368,14 @@ class Parser:
 
         elif document['type'] == 4: # Otro documento
             document['name'] = document['description']
+            if document['description'].startswith('OTROS-'):
+                document['name'] = document['description'][6:]
             document['description'] = 'Otros'
 
-        name_length = len(document['name'])
+        
+
+        # name_length = len(document['name'])
+
         # if name_length > 200:
         #     document['name'] = document['name'][0:200] + "..."
 
