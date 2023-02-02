@@ -37,19 +37,36 @@ const SingleVote = ({vote}) => {
       }
       {
         vote.vote_option === 'Afirmativo' ?
-          <div className={styles.greenVote}><b>{ vote.vote_option }</b></div>
+          <div className='vote green-vote'>{ vote.vote_option }</div>
           :
         vote.vote_option === 'En Contra' ?
-          <div className={styles.redVote}><b>{ vote.vote_option }</b></div>
+          <div className='vote red-vote'>{ vote.vote_option }</div>
           :
-          <div><b>{ vote.vote_option }</b></div>
+          <div className='vote'>{ vote.vote_option }</div>
       }
-      <div className={styles.link}>
-        <a href={`https://www.camara.cl/legislacion/sala_sesiones/votacion_detalle.aspx?prmIdVotacion=${vote.voting_id}`} target='_blank' rel="noreferrer">
-          <button>
+      <div className={styles.moreInfo}>
+        <div className={styles.votesInfo}>
+          <b style={{'color': 'gray'}}>Resultado Votación</b>
+          <br/>
+          <b style={{'color': 'limegreen'}}>{ vote.total_yes }</b> &nbsp;
+          <b style={{'color': 'red'}}>{ vote.total_no }</b> &nbsp;
+          <b style={{'color': 'gray'}}>{ vote.total_abstention }</b>&nbsp;
+          <br/>
+          {
+            vote.result === 'Aprobado' ?
+              <b className='vote-count green-vote'>{ vote.result }</b>
+              :
+            vote.result === 'Unánime' ?
+              <b className='vote-count red-vote'>{ vote.result }</b>
+              :
+              <b className='vote-count'>{ vote.result }</b>
+          }
+        </div>
+        <div className={styles.linkInfo}>
+          <a href={`https://www.camara.cl/legislacion/sala_sesiones/votacion_detalle.aspx?prmIdVotacion=${vote.voting_id}`} target='_blank' rel="noreferrer">
             Ver detalle
-          </button>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
   )

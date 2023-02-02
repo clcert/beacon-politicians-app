@@ -2449,6 +2449,23 @@ input, select, textarea {
 
 	}
 
+.vote {
+	margin: 10px 0;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.green-vote{
+	color: #06c96e;
+}
+
+.red-vote {
+	color: #f00;
+}
+
+.vote-count {
+	font-size: 0.8rem;
+}
 
 .loading-spinner {
 	width: 100%;
