@@ -6,6 +6,7 @@ import random
 import requests
 import argparse
 import pytz
+from time import sleep
 
 
 class Updater:
@@ -77,40 +78,47 @@ class Updater:
         print('Deputy Index:', index)
         print('---------------------')
 
-        if using_json:
-            if not os.path.exists(self.json_path):
-                dep_json = open(self.json_path, "x")
-                dep_json.close()
+        # if the json file does not exist, create it.
+        if not os.path.exists(self.json_path):
+            dep_json = open(self.json_path, "x")
+            dep_json.close()
 
-            with open(self.json_path, 'r', encoding='utf-8') as infile:
-                try:
-                    deputies = json.load(infile)
-                except ValueError:
-                    deputies = dict(deputies=list())
-                finally:
-                    infile.close()
-
-            with open(self.json_path, 'w', encoding='utf-8') as outfile:
-                deputy = dict(
-                    date=date_hour.strftime("%Y-%m-%d %H:%M:%S"),
-                    index=index,
-                    record=record,
-                )
-                # If something goes wrong, the json file is not modified.
-                try:
-                    deputy = {**deputy, **pd.Parser().get_deputy(index)}
-                    deputies['deputies'] = self.save_or_update(deputies['deputies'], deputy)
-                    print(f'Done.\n\n\n')
-                except Exception as e:
-                    print(e)
-                    print(f'Unexpected error getting deputy information.\n\n\n')
-                finally:
-                    json.dump(deputies, outfile, ensure_ascii=False)
-                    outfile.close()
-        else:
+        # Only print the deputy information if not using json.
+        if not using_json:
             parser = pd.Parser()
             deputy = parser.get_profile(parser.idfindex(index))
             print('Deputy: ', deputy['first_name'], deputy['first_surname'])
+            return
+
+        # If the json file exists, read its content.
+        with open(self.json_path, 'r', encoding='utf-8') as infile:
+            try:
+                deputies = json.load(infile)
+            except ValueError:
+                deputies = dict(deputies=list())
+            finally:
+                infile.close()
+        
+        deputy = dict(
+            date=date_hour.strftime("%Y-%m-%d %H:%M:%S"),
+            index=index,
+            record=record,
+        )
+
+        attempts = 0
+        while attempts < 3:
+            print(f'\n -- Attempt {attempts + 1}/3 -- \n')
+            try:
+                deputy = {**deputy, **pd.Parser().get_deputy(index)}
+                deputies['deputies'] = self.save_or_update(deputies['deputies'], deputy)
+                with open(self.json_path, 'w', encoding='utf-8') as outfile:
+                    json.dump(deputies, outfile, ensure_ascii=False)
+                    outfile.close()
+                break
+            except Exception as e:
+                attempts += 1
+                print(f'Unexpected error getting deputy information: {e}\n\n\n')
+                sleep(60)             
 
         return
 
