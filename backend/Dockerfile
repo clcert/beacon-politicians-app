@@ -15,4 +15,4 @@ COPY updater-cron /var/spool/cron/crontabs/root
 RUN mkdir log
 RUN python3 populate_json.py 2
 
-CMD crond -b && python app.py
+CMD crond -b && python webapp.py
