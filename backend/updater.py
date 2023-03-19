@@ -69,7 +69,7 @@ def collect_deputy_info(timestamp=None, only_print=False):
                 json.dump(deputies, outfile, ensure_ascii=False)
                 outfile.close()
             if TOKEN_TELEGRAM_BOT:
-                deputy_name = f'{deputy["profile"]["first_name"]} {deputy["profile"]["first_surname"]}'
+                deputy_name = f'{deputy["first_name"]} {deputy["first_surname"]}'
                 send_telegram_alert(message=f'New deputy: {deputy_name}')
             break
         except Exception as e:
