@@ -1,228 +1,166 @@
-import json
-import datetime
-import os
-import parser.deputies as pd
-import random
-import requests
-import argparse
-import pytz
+from argparse import ArgumentParser
+from datetime import datetime, date
+from pytz import timezone, utc
 from time import sleep
 
+import json
 
-class Updater:
-    def __init__(self):
-        self.json_path = os.path.dirname(os.path.realpath(__file__)) + '/deputies.json'
+from settings import JSON_PATH
+from deputies.deputy import DeputyParser
+from deputies.updater.beacon import get_pulse_data, get_index
+from deputies.utils import (
+    valid_date,
+    valid_hour,
+    create_path_if_not_exists,
+    get_json_data
+)
 
-    def index_from_json(self, date_hour):
-        """
-        Given a datetime object, gets its timestamp and return the beacon record and the output value.
-        :param date_hour: Datetime object used to get the record and output value.
-        :return:
-        """
-        url = 'https://random.uchile.cl/beacon/2.0-beta1/pulse/time/' + str(int(date_hour.timestamp()) * 1000)
-        page = requests.get(url)
-        json_page = page.json()
 
-        return json_page['pulse']['outputValue'], json_page['pulse']['pulseIndex']
+def collect_deputy_info(timestamp=None, only_print=False):
+    """
+    Collects info from a random deputy and saves it in a json file.
+    :param date_hour: datetime object to get the pulse data.
+    :param only_print: if true only prints basic info.
+    :return:
+    """
+    if timestamp is None:
+        [year, month, day] = str(date.today()).split('-')
+        timestamp = datetime(year=int(year), month=int(month), day=int(day), hour=0, minute=0)
 
-    def get_index(self, date_hour):
-        """
-        Get a random number in the range of the deputies list length.
-        TO DO: Modify using CLCERT Beacon Random
-        :return: An integer in the range of the list described.
-        """
-        max_index = pd.Parser().count_deputies() - 1
+    # Convert to UTC time
+    local_dt = timezone('America/Santiago').localize(timestamp, is_dst=None)
+    timestamp = local_dt.astimezone(utc)
 
-        index, record = self.index_from_json(date_hour)
-        random.seed(index)
+    chainId, pulseId, randOut = get_pulse_data(timestamp)
+    local_index = get_index(randOut)
 
-        return random.randint(0, max_index), record
+    print('---------------------')
+    print('Pulse Index:', pulseId)
+    print('Pulse Date:', timestamp.strftime("%Y-%m-%d %H:%M:%S"), 'UTC')
+    print('Deputy Index:', local_index)
+    print('---------------------')
 
-    def get_list(self):
-        """
-        Returns an ordered list of dictionaries containing the date, index from the deputies list and the beacon id,
-        ordered according to the date.
-        :return:
-        """
-        if os.path.exists(self.json_path) and os.stat(self.json_path).st_size != 0:
-            with open(self.json_path, 'r', encoding='utf-8') as infile:
-                try:
-                    deputies_list = json.load(infile)['deputies']
-                    deputies_list = sorted(deputies_list, key=lambda k: datetime.datetime.strptime(k['date'],
-                                                                                                   "%Y-%m-%d %H:%M:%S"))
-                    return deputies_list
-                except ValueError:
-                    return []
-        return []
+    create_path_if_not_exists(JSON_PATH)
 
-    def update(self, using_json=True, date_hour=None):
-        """
-        Given an index for the position of the deputy at deputies list, modifies the json
-        file using deputy's information.
-        :param; Boolean used for testing, must be True for update in json and false if testing.
-        :return:
-        """
-        if not date_hour:
-            [year, month, day] = str(datetime.date.today()).split('-')
-            date_hour = datetime.datetime(year=int(year), month=int(month), day=int(day), hour=0, minute=0)
+    # Only print the deputy information if not using json.
+    if only_print:
+        deputy = DeputyParser(local_index)
+        profile = deputy.get_profile()
+        print('Deputy: ', profile['first_name'], profile['first_surname'])
+        return
 
-        # Convert to UTC time
-        local_dt = pytz.timezone('America/Santiago').localize(date_hour, is_dst=None)
-        date_hour = local_dt.astimezone(pytz.utc)
+    deputies = get_json_data()
+    if deputies is None:
+        deputies = dict(deputies=list())
+    
+    deputy = dict(
+        date=timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+        index=local_index,
+        record=pulseId,
+    )
 
-        index, record = self.get_index(date_hour)
-
-        print('---------------------')
-        print('Record:', record)
-        print('Pulse Date:', date_hour.strftime("%Y-%m-%d %H:%M:%S"), 'UTC')
-        print('Deputy Index:', index)
-        print('---------------------')
-
-        # if the json file does not exist, create it.
-        if not os.path.exists(self.json_path):
-            dep_json = open(self.json_path, "x")
-            dep_json.close()
-
-        # Only print the deputy information if not using json.
-        if not using_json:
-            parser = pd.Parser()
-            deputy = parser.get_profile(parser.idfindex(index))
-            print('Deputy: ', deputy['first_name'], deputy['first_surname'])
-            return
-
-        # If the json file exists, read its content.
-        with open(self.json_path, 'r', encoding='utf-8') as infile:
-            try:
-                deputies = json.load(infile)
-            except ValueError:
-                deputies = dict(deputies=list())
-            finally:
-                infile.close()
-        
-        deputy = dict(
-            date=date_hour.strftime("%Y-%m-%d %H:%M:%S"),
-            index=index,
-            record=record,
-        )
-
-        attempts = 0
-        while attempts < 3:
-            print(f'\n -- Attempt {attempts + 1}/3 -- \n')
-            try:
-                deputy = {**deputy, **pd.Parser().get_deputy(index)}
-                deputies['deputies'] = self.save_or_update(deputies['deputies'], deputy)
-                with open(self.json_path, 'w', encoding='utf-8') as outfile:
-                    json.dump(deputies, outfile, ensure_ascii=False)
-                    outfile.close()
-                break
-            except Exception as e:
-                attempts += 1
-                print(f'Unexpected error getting deputy information: {e}\n\n\n')
-                sleep(60)             
+    attempts = 0
+    while attempts < 3:
+        print(f'\n -- Attempt {attempts + 1}/3 -- \n')
+        try:
+            deputy = {**deputy, **DeputyParser(local_index).get_data()}
+            deputies['deputies'] = save_or_update(deputies['deputies'], deputy)
+            with open(JSON_PATH, 'w', encoding='utf-8') as outfile:
+                json.dump(deputies, outfile, ensure_ascii=False)
+                outfile.close()
+            break
+        except Exception as e:
+            attempts += 1
+            print(f'Unexpected error getting deputy information: {e}', end='\n\n')
+            sleep(60)             
 
         return
 
-    def save_or_update(self, deputies, deputy_data):
-        """
-        Saves or updates the deputy data in the deputies list.
-        :param deputies: List of deputies.
-        :param deputy_data: Deputy data.
-        :return: The updated list of the last 7 deputies.
-        """
-        filtered_deputies = list(
-            filter(
-                lambda deputy: deputy['index'] != deputy_data['index'],
-                deputies,
-            )
-        )
-        filtered_deputies.append(deputy_data)
-        return filtered_deputies[-7:]
-
-    def run(self):
-        """
-        Updates using the index gotten by using the get_index method
-        and then run  the process.
-        :return:
-        """
-        self.update()
-
-
-def valid_date(date):
+def save_or_update(deputies_list, deputy):
     """
-    Checks if a date is valid according to the argument parser.
-    :param date: String representing a date. Format must be YYYY-mm-dd.
-    :return: Datetime object representing the given string.
-    """
-    try:
-        return datetime.datetime.strptime(date, "%Y-%m-%d")
-    except ValueError:
-        msg = "Not a valid date: '{0}'.".format(date)
-        raise argparse.ArgumentTypeError(msg)
+    Saves or updates the new deputy in the list of deputies.
+    :param deputies_list: list of deputies.
+    :param deputy: deputy to save or update.
 
+    """
+    deputies_list = list(filter(
+        lambda d: d['date'] != deputy['date'] and d['index'] != deputy['index'],
+        deputies_list
+    ))
+    deputies_list.append(deputy)
+    deputies_list = deputies_list[-10:]
 
-def valid_hour(hour):
-    """
-    Checks if an hour is valid according to the argument parser.
-    :param hour: String representing an hour. Format must be HH:MM.
-    :return: Datetime object representing te given string.
-    """
-    try:
-        return datetime.datetime.strptime(hour, "%H:%M")
-    except ValueError:
-        msg = "Not a valid hour: '{0}'.".format(hour)
-        raise argparse.ArgumentTypeError(msg)
+    return deputies_list
 
 
 if __name__ == '__main__':
     # Declares Argument Parser using the description defined above.
-    description = "By default, gets and updates information for the last deputy, or print it. Also, given a date and " \
-                  "hour in specific, can get information of the deputy that should be obtained by using the correspo" \
-                  "nding record of that date."
-    parser = argparse.ArgumentParser(description=description)
+    description = (
+        "By default, gets and updates information for the last deputy, or print it. Also, given a date and " \
+        "hour in specific, can get information of the deputy that should be obtained by using the correspo" \
+        "nding record of that date."
+    )
+    parser = ArgumentParser(description=description)
 
     # Defines the different arguments
-    parser.add_argument("-p", "--print",
-                        help="Display information of the deputy.",
-                        action="store_true")
-    parser.add_argument("-d", "--date",
-                        help="Sets the date to get the record, by default at 00:00 hrs, if hour isn't specified. "
-                             "Format must be YYYY-mm-dd",
-                        type=valid_date)
-    parser.add_argument("-t", "--time",
-                        help="Sets the hour to get the record, by default using the current date if date isn't "
-                             "specified. Format must be HH:MM",
-                        type=valid_hour)
-    parser.add_argument("-e", "--epoch",
-                        help="Sets the date and time to the given epoch. If date or time are given, will prioritize"
-                             "the epoch argument.",
-                        type=int)
+    parser.add_argument(
+        "-p",
+        "--print",
+        help="Display information of the deputy.",
+        action="store_true"
+    )
+    parser.add_argument(
+        "-d",
+        "--date",
+        help=(
+            "Sets the date to get the record, by default at 00:00 hrs, if hour isn't specified. "
+            "Format must be YYYY-mm-dd"
+        ),
+        type=valid_date
+    )
+    parser.add_argument(
+        "-t",
+        "--time",
+        help=(
+            "Sets the hour to get the record, by default using the current date if date isn't "
+            "specified. Format must be HH:MM",
+        ),
+        type=valid_hour
+    )
+    parser.add_argument(
+        "-e",
+        "--epoch",
+        help=(
+            "Sets the date and time to the given epoch. If date or time are given, will prioritize"
+            "the epoch argument."
+        ),
+        type=int
+    )
 
     args = parser.parse_args()
-
     
     if args.epoch:
-        date = datetime.datetime.fromtimestamp(args.epoch)
+        timestamp = datetime.fromtimestamp(args.epoch)
 
     elif args.date:
-        date = datetime.datetime(
+        timestamp = datetime.datetime(
             year=args.date.year, 
             month=args.date.month, 
             day=args.date.day
         )
 
         if args.time: # also include time
-            date = datetime.datetime(
-                year=date.year, 
-                month=date.month, 
-                day=date.day,
+            timestamp = datetime.datetime(
+                year=timestamp.year, 
+                month=timestamp.month, 
+                day=timestamp.day,
                 hour=args.time.hour, 
                 minute=args.time.minute
             )
 
     else:
-        date = None
+        # If no arguments are given, use today at 00:00 hrs.
+        timestamp=None
 
     # If print argument isn't given. Just update the json, with the last pulse.
-    # Else, checks for the different arguments, and asks for the information according to the documentation.s
-    updater = Updater()
-    updater.update(using_json=(not args.print), date_hour=date)
+    collect_deputy_info(timestamp=timestamp, only_print=args.print)

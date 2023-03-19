@@ -2,12 +2,10 @@
 # Python 3.5 o superior
 # otros requerimientos en requirents.txt
 #######################################################################################################################
-from flask import Flask, jsonify
-from flask import abort
-from deputy import Deputy
-from updater import Updater
+from flask import Flask, jsonify, abort
 from flask_cors import CORS
 
+from deputies.utils import get_sorted_deputies
 
 app = Flask(__name__)
 CORS(app)
@@ -15,7 +13,7 @@ CORS(app)
 
 @app.route('/api/diputadodeldia')
 def main_page():
-    deputies_list = Updater().get_list()
+    deputies_list = get_sorted_deputies()
     if len(deputies_list) == 0:
         abort(404)
         return
@@ -25,19 +23,17 @@ def main_page():
 
 @app.route('/api/diputado/date/<string:selection_date>')
 def dateRecord(selection_date):
-    deputies_list = Updater().get_list()
+    deputies_list = get_sorted_deputies()
     deputy = list(filter(lambda d: d['date'].split(' ')[0] == selection_date, deputies_list))
     if len(deputy) == 0:
         abort(404)
         return
-    d = Deputy(int(deputy[0]['index']))
-    current = d.info
-    return jsonify(current)
+    return jsonify(deputy[0])
 
 
 @app.route('/api/dates')
 def dates():
-    deputies_list = Updater().get_list()
+    deputies_list = get_sorted_deputies()
     dates = list(map(lambda x: x['date'], deputies_list))
     dates.sort()
     return jsonify({'dates': dates})
