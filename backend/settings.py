@@ -20,6 +20,9 @@ BASE_PROFILE_PIC_URL = 'https://www.camara.cl/img.aspx?prmID=GRCL'
 BASE_DEPUTY_INFO_URL = OPENDATA_CAMARA_URL + 'WSDiputado.asmx/retornarDiputado?prmDiputadoId='
 BASE_ATTENDANCES_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionAsistencia?prmSesionId='
 
+TOKEN_TELEGRAM_BOT = None
+TELEGRAM_CHAT_ID = ''
+
 # Voting filter
 # Blacklist of keywords
 VOTING_BLACKLIST = [

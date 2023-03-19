@@ -5,7 +5,7 @@ from time import sleep
 
 import json
 
-from settings import JSON_PATH
+from settings import JSON_PATH, TOKEN_TELEGRAM_BOT, TELEGRAM_CHAT_ID
 from deputies.deputy import DeputyParser
 from deputies.updater.beacon import get_pulse_data, get_index
 from deputies.utils import (
@@ -68,13 +68,20 @@ def collect_deputy_info(timestamp=None, only_print=False):
             with open(JSON_PATH, 'w', encoding='utf-8') as outfile:
                 json.dump(deputies, outfile, ensure_ascii=False)
                 outfile.close()
+            if TOKEN_TELEGRAM_BOT:
+                deputy_name = f'{deputy["profile"]["first_name"]} {deputy["profile"]["first_surname"]}'
+                send_telegram_alert(message=f'New deputy: {deputy_name}')
             break
         except Exception as e:
             attempts += 1
-            print(f'Unexpected error getting deputy information: {e}', end='\n\n')
+            error_msg = f'Unexpected error getting deputy information: {e}'
+            print(error_msg)
+            print('Retrying in 60 seconds...', end='\n\n')
+            if TOKEN_TELEGRAM_BOT:
+                send_telegram_alert(message=error_msg)
             sleep(60)             
 
-        return
+    return
 
 def save_or_update(deputies_list, deputy):
     """
@@ -92,6 +99,20 @@ def save_or_update(deputies_list, deputy):
 
     return deputies_list
 
+def send_telegram_alert(message):
+    """
+    Sends a telegram alert with the given message.
+    :param message: message to send.
+    :return:
+    """
+    import requests
+    url = f'https://api.telegram.org/bot{TOKEN_TELEGRAM_BOT}/sendMessage'
+    data = {
+        'chat_id': TELEGRAM_CHAT_ID,
+        'text': message,
+        'parse_mode': 'Markdown'
+    }
+    requests.post(url, data=data)
 
 if __name__ == '__main__':
     # Declares Argument Parser using the description defined above.
@@ -162,5 +183,10 @@ if __name__ == '__main__':
         # If no arguments are given, use today at 00:00 hrs.
         timestamp=None
 
-    # If print argument isn't given. Just update the json, with the last pulse.
-    collect_deputy_info(timestamp=timestamp, only_print=args.print)
+    try:
+        # If print argument isn't given. Just update the json, with the last pulse.
+        collect_deputy_info(timestamp=timestamp, only_print=args.print)
+    except Exception as e:
+        print('Totally unexpected error:', e)
+        if TOKEN_TELEGRAM_BOT:
+            send_telegram_alert(message=f'Totally unexpected error: {e}')
