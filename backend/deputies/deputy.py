@@ -141,12 +141,16 @@ class DeputyParser:
         all_expenses = {}
 
         for expense_name, parser in parsers.items():
-            expenses_data = parser.get_deputy_expenses()
-            if expenses_data == []:
-                print(f'[{expense_name.capitalize()} Expenses] Not found.')
-            else:
-                print(f'[{expense_name.capitalize()} Expenses] Obtained.')
-            all_expenses[expense_name] = expenses_data
+            try:
+                expenses_data = parser.get_deputy_expenses()
+                if expenses_data == []:
+                    print(f'[{expense_name.capitalize()} Expenses] Not found.')
+                else:
+                    print(f'[{expense_name.capitalize()} Expenses] Obtained.')
+                all_expenses[expense_name] = expenses_data
+            except:
+                print(f'[{expense_name.capitalize()} Expenses] Error.')
+                all_expenses[expense_name] = []
 
         # Show summary
         print('[Expenses] Obtained')
