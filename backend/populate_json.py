@@ -1,8 +1,6 @@
-from updater import Updater
+from updater import collect_deputy_info
 from datetime import datetime, timedelta
 from sys import argv
-
-updater = Updater()
 
 days_to_calculate = int(argv[1]) if len(argv) > 1 else 1
 days_to_calculate = min(days_to_calculate, 7)
@@ -24,4 +22,4 @@ initial_date = initial_date.replace(hour=0, minute=0, second=0, microsecond=0)
 # Populates the json with the last 7 days
 for delta in range(days_to_calculate):
     date = (initial_date + timedelta(days=delta))
-    updater.update(using_json=True, date_hour=date)
+    collect_deputy_info(timestamp=date)
