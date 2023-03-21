@@ -91,7 +91,7 @@ def save_or_update(deputies_list, deputy):
 
     """
     deputies_list = list(filter(
-        lambda d: d['date'] != deputy['date'] and d['index'] != deputy['index'],
+        lambda d: d['date'] != deputy['date'],
         deputies_list
     ))
     deputies_list.append(deputy)
@@ -161,17 +161,17 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     if args.epoch:
-        timestamp = datetime.fromtimestamp(args.epoch)
+        timestamp = fromtimestamp(args.epoch)
 
     elif args.date:
-        timestamp = datetime.datetime(
+        timestamp = datetime(
             year=args.date.year, 
             month=args.date.month, 
             day=args.date.day
         )
 
         if args.time: # also include time
-            timestamp = datetime.datetime(
+            timestamp = datetime(
                 year=timestamp.year, 
                 month=timestamp.month, 
                 day=timestamp.day,

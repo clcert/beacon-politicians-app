@@ -72,7 +72,7 @@ def valid_date(date):
     :return: Datetime object representing the given string.
     """
     try:
-        return datetime.datetime.strptime(date, "%Y-%m-%d")
+        return datetime.strptime(date, "%Y-%m-%d")
     except ValueError:
         msg = "Not a valid date: '{0}'.".format(date)
         raise argparse.ArgumentTypeError(msg)
@@ -85,7 +85,7 @@ def valid_hour(hour):
     :return: Datetime object representing te given string.
     """
     try:
-        return datetime.datetime.strptime(hour, "%H:%M")
+        return datetime.strptime(hour, "%H:%M")
     except ValueError:
         msg = "Not a valid hour: '{0}'.".format(hour)
         raise argparse.ArgumentTypeError(msg)
