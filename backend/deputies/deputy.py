@@ -133,16 +133,17 @@ class DeputyParser:
         t_init = perf_counter()
 
         parsers = {
-            'operational': OperationalExpensesParser(self.profile),
-            'offices': OfficesExpensesParser(self.profile),
-            'staff': StaffExpensesParser(self.profile)
+            'operational': OperationalExpensesParser,
+            'offices': OfficesExpensesParser,
+            'staff': StaffExpensesParser,
         }
 
         all_expenses = {}
 
         for expense_name, parser in parsers.items():
             try:
-                expenses_data = parser.get_deputy_expenses()
+                current_parser = parser(self.profile)
+                expenses_data = current_parser.get_deputy_expenses()
                 if expenses_data == []:
                     print(f'[{expense_name.capitalize()} Expenses] Not found.')
                 else:

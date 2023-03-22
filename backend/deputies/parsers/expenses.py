@@ -26,7 +26,7 @@ class ExpensesParser:
             options.binary_location = '/usr/bin/chromium-browser'
             driver = webdriver.Chrome('chromedriver', options=options)
         except Exception as e: # Outside Docker
-            print(f'Failed to run chromium chrome driver: {e}')
+            print(f'Failed to run chromium chrome driver.')
             print('Trying with google chrome...')
             options.binary_location = '/usr/bin/google-chrome-stable'
             driver = webdriver.Chrome('chromedriver', options=options)
