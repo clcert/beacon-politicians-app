@@ -183,7 +183,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     if args.epoch:
-        timestamp = fromtimestamp(args.epoch)
+        timestamp = datetime.fromtimestamp(args.epoch)
 
     elif args.date:
         timestamp = datetime(
