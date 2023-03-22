@@ -103,7 +103,8 @@ def check_json_correct_format():
         try:
             # Try to load the file as json
             json.load(infile)  
-        except ValueError:
+        except (json.decoder.JSONDecodeError, ValueError) as err:
+            print(err)
             return False
         finally:
             infile.close()
@@ -120,7 +121,8 @@ def get_json_data():
             try:
                 json_data = json.load(infile)
                 return json_data
-            except ValueError:
+            except (json.decoder.JSONDecodeError, ValueError) as err:
+                print(err)
                 return None
     return None
 
