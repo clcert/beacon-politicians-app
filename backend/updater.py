@@ -4,6 +4,7 @@ from pytz import timezone, utc
 from time import sleep
 
 import json
+import traceback
 
 from settings import JSON_PATH, TOKEN_TELEGRAM_BOT, TELEGRAM_CHAT_ID
 from deputies.deputy import DeputyParser
@@ -187,6 +188,7 @@ if __name__ == '__main__':
         # If print argument isn't given. Just update the json, with the last pulse.
         collect_deputy_info(timestamp=timestamp, only_print=args.print)
     except Exception as e:
+        traceback.print_exc()
         print('Totally unexpected error:', e)
         if TOKEN_TELEGRAM_BOT:
             send_telegram_alert(message=f'Totally unexpected error: {e}')
