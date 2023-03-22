@@ -75,6 +75,7 @@ def collect_deputy_info(timestamp=None, only_print=False):
         except Exception as e:
             attempts += 1
             error_msg = f'Unexpected error getting deputy information: {e}'
+            traceback.print_exc()
             print(error_msg)
             print('Retrying in 60 seconds...', end='\n\n')
             if TOKEN_TELEGRAM_BOT:

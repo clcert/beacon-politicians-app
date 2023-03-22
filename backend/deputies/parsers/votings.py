@@ -33,7 +33,11 @@ def parse_deputy_votings(deputy_id, votes_limit=-1):
             break
 
         voting_id = legislature_voting[i]['voting_id']
-        doc = parse_vote_info(voting_id)
+        try:
+            doc = parse_vote_info(voting_id)
+        except:
+            # Error al obtener la votación
+            continue
 
         voting = dict()
 

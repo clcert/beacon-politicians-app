@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from time import perf_counter
 from datetime import datetime
+
 import requests
 
 # parsers
