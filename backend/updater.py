@@ -6,7 +6,12 @@ from time import sleep
 import json
 import traceback
 
-from settings import JSON_PATH, TOKEN_TELEGRAM_BOT, TELEGRAM_CHAT_ID
+from settings import JSON_PATH, TOKEN_TELEGRAM_BOT, TELEGRAM_CHAT_ID, DISCORD_WEBHOOK_URL
+
+# notifications
+from notifications import discord, telegram
+
+# deputies
 from deputies.deputy import DeputyParser
 from deputies.updater.beacon import get_pulse_data, get_index
 from deputies.utils import (
@@ -15,6 +20,9 @@ from deputies.utils import (
     create_path_if_not_exists,
     get_json_data
 )
+
+# Error Exceptions
+from requests.exceptions import ConnectionError
 
 
 def collect_deputy_info(timestamp=None, only_print=False):
@@ -68,18 +76,14 @@ def collect_deputy_info(timestamp=None, only_print=False):
             with open(JSON_PATH, 'w', encoding='utf-8') as outfile:
                 json.dump(deputies, outfile, ensure_ascii=False)
                 outfile.close()
+            formatted_message = telegram.format_success_message(deputy)
             if TOKEN_TELEGRAM_BOT:
-                deputy_name = f'{deputy["first_name"]} {deputy["first_surname"]}'
-                send_telegram_alert(message=f'New deputy: {deputy_name}')
+                telegram.send_notification(message=formatted_message)
             break
         except Exception as e:
-            attempts += 1
-            error_msg = f'Unexpected error getting deputy information: {e}'
             traceback.print_exc()
-            print(error_msg)
             print('Retrying in 60 seconds...', end='\n\n')
-            if TOKEN_TELEGRAM_BOT:
-                send_telegram_alert(message=error_msg)
+            attempts += 1
             sleep(60)             
 
     return
@@ -118,24 +122,10 @@ def save_or_update(deputies_list, deputy):
         deputies_list
     ))
     deputies_list.append(deputy)
-    deputies_list = deputies_list[-10:]
+    deputies_list = deputies_list[-14:]
 
     return deputies_list
 
-def send_telegram_alert(message):
-    """
-    Sends a telegram alert with the given message.
-    :param message: message to send.
-    :return:
-    """
-    import requests
-    url = f'https://api.telegram.org/bot{TOKEN_TELEGRAM_BOT}/sendMessage'
-    data = {
-        'chat_id': TELEGRAM_CHAT_ID,
-        'text': message,
-        'parse_mode': 'Markdown'
-    }
-    requests.post(url, data=data)
 
 if __name__ == '__main__':
     # Declares Argument Parser using the description defined above.
@@ -209,8 +199,13 @@ if __name__ == '__main__':
     try:
         # If print argument isn't given. Just update the json, with the last pulse.
         collect_deputy_info(timestamp=timestamp, only_print=args.print)
+        message = 'Deputy information updated successfully.'
+    except ConnectionError:
+        message = 'Error connecting to random.uchile.cl. Please check internet connection.'
     except Exception as e:
         traceback.print_exc()
-        print('Totally unexpected error:', e)
-        if TOKEN_TELEGRAM_BOT:
-            send_telegram_alert(message=f'Totally unexpected error: {e}')
+        message = f'Unexpected error. Please check the logs for more information.\n{e}'
+    finally:
+        print(message)
+        if DISCORD_WEBHOOK_URL:
+            discord.send_notification(message=message)

@@ -21,6 +21,15 @@ def main_page():
     return jsonify(last_deputy)
 
 
+@app.route('/api/diputados')
+def all_deputies():
+    deputies_list = get_sorted_deputies()
+    if len(deputies_list) == 0:
+        abort(404)
+        return
+    return jsonify(deputies_list)
+
+
 @app.route('/api/diputado/date/<string:selection_date>')
 def dateRecord(selection_date):
     deputies_list = get_sorted_deputies()

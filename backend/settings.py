@@ -22,6 +22,7 @@ BASE_ATTENDANCES_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionAsistenc
 
 TOKEN_TELEGRAM_BOT = None
 TELEGRAM_CHAT_ID = ''
+DISCORD_WEBHOOK_URL = ''
 
 # Voting filter
 # Blacklist of keywords
