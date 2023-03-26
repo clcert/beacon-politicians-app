@@ -76,13 +76,17 @@ def collect_deputy_info(timestamp=None, only_print=False):
             with open(JSON_PATH, 'w', encoding='utf-8') as outfile:
                 json.dump(deputies, outfile, ensure_ascii=False)
                 outfile.close()
-            formatted_message = telegram.format_success_message(deputy)
             if TOKEN_TELEGRAM_BOT:
+                formatted_message = telegram.format_success_message(deputy)
                 telegram.send_notification(message=formatted_message)
             break
         except Exception as e:
             traceback.print_exc()
             print('Retrying in 60 seconds...', end='\n\n')
+            if DISCORD_WEBHOOK_URL:
+                message = f'{attempts+1}° attempt failed. Retrying in 60 seconds...\n'
+                message += f'Error detail: {e}'
+                discord.send_notification(message=message)
             attempts += 1
             sleep(60)             
 
