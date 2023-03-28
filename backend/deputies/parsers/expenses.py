@@ -22,12 +22,12 @@ class ExpensesParser:
         options.add_argument("--no-sandbox")
         options.add_argument("--headless") # We don't need a GUI
         try: # Inside Docker
-            print('Attempting to run chromium chrome driver...')
+            print('[Expenses] Attempting to run chromium chrome driver...')
             options.binary_location = '/usr/bin/chromium-browser'
             driver = webdriver.Chrome('chromedriver', options=options)
         except Exception as e: # Outside Docker
-            print(f'Failed to run chromium chrome driver.')
-            print('Trying with google chrome...')
+            print('[Expenses] Failed to run chromium chrome driver.')
+            print('[Expenses] Trying with google chrome...')
             options.binary_location = '/usr/bin/google-chrome-stable'
             driver = webdriver.Chrome('chromedriver', options=options)
         

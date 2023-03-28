@@ -84,8 +84,10 @@ def collect_deputy_info(timestamp=None, only_print=False):
             traceback.print_exc()
             print('Retrying in 60 seconds...', end='\n\n')
             if DISCORD_WEBHOOK_URL:
-                message = f'{attempts+1}° attempt failed. Retrying in 60 seconds...\n'
-                message += f'Error detail: {e}'
+                message = f'Fail getting information in attempt {attempts+1}/3.'
+                message += f'Error detail: {e} \n\n'
+                message += f'```{traceback.format_exc()}```'
+                message += 'Retrying in 60 seconds...' if attempts < 2 else 'Giving up for today.'
                 discord.send_notification(message=message)
             attempts += 1
             sleep(60)             
@@ -203,12 +205,14 @@ if __name__ == '__main__':
     try:
         # If print argument isn't given. Just update the json, with the last pulse.
         collect_deputy_info(timestamp=timestamp, only_print=args.print)
-        message = 'Deputy information updated successfully.'
+        message = 'Deputy information updated successfully.\n'
+        message += 'Check it out at https://diputado.labs.clcert.cl'
     except ConnectionError:
         message = 'Error connecting to random.uchile.cl. Please check internet connection.'
     except Exception as e:
         traceback.print_exc()
         message = f'Unexpected error. Please check the logs for more information.\n{e}'
+        message += f'\n\n```{traceback.format_exc()}```'
     finally:
         print(message)
         if DISCORD_WEBHOOK_URL:
