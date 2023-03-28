@@ -40,10 +40,10 @@ def format_success_message(profile):
 
     message += "\n\n"
     message += "Su gasto promedio mensual se distribuye como sigue:\n"
-    message += f"- Gastos Operacionales: *${mean_operational_expenses:,}*\n".replace(',','.')
-    message += f"- Gasto en Oficinas: *${mean_offices_expenses:,}*\n".replace(',','.')
-    message += f"- Gasto en Personal de Apoyo: *${mean_staff_expenses:,}*\n".replace(',','.')
-    message += f"Formando un total de de *${(mean_operational_expenses + mean_offices_expenses + mean_staff_expenses):,}*.".replace(',','.')
+    message += f"- Gastos Operacionales: *${mean_operational_expenses:,.0f}*\n".replace(',','.')
+    message += f"- Gasto en Oficinas: *${mean_offices_expenses:,.0f}*\n".replace(',','.')
+    message += f"- Gasto en Personal de Apoyo: *${mean_staff_expenses:,.0f}*\n".replace(',','.')
+    message += f"Formando un total de de *${(mean_operational_expenses + mean_offices_expenses + mean_staff_expenses):,.0f}*.".replace(',','.')
     
     message += "\n\n"
     message += "Para ver más detalles, visita el siguiente enlace: "
