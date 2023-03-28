@@ -86,7 +86,6 @@ def collect_deputy_info(timestamp=None, only_print=False):
             if DISCORD_WEBHOOK_URL:
                 message = f'Fail getting information in attempt {attempts+1}/3.'
                 message += f'Error detail: {e} \n\n'
-                message += f'```{traceback.format_exc()}```'
                 message += 'Retrying in 60 seconds...' if attempts < 2 else 'Giving up for today.'
                 discord.send_notification(message=message)
             attempts += 1
@@ -212,7 +211,6 @@ if __name__ == '__main__':
     except Exception as e:
         traceback.print_exc()
         message = f'Unexpected error. Please check the logs for more information.\n{e}'
-        message += f'\n\n```{traceback.format_exc()}```'
     finally:
         print(message)
         if DISCORD_WEBHOOK_URL:
