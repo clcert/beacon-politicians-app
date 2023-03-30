@@ -1,8 +1,6 @@
 from time import sleep
 
 # Selenium
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
@@ -16,21 +14,7 @@ from deputies.utils import get_current_month, get_current_year
 
 class ExpensesParser:
 
-    def __init__(self):
-        options = webdriver.ChromeOptions()
-        # Location of Google Chrome binary
-        options.add_argument("--no-sandbox")
-        options.add_argument("--headless") # We don't need a GUI
-        try: # Inside Docker
-            print('[Expenses] Attempting to run chromium chrome driver...')
-            options.binary_location = '/usr/bin/chromium-browser'
-            driver = webdriver.Chrome('chromedriver', options=options)
-        except Exception as e: # Outside Docker
-            print('[Expenses] Failed to run chromium chrome driver.')
-            print('[Expenses] Trying with google chrome...')
-            options.binary_location = '/usr/bin/google-chrome-stable'
-            driver = webdriver.Chrome('chromedriver', options=options)
-        
+    def __init__(self, driver=None):        
         self.driver = driver
         self.url = ''
         self.month_selector_id = ''
@@ -81,20 +65,16 @@ class ExpensesParser:
                 # print('Error parsing expenses for month: ' + month + ' and year: ' + str(year))
                 continue
 
-        self.close_driver()
         return expenses
 
     def parse_and_filter_table(self, html_table):
         pass
 
-    def close_driver(self):
-        self.driver.close()
-
 
 class OperationalExpensesParser(ExpensesParser):
 
-    def __init__(self, profile):
-        super().__init__()
+    def __init__(self, profile, **kwargs):
+        super().__init__(**kwargs)
         deputy_id = profile['deputy_id']
         self.url = f'https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId={deputy_id}'
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_DetallePlaceHolder_ddlMes'
@@ -125,8 +105,8 @@ class OperationalExpensesParser(ExpensesParser):
 
 class OfficesExpensesParser(ExpensesParser):
 
-    def __init__(self, profile):
-        super().__init__()
+    def __init__(self, profile, **kwargs):
+        super().__init__(**kwargs)
         self.deputy_name = f'{profile["first_surname"]} {profile["second_surname"][0]}., {profile["first_name"]}'
         self.url = 'https://www.camara.cl/transparencia/oficinasparlamentarias.aspx'
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlMes'
@@ -148,8 +128,8 @@ class OfficesExpensesParser(ExpensesParser):
 
 class StaffExpensesParser(ExpensesParser):
 
-    def __init__(self, profile):
-        super().__init__()
+    def __init__(self, profile, **kwargs):
+        super().__init__(**kwargs)
         self.deputy_name = f'{profile["first_surname"]} {profile["second_surname"]}, {profile["first_name"]}'
         self.url = 'https://www.camara.cl/transparencia/personalapoyogral.aspx'
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlMes'
