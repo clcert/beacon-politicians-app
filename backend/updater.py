@@ -180,6 +180,8 @@ if __name__ == '__main__':
         # If no arguments are given, use today at 00:00 hrs.
         timestamp=None
 
+    message = ''
+
     try:
         # If print argument isn't given. Just update the json, with the last pulse.
         collect_deputy_info(timestamp=timestamp, only_print=args.print)
@@ -188,8 +190,8 @@ if __name__ == '__main__':
     except ConnectionError:
         message = 'Error connecting to random.uchile.cl. Please check internet connection.'
     except Exception as e:
-        traceback.print_exc()
         message = f'Unexpected error. Please check the logs for more information.\n{e}'
+        traceback.print_exc()
     finally:
         print(message)
         if DISCORD_WEBHOOK_URL:
