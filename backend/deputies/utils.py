@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
-from datetime import datetime
+from argparse import ArgumentTypeError
+from datetime import datetime, date, timedelta
 from os import path, stat
 
 import requests
@@ -9,8 +10,9 @@ from settings import (
     ALL_LEGISLATURES_URL,
     CURRENT_LEGISLATURE_URL,
     CURRENT_DEPUTIES_URL,
-    JSON_PATH,
-)
+    FILE_LOCATIONS,
+    JsonFiles,
+)   
 
 def get_number_of_deputies():
     """
@@ -75,7 +77,7 @@ def valid_date(date):
         return datetime.strptime(date, "%Y-%m-%d")
     except ValueError:
         msg = "Not a valid date: '{0}'.".format(date)
-        raise argparse.ArgumentTypeError(msg)
+        raise ArgumentTypeError(msg)
 
 
 def valid_hour(hour):
@@ -88,18 +90,25 @@ def valid_hour(hour):
         return datetime.strptime(hour, "%H:%M")
     except ValueError:
         msg = "Not a valid hour: '{0}'.".format(hour)
-        raise argparse.ArgumentTypeError(msg)
+        raise ArgumentTypeError(msg)
 
-def check_json_correct_format():
+def check_json_correct_format(json_file=JsonFiles.DEPUTIES):
     """
     Checks if the file format is correct as a json file
     :return: True if the file is formatted as a json, else False
     """
-    if not path.exists(JSON_PATH):
-        print(JSON_PATH + ' does not exist')
+    if json_file == JsonFiles.DEPUTIES:
+        file_path = FILE_LOCATIONS[JsonFiles.DEPUTIES]
+    elif json_file == JsonFiles.EXPENSES:
+        file_path = FILE_LOCATIONS[JsonFiles.EXPENSES]
+    else:
+        raise ValueError('Invalid json file')
+    
+    if not path.exists(file_path):
+        print(file_path + ' does not exist')
         return False
 
-    with open(JSON_PATH, 'r') as infile:
+    with open(file_path, 'r') as infile:
         try:
             # Try to load the file as json
             json.load(infile)  
@@ -110,14 +119,21 @@ def check_json_correct_format():
             infile.close()
         return True
 
-def get_json_data():
+def get_json_data(json_file=JsonFiles.DEPUTIES):
     """
     Returns an ordered list of dictionaries containing the date, index from the deputies list and the beacon id,
     ordered according to the date.
     :return:
     """
-    if path.exists(JSON_PATH) and stat(JSON_PATH).st_size != 0:
-        with open(JSON_PATH, 'r', encoding='utf-8') as infile:
+    if json_file == JsonFiles.DEPUTIES:
+        file_path = FILE_LOCATIONS[JsonFiles.DEPUTIES]
+    elif json_file == JsonFiles.EXPENSES:
+        file_path = FILE_LOCATIONS[JsonFiles.EXPENSES]
+    else:
+        raise ValueError('Invalid json file')
+    
+    if path.exists(file_path) and stat(file_path).st_size != 0:
+        with open(file_path, 'r', encoding='utf-8') as infile:
             try:
                 json_data = json.load(infile)
                 return json_data

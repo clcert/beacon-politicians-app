@@ -8,11 +8,9 @@ import requests
 from deputies.parsers.profile import parse_deputy_profile
 from deputies.parsers.attendances import parse_deputy_attendance
 from deputies.parsers.votings import parse_deputy_votings
-from deputies.parsers.expenses import (
-    OfficesExpensesParser,
-    OperationalExpensesParser,
-    StaffExpensesParser
-)
+
+# utils
+from deputies.utils import get_json_data
 
 # settings
 from settings import (
@@ -20,6 +18,7 @@ from settings import (
     BASE_PROFILE_PIC_URL,
     BASE_DEPUTY_INFO_URL,
     CURRENT_DEPUTIES_URL,
+    JsonFiles,
 )
 
 
@@ -45,7 +44,7 @@ class DeputyParser:
         self.profile = self.get_profile()
         self.profile['attendance'] = self.get_attendance()
         self.profile['voting'] = self.get_last_votes()
-        # self.profile['expenses'] = self.get_deputy_expenses()
+        self.profile['expenses'] = self.get_deputy_expenses()
 
         return self.profile
 
@@ -123,35 +122,13 @@ class DeputyParser:
 
         return voting
 
-    # def get_deputy_expenses(self):
-    #     """
-    #     Method used to get the expenses of a deputy for all the chamber sessions of the
-    #     current legislature.
-    #     :return: Returns a dictionary containing the number of days attended, unattended justified or not, the total
-    #     number of days and the official percentage of attended days.
-    #     """
-    #     # Measure elapsed time
-    #     t_init = perf_counter()
-
-    #     parsers = {
-    #         'operational': OperationalExpensesParser,
-    #         'offices': OfficesExpensesParser,
-    #         'staff': StaffExpensesParser,
-    #     }
-
-    #     all_expenses = {}
-
-    #     for expense_name, parser in parsers.items():
-    #         current_parser = parser(self.profile)
-    #         expenses_data = current_parser.get_deputy_expenses()
-    #         if expenses_data == []:
-    #             print(f'[Expenses] {expense_name.capitalize()} Not found.')
-    #         else:
-    #             print(f'[Expenses] {expense_name.capitalize()} Obtained.')
-    #         all_expenses[expense_name] = expenses_data
-
-    #     # Show summary
-    #     print('[Expenses] Obtained')
-    #     print('[Expenses] Elapsed time: ', round(perf_counter() - t_init, 3), 's', end='\n\n')
-        
-    #     return all_expenses
+    def get_deputy_expenses(self):
+        """
+        Method used to get the expenses of a deputy for all the chamber sessions of the
+        current legislature.
+        :return: Returns a dictionary containing last 6 months deputy expenses.
+        """
+        expenses_data = get_json_data(json_file=JsonFiles.DEPUTIES)
+        deputy_data = expenses_data[self.local_index]
+        # TODO: Add all deputies average expenses in order to compare them
+        return deputy_data['expenses']

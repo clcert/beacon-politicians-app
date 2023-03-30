@@ -1,12 +1,12 @@
 from argparse import ArgumentParser
-from datetime import datetime, date, timedelta
+from datetime import datetime
 from pytz import timezone, utc
 from time import sleep
 
 import json
 import traceback
 
-from settings import JSON_PATH, TOKEN_TELEGRAM_BOT, TELEGRAM_CHAT_ID, DISCORD_WEBHOOK_URL
+from settings import JsonFiles, FILE_LOCATIONS, TOKEN_TELEGRAM_BOT, TELEGRAM_CHAT_ID, DISCORD_WEBHOOK_URL
 
 # notifications
 from notifications import discord, telegram
@@ -49,7 +49,7 @@ def collect_deputy_info(timestamp=None, only_print=False):
     print('Deputy Index:', local_index)
     print('---------------------')
 
-    create_path_if_not_exists(JSON_PATH)
+    create_path_if_not_exists(FILE_LOCATIONS[JsonFiles.DEPUTIES])
 
     # Only print the deputy information if not using json.
     if only_print:
@@ -74,7 +74,7 @@ def collect_deputy_info(timestamp=None, only_print=False):
         try:
             deputy = {**deputy, **DeputyParser(local_index).get_data()}
             deputies['deputies'] = save_or_update(deputies['deputies'], deputy)
-            with open(JSON_PATH, 'w', encoding='utf-8') as outfile:
+            with open(FILE_LOCATIONS[JsonFiles.DEPUTIES], 'w', encoding='utf-8') as outfile:
                 json.dump(deputies, outfile, ensure_ascii=False)
                 outfile.close()
             if TOKEN_TELEGRAM_BOT:

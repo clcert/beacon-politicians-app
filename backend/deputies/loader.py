@@ -1,8 +1,4 @@
-import json
-import os
-
 from updater import Updater
-from settings import JSON_PATH
 from deputies.utils import (
     check_json_correct_format,
     get_sorted_deputies,

@@ -1,6 +1,17 @@
 from os import path
+from enum import Enum
 
-JSON_PATH = path.dirname(path.realpath(__file__)) + '/deputies.json'
+class JsonFiles(Enum):
+    """
+    Enum used to identify the json file to be used.
+    """
+    DEPUTIES = 1
+    EXPENSES = 2
+
+FILE_LOCATIONS = {
+    JsonFiles.DEPUTIES: path.dirname(path.realpath(__file__)) + '/deputies.json',
+    JsonFiles.EXPENSES: path.dirname(path.realpath(__file__)) + '/expenses.json',
+}
 
 OPENDATA_CAMARA_URL = 'http://opendata.camara.cl/camaradiputados/WServices/'
 
