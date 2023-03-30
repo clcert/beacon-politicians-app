@@ -18,7 +18,8 @@ from deputies.utils import (
     valid_date,
     valid_hour,
     create_path_if_not_exists,
-    get_json_data
+    get_json_data,
+    get_today_timestamp,
 )
 
 # Error Exceptions
@@ -92,28 +93,6 @@ def collect_deputy_info(timestamp=None, only_print=False):
             sleep(60)             
 
     return
-
-def get_today_timestamp():
-    """
-    Gets the timestamp for today at 00:00:00 UTC-3.
-    :return: timestamp.
-    """
-    dt_utc = datetime.utcnow()
-    dt_local = datetime.now()
-
-    today_pulse = dt_utc.day > dt_local.day or (
-        dt_utc.day == dt_local.day and dt_utc.hour >= 3
-    )
-
-    if today_pulse:
-        today = date.today()
-    else:
-        today = date.today() - timedelta(days=1)
-
-    [year, month, day] = str(today).split('-')
-    timestamp = datetime(year=int(year), month=int(month), day=int(day), hour=0, minute=0)
-
-    return timestamp
 
 def save_or_update(deputies_list, deputy):
     """
