@@ -3,6 +3,8 @@ from selenium import webdriver
 from datetime import datetime
 from time import perf_counter
 
+import threading
+
 # drivers
 from drivers.drivers import chromium_driver, google_chrome_driver
 
@@ -14,6 +16,9 @@ from deputies.parsers.expenses import (
     OperationalExpensesParser,
     StaffExpensesParser,
 )
+
+deputies_expenses = []
+THREADS = 6
 
 
 def parse_expenses(profile, driver):
@@ -51,8 +56,6 @@ def parse_expenses(profile, driver):
     return all_expenses
 
 
-    
-
 def get_driver():
     options = webdriver.ChromeOptions()
     options.add_argument("--no-sandbox")
@@ -65,17 +68,16 @@ def get_driver():
         return google_chrome_driver(options)
 
 
-def parse_deputies_expenses():
-    total_deputies = get_number_of_deputies()
+def parse_deputies_expenses(indexes_list):
+    global deputies_expenses
     driver = get_driver()
 
     if driver is None:
         print('[Expenses] Failed to run chrome driver.')
+        print('Index list: ', ', '.join(indexes_list))
         return
 
-    deputies_expenses = []
-
-    for local_index in range(total_deputies):
+    for local_index in indexes_list:
         current_deputy = DeputyParser(index=local_index)
         deputy_profile = current_deputy.get_profile()
         deputy_profile['expenses'] = parse_expenses(deputy_profile, driver)
@@ -86,7 +88,20 @@ def parse_deputies_expenses():
 
 
 if __name__ == '__main__':
+    total_deputies = get_number_of_deputies()
+    indexes_list = list(range(total_deputies))
+
+    threads_list = []
+    for i in range(THREADS):
+        thread = threading.Thread(target=parse_deputies_expenses, args=(indexes_list[i::THREADS],))
+        threads_list.append(thread)
+        thread.start()
+
+    for thread in threads_list:
+        thread.join()
+
     deputies_expenses = parse_deputies_expenses()
     dump_data = {'expenses': deputies_expenses, 'last_update': datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
     with open('deputies_expenses.json', 'w') as f:
         json.dump(deputies_expenses, f, indent=4)
