@@ -128,7 +128,8 @@ class DeputyParser:
         current legislature.
         :return: Returns a dictionary containing last 6 months deputy expenses.
         """
-        expenses_data = get_json_data(json_file=JsonFiles.DEPUTIES)
+        json_data = get_json_data(json_file=JsonFiles.EXPENSES)
+        expenses_data = json_data['expenses']
         deputy_data = expenses_data[self.local_index]
         # TODO: Add all deputies average expenses in order to compare them
         return deputy_data['expenses']
