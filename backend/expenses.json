@@ -23909,7 +23909,7 @@
                         "Relacionados a Oficina Parlamentaria": 1859009,
                         "Web y Almacenamiento": 0,
                         "Otros": 609206,
-                        "Telefonía (**monto ajustado por nota de crédito recibida)": 50742,
+                        "Telefonía": 50742,
                         "Traslación": 2692269,
                         "Difusión": 697000,
                         "Actividades destinadas a la interacción con la comunidad": 0,
@@ -26697,5 +26697,319 @@
             }
         }
     ],
-    "last_update": "2023-03-30 18:55:52"
+    "last_update": "2023-03-30 18:55:52",
+    "average_expenses": {
+        "operational": [
+            {
+                "total": 4876234,
+                "total_std": 693991,
+                "month": "diciembre",
+                "detail": {
+                    "Relacionados a Oficina Parlamentaria": {
+                        "total": 823702,
+                        "total_std": 569296
+                    },
+                    "Web y Almacenamiento": {
+                        "total": 28632,
+                        "total_std": 164347
+                    },
+                    "Otros": {
+                        "total": 1577859,
+                        "total_std": 766597
+                    },
+                    "Telefonía": {
+                        "total": 107053,
+                        "total_std": 77682
+                    },
+                    "Traslación": {
+                        "total": 1692335,
+                        "total_std": 656868
+                    },
+                    "Difusión": {
+                        "total": 606380,
+                        "total_std": 742085
+                    },
+                    "Actividades destinadas a la interacción con la comunidad": {
+                        "total": 32278,
+                        "total_std": 204408
+                    },
+                    "Correspondencia": {
+                        "total": 7996,
+                        "total_std": 40690
+                    }
+                }
+            },
+            {
+                "total": 5041144,
+                "total_std": 642110,
+                "month": "noviembre",
+                "detail": {
+                    "Relacionados a Oficina Parlamentaria": {
+                        "total": 849091,
+                        "total_std": 583346
+                    },
+                    "Web y Almacenamiento": {
+                        "total": 20553,
+                        "total_std": 134768
+                    },
+                    "Otros": {
+                        "total": 1492228,
+                        "total_std": 746366
+                    },
+                    "Telefonía": {
+                        "total": 112075,
+                        "total_std": 89567
+                    },
+                    "Traslación": {
+                        "total": 2100891,
+                        "total_std": 641520
+                    },
+                    "Difusión": {
+                        "total": 456940,
+                        "total_std": 564393
+                    },
+                    "Actividades destinadas a la interacción con la comunidad": {
+                        "total": 4676,
+                        "total_std": 40437
+                    },
+                    "Correspondencia": {
+                        "total": 4689,
+                        "total_std": 12321
+                    }
+                }
+            },
+            {
+                "total": 5143749,
+                "total_std": 614997,
+                "month": "octubre",
+                "detail": {
+                    "Relacionados a Oficina Parlamentaria": {
+                        "total": 840418,
+                        "total_std": 596287
+                    },
+                    "Web y Almacenamiento": {
+                        "total": 17491,
+                        "total_std": 110888
+                    },
+                    "Otros": {
+                        "total": 1495686,
+                        "total_std": 773144
+                    },
+                    "Telefonía": {
+                        "total": 135944,
+                        "total_std": 155144
+                    },
+                    "Traslación": {
+                        "total": 2051464,
+                        "total_std": 602399
+                    },
+                    "Difusión": {
+                        "total": 567466,
+                        "total_std": 674848
+                    },
+                    "Actividades destinadas a la interacción con la comunidad": {
+                        "total": 29340,
+                        "total_std": 151798
+                    },
+                    "Correspondencia": {
+                        "total": 5939,
+                        "total_std": 21188
+                    }
+                }
+            },
+            {
+                "total": 4985023,
+                "total_std": 679043,
+                "month": "septiembre",
+                "detail": {
+                    "Relacionados a Oficina Parlamentaria": {
+                        "total": 839321,
+                        "total_std": 584082
+                    },
+                    "Web y Almacenamiento": {
+                        "total": 21998,
+                        "total_std": 147879
+                    },
+                    "Otros": {
+                        "total": 1561405,
+                        "total_std": 795489
+                    },
+                    "Telefonía": {
+                        "total": 124559,
+                        "total_std": 141195
+                    },
+                    "Traslación": {
+                        "total": 1927263,
+                        "total_std": 601540
+                    },
+                    "Difusión": {
+                        "total": 489711,
+                        "total_std": 596997
+                    },
+                    "Actividades destinadas a la interacción con la comunidad": {
+                        "total": 13868,
+                        "total_std": 73230
+                    },
+                    "Correspondencia": {
+                        "total": 6899,
+                        "total_std": 22345
+                    }
+                }
+            },
+            {
+                "total": 5213091,
+                "total_std": 785107,
+                "month": "agosto",
+                "detail": {
+                    "Relacionados a Oficina Parlamentaria": {
+                        "total": 865726,
+                        "total_std": 611438
+                    },
+                    "Web y Almacenamiento": {
+                        "total": 24945,
+                        "total_std": 123586
+                    },
+                    "Otros": {
+                        "total": 1535423,
+                        "total_std": 838384
+                    },
+                    "Telefonía": {
+                        "total": 131308,
+                        "total_std": 167895
+                    },
+                    "Traslación": {
+                        "total": 2055315,
+                        "total_std": 644515
+                    },
+                    "Difusión": {
+                        "total": 543509,
+                        "total_std": 636077
+                    },
+                    "Actividades destinadas a la interacción con la comunidad": {
+                        "total": 47629,
+                        "total_std": 235002
+                    },
+                    "Correspondencia": {
+                        "total": 9237,
+                        "total_std": 25407
+                    }
+                }
+            },
+            {
+                "total": 4965424,
+                "total_std": 702145,
+                "month": "julio",
+                "detail": {
+                    "Relacionados a Oficina Parlamentaria": {
+                        "total": 877262,
+                        "total_std": 620736
+                    },
+                    "Web y Almacenamiento": {
+                        "total": 25997,
+                        "total_std": 141114
+                    },
+                    "Otros": {
+                        "total": 1486665,
+                        "total_std": 808135
+                    },
+                    "Telefonía": {
+                        "total": 110366,
+                        "total_std": 117879
+                    },
+                    "Traslación": {
+                        "total": 1908217,
+                        "total_std": 655174
+                    },
+                    "Difusión": {
+                        "total": 529051,
+                        "total_std": 608918
+                    },
+                    "Actividades destinadas a la interacción con la comunidad": {
+                        "total": 24501,
+                        "total_std": 118121
+                    },
+                    "Correspondencia": {
+                        "total": 3365,
+                        "total_std": 15198
+                    }
+                }
+            }
+        ],
+        "offices": [
+            {
+                "total": 665034,
+                "total_std": 187119,
+                "month": "enero",
+                "detail": null
+            },
+            {
+                "total": 662172,
+                "total_std": 184959,
+                "month": "diciembre",
+                "detail": null
+            },
+            {
+                "total": 655798,
+                "total_std": 191117,
+                "month": "noviembre",
+                "detail": null
+            },
+            {
+                "total": 473862,
+                "total_std": 254961,
+                "month": "octubre",
+                "detail": null
+            },
+            {
+                "total": 555962,
+                "total_std": 125878,
+                "month": "septiembre",
+                "detail": null
+            },
+            {
+                "total": 555962,
+                "total_std": 125878,
+                "month": "agosto",
+                "detail": null
+            }
+        ],
+        "staff": [
+            {
+                "total": 8569007,
+                "total_std": 1510811,
+                "month": "febrero",
+                "detail": null
+            },
+            {
+                "total": 8710992,
+                "total_std": 1325601,
+                "month": "enero",
+                "detail": null
+            },
+            {
+                "total": 8037006,
+                "total_std": 1043646,
+                "month": "diciembre",
+                "detail": null
+            },
+            {
+                "total": 8033570,
+                "total_std": 1046788,
+                "month": "noviembre",
+                "detail": null
+            },
+            {
+                "total": 8016044,
+                "total_std": 1150712,
+                "month": "octubre",
+                "detail": null
+            },
+            {
+                "total": 8157629,
+                "total_std": 1117356,
+                "month": "septiembre",
+                "detail": null
+            }
+        ]
+    }
 }
