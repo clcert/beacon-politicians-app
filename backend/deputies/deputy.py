@@ -129,7 +129,15 @@ class DeputyParser:
         :return: Returns a dictionary containing last 6 months deputy expenses.
         """
         json_data = get_json_data(json_file=JsonFiles.EXPENSES)
+
+        average_expenses = json_data['average_expenses']
+        
         expenses_data = json_data['expenses']
         deputy_data = expenses_data[self.local_index]
-        # TODO: Add all deputies average expenses in order to compare them
+
+        operational_expenses = deputy_data['expenses']['operational']
+        for month_data in operational_expenses:
+            month = month_data['month']
+            month_data['average'] = average_expenses['operational'][month]
+
         return deputy_data['expenses']
