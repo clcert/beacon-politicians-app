@@ -89,6 +89,7 @@ class OperationalExpensesParser(ExpensesParser):
         total = 0
         for line in lines[1:]:
             [title, amount] = line.split('   ')
+            title = title.replace('(**monto ajustado por nota de crédito recibida)','').strip()
             integer_amount = int(amount.strip().replace('.', ''))
             total += integer_amount
             if title in OP_EXPENSES_OFFICE:
