@@ -18,6 +18,7 @@ from settings import (
     BASE_PROFILE_PIC_URL,
     BASE_DEPUTY_INFO_URL,
     CURRENT_DEPUTIES_URL,
+    OP_EXPENSES_TYPES,
     JsonFiles,
 )
 
@@ -136,8 +137,44 @@ class DeputyParser:
         deputy_data = expenses_data[self.local_index]
 
         operational_expenses = deputy_data['expenses']['operational']
+        avg_expenses_list = average_expenses['operational']
         for month_data in operational_expenses:
-            month = month_data['month']
-            month_data['average'] = average_expenses['operational'][month]
+            avg_expenses_month = next(
+                filter(
+                    lambda avg_data: avg_data['month'] == month_data['month'],
+                    avg_expenses_list,
+                )
+            )['detail']
+            for expense_category in OP_EXPENSES_TYPES:
+                deputy_amount = month_data[expense_category]
+                month_data[expense_category] = {
+                    'amount': deputy_amount,
+                    'mean': avg_expenses_month[expense_category]['total'],
+                    'stdev': avg_expenses_month[expense_category]['total_std'],
+                }
+        
+        offices_expenses = deputy_data['expenses']['offices']
+        avg_expenses_list = average_expenses['offices']
+        for month_data in offices_expenses:
+            avg_expenses_month = next(
+                filter(
+                    lambda avg_data: avg_data['month'] == month_data['month'],
+                    avg_expenses_list,
+                )
+            )
+            month_data['mean'] = avg_expenses_month['total']
+            month_data['stdev'] = avg_expenses_month['total_std']
+        
+        staff_expenses = deputy_data['expenses']['staff']
+        avg_expenses_list = average_expenses['staff']
+        for month_data in staff_expenses:
+            avg_expenses_month = next(
+                filter(
+                    lambda avg_data: avg_data['month'] == month_data['month'],
+                    avg_expenses_list,
+                )
+            )
+            month_data['mean'] = avg_expenses_month['total']
+            month_data['stdev'] = avg_expenses_month['total_std']
 
         return deputy_data['expenses']
