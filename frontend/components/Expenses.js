@@ -30,12 +30,15 @@ const Expenses = ({deputyInfo}) => {
 
   const opExp_month = deputyInfo.expenses.operational.filter(expenses => expenses.month == show_month);
   const show_operational = opExp_month.length > 0 ? opExp_month[0].total : 0;
+  const mean_operational = opExp_month.length > 0 ? opExp_month[0].mean : 0;
 
   const ofExp_month = deputyInfo.expenses.offices.filter(expenses => expenses.month == show_month);
   const show_offices = ofExp_month.length > 0 ? ofExp_month[0].total : 0;
+  const mean_offices = ofExp_month.length > 0 ? ofExp_month[0].mean : 0;
   
   const stExp_month = deputyInfo.expenses.staff.filter(expenses => expenses.month == show_month);
   const show_staff = stExp_month.length > 0 ? stExp_month[0].total : 0;
+  const mean_staff = stExp_month.length > 0 ? stExp_month[0].mean : 0;
 
   const show_total = formatAmount(show_operational + show_offices + show_staff);
   const size = window.innerWidth < 600 ? 300 : 400;
@@ -47,10 +50,10 @@ const Expenses = ({deputyInfo}) => {
       'Telefonía',
       'Traslación',
       'Difusión',
-      'Actividades destinadas a la interacción con la comunidad',
       'Correspondencia',
       'Relacionados a Oficina Parlamentaria',
       'Web y Almacenamiento',
+      'Actividades destinadas a la interacción con la comunidad',
       'Otros',
     ];
 
@@ -60,20 +63,34 @@ const Expenses = ({deputyInfo}) => {
 
     const charts = [
       new Chart(mainExpensesContainer, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
           labels: ["Gastos Operacionales", "Oficinas Parlamentarias", "Personal de Apoyo"],
-          datasets: [{
-            label: "Expenses",
-            backgroundColor: ["#BA5DE8", "#5961FF", "#02B4F5"],
-            data: [ show_operational, show_offices, show_staff ],
-          }]
+          datasets: [
+            {
+              label: "Gastos Diputadx",
+              backgroundColor: ["#BA5DE8", "#5961FF", "#02B4F5"],
+              data: [ show_operational, show_offices, show_staff ],
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+            },
+            {
+              label: "Promedio Diputadxs",
+              backgroundColor: ["#cccccc", "#cccccc", "#cccccc"],
+              data: [ mean_operational, mean_offices, mean_staff ],
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+            },
+          ],
         },
         options: {
           responsive: true,
           plugins: {
             legend: {
-              position: 'bottom',
+              position: 'top',
+              display: false,
             },
             title: {
               display: true,
@@ -88,31 +105,41 @@ const Expenses = ({deputyInfo}) => {
       new Chart(operationalExpensesContainer, {
         type: 'bar',
         data: {
-          labels: ['Telefonía','Traslación','Difusión','Interacción con Comunidad','Correspondencia','Oficina Parlamentaria','Web y Almacenamiento','Otros'],
-          datasets: [{
-            label: "Expenses",
-            data: op_keys.map((op_key) => deputyInfo.expenses.operational[0][op_key]),
-            backgroundColor: ['#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8'],
-            borderWidth: 2,
-            borderRadius: 10,
-            borderSkipped: false,
-          }]
+          labels: op_keys,
+          datasets: [
+            {
+              label: "Gastos Diputadx",
+              data: op_keys.map((op_key) => deputyInfo.expenses.operational[0][op_key]['amount']),
+              backgroundColor: ['#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8'],
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+            },
+            {
+              label: "Promedio Diputadxs",
+              data: op_keys.map((op_key) => deputyInfo.expenses.operational[0][op_key]['mean']),
+              backgroundColor: ['#cccccc', '#cccccc', '#cccccc', '#cccccc', '#cccccc', '#cccccc', '#cccccc', '#cccccc'],
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+            }
+          ]
         },
         options: {
           responsive: true,
           plugins: {
             legend: {
-              position: 'bottom',
+              position: 'top',
               display: false,
             },
             title: {
               display: true,
-              text: 'Gastos Operacionales ('+formatAmount(show_operational)+')',
+              text: 'Distribución de Gastos Operacionales ('+formatAmount(show_operational)+')',
               font: {
                 size: 18,
               }
             },
-          }
+          },
         }
       }),
       new Chart(historyExpensesContainer, {
@@ -190,10 +217,10 @@ const Expenses = ({deputyInfo}) => {
       </header>
       <div className={styles.chartContainer}>
         <div id='mainExpensesContainer'>
-          <canvas id='mainExpensesChart' width={size} height={size}></canvas>
+          <canvas id='mainExpensesChart' width={size*0.8} height={size}></canvas>
         </div>
         <div id='operationalExpensesContainer'>
-          <canvas id='operationalExpensesChart' height={size} width={size}></canvas>
+          <canvas id='operationalExpensesChart' height={size*1.5} width={size*1.2}></canvas>
         </div>
       </div>
       <div className={styles.expensesHistoryIntroduction}>
