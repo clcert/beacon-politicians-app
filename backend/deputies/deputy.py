@@ -144,14 +144,19 @@ class DeputyParser:
                     lambda avg_data: avg_data['month'] == month_data['month'],
                     avg_expenses_list,
                 )
-            )['detail']
+            )
+            avg_expenses_detail = avg_expenses_month['detail']
+
             for expense_category in OP_EXPENSES_TYPES:
                 deputy_amount = month_data[expense_category]
                 month_data[expense_category] = {
                     'amount': deputy_amount,
-                    'mean': avg_expenses_month[expense_category]['total'],
-                    'stdev': avg_expenses_month[expense_category]['total_std'],
+                    'mean': avg_expenses_detail[expense_category]['total'],
+                    'stdev': avg_expenses_detail[expense_category]['total_std'],
                 }
+
+            month_data['mean'] = avg_expenses_month['total']
+            month_data['stdev'] = avg_expenses_month['total_std']
         
         offices_expenses = deputy_data['expenses']['offices']
         avg_expenses_list = average_expenses['offices']
