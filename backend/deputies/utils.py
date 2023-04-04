@@ -184,7 +184,7 @@ def get_today_timestamp():
     dt_local = datetime.now()
 
     today_pulse = dt_utc.day > dt_local.day or (
-        dt_utc.day == dt_local.day and dt_utc.hour >= 3
+        dt_utc.day == dt_local.day and dt_utc.hour >= 4
     )
 
     if today_pulse:

@@ -3,13 +3,13 @@ from datetime import datetime, timedelta
 from sys import argv
 
 days_to_calculate = int(argv[1]) if len(argv) > 1 else 1
-days_to_calculate = min(days_to_calculate, 7)
+days_to_calculate = min(days_to_calculate, 14)
 
 dt_utc = datetime.utcnow()
 dt_local = datetime.now()
 
 consider_today = dt_utc.day > dt_local.day or (
-    dt_utc.day == dt_local.day and dt_utc.hour > 3
+    dt_utc.day == dt_local.day and dt_utc.hour >= 4
 )
 
 if consider_today:
