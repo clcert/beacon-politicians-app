@@ -1,2 +1,2 @@
-01 04 * * * python /app/updater.py >> /app/log/daily_updater.txt
-00 05 01 * * python /app/update_expenses.py >> /app/log/monthly_updater.txt
+01 04 * * * python /app/updater.py | tee /app/log/daily_updater.txt
+00 05 01 * * python /app/update_expenses.py | tee /app/log/monthly_updater.txt
