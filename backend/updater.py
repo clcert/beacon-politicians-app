@@ -33,6 +33,8 @@ def collect_deputy_info(timestamp=None, only_print=False):
     :param only_print: if true only prints basic info.
     :return:
     """
+    err = 0 # Error flag
+
     if timestamp is None:
         timestamp = get_today_timestamp()
 
@@ -82,17 +84,17 @@ def collect_deputy_info(timestamp=None, only_print=False):
                 telegram.send_notification(message=formatted_message)
             break
         except Exception as e:
+            err = 1
             traceback.print_exc()
             print('Retrying in 60 seconds...', end='\n\n')
             if DISCORD_WEBHOOK_URL:
                 message = f'Fail getting information in attempt {attempts+1}/3.\n'
-                message += f'Error detail:\n{e}\n'
                 message += 'Retrying in 60 seconds...' if attempts < 2 else 'Giving up for today.'
                 discord.send_notification(message=message)
             attempts += 1
             sleep(60)             
 
-    return
+    return err
 
 def save_or_update(deputies_list, deputy):
     """
@@ -184,9 +186,12 @@ if __name__ == '__main__':
 
     try:
         # If print argument isn't given. Just update the json, with the last pulse.
-        collect_deputy_info(timestamp=timestamp, only_print=args.print)
-        message = 'Deputy information updated successfully.\n'
-        message += 'Check it out at https://diputado.labs.clcert.cl'
+        err = collect_deputy_info(timestamp=timestamp, only_print=args.print)
+        if err:
+            message = 'Error loading deputy information. The previous deputy information is still available anyways.\n'
+        else:
+            message = 'Deputy information updated successfully.\n'
+            message += 'Check it out at https://diputado.labs.clcert.cl'
     except ConnectionError:
         message = 'Error connecting to random.uchile.cl. Please check internet connection.'
     except Exception as e:
