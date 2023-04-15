@@ -68,17 +68,21 @@ const Expenses = ({deputyInfo}) => {
           labels: ["Gastos Operacionales", "Oficinas Parlamentarias", "Personal de Apoyo"],
           datasets: [
             {
-              label: "Gastos Diputadx",
-              backgroundColor: ["#BA5DE8", "#5961FF", "#02B4F5"],
-              data: [ show_operational, show_offices, show_staff ],
-              borderWidth: 2,
-              borderRadius: 10,
-              borderSkipped: false,
-            },
-            {
               label: "Promedio Diputadxs",
               backgroundColor: ["#cccccc", "#cccccc", "#cccccc"],
               data: [ mean_operational, mean_offices, mean_staff ],
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+              stack: 'combined',
+              type: 'line',
+              cubicInterpolationMode: 'monotone',
+              tension: 0.4
+            },
+            {
+              label: "Gastos Diputadx",
+              backgroundColor: ["#BA5DE8", "#5961FF", "#02B4F5"],
+              data: [ show_operational, show_offices, show_staff ],
               borderWidth: 2,
               borderRadius: 10,
               borderSkipped: false,
@@ -108,6 +112,19 @@ const Expenses = ({deputyInfo}) => {
           labels: op_keys,
           datasets: [
             {
+              label: "Promedio Diputadxs",
+              data: op_keys.map((op_key) => deputyInfo.expenses.operational[0][op_key]['mean']),
+              backgroundColor: ['#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8'],
+              borderWidth: 2,
+              borderRadius: 10,
+              borderSkipped: false,
+              borderColor: '#ff0000',
+              stack: 'combined',
+              type: 'line',
+              cubicInterpolationMode: 'monotone',
+              tension: 0.4
+            },
+            {
               label: "Gastos Diputadx",
               data: op_keys.map((op_key) => deputyInfo.expenses.operational[0][op_key]['amount']),
               backgroundColor: ['#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8'],
@@ -115,14 +132,6 @@ const Expenses = ({deputyInfo}) => {
               borderRadius: 10,
               borderSkipped: false,
             },
-            {
-              label: "Promedio Diputadxs",
-              data: op_keys.map((op_key) => deputyInfo.expenses.operational[0][op_key]['mean']),
-              backgroundColor: ['#cccccc', '#cccccc', '#cccccc', '#cccccc', '#cccccc', '#cccccc', '#cccccc', '#cccccc'],
-              borderWidth: 2,
-              borderRadius: 10,
-              borderSkipped: false,
-            }
           ]
         },
         options: {
