@@ -1,209 +1,160 @@
-import { forwardRef, useCallback, useEffect, useState } from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import DatePicker from 'react-datepicker';
+// React Hooks
+import { useEffect, useState } from 'react';
 
-import Attendance from '../components/Attendance';
-import Overview from '../components/Overview';
-import Votings from '../components/Votings';
+// Components
+import DeputyOverview from '../components/DeputyOverview';
+import DeputyAttendance from '../components/DeputyAttendance';
+import ExpensesSummary from '../components/expenses/ExpensesSummary';
+import OperationalDistribuition from '../components/expenses/OperationalDistribuition';
+import HistoryMonths from '../components/expenses/HistoryMonths';
+import DeputyVotings from '../components/DeputyVotings';
 
-import Expenses from '../components/Expenses';
-import styles from '../styles/Home.module.css';
-import 'react-datepicker/dist/react-datepicker.css';
+const BACKEND_URL = 'http://127.0.0.1:5000';
 
-import logo from '../public/images/logo.png';
-
-const BACKEND_URI = 'http://127.0.0.1:5000';
-
-const CustomDatePicker = forwardRef(({ value, onClick }, ref) => (
-  <button className="custom-datepicker-button" onClick={onClick} ref={ref}>
-    <FontAwesomeIcon icon={faCalendarAlt} />
-    {value}
-  </button>
-));
-CustomDatePicker.displayName = 'CustomDatePicker';
+function getLastDeputyData() {
+  const url = `${BACKEND_URL}/api/diputadodeldia`;
+  return fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+      return null;
+    })
+    .catch(() => {
+      return null;
+    });
+}
 
 export default function Home() {
 
-  const [ deputyInfo, setDeputyInfo ] = useState({});
+  const searchParams = useSearchParams();
+  const search = searchParams.get('date');
+
+  const [ date, setDate ] = useState(new Date());
+  const [ deputyData, setDeputyData] = useState({});
   const [ loading, setLoading ] = useState(true);
-  const [ startDate, setStartDate ] = useState(new Date());
   const [ error, setError ] = useState(false);
-  const [ datesError, setDatesError ] = useState(false);
-  const [ availableDates, setAvailableDates ] = useState([]);
 
-  const isValidDate = (date) => {
-    return availableDates.filter((d) => d.toISOString().split('T')[0] === date.toISOString().split('T')[0]).length > 0;
-  };
+  useEffect(() => {
+    console.log('search', search);
 
-  const getData = async (url) => {
-    const dataJson = fetch(url)
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        return null;
-      })
-      .catch(() => {
-        return null;
-      });
-    return dataJson;
-  }
-
-  const getDeputyInfo = useCallback((url) => {
     setLoading(true);
     setTimeout(async () => {
-      const jsonData = await getData(url);
+      const jsonData = await getLastDeputyData();
       if (jsonData === null) {
         setError(true);
       } else {
         setError(false);
-        setDeputyInfo(jsonData);
+        console.log('jsonData', jsonData);
+        setDeputyData(jsonData);
       }
       setLoading(false);
     }, 1000);
-  }, [setError, setDeputyInfo, setLoading]);
+  }, [search]);
 
-  const getAvailableDates = useCallback(() => {
-    setTimeout(async () => {
-      const jsonData = await getData(`${BACKEND_URI}/api/dates`);
-      if (jsonData === null) {
-        setDatesError(true);
-      } else {
-        setDatesError(false);
-        const data = jsonData.dates.map((date) => new Date(date));
-        setAvailableDates(data);
-        setStartDate(data[data.length - 1])
-      }
-    }, 1000);
-  }, [setDatesError, setAvailableDates]);
-
-  useEffect(() => {
-    getDeputyInfo(`${BACKEND_URI}/api/diputadodeldia`);
-    getAvailableDates();
-  }, [getDeputyInfo, getAvailableDates]);
-
-  const changeDeputy = (date) => {
-    const offset = date.getTimezoneOffset()
-    const offsetDate = new Date(date.getTime() - (offset*60*1000))
-    setStartDate(offsetDate);
-    const dateStr = offsetDate.toISOString().split('T')[0];
-    getDeputyInfo(`${BACKEND_URI}/api/diputado/date/${dateStr}`);
+  if (loading) {
+    return (
+      <div className="loader">Cargando</div>
+    )
   }
 
   return (
-    <div>
-      <Head>
-        <link rel='shortcut icon' href='/favicon.png' />
-        <title>#DiputadxDelDía</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
-      </Head>
+    <div>      
+      <div id="header">
+        <DeputyOverview data={ deputyData }/>
+			</div>
 
-      <nav id='nav' className='nav-bar'>
-        <div className='app-logo'>
-          <Image src={logo} alt='Diputadx del Día' />
-        </div>
-        <ul className='nav-items'>
-          <li><a href='#top'>Principal</a></li>
-          <li><a href='#attendance'>Asistencia</a></li>
-          <li><a href='#expenses'>Gastos</a></li>
-          <li><a href='#votes'>Votaciones</a></li>
-        </ul>
-        <div className={styles.changeDeputy}>
-          {
-            availableDates.length > 0 &&
-            <DatePicker 
-              className='datepicker'
-              dateFormat="dd/MM/yyyy"
-              selected={startDate}
-              onChange={changeDeputy}
-              customInput={<CustomDatePicker />}
-              filterDate={isValidDate}
-            />
-          }
-        </div>
-      </nav>
+			<div id="main">
+				<header className="major container medium">
+					<h4>
+            Escogid{ deputyData.termination } el { deputyData.date } (horario UTC) en base al Pulso&nbsp;
+            <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/1/pulse/${ deputyData.record }`} target='_blank' rel="noreferrer">
+              #{ deputyData.record }
+            </a>{' '}
+            del faro de aleatoriedad de Random UChile.
+          </h4>
+					<p className='verification-text'>
+            Comprueba la elección utilizando nuestro script (Python)&nbsp;
+            <a href='https://github.com/clcert/beacon-politicians-app' target='_blank' rel="noreferrer">
+              disponible en GitHub
+            </a>.
+          </p>
+				</header>
 
-      {
-        loading ? 
-          <div className='loading-spinner'>
-            <div className='lds-facebook'>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
-        :
-        (error || datesError) ? <div>Hubo un error al cargar los datos</div>
-        :
-        <div className='articles'>
-          <article id='top' className='wrapper style1'>
-            <Overview deputyInfo={deputyInfo} />
-          </article>
+				<div className="box alt container">
+					<section className="feature left">
+						<DeputyAttendance data={deputyData }/>
+					</section>
+					<section className="feature right">
+						<ExpensesSummary data={deputyData} />
+					</section>
+					<section className="feature left">
+						<OperationalDistribuition data={deputyData} />
+					</section>
+          <section className="feature right">
+						<HistoryMonths data={deputyData} />
+					</section>
+				</div>
 
-          <article id='attendance' className='wrapper style2'>
-            <Attendance deputyInfo={deputyInfo} />
-          </article>
+				<div className="box container">
+					<DeputyVotings data={deputyData} />
+				</div>
 
-          <article id='expenses' className='wrapper style3'>
-            <Expenses deputyInfo={deputyInfo} />
-          </article>
+				<footer className="major container medium">
+					<h3>Get shady with science</h3>
+					<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus.</p>
+					<ul className="actions special">
+						<li><a href="#" className="button">Join our crew</a></li>
+					</ul>
+				</footer>
 
-          <article id='votes' className='wrapper style2'>
-            <Votings deputyInfo={deputyInfo} />
-          </article>
+			</div>
 
-          <article id='contact' className='wrapper style4'>
-            <div className='container medium'>
-              <header>
-                <h2>Referencias</h2>
-                  <ol>
-                    <li id='ref-attendance'>
-                      Cálculo hecho según justificaciones a inasistencias, para más información visitar: <br />
-                      <a href='https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx' target='_blank' rel='noreferrer'>
-                        https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx
-                      </a>.
-                    </li>
-                    <li id='op-expenses'>
-                      Los datos acerca de los gastos operacionales fueron obtenidos desde:<br />
-                      <a href={`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyInfo.deputy_id}`} target='_blank' rel='noreferrer'>
-                        {`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyInfo.deputy_id}`}
-                      </a>.
-                    </li>
-                    <li id='of-expenses'>
-                      Los datos acerca de los gastos en oficinas parlamentarias fueron obtenidos desde:<br />
-                      <a href='https://www.camara.cl/transparencia/oficinasparlamentarias.aspx' target='_blank' rel='noreferrer'>
-                        https://www.camara.cl/transparencia/oficinasparlamentarias.aspx
-                      </a>.
-                    </li>
-                    <li id='st-expenses'>
-                      Los datos acerca de los gastos de personal de apoyo fueron obtenidos desde:<br />
-                      <a href='https://www.camara.cl/transparencia/personalapoyogral.aspx' target='_blank' rel='noreferrer'>
-                        https://www.camara.cl/transparencia/personalapoyogral.aspx
-                      </a>.
-                    </li>
-                    <li id='ref-expenses'>
-                      Existen desfases con respecto a los meses con gastos declarados.
-                    </li>
-                  </ol>
-              </header>
+			<div id="footer">
+				<div className="container medium">
 
-              <footer>
-                <p>¿Quieres saber como funciona la elección del #DiputadoDelDía?&nbsp;
-                  <Link href='/about'>Descúbrelo aquí</Link>.
-                </p>
-                <ul id='copyright'>
-                  <li>&copy;Design: <a href='https://html5up.net/miniport'>HTML5 UP - Miniport</a>, template adaptado.</li>
-                </ul>
-              </footer>
-            </div>
-          </article>
-        </div>
-      }
+					<header className="major last">
+						<h2>Questions or comments?</h2>
+					</header>
+
+					<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor
+					orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus.</p>
+
+					<form method="post" action="#">
+						<div className="row">
+							<div className="col-6 col-12-mobilep">
+								<input type="text" name="name" placeholder="Name" />
+							</div>
+							<div className="col-6 col-12-mobilep">
+								<input type="email" name="email" placeholder="Email" />
+							</div>
+							<div className="col-12">
+								<textarea name="message" placeholder="Message" rows="6"></textarea>
+							</div>
+							<div className="col-12">
+								<ul className="actions special">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+
+					<ul className="icons">
+						<li><a href="#" className="icon brands fa-twitter"><span className="label">Twitter</span></a></li>
+						<li><a href="#" className="icon brands fa-facebook-f"><span className="label">Facebook</span></a></li>
+						<li><a href="#" className="icon brands fa-instagram"><span className="label">Instagram</span></a></li>
+						<li><a href="#" className="icon brands fa-github"><span className="label">Github</span></a></li>
+						<li><a href="#" className="icon brands fa-dribbble"><span className="label">Dribbble</span></a></li>
+					</ul>
+
+					<ul className="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+				</div>
+			</div>
     </div>
   )
 }

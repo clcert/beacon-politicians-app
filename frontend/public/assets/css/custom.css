@@ -1,0 +1,35 @@
+.avatar img {
+  border-radius: 100%;
+}
+
+.parlamentary-periods h3 {
+  text-align: center;
+}
+
+.parlamentary-periods .periods {
+  display: flex; 
+  justify-content: center;
+}
+
+.parlamentary-periods .period {
+  margin: 0 10px;
+  padding: 10px; 
+  border-radius: 5px; 
+  background-color: rgba(0, 0, 0, .4); 
+  color: white;
+  font-weight: 600;
+}
+
+.verification-text {
+  font-size: 1em !important;
+}
+
+.add-padding {
+  padding: 0 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .deputy-overview {
+    padding: 0 200px;
+  }
+}

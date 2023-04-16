@@ -4,9 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import styles from '../styles/About.module.css';
-import homeStyles from '../styles/Home.module.css';
 
-import logo from '../public/images/logo.png'
+import logo from '../public/logo.png'
 
 const about = () => {
   return (
