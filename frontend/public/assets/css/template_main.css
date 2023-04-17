@@ -1,5 +1,4 @@
 @import url("fontawesome-all.min.css");
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600,600italic,700,700italic");
 
 /*
 	Directive by HTML5 UP
@@ -2117,15 +2116,6 @@ input, select, textarea {
 		line-height: 1em;
 	}
 
-	select {
-		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' preserveAspectRatio='none' viewBox='0 0 40 40'%3E%3Cpath d='M9.4,12.3l10.4,10.4l10.4-10.4c0.2-0.2,0.5-0.4,0.9-0.4c0.3,0,0.6,0.1,0.9,0.4l3.3,3.3c0.2,0.2,0.4,0.5,0.4,0.9 c0,0.4-0.1,0.6-0.4,0.9L20.7,31.9c-0.2,0.2-0.5,0.4-0.9,0.4c-0.3,0-0.6-0.1-0.9-0.4L4.3,17.3c-0.2-0.2-0.4-0.5-0.4-0.9 c0-0.4,0.1-0.6,0.4-0.9l3.3-3.3c0.2-0.2,0.5-0.4,0.9-0.4S9.1,12.1,9.4,12.3z' fill='rgba(224, 224, 224, 0.75)' /%3E%3C/svg%3E");
-		background-size: 1.25em;
-		background-repeat: no-repeat;
-		background-position: calc(100% - 1em) center;
-		padding-right: 1.5em;
-		text-overflow: ellipsis;
-	}
-
 		select option {
 			color: #5b5b5b;
 			background: #ffffff;
@@ -2699,7 +2689,7 @@ input, select, textarea {
 
 	#header {
 		background-attachment: scroll,							scroll,					fixed;
-		background-image: url("images/top-3200.svg"), url("../../images/header.jpg");
+		background-image: url("../../images/top-3200.svg"), url("../../images/header.jpg");
 		background-position: bottom center,					top left,				center center;
 		background-repeat: repeat-x,						repeat,					no-repeat;
 		background-size: 3200px 460px,					auto,					cover;
@@ -2790,7 +2780,7 @@ input, select, textarea {
 	#footer {
 		background-attachment: scroll;
 		background-color: #4eb980;
-		background-image: url("images/bottom-3200.svg");
+		background-image: url("../../images/bottom-3200.svg");
 		background-position: top center;
 		background-repeat: repeat-x;
 		background-size: 3200px 460px;
@@ -3015,7 +3005,7 @@ input, select, textarea {
 
 			#header {
 				background-attachment: scroll,							scroll,							scroll;
-				background-image: url("images/top-1600.svg"), url("../../images/header.jpg");
+				background-image: url("../../images/top-1600.svg"), url("../../images/header.jpg");
 				background-size: 1600px 230px,					auto,							cover;
 				padding: 6em 0 12em 0;
 			}
@@ -3039,7 +3029,7 @@ input, select, textarea {
 		/* Footer */
 
 			#footer {
-				background-image: url("images/bottom-1600.svg");
+				background-image: url("../../images/bottom-1600.svg");
 				background-size: 1600px 230px;
 				margin-top: -100px;
 				padding: calc(230px + 4em) 0 6em 0;
@@ -3167,7 +3157,7 @@ input, select, textarea {
 		/* Header */
 
 			#header {
-				background-image: url("images/top-1280.svg"), url("../../images/header.jpg");
+				background-image: url("../../images/top-1280.svg"), url("../../images/header.jpg");
 				background-size: 1280px 184px,						auto,							cover;
 				padding: 3em 0 7em 0;
 			}
@@ -3195,7 +3185,7 @@ input, select, textarea {
 		/* Footer */
 
 			#footer {
-				background-image: url("images/bottom-1280.svg");
+				background-image: url("../../images/bottom-1280.svg");
 				background-size: 1280px 184px;
 				margin-top: -75px;
 				padding: calc(184px + 2em) 0 2em 0;
