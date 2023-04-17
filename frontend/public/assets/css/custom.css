@@ -146,6 +146,30 @@
   text-shadow: none;
 }
 
+.loader {
+  background-image: url("../../images/header.jpg");
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 769px) {
+  .deputy-overview {
+    padding: 0 200px;
+  }
+}
+
+ol {
+  list-style: decimal;
+  padding-left: 1.25em;
+}
+
+ol li {
+  padding-left: 0.25em;
+}
+
 @media screen and (max-width: 768px) {
   .moreInfo {
     flex-direction: column;
@@ -163,8 +187,5 @@
     border-top-right-radius: 0;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-  }
-  .deputy-overview {
-    padding: 0 200px;
   }
 }

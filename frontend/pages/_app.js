@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 // Styles
 import '../public/assets/css/template_main.css';
 import '../public/assets/css/custom.css';
+import '../public/assets/css/spinner.css';
 
 function MyApp({ Component, pageProps }) {
 
