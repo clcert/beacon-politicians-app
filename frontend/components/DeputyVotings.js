@@ -56,9 +56,9 @@ const SingleVote = ({vote, sex}) => {
           <span className='vote green-vote'>{ vote.vote_option }</span>
           :
         vote.vote_option === 'En Contra' ?
-          <div className='vote red-vote'>{ vote.vote_option }</div>
+          <span className='vote red-vote'>{ vote.vote_option }</span>
           :
-          <div className='vote'>{ vote.vote_option }</div>
+          <span className='vote'>{ vote.vote_option }</span>
       }
       <div className='more-info'>
         <div className='votes-info'>
