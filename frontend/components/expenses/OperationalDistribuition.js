@@ -43,7 +43,7 @@ const OperationalDistribuition = ({data}) => {
         labels: short_keys,
         datasets: [
           {
-            label: "Promedio Diputadxs",
+            label: 'Promedio Diputadxs',
             data: chart_mean,
             backgroundColor: '#2F58CD',
             borderWidth: 2,
@@ -109,7 +109,7 @@ const OperationalDistribuition = ({data}) => {
       <div className='image chart-container-3'>
         <canvas id='operational-distribuition-chart'></canvas>
       </div>
-      <div className="content">
+      <div className='content'>
         <h3>Distribución de Gastos Operacionales</h3>
         <p>
           Los gastos operacionales del mes indicado se distribuyen según

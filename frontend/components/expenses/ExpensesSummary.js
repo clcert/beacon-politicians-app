@@ -13,8 +13,8 @@ const ExpensesSummary = ({data}) => {
   const stExp_month = data.expenses.staff.filter(expenses => expenses.month == show_month);
 
 
-  const chart_labels = ["Gastos Operacionales", "Oficinas Parlamentarias", "Personal de Apoyo"];
-  const chart_colors = ["#AA77FF", "#62CDFF", "#FFB84C"];
+  const chart_labels = ['Gastos Operacionales', 'Oficinas Parlamentarias', 'Personal de Apoyo'];
+  const chart_colors = ['#AA77FF', '#62CDFF', '#FFB84C'];
   const chart_data = [
     opExp_month.length > 0 ? opExp_month[0].total : 0,
     ofExp_month.length > 0 ? ofExp_month[0].total : 0,
@@ -36,7 +36,7 @@ const ExpensesSummary = ({data}) => {
         labels: chart_labels,
         datasets: [
           {
-            label: "Promedio Diputadxs",
+            label: 'Promedio Diputadxs',
             backgroundColor: '#2F58CD',
             data: chart_mean,
             borderWidth: 2,
@@ -49,7 +49,7 @@ const ExpensesSummary = ({data}) => {
             tension: 0.4
           },
           {
-            label: "Gastos Diputadx",
+            label: `Gastos Diputad${data.termination}`,
             backgroundColor: chart_colors,
             data: chart_data,
             barPercentage: 0.6,
@@ -104,7 +104,7 @@ const ExpensesSummary = ({data}) => {
       <div className='image add-padding chart-container-2'>
         <canvas id='summary-expenses-chart'></canvas>
       </div>
-      <div className="content">
+      <div className='content'>
         <h3>Resumen de Gastos</h3>
         <p>
           El último mes donde existe un registro completo de los gastos { data.sex == 0 ? 'de la' : 'del' }

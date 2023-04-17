@@ -16,7 +16,7 @@ const HistoryMonths = ({data}) => {
         labels: months_for_chart,
         datasets: [
           {
-            label: "Gastos Operacionales",
+            label: 'Gastos Operacionales',
             data: getExpensesForHistoryChart(data.expenses.operational, months_for_chart),
             backgroundColor: '#d7f5eb',
             borderWidth: 3,
@@ -25,7 +25,7 @@ const HistoryMonths = ({data}) => {
             borderSkipped: false,
           },
           {
-            label: "Oficinas Parlamentarias",
+            label: 'Oficinas Parlamentarias',
             data: getExpensesForHistoryChart(data.expenses.offices, months_for_chart),
             backgroundColor: '#afc1fa',
             borderWidth: 3,
@@ -34,7 +34,7 @@ const HistoryMonths = ({data}) => {
             borderSkipped: false,
           },
           {
-            label: "Personal de Apoyo",
+            label: 'Personal de Apoyo',
             data: getExpensesForHistoryChart(data.expenses.staff, months_for_chart),
             backgroundColor: '#ded5f5',
             borderWidth: 3,
@@ -87,7 +87,7 @@ const HistoryMonths = ({data}) => {
       <div className='image chart-container-4'>
         <canvas id='history-months-chart'></canvas>
       </div>
-      <div className="content">
+      <div className='content'>
         <h3>Progresión de Gastos</h3>
         <p>
           Se presenta además la evolución de los gastos en los <strong>últimos 6 meses</strong><a href='#ref-expenses'><sup>5</sup></a>
