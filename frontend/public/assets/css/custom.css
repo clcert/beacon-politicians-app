@@ -1,5 +1,10 @@
-.avatar img {
+.deputy-pic {
+  background-color: unset !important;
+}
+
+.deputy-pic img {
   border-radius: 100%;
+  border: 3px solid #fff;
 }
 
 .parlamentary-periods h3 {
@@ -26,6 +31,22 @@
 
 .add-padding {
   padding: 0 30px;
+}
+
+.chart-container-1 {
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.35)), url("../../images/pink-violet-pastel.jpg");
+}
+
+.chart-container-2 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.85)), url("../../images/blue-pastel.jpg");
+}
+
+.chart-container-3 {
+  background: linear-gradient(45deg, rgba(252, 245, 212, 0.589), rgba(255, 255, 255, 0.76));
+}
+
+.chart-container-4 {
+  background: linear-gradient(90deg, rgba(252, 255, 255, 0.973), rgba(255, 255, 255, 0.822)), url("../../images/pink-blue-pastel.jpg");
 }
 
 @media screen and (min-width: 768px) {

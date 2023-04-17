@@ -21,6 +21,17 @@ const OperationalDistribuition = ({data}) => {
       'Otros',
     ];
 
+    const short_keys = [
+      'Telefonía',
+      'Traslación',
+      'Difusión',
+      'Correspondencia',
+      'Oficina Parlamentaria',
+      'Web y Almacenamiento',
+      'Interacción Comunitaria',
+      'Otros',
+    ];
+
     const container = document.getElementById('operational-distribuition-chart').getContext('2d');
     const chart_mean = op_keys.map((op_key) => data.expenses.operational[0][op_key]['mean']);
     const chart_data = op_keys.map((op_key) => data.expenses.operational[0][op_key]['amount']);
@@ -29,25 +40,26 @@ const OperationalDistribuition = ({data}) => {
     const chart = new Chart(container, {
       type: 'bar',
       data: {
-        labels: op_keys,
+        labels: short_keys,
         datasets: [
           {
             label: "Promedio Diputadxs",
             data: chart_mean,
-            backgroundColor: chart_colors,
+            backgroundColor: '#2F58CD',
             borderWidth: 2,
             borderRadius: 10,
             borderSkipped: false,
-            borderColor: '#AAAAAA',
+            borderColor: '#2F58CD',
             stack: 'combined',
             type: 'line',
             cubicInterpolationMode: 'monotone',
             tension: 0.4
           },
           {
-            label: "Gastos Diputadx",
+            label: `Gastos Diputad${data.termination}`,
             data: chart_data,
             backgroundColor: chart_colors,
+            borderColor: '#fff',
             borderWidth: 2,
             borderRadius: 10,
             borderSkipped: false,
@@ -64,9 +76,9 @@ const OperationalDistribuition = ({data}) => {
           },
           title: {
             display: true,
-            text: 'Distribución de Gastos Operacionales ('+formatAmount(show_operational)+')',
+            text: 'Gastos Operacionales ('+formatAmount(show_operational)+')',
             font: {
-              size: 24,
+              size: 20,
             }
           },
         },
@@ -94,7 +106,7 @@ const OperationalDistribuition = ({data}) => {
 
   return (
     <>
-      <div className='image add-padding'>
+      <div className='image chart-container-3'>
         <canvas id='operational-distribuition-chart'></canvas>
       </div>
       <div className="content">

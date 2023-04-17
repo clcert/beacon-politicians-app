@@ -14,7 +14,7 @@ const ExpensesSummary = ({data}) => {
 
 
   const chart_labels = ["Gastos Operacionales", "Oficinas Parlamentarias", "Personal de Apoyo"];
-  const chart_colors = ["#AEEBD8", "#9BABDE", "#CBB5FF"];
+  const chart_colors = ["#AA77FF", "#62CDFF", "#FFB84C"];
   const chart_data = [
     opExp_month.length > 0 ? opExp_month[0].total : 0,
     ofExp_month.length > 0 ? ofExp_month[0].total : 0,
@@ -37,12 +37,12 @@ const ExpensesSummary = ({data}) => {
         datasets: [
           {
             label: "Promedio Diputadxs",
-            backgroundColor: chart_colors,
+            backgroundColor: '#2F58CD',
             data: chart_mean,
             borderWidth: 2,
             borderRadius: 10,
             borderSkipped: false,
-            borderColor: '#AAAAAA',
+            borderColor: '#2F58CD',
             stack: 'combined',
             type: 'line',
             cubicInterpolationMode: 'monotone',
@@ -52,9 +52,10 @@ const ExpensesSummary = ({data}) => {
             label: "Gastos Diputadx",
             backgroundColor: chart_colors,
             data: chart_data,
-            barPercentage: 0.75,
+            barPercentage: 0.6,
             borderWidth: 2,
             borderRadius: 10,
+            borderColor: '#fff',
             borderSkipped: false,
           },
         ],
@@ -65,13 +66,13 @@ const ExpensesSummary = ({data}) => {
         plugins: {
           legend: {
             position: 'top',
-            display: false,
+            display: true,
           },
           title: {
             display: true,
             text: `Gastos de ${show_month} de ${show_year}`,
             font: {
-              size: 24,
+              size: 20,
             },
           },
         },
@@ -100,7 +101,7 @@ const ExpensesSummary = ({data}) => {
 
   return (
     <>
-      <div className='image add-padding'>
+      <div className='image add-padding chart-container-2'>
         <canvas id='summary-expenses-chart'></canvas>
       </div>
       <div className="content">

@@ -36,7 +36,7 @@ const DeputyAttendance = ({data}) => {
             display: true,
             text: 'Asistencia',
             font: {
-              size: 18,
+              size: 20,
             }
           }
         }
@@ -49,7 +49,7 @@ const DeputyAttendance = ({data}) => {
 
   return (
     <>
-      <div className='image'>
+      <div className='image chart-container-1'>
         <canvas id='attendances-chart' height='100%'></canvas>
       </div>
       <div className="content">

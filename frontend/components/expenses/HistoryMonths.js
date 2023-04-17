@@ -18,24 +18,27 @@ const HistoryMonths = ({data}) => {
           {
             label: "Gastos Operacionales",
             data: getExpensesForHistoryChart(data.expenses.operational, months_for_chart),
-            backgroundColor: '#AEEBD8',
-            borderWidth: 2,
+            backgroundColor: '#d7f5eb',
+            borderWidth: 3,
+            borderColor: '#AEEBD8',
             borderRadius: 10,
             borderSkipped: false,
           },
           {
             label: "Oficinas Parlamentarias",
             data: getExpensesForHistoryChart(data.expenses.offices, months_for_chart),
-            backgroundColor: '#9BABDE',
-            borderWidth: 2,
+            backgroundColor: '#afc1fa',
+            borderWidth: 3,
+            borderColor: '#9BABDE',
             borderRadius: 10,
             borderSkipped: false,
           },
           {
             label: "Personal de Apoyo",
             data: getExpensesForHistoryChart(data.expenses.staff, months_for_chart),
-            backgroundColor: '#CBB5FF',
-            borderWidth: 2,
+            backgroundColor: '#ded5f5',
+            borderWidth: 3,
+            borderColor: '#CBB5FF',
             borderRadius: 10,
             borderSkipped: false,
           },
@@ -50,7 +53,7 @@ const HistoryMonths = ({data}) => {
           },
           title: {
             display: true,
-            text: 'Gastos',
+            text: 'Historial 6 meses',
             font: {
               size: 24,
             }
@@ -81,7 +84,7 @@ const HistoryMonths = ({data}) => {
 
   return (
     <>
-      <div className='image add-padding'>
+      <div className='image chart-container-4'>
         <canvas id='history-months-chart'></canvas>
       </div>
       <div className="content">

@@ -5,7 +5,7 @@ const DeputyOverview = ({data}) => {
 
   return (
     <>
-      <a href={data.photo} target='_blank' rel="noreferrer" className='image avatar'>
+      <a href={data.photo} target='_blank' rel="noreferrer" className='image deputy-pic'>
         <img src={data.photo} alt={`Diputad${ data.termination } ${ deputyName }`} />
       </a>
       <h1>Diputad{ data.termination } <strong>{ data.first_name } { data.first_surname }</strong></h1>
