@@ -39,7 +39,7 @@ export default function Home() {
   const [ error, setError ] = useState(false);
 
   useEffect(() => {
-    console.log('search', search);
+    // console.log('search', search);
 
     setLoading(true);
     setTimeout(async () => {
@@ -48,7 +48,6 @@ export default function Home() {
         setError(true);
       } else {
         setError(false);
-        console.log('jsonData', jsonData);
         setDeputyData(jsonData);
       }
       setLoading(false);
