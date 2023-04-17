@@ -14,7 +14,7 @@ const ExpensesSummary = ({data}) => {
 
 
   const chart_labels = ['Gastos Operacionales', 'Oficinas Parlamentarias', 'Personal de Apoyo'];
-  const chart_colors = ['#AA77FF', '#62CDFF', '#FFB84C'];
+  // const chart_colors = ['#AA77FF', '#62CDFF', '#FFB84C'];
   const chart_data = [
     opExp_month.length > 0 ? opExp_month[0].total : 0,
     ofExp_month.length > 0 ? ofExp_month[0].total : 0,
@@ -42,15 +42,14 @@ const ExpensesSummary = ({data}) => {
             borderWidth: 2,
             borderRadius: 10,
             borderSkipped: false,
-            borderColor: '#2F58CD',
             stack: 'combined',
             type: 'line',
-            cubicInterpolationMode: 'monotone',
-            tension: 0.4
+            showLine: false,
+            pointStyle: 'circle',
           },
           {
             label: `Gastos Diputad${data.termination}`,
-            backgroundColor: chart_colors,
+            backgroundColor: '#FFB84C',
             data: chart_data,
             barPercentage: 0.6,
             borderWidth: 2,

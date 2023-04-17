@@ -35,7 +35,7 @@ const OperationalDistribuition = ({data}) => {
     const container = document.getElementById('operational-distribuition-chart').getContext('2d');
     const chart_mean = op_keys.map((op_key) => data.expenses.operational[0][op_key]['mean']);
     const chart_data = op_keys.map((op_key) => data.expenses.operational[0][op_key]['amount']);
-    const chart_colors = ['#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8'];
+    // const chart_colors = ['#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8'];
 
     const chart = new Chart(container, {
       type: 'bar',
@@ -47,18 +47,17 @@ const OperationalDistribuition = ({data}) => {
             data: chart_mean,
             backgroundColor: '#2F58CD',
             borderWidth: 2,
-            borderRadius: 10,
             borderSkipped: false,
             borderColor: '#2F58CD',
             stack: 'combined',
             type: 'line',
-            cubicInterpolationMode: 'monotone',
-            tension: 0.4
+            showLine: false,
+            pointStyle: 'dot',
           },
           {
             label: `Gastos Diputad${data.termination}`,
             data: chart_data,
-            backgroundColor: chart_colors,
+            backgroundColor: '#08cad1',
             borderColor: '#fff',
             borderWidth: 2,
             borderRadius: 10,

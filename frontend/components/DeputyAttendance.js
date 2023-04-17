@@ -53,7 +53,6 @@ const DeputyAttendance = ({data}) => {
         <canvas id='attendances-chart' height='100%'></canvas>
       </div>
       <div className="content">
-        <h3>Asistencia</h3>
         <p>
           A la fecha de consulta, ha asistido a <strong>{ data.attendance.attended } sesiones de cámara</strong>, 
           de un total de { data.attendance.total } sesiones, obteniendo así un <strong>{ data.attendance.percentage }% 

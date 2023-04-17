@@ -85,10 +85,19 @@ export default function Home() {
           </p>
 				</header>
 
-				<div className="box alt container">
+				<div className="box container">
+					<header>
+						<h2>Asistencia</h2>
+					</header>
 					<section className="feature left">
 						<DeputyAttendance data={deputyData }/>
 					</section>
+				</div>
+
+				<div className="box container">
+					<header>
+						<h2>Gastos { deputyData.sex == '1' ? 'del diputado' : 'de la diputada'}</h2>
+					</header>
 					<section className="feature right">
 						<ExpensesSummary data={deputyData} />
 					</section>

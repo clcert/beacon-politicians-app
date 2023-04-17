@@ -34,7 +34,7 @@
 }
 
 .chart-container-1 {
-  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.35)), url("../../images/pink-violet-pastel.jpg");
+  background: unset !important;
 }
 
 .chart-container-2 {
