@@ -57,7 +57,7 @@ const DeputyAttendance = ({data}) => {
           A la fecha de consulta, ha asistido a <strong>{ data.attendance.attended } sesiones de cámara</strong>, 
           de un total de { data.attendance.total } sesiones, obteniendo así un <strong>{ data.attendance.percentage }% 
           de asistencia justificada</strong>. Considerando las inasistencias justificadas y las no justificadas
-          <sup><a id='text-attendance' href='#ref-attendance'>1</a></sup>.
+          <sup><a id='text-attendance' href='#ref-1'>1</a></sup>.
         </p>
       </div>
     </>

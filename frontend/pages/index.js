@@ -96,7 +96,7 @@ export default function Home() {
 
 				<div className="box container">
 					<header>
-						<h2>Gastos { deputyData.sex == '1' ? 'del diputado' : 'de la diputada'}</h2>
+						<h2>Dieta Parlamentaria y Asignaciones { deputyData.sex == '1' ? 'del diputado' : 'de la diputada'}</h2>
 					</header>
 					<section className="feature right">
 						<ExpensesSummary data={deputyData} />
@@ -124,32 +124,38 @@ export default function Home() {
 					<header>
 						<h2>Referencias</h2>
 							<ol >
-								<li id='ref-attendance'>
+								<li id='ref-1'>
 									Cálculo hecho según justificaciones a inasistencias, para más información visitar: <br />
 									<a href='https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx' target='_blank' rel='noreferrer'>
 										https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx
 									</a>.
 								</li>
-								<li id='op-expenses'>
+								<li id='ref-2'>
+									Documento que acredita la dieta parlamentaria desde agosto 2022:<br />
+									<a href='https://www.camara.cl/transparencia/doc/dieta_actualizada.pdf' target='_blank' rel='noreferrer'>
+										https://www.camara.cl/transparencia/doc/dieta_actualizada.pdf
+									</a>.
+								</li>
+								<li id='ref-3'>
 									Los datos acerca de los gastos operacionales fueron obtenidos desde:<br />
 									<a href={`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyData.deputy_id}`} target='_blank' rel='noreferrer'>
 										{`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyData.deputy_id}`}
 									</a>.
 								</li>
-								<li id='of-expenses'>
+								<li id='ref-4'>
 									Los datos acerca de los gastos en oficinas parlamentarias fueron obtenidos desde:<br />
 									<a href='https://www.camara.cl/transparencia/oficinasparlamentarias.aspx' target='_blank' rel='noreferrer'>
 										https://www.camara.cl/transparencia/oficinasparlamentarias.aspx
 									</a>.
 								</li>
-								<li id='st-expenses'>
+								<li id='ref-5'>
 									Los datos acerca de los gastos de personal de apoyo fueron obtenidos desde:<br />
 									<a href='https://www.camara.cl/transparencia/personalapoyogral.aspx' target='_blank' rel='noreferrer'>
 										https://www.camara.cl/transparencia/personalapoyogral.aspx
 									</a>.
 								</li>
-								<li id='ref-expenses'>
-									Existen desfases con respecto a los meses con gastos declarados.
+								<li id='ref-6'>
+									Existen desfases con respecto a los meses con gastos declarados en cada categoría.
 								</li>
 							</ol>
 					</header>

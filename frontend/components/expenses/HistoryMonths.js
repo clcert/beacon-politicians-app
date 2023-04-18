@@ -90,7 +90,7 @@ const HistoryMonths = ({data}) => {
       <div className='content'>
         <h3>Progresión de Gastos</h3>
         <p>
-          Se presenta además la evolución de los gastos en los <strong>últimos 6 meses</strong><a href='#ref-expenses'><sup>5</sup></a>
+          Se presenta además la evolución de los gastos en los <strong>últimos 6 meses</strong><a href='#ref-6'><sup>6</sup></a>.
         </p>
       </div>
     </>

@@ -12,15 +12,19 @@ const ExpensesSummary = ({data}) => {
   const ofExp_month = data.expenses.offices.filter(expenses => expenses.month == show_month);
   const stExp_month = data.expenses.staff.filter(expenses => expenses.month == show_month);
 
+  const parlamentary_diet = 7012338;
 
-  const chart_labels = ['Gastos Operacionales', 'Oficinas Parlamentarias', 'Personal de Apoyo'];
+
+  const chart_labels = [ 'Dieta Parlamentaria', 'Gastos Operacionales', 'Oficinas Parlamentarias', 'Personal de Apoyo'];
   // const chart_colors = ['#AA77FF', '#62CDFF', '#FFB84C'];
   const chart_data = [
+    parlamentary_diet,
     opExp_month.length > 0 ? opExp_month[0].total : 0,
     ofExp_month.length > 0 ? ofExp_month[0].total : 0,
     stExp_month.length > 0 ? stExp_month[0].total : 0,
   ];
   const chart_mean = [
+    parlamentary_diet,
     opExp_month.length > 0 ? opExp_month[0].mean : 0,
     ofExp_month.length > 0 ? ofExp_month[0].mean : 0,
     stExp_month.length > 0 ? stExp_month[0].mean : 0,
@@ -100,17 +104,20 @@ const ExpensesSummary = ({data}) => {
 
   return (
     <>
-      <div className='image add-padding chart-container-2'>
+      <div className='image chart-container-2'>
         <canvas id='summary-expenses-chart'></canvas>
       </div>
       <div className='content'>
-        <h3>Resumen de Gastos</h3>
+        <h3>Resumen</h3>
         <p>
           El último mes donde existe un registro completo de los gastos { data.sex == 0 ? 'de la' : 'del' }
           {' '} diputad{data.termination} <strong>{ data.first_name } { data.first_surname }</strong> corresponde a
           {' '} <strong>{data.expenses.operational[0].month} de { data.expenses.operational[0].year }</strong>,
-          {' '} destinando un total de <strong>{ total_amount }</strong><a href='#op-expenses'><sup>2,3,4</sup></a> entre gastos operacionales, 
-          {' '} de oficina y personal de apoyo.
+          {' '} destinando un total de <strong>{ total_amount }</strong> entre 
+          {' '} dieta parlamentaria<sup><a href='#ref-2'>2</a></sup>, 
+          {' '} gastos operacionales<sup><a href='#ref-3'>3</a></sup>, 
+          {' '} asignaciones para oficinas parlamentarias<sup><a href='#ref-4'>4</a></sup>,
+          {' '} y para personal de apoyo<sup><a href='#ref-5'>5</a></sup>.
         </p>
       </div>
     </>

@@ -2588,7 +2588,7 @@ input, select, textarea {
 
 	.feature {
 		position: relative;
-		height: 20em;
+		height: 22em;
 	}
 
 		.feature:after {
@@ -2626,7 +2626,7 @@ input, select, textarea {
 
 		.feature .content {
 			display: inline-block;
-			padding: 3.5em;
+			padding: 2.5em;
 			vertical-align: middle;
 			width: 48%;
 		}
@@ -2994,7 +2994,7 @@ input, select, textarea {
 		/* Feature */
 
 			.feature {
-				height: 18em;
+				height: 20em;
 			}
 
 				.feature .content {
