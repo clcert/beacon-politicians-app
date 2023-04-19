@@ -25,6 +25,7 @@ export default function HomeByDate() {
 				try {
 					dateCandidate = new Date(search + ' 04:00:00');
 					setDate(dateCandidate);
+          console.log('candidate: ', dateCandidate);
           setError(false);
 				} catch (e) {
 					console.error('Unexpected date format', e);
