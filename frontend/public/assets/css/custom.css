@@ -235,15 +235,11 @@ ol li {
   line-height: 15px;
 }
 
-.react-datepicker-popper {
-  position: fixed !important;
-}
-
 .topnav {
   position: fixed;
   top: 10px;
   background-color: rgba(0, 0, 0, .4);
-  overflow: hidden;
+  /* overflow: hidden; */
   z-index: 1000;
   border-radius: 15px;
 }
