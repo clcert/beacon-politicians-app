@@ -1,3 +1,5 @@
+export const BACKEND_URL = 'http://127.0.0.1:5000';
+
 export const formatAmount = (amount) => {
   return '$'+amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
@@ -16,4 +18,18 @@ export const getExpensesForHistoryChart = (expenses, months) => {
     expenses_by_month[expense.month] = expense.total
   }
   return months.map((month) => expenses_by_month[month] || undefined)
+}
+
+export const getData = async (url) => {
+  const dataJson = fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+      return null;
+    })
+    .catch(() => {
+      return null;
+    });
+  return dataJson;
 }

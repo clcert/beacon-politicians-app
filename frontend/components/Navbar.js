@@ -1,6 +1,77 @@
-import React, { useEffect } from 'react';
+import React, { forwardRef, useState, useCallback, useEffect } from 'react';
 
-const Navbar = () => {
+// Date Picker
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { getData, BACKEND_URL } from '../utils/utils';
+
+const MyDatePicker = forwardRef(({ value, onClick }, ref) => (
+  <button className="custom-datepicker-button" onClick={onClick} ref={ref}>
+    <b>Fecha: </b> 
+    {
+      new Date(value.replace('/','-').replace('/','-').split('-').reverse().join('-')+' 04:00:00').toLocaleDateString("es-ES", {
+        day: "numeric",
+        month: "long",
+      })
+    }
+  </button>
+));
+MyDatePicker.displayName = 'MyDatePicker';
+
+const CustomDatePicker = ({date}) => {
+
+  const [ availableDates, setAvailableDates ] = useState([]);
+  const [ startDate, setStartDate ] = useState(date);
+  const [ datesError, setDatesError ] = useState(false);
+
+  const isValidDate = (date) => {
+    return availableDates.filter((d) => d.toISOString().split('T')[0] === date.toISOString().split('T')[0]).length > 0;
+  };
+
+  const changeDeputy = (date) => {
+    const dateISOString = date.toISOString().split('T')[0];
+    window.location.href = "/?date=" + dateISOString;
+  }
+
+  const getAvailableDates = useCallback(() => {
+    setTimeout(async () => {
+      const jsonData = await getData(`${BACKEND_URL}/api/dates`);
+      if (jsonData === null) {
+        setDatesError(true);
+      } else {
+        setDatesError(false);
+        const data = jsonData.dates.map((date) => new Date(date));
+        setAvailableDates(data);
+        setStartDate(data[data.length - 1])
+      }
+    }, 1000);
+  }, [setDatesError, setAvailableDates]);
+
+  useEffect(() => {
+    getAvailableDates();
+  }, [getAvailableDates]);
+
+  if (availableDates.length === 0 || datesError) {
+    return (
+      <>
+        <b>Fecha:</b> ---
+      </>
+    )
+  } else {
+    return (
+      <DatePicker 
+        className='datepicker'
+        dateFormat="dd/MM/yyyy"
+        selected={startDate}
+        onChange={changeDeputy}
+        customInput={<MyDatePicker />}
+        filterDate={isValidDate}
+      />
+    )
+  }
+}
+
+const Navbar = ({date}) => {
 
   const showMobileMenu = () => {
     var x = document.getElementById("myTopnav");
@@ -28,7 +99,7 @@ const Navbar = () => {
         <a href="#expenses" onClick={closeMenu}>Gastos</a>
         <a href="#votings" onClick={closeMenu}>Votaciones</a>
         <a href="#about" onClick={closeMenu}>Método de Elección</a>
-        <a href="#about" onClick={closeMenu}>Choose</a>
+        <a><CustomDatePicker date={date}/></a>
         <a className="icon" onClick={showMobileMenu}>
           <i className="fa fa-bars"></i>
         </a>

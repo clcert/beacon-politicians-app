@@ -219,6 +219,19 @@ ol li {
   padding-top: 10px !important;
 }
 
+.custom-datepicker-button {
+  background-color: unset;
+  border: unset;
+  color: inherit;
+  font: inherit;
+  font-size: 16px;
+  line-height: 15px;
+}
+
+.react-datepicker-popper {
+  position: fixed !important;
+}
+
 .topnav {
   position: fixed;
   top: 10px;
@@ -237,6 +250,10 @@ ol li {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+}
+
+.topnav b {
+  color: #f2f2f2;
 }
 
 /* Change the color of links on hover */

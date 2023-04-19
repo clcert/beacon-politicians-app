@@ -13,7 +13,7 @@ import DeputyVotings from '../components/DeputyVotings';
 import About from '../components/About';
 import Navbar from '../components/Navbar';
 
-const BACKEND_URL = 'http://127.0.0.1:5000';
+import { BACKEND_URL } from '../utils/utils';
 
 function getLastDeputyData() {
   const url = `${BACKEND_URL}/api/diputadodeldia`;
@@ -40,7 +40,7 @@ export default function Home() {
   const [ error, setError ] = useState(false);
 
   useEffect(() => {
-    // console.log('search', search);
+    console.log('search', search);
 
     setLoading(true);
     setTimeout(async () => {
@@ -65,7 +65,7 @@ export default function Home() {
 
   return (
     <div>
-			<Navbar />
+			<Navbar date={date} />
       <div id="header">
         <DeputyOverview data={ deputyData }/>
 			</div>
