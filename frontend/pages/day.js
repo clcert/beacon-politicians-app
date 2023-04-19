@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
 
 // Components
-import Main from '../../components/Main';
+import Main from '../components/Main';
 
 export default function HomeByDate() {
 
