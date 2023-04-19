@@ -11,6 +11,7 @@ import OperationalDistribuition from '../components/expenses/OperationalDistribu
 import HistoryMonths from '../components/expenses/HistoryMonths';
 import DeputyVotings from '../components/DeputyVotings';
 import About from '../components/About';
+import Navbar from '../components/Navbar';
 
 const BACKEND_URL = 'http://127.0.0.1:5000';
 
@@ -63,7 +64,8 @@ export default function Home() {
   }
 
   return (
-    <div>      
+    <div>
+			<Navbar />
       <div id="header">
         <DeputyOverview data={ deputyData }/>
 			</div>
@@ -85,7 +87,7 @@ export default function Home() {
           </p>
 				</header>
 
-				<div className="box container">
+				<div id="attendance" className="box container">
 					<header>
 						<h2>Asistencia</h2>
 					</header>
@@ -94,7 +96,7 @@ export default function Home() {
 					</section>
 				</div>
 
-				<div className="box container">
+				<div id="expenses" className="box container">
 					<header>
 						<h2>Dieta Parlamentaria y Asignaciones { deputyData.sex == '1' ? 'del diputado' : 'de la diputada'}</h2>
 					</header>
@@ -109,11 +111,11 @@ export default function Home() {
 					</section>
 				</div>
 
-				<div className="box container">
+				<div id="votings" className="box container">
 					<DeputyVotings data={deputyData} />
 				</div>
 
-				<footer className="major container medium">
+				<footer id="about" className="major container medium">
 					<About />
 				</footer>
 
