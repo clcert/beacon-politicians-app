@@ -18,10 +18,10 @@ const MyDatePicker = forwardRef(({ value, onClick }, ref) => (
 ));
 MyDatePicker.displayName = 'MyDatePicker';
 
-const CustomDatePicker = ({date}) => {
+const CustomDatePicker = ({pageDate}) => {
 
   const [ availableDates, setAvailableDates ] = useState([]);
-  const [ startDate, setStartDate ] = useState(date);
+  const [ startDate, setStartDate ] = useState(pageDate);
   const [ datesError, setDatesError ] = useState(false);
 
   const isValidDate = (date) => {
@@ -30,19 +30,19 @@ const CustomDatePicker = ({date}) => {
 
   const changeDeputy = (date) => {
     const dateISOString = date.toISOString().split('T')[0];
-    window.location.href = "/?date=" + dateISOString;
+    window.location.href = "/day?date=" + dateISOString;
   }
 
   const getAvailableDates = useCallback(() => {
     setTimeout(async () => {
       const jsonData = await getData(`${BACKEND_URL}/api/dates`);
-      if (jsonData === null) {
+      if (!jsonData) {
         setDatesError(true);
       } else {
         setDatesError(false);
         const data = jsonData.dates.map((date) => new Date(date));
         setAvailableDates(data);
-        setStartDate(data[data.length - 1])
+        setStartDate(pageDate)
       }
     }, 1000);
   }, [setDatesError, setAvailableDates]);
@@ -99,7 +99,7 @@ const Navbar = ({date}) => {
         <a href="#expenses" onClick={closeMenu}>Gastos</a>
         <a href="#votings" onClick={closeMenu}>Votaciones</a>
         <a href="#about" onClick={closeMenu}>Método de Elección</a>
-        <a><CustomDatePicker date={date}/></a>
+        <a><CustomDatePicker pageDate={date}/></a>
         <a className="icon" onClick={showMobileMenu}>
           <i className="fa fa-bars"></i>
         </a>

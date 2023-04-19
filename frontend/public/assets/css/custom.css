@@ -210,6 +210,10 @@ ol li {
   padding: 20px;
 }
 
+.references-list {
+  overflow: auto;
+}
+
 /* Nav Bar */
 /* Add a black background color to the top navigation */
 .navbar-container {
