@@ -30,7 +30,7 @@ const CustomDatePicker = ({pageDate}) => {
 
   const changeDeputy = (date) => {
     const dateISOString = date.toISOString().split('T')[0];
-    window.location.href = "/day?date=" + dateISOString;
+    window.location.href = "/archivo/diputado?fecha=" + dateISOString;
   }
 
   const getAvailableDates = useCallback(() => {

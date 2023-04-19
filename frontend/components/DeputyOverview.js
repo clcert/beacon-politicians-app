@@ -17,7 +17,7 @@ const DeputyOverview = ({data}) => {
           nacid{ data.termination } el <strong>{ data.birthday }</strong>,{' '}
           {
             data.profession === 'Sin Información' ? '' : (
-              <>es de profesión <strong>{ data.profession }</strong>deputyInfo,</>
+              <>es de profesión <strong>{ data.profession }</strong>, </>
             )
           }
           quien es actualmente diputad{ data.termination } por el <strong>distrito { data.district }</strong>{' '}

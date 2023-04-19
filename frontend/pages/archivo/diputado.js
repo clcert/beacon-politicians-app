@@ -4,9 +4,9 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
 
 // Components
-import Main from '../components/Main';
+import Main from '../../components/Main';
 
-export default function HomeByDate() {
+export default function DayPage() {
 
   const searchParams = useSearchParams();
 
@@ -19,7 +19,7 @@ export default function HomeByDate() {
     setLoading(true);
 		setTimeout(async () => {
 			let dateCandidate;
-			const search = searchParams.get('date');
+			const search = searchParams.get('fecha');
 			// Let's check if we have a date in the URL
 			if (search) {
 				try {
