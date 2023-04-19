@@ -271,7 +271,10 @@ ol li {
     float: right;
     display: block;
   }
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {
+    position: fixed;
+    background-color: rgba(0, 0, 0, .9);
+  }
   .topnav.responsive a.icon {
     position: absolute;
     right: 0;
@@ -280,6 +283,11 @@ ol li {
   .topnav.responsive a {
     float: none;
     display: block;
-    text-align: left;
+    text-align: center;
+    font-weight: bold;
+  }
+  .topnav a:hover {
+    background-color: rgba(255, 255, 255, .4);
+    color: white;
   }
 } 

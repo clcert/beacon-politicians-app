@@ -4,7 +4,6 @@ const Navbar = () => {
 
   const showMobileMenu = () => {
     var x = document.getElementById("myTopnav");
-    console.log(x);
     if (x.className === "topnav") {
       x.className += " responsive";
     } else {
@@ -12,18 +11,25 @@ const Navbar = () => {
     }
   }
 
+  const closeMenu = () => {
+    var x = document.getElementById("myTopnav");
+    if (x.className !== "topnav") {
+      x.className = "topnav";
+    }
+  }
+
   return (
     <div className="navbar-container">
       <nav className="topnav" id="myTopnav">
-        <a href="#" className='logo-container'>
+        <a href="#" className='logo-container' onClick={closeMenu}>
           <img src="/logo.png" alt="Logo" className='app-logo'/>
         </a>
-        <a href="#attendance">Asistencia</a>
-        <a href="#expenses">Gastos</a>
-        <a href="#votings">Votaciones</a>
-        <a href="#about">Método de Elección</a>
-        <a href="#about">Choose</a>
-        <a className="icon" onClick={e=>showMobileMenu()}>
+        <a href="#attendance" onClick={closeMenu}>Asistencia</a>
+        <a href="#expenses" onClick={closeMenu}>Gastos</a>
+        <a href="#votings" onClick={closeMenu}>Votaciones</a>
+        <a href="#about" onClick={closeMenu}>Método de Elección</a>
+        <a href="#about" onClick={closeMenu}>Choose</a>
+        <a className="icon" onClick={showMobileMenu}>
           <i className="fa fa-bars"></i>
         </a>
       </nav>
