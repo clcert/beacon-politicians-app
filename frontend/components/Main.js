@@ -25,7 +25,6 @@ export default function Main ({date}) {
     setTimeout(async () => {
       const localDateStr = date.toLocaleDateString("es-ES", {day: "2-digit", month: "2-digit", year: "numeric", timeZone: "America/Santiago"})
       const formattedDate = localDateStr.replace('/', '-').replace('/', '-').split('-').reverse().join('-');
-      console.log(formattedDate);
       const jsonData = await getData(`${BACKEND_URL}/api/diputado/date/${formattedDate}`);
       if (jsonData !== undefined) {
         setDeputyData(jsonData);

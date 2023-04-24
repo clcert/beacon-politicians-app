@@ -112,12 +112,10 @@ const ExpensesSummary = ({data}) => {
         <p>
           El último mes donde existe un registro completo de los gastos { data.sex == 0 ? 'de la' : 'del' }
           {' '} diputad{data.termination} <strong>{ data.first_name } { data.first_surname }</strong> corresponde a
-          {' '} <strong>{data.expenses.operational[0].month} de { data.expenses.operational[0].year }</strong>,
-          {' '} destinando un total de <strong>{ total_amount }</strong> entre 
-          {' '} dieta parlamentaria<sup><a href='#ref-2'>2</a></sup>, 
-          {' '} gastos operacionales<sup><a href='#ref-3'>3</a></sup>, 
-          {' '} asignaciones para oficinas parlamentarias<sup><a href='#ref-4'>4</a></sup>,
-          {' '} y para personal de apoyo<sup><a href='#ref-5'>5</a></sup>.
+          {' '} <strong>{data.expenses.operational[0].month} de { data.expenses.operational[0].year }</strong>.
+          {' '} Sumando la dieta parlamentaria <sup><a href='#ref-2'>2</a></sup> con las asignaciones para gastos
+          {' '} operacionales<sup><a href='#ref-3'>3</a></sup>, oficinas parlamentarias<sup><a href='#ref-4'>4</a></sup>
+          {' '} y personal de apoyo<sup><a href='#ref-5'>5</a></sup>, se obtiene un total de <strong>{ total_amount }</strong>.
         </p>
       </div>
     </>
