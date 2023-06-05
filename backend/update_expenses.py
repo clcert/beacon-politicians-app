@@ -24,7 +24,7 @@ from settings import JsonFiles, FILE_LOCATIONS, OP_EXPENSES_TYPES
 import json
 
 deputies_expenses = []
-THREADS = 4
+THREADS = 2
 
 
 def parse_expenses(profile, driver):
@@ -83,7 +83,7 @@ def create_file():
     Function that creates the expenses file if it doesn't exist.
     """
     with open(FILE_LOCATIONS[JsonFiles.EXPENSES], 'w') as f:
-        f.write('')
+        f.write('{ expenses: "", last_update: "" }')
     
 
 def save_deputy_expenses(deputy_profile):
