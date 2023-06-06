@@ -50,12 +50,15 @@ MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agost
 OP_EXPENSES_TYPES = [
     'Relacionados a Oficina Parlamentaria',
     'Web y Almacenamiento',
-    'Otros',
     'Telefonía',
     'Traslación',
     'Difusión',
     'Actividades destinadas a la interacción con la comunidad',
     'Correspondencia',
+    'Traspaso desde gastos operacionales a asignación personal de apoyo',
+    'Consumos básicos',
+    'Seguros de bienes',
+    'Otros',
 ]
 
 OP_EXPENSES_OFFICE = [
@@ -76,9 +79,6 @@ OP_EXPENSES_WEB = [
 ]
 
 OP_EXPENSES_OTHERS = [
-    # 'TRASPASO DESDE GASTOS OPERACIONALES A ASIGNACIÓN PERSONAL DE APOYO',
-    # 'CONSUMOS BÁSICOS',
-    # 'SEGUROS DE BIENES',
     'SERVICIOS MENORES',
     'COVID-19 PERSONAL DE APOYO',
 ]
