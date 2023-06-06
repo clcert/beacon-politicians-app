@@ -18,6 +18,9 @@ const OperationalDistribuition = ({data}) => {
       'Relacionados a Oficina Parlamentaria',
       'Web y Almacenamiento',
       'Actividades destinadas a la interacción con la comunidad',
+      'Traspaso desde gastos operacionales a asignación personal de apoyo',
+      'Consumos básicos',
+      'Seguros de bienes',
       'Otros',
     ];
 
@@ -29,6 +32,9 @@ const OperationalDistribuition = ({data}) => {
       'Oficina Parlamentaria',
       'Web y Almacenamiento',
       'Interacción Comunitaria',
+      'Derivado a Personal de Apoyo',
+      'Consumos Básicos',
+      'Seguros de Bienes',
       'Otros',
     ];
 
