@@ -29540,10 +29540,6 @@
                         "total": 29942,
                         "total_std": 185128
                     },
-                    "Otros": {
-                        "total": 413697,
-                        "total_std": 247038
-                    },
                     "Telefonía": {
                         "total": 159381,
                         "total_std": 255937
@@ -29563,6 +29559,22 @@
                     "Correspondencia": {
                         "total": 859,
                         "total_std": 3916
+                    },
+                    "Traspaso desde gastos operacionales a asignación personal de apoyo": {
+                        "total": 1087009,
+                        "total_std": 881274
+                    },
+                    "Consumos básicos": {
+                        "total": 45353,
+                        "total_std": 71514
+                    },
+                    "Seguros de bienes": {
+                        "total": 231,
+                        "total_std": 2878
+                    },
+                    "Otros": {
+                        "total": 413697,
+                        "total_std": 247038
                     }
                 }
             },
@@ -29578,10 +29590,6 @@
                     "Web y Almacenamiento": {
                         "total": 24120,
                         "total_std": 170363
-                    },
-                    "Otros": {
-                        "total": 538242,
-                        "total_std": 159399
                     },
                     "Telefonía": {
                         "total": 125841,
@@ -29602,6 +29610,22 @@
                     "Correspondencia": {
                         "total": 3986,
                         "total_std": 10863
+                    },
+                    "Traspaso desde gastos operacionales a asignación personal de apoyo": {
+                        "total": 1085004,
+                        "total_std": 843557
+                    },
+                    "Consumos básicos": {
+                        "total": 44852,
+                        "total_std": 76754
+                    },
+                    "Seguros de bienes": {
+                        "total": 230,
+                        "total_std": 2861
+                    },
+                    "Otros": {
+                        "total": 538242,
+                        "total_std": 159399
                     }
                 }
             },
@@ -29617,10 +29641,6 @@
                     "Web y Almacenamiento": {
                         "total": 28632,
                         "total_std": 164347
-                    },
-                    "Otros": {
-                        "total": 551366,
-                        "total_std": 133267
                     },
                     "Telefonía": {
                         "total": 107053,
@@ -29641,6 +29661,22 @@
                     "Correspondencia": {
                         "total": 7996,
                         "total_std": 40690
+                    },
+                    "Traspaso desde gastos operacionales a asignación personal de apoyo": {
+                        "total": 974469,
+                        "total_std": 805819
+                    },
+                    "Consumos básicos": {
+                        "total": 51796,
+                        "total_std": 76906
+                    },
+                    "Seguros de bienes": {
+                        "total": 228,
+                        "total_std": 2843
+                    },
+                    "Otros": {
+                        "total": 551366,
+                        "total_std": 133267
                     }
                 }
             },
@@ -29656,10 +29692,6 @@
                     "Web y Almacenamiento": {
                         "total": 20553,
                         "total_std": 134768
-                    },
-                    "Otros": {
-                        "total": 492990,
-                        "total_std": 194033
                     },
                     "Telefonía": {
                         "total": 112075,
@@ -29680,6 +29712,22 @@
                     "Correspondencia": {
                         "total": 4689,
                         "total_std": 12321
+                    },
+                    "Traspaso desde gastos operacionales a asignación personal de apoyo": {
+                        "total": 949271,
+                        "total_std": 807334
+                    },
+                    "Consumos básicos": {
+                        "total": 49967,
+                        "total_std": 87078
+                    },
+                    "Seguros de bienes": {
+                        "total": 0,
+                        "total_std": 0
+                    },
+                    "Otros": {
+                        "total": 492990,
+                        "total_std": 194033
                     }
                 }
             },
@@ -29695,10 +29743,6 @@
                     "Web y Almacenamiento": {
                         "total": 17491,
                         "total_std": 110888
-                    },
-                    "Otros": {
-                        "total": 514174,
-                        "total_std": 174159
                     },
                     "Telefonía": {
                         "total": 135944,
@@ -29719,6 +29763,22 @@
                     "Correspondencia": {
                         "total": 5939,
                         "total_std": 21188
+                    },
+                    "Traspaso desde gastos operacionales a asignación personal de apoyo": {
+                        "total": 931720,
+                        "total_std": 826154
+                    },
+                    "Consumos básicos": {
+                        "total": 49791,
+                        "total_std": 77396
+                    },
+                    "Seguros de bienes": {
+                        "total": 0,
+                        "total_std": 0
+                    },
+                    "Otros": {
+                        "total": 514174,
+                        "total_std": 174159
                     }
                 }
             },
@@ -29734,10 +29794,6 @@
                     "Web y Almacenamiento": {
                         "total": 21998,
                         "total_std": 147879
-                    },
-                    "Otros": {
-                        "total": 505743,
-                        "total_std": 172278
                     },
                     "Telefonía": {
                         "total": 124559,
@@ -29758,6 +29814,22 @@
                     "Correspondencia": {
                         "total": 6899,
                         "total_std": 22345
+                    },
+                    "Traspaso desde gastos operacionales a asignación personal de apoyo": {
+                        "total": 999793,
+                        "total_std": 847567
+                    },
+                    "Consumos básicos": {
+                        "total": 55653,
+                        "total_std": 97538
+                    },
+                    "Seguros de bienes": {
+                        "total": 216,
+                        "total_std": 2691
+                    },
+                    "Otros": {
+                        "total": 505743,
+                        "total_std": 172278
                     }
                 }
             }
