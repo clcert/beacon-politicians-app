@@ -48,7 +48,7 @@ VOTING_BLACKLIST = [
 MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 
 OP_EXPENSES_TYPES = [
-    'Relacionados a Oficina Parlamentaria',
+    'Otros gastos de oficina parlamentaria',
     'Web y Almacenamiento',
     'Telefonía',
     'Traslación',
@@ -58,11 +58,12 @@ OP_EXPENSES_TYPES = [
     'Traspaso desde gastos operacionales a asignación personal de apoyo',
     'Consumos básicos',
     'Seguros de bienes',
+    'Arriendo de inmueble',
     'Otros',
 ]
 
 OP_EXPENSES_OFFICE = [
-    'ARRIENDO DE INMUEBLE',
+    # 'ARRIENDO DE INMUEBLE',
     'EQUIPAMIENTO OFICINA PARLAMENTARIA',
     'MATERIALES DE OFICINA',
     'GASTOS DE MANTENCIÓN OFICINA PARLAMENTARIA (INMUEBLE)',

@@ -83,7 +83,7 @@ class OperationalExpensesParser(ExpensesParser):
     def parse_and_filter_table(self, html_table):
         lines = html_table.splitlines()
         expenses = dict()
-        expenses['Relacionados a Oficina Parlamentaria'] = 0
+        expenses['Otros gastos de oficina parlamentaria'] = 0
         expenses['Web y Almacenamiento'] = 0
         expenses['Otros'] = 0
         total = 0
@@ -93,7 +93,7 @@ class OperationalExpensesParser(ExpensesParser):
             integer_amount = int(amount.strip().replace('.', ''))
             total += integer_amount
             if title in OP_EXPENSES_OFFICE:
-                expenses['Relacionados a Oficina Parlamentaria'] += integer_amount
+                expenses['Otros gastos de oficina parlamentaria'] += integer_amount
             elif title in OP_EXPENSES_WEB:
                 expenses['Web y Almacenamiento'] += integer_amount
             elif title in OP_EXPENSES_OTHERS:
