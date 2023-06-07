@@ -15,18 +15,18 @@ const ExpensesSummary = ({data}) => {
   const parlamentary_diet = 7012338;
 
 
-  const chart_labels = [ 'Dieta Parlamentaria', 'Gastos Operacionales', 'Oficinas Parlamentarias', 'Personal de Apoyo'];
+  const chart_labels = [ 'Dieta Parlamentaria', 'Gastos Operacionales', 'Personal de Apoyo'];
   // const chart_colors = ['#AA77FF', '#62CDFF', '#FFB84C'];
   const chart_data = [
     parlamentary_diet,
     opExp_month.length > 0 ? opExp_month[0].total : 0,
-    ofExp_month.length > 0 ? ofExp_month[0].total : 0,
+    // ofExp_month.length > 0 ? ofExp_month[0].total : 0,
     stExp_month.length > 0 ? stExp_month[0].total : 0,
   ];
   const chart_mean = [
     parlamentary_diet,
     opExp_month.length > 0 ? opExp_month[0].mean : 0,
-    ofExp_month.length > 0 ? ofExp_month[0].mean : 0,
+    // ofExp_month.length > 0 ? ofExp_month[0].mean : 0,
     stExp_month.length > 0 ? stExp_month[0].mean : 0,
   ]
 
@@ -113,8 +113,9 @@ const ExpensesSummary = ({data}) => {
           El último mes donde existe un registro completo de los gastos { data.sex == 0 ? 'de la' : 'del' }
           {' '} diputad{data.termination} <strong>{ data.first_name } { data.first_surname }</strong> corresponde a
           {' '} <strong>{data.expenses.operational[0].month} de { data.expenses.operational[0].year }</strong>.
-          {' '} Sumando la dieta parlamentaria <sup><a href='#ref-2'>2</a></sup> con las asignaciones para gastos
-          {' '} operacionales<sup><a href='#ref-3'>3</a></sup>, oficinas parlamentarias<sup><a href='#ref-4'>4</a></sup>
+          {' '} Sumando la dieta parlamentaria<sup><a href='#ref-2'>2</a></sup> con las asignaciones para 
+          {' '} gastos operacionales<sup><a href='#ref-3'>3</a></sup> 
+          {/* {' '} oficinas parlamentarias<sup><a href='#ref-4'>4</a></sup> */}
           {' '} y personal de apoyo<sup><a href='#ref-5'>5</a></sup>, se obtiene un total de <strong>{ total_amount }</strong>.
         </p>
       </div>

@@ -8,7 +8,7 @@ export const getMonthsForHistoryChart = (expenses) => {
   const operational_months = expenses.operational.map((expense) => expense.month).reverse()
   const offices_months = expenses.offices.map((expense) => expense.month).reverse()
   const staff_months = expenses.staff.map((expense) => expense.month).reverse()
-  const months = [...new Set([...operational_months,...offices_months, ...staff_months])]
+  const months = [...new Set([...operational_months, ...staff_months])]
   return months
 }
 
