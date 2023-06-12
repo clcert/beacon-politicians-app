@@ -3,6 +3,8 @@ import Chart from 'chart.js/auto';
 
 const DeputyAttendance = ({data}) => {
 
+  const depPronoun = data.termination === 'o' ? 'el diputado' : 'la diputada';
+
   useEffect(() => {
     var container = document.getElementById('attendances-chart').getContext('2d');
     var attendances_data = [
@@ -54,9 +56,9 @@ const DeputyAttendance = ({data}) => {
       </div>
       <div className="content">
         <p>
-          A la fecha de consulta, ha asistido a <strong>{ data.attendance.attended } sesiones de cámara</strong>, 
-          de un total de { data.attendance.total } sesiones, obteniendo así un <strong>{ data.attendance.percentage }% 
-          de asistencia justificada</strong>. Considerando las inasistencias justificadas y las no justificadas
+          A la fecha, { depPronoun } ha asistido a <strong>{ data.attendance.attended } sesiones de cámara</strong>, 
+          de un total de { data.attendance.total } sesiones dentro de la legislatura. Esto significa un <strong>{ data.attendance.percentage }% 
+          de asistencia justificada</strong> (considerando las inasistencias justificadas y las no justificadas)
           <sup><a id='text-attendance' href='#ref-1'>1</a></sup>.
         </p>
       </div>

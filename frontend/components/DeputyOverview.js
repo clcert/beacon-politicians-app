@@ -27,13 +27,13 @@ const DeputyOverview = ({data}) => {
       <div className='deputy-overview'>
         <p>
           { titleWithPronoun } del día <strong>{ selectionDateStr }</strong> es{' '}
-          <strong>{ fullName }</strong> con <strong>{ age } años</strong> de edad
+          <strong>{ fullName }</strong>. Con <strong>{ age } años</strong> de edad,{' '}
           {
             data.profession === 'Sin Información' ? '' : (
-              <> y es de profesión <strong>{ data.profession }</strong>.</>
+              <>es de profesión <strong>{ data.profession }</strong> y{' '}</>
             )
           }
-          . Actualmente es { deputyTitle.toLocaleLowerCase() } por el <strong>distrito { data.district }</strong>{' '}
+          actualmente es { deputyTitle.toLocaleLowerCase() } por el <strong>distrito { data.district }</strong>{' '}
           que forma parte de la <strong>{ data.districtregion }</strong>,{' '}
           durante el período { lastPeriod[0] } a { lastPeriod[1] }.
         </p>
