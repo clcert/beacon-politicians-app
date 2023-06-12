@@ -12,6 +12,7 @@ import About from '../components/About';
 import Navbar from '../components/Navbar';
 
 import { BACKEND_URL, getData } from '../utils/utils';
+import DeputySelection from './DeputySelection';
 
 export default function Main ({date}) {
 
@@ -64,21 +65,13 @@ export default function Main ({date}) {
         </div>
 
         <div id="main">
-          <header className="major container medium">
-            <h4>
-              Escogid{ deputyData.termination } el { deputyData.date } (horario UTC) en base al Pulso&nbsp;
-              <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/1/pulse/${ deputyData.record }`} target='_blank' rel="noreferrer">
-                #{ deputyData.record }
-              </a>{' '}
-              del faro de aleatoriedad de Random UChile.
-            </h4>
-            <p className='verification-text'>
-              Comprueba la elección utilizando nuestro script (Python)&nbsp;
-              <a href='https://github.com/clcert/beacon-politicians-app' target='_blank' rel="noreferrer">
-                disponible en GitHub
-              </a>.
-            </p>
-          </header>
+          <DeputySelection
+            deputyName={`${deputyData.first_name} ${deputyData.first_surname}`}
+            selectionDate={deputyData.date}
+            termination={deputyData.termination}
+            pulseId={deputyData.record}
+            deputyData={deputyData} 
+          />
 
           <div id="attendance" className="box container">
             <header>
