@@ -19,15 +19,15 @@ class CustomParser(ArgumentParser):
             action="store_true"
         )
         self.add_argument(
-            "--all_profiles",
+            "--update_profiles",
             help="Actualizar la información básica de los diputados.",
             action="store_true"
         )
         self.add_argument(
+            "-u",
             "--update_expenses",
             help="Actualizar la información de gastos de los diputados indicados.",
-            action="store_true",
-            type=valid_range
+            type=valid_range,
         )
 
 

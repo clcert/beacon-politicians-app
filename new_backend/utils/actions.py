@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
 from utils.data import CURRENT_DEPUTIES_URL
-from utils.db import insert_deputy_profile, insert_parlamentary_period
 from deputies.deputy_parser import DeputyParser
 import requests
 
@@ -24,15 +23,16 @@ def update_all_profiles():
     for local_id in range(get_number_of_deputies()):
         deputy_parser = DeputyParser(local_id)
         main_profile_dict = deputy_parser.update_profile()
-        main_profile_dict['last_update'] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        insert_deputy_profile(main_profile_dict)
-        for period in main_profile_dict['periods']:
-            period_from, period_to = period.split('-')
-            insert_parlamentary_period({
-                'id': main_profile_dict['id'],
-                'period_from': int(period_from),
-                'period_to': int(period_to),
-            })
-
     print("Main profiles updated.")
+
+def update_expenses(from_id=0, to_id=get_number_of_deputies()):
+    """
+    Updates all deputy expenses.
+    """
+    print("Updating expenses...")
+    for local_id in range(from_id, to_id):
+        deputy_parser = DeputyParser(local_id)
+        deputy_parser.load_or_update_profile()
+        deputy_parser.update_deputy_expenses()
+    print("Expenses updated.")
 

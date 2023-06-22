@@ -124,3 +124,17 @@ def insert_parlamentary_period(period):
     )
     db.commit()
     db.close()
+
+def find_profile_data_in_db(deputy_index):
+    """Find a deputy profile in the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT * FROM main_profile WHERE id = :id
+        """,
+        {"id": deputy_index}
+    )
+    deputy_profile = cursor.fetchone()
+    db.close()
+    return deputy_profile

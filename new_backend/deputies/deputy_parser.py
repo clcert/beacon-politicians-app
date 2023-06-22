@@ -3,6 +3,11 @@ import requests
 
 from deputies.parsers.profile import parse_deputy_profile
 from utils.data import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
+from utils.db import (
+    insert_deputy_profile,
+    find_profile_data_in_db,
+    insert_parlamentary_period,
+)
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
 BASE_PROFILE_PIC_URL = 'https://www.camara.cl/img.aspx?prmID=GRCL'
@@ -39,15 +44,40 @@ class DeputyParser:
         :return: Returns basic information of the deputy.
         """
 
-        profile = parse_deputy_profile(self.profile_html_url, self.deputy_info_url)
-        profile['id'] = self.real_index
-        profile['local_id'] = self.local_index
-        profile['profile_picture'] = self.profile_pic_url
+        self.profile = parse_deputy_profile(self.profile_html_url, self.deputy_info_url)
+        self.profile['id'] = self.real_index
+        self.profile['local_id'] = self.local_index
+        self.profile['profile_picture'] = self.profile_pic_url
+        self.profile['last_update'] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        insert_deputy_profile(self.profile)
+
+        # Update parlamentary periods
+        for period in self.profile['periods']:
+            period_from, period_to = period.split('-')
+            insert_parlamentary_period({
+                'id': self.profile['id'],
+                'period_from': int(period_from),
+                'period_to': int(period_to),
+            })
 
         # Show summary
         print(f"Main profile of {profile['first_name']} {profile['first_surname']} (ID-{self.local_index}) successfully updated.")
 
-        return profile
+        return self.profile
+
+    def load_or_update_profile(self):
+        """
+        Loads deputy profile data from database if it exists, otherwise updates it.
+        """
+        db_profile_data = find_profile_data_in_db(self.real_index)
+        if db_profile_data:
+            self.profile = db_profile_data
+        else:
+            update_profile()
+
+    def update_deputy_expenses():
+        pass
+
 
 
     # def get_attendance(self):
