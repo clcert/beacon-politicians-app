@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from datetime import datetime
 import requests
 
 from deputies.parsers.profile import parse_deputy_profile
@@ -72,9 +73,6 @@ class DeputyParser:
                     'period_from': int(period_from),
                     'period_to': int(period_to),
                 })
-
-        # Show summary
-        print(f"(ID-{self.local_index}) Main profile of {profile['first_name']} {profile['first_surname']} successfully updated.")
 
         return self.profile
 

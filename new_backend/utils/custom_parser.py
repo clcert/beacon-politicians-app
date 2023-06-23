@@ -1,4 +1,5 @@
 from argparse import ArgumentParser, ArgumentTypeError
+from datetime import datetime
 
 class CustomParser(ArgumentParser):
     def __init__(self, *args, **kwargs):
@@ -61,6 +62,7 @@ class CustomParser(ArgumentParser):
             "-v",
             "--verify",
             help="¿Quieres verificar un resultado? Indícalo con esta opción.",
+            action="store_true"
         )
         
         
