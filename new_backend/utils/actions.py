@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
 from utils.data import CURRENT_DEPUTIES_URL
+from utils.drivers import get_driver
 from deputies.deputy_parser import DeputyParser
 import requests
 
@@ -30,9 +31,10 @@ def update_expenses(from_id=0, to_id=get_number_of_deputies()):
     Updates all deputy expenses.
     """
     print("Updating expenses...")
+    driver = get_driver()
     for local_id in range(from_id, to_id):
         deputy_parser = DeputyParser(local_id)
         deputy_parser.load_or_update_profile()
-        deputy_parser.update_deputy_expenses()
+        deputy_parser.update_deputy_expenses(driver=driver)
     print("Expenses updated.")
 

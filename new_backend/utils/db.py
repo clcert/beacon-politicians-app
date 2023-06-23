@@ -135,6 +135,88 @@ def find_profile_data_in_db(deputy_index):
         """,
         {"id": deputy_index}
     )
-    deputy_profile = cursor.fetchone()
+    row = cursor.fetchone()
+    cursor.close()
     db.close()
-    return deputy_profile
+
+    if row:
+        return {
+            'id': row[0],
+            'local_id': row[1],
+            'first_name': row[2],
+            'second_name': row[3],
+            'first_surname': row[4],
+            'second_surname': row[5],
+            'profile_picture': row[6],
+            'gender': row[7],
+            'birthdate': row[8],
+            'profession': row[9],
+            'district': row[10],
+            'district_region': row[11],
+            'party': row[12],
+            'party_alias': row[13],
+            'last_update': row[14]
+        }
+
+    return None
+
+
+def insert_operational_expenses(op_exp, deputy_id):
+    """Insert operational expenses of a deputy into the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+
+    for record in op_exp:
+        record_month, record_year = record['month'], record['year']
+        del record['month']
+        del record['year']
+
+        for key, value in record.items():
+            cursor.execute(
+                """
+                INSERT OR REPLACE INTO expenses_operational (deputy_id, year, month, expense_type, amount)
+                VALUES (:deputy_id, :year, :month, :expense_type, :amount)
+                """, 
+                { 'deputy_id': deputy_id, 'year': record_year, 'month': record_month, 'expense_type': key, 'amount': value }
+            )
+    db.commit()
+    cursor.close()
+    db.close()
+
+
+def insert_staff_expenses(st_exp, deputy_id):
+    """Insert staff expenses of a deputy into the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+
+    for record in st_exp:
+        record['deputy_id'] = deputy_id
+        cursor.execute(
+            """
+            INSERT OR REPLACE INTO expenses_support_staff (deputy_id, year, month, hired_staff, total_amount)
+            VALUES (:deputy_id, :year, :month, :num_personal, :total)
+            """, 
+            record
+        )
+    db.commit()
+    cursor.close()
+    db.close()
+
+
+def insert_office_expenses(off_exp, deputy_id):
+    """Insert office expenses of a deputy into the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+
+    for record in off_exp:
+        record['deputy_id'] = deputy_id
+        cursor.execute(
+            """
+            INSERT OR REPLACE INTO expenses_offices (deputy_id, year, month, offices_number, total_amount)
+            VALUES (:deputy_id, :year, :month, :num_oficinas, :total)
+            """, 
+            record
+        )
+    db.commit()
+    cursor.close()
+    db.close()

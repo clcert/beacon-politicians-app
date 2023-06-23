@@ -2,11 +2,20 @@ from bs4 import BeautifulSoup
 import requests
 
 from deputies.parsers.profile import parse_deputy_profile
+from deputies.parsers.expenses import (
+    OfficesExpensesParser,
+    OperationalExpensesParser,
+    StaffExpensesParser,
+)
+from utils.drivers import get_driver
 from utils.data import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
 from utils.db import (
     insert_deputy_profile,
     find_profile_data_in_db,
     insert_parlamentary_period,
+    insert_operational_expenses,
+    insert_office_expenses,
+    insert_staff_expenses,
 )
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
@@ -25,6 +34,7 @@ class DeputyParser:
 
         self.profile = None
 
+
     def get_real_index(self):
         """
         Given a local index between 0 and the total number of deputies, returns the id of a deputy.
@@ -38,7 +48,8 @@ class DeputyParser:
         real_index = int(deputy.find('Id').get_text())
         return real_index
 
-    def update_profile(self):
+
+    def update_profile(self, save=True):
         """
         Method used to scrap information from the profile of a deputy, given a deputy id.
         :return: Returns basic information of the deputy.
@@ -49,21 +60,24 @@ class DeputyParser:
         self.profile['local_id'] = self.local_index
         self.profile['profile_picture'] = self.profile_pic_url
         self.profile['last_update'] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        insert_deputy_profile(self.profile)
 
-        # Update parlamentary periods
-        for period in self.profile['periods']:
-            period_from, period_to = period.split('-')
-            insert_parlamentary_period({
-                'id': self.profile['id'],
-                'period_from': int(period_from),
-                'period_to': int(period_to),
-            })
+        if save: # Save profile to database
+            insert_deputy_profile(self.profile)
+    
+            # Update parlamentary periods
+            for period in self.profile['periods']:
+                period_from, period_to = period.split('-')
+                insert_parlamentary_period({
+                    'id': self.profile['id'],
+                    'period_from': int(period_from),
+                    'period_to': int(period_to),
+                })
 
         # Show summary
-        print(f"Main profile of {profile['first_name']} {profile['first_surname']} (ID-{self.local_index}) successfully updated.")
+        print(f"(ID-{self.local_index}) Main profile of {profile['first_name']} {profile['first_surname']} successfully updated.")
 
         return self.profile
+
 
     def load_or_update_profile(self):
         """
@@ -75,8 +89,40 @@ class DeputyParser:
         else:
             update_profile()
 
-    def update_deputy_expenses():
-        pass
+
+    def update_deputy_expenses(self, save=True, driver=None):
+        """
+        Gets the expenses of a deputy in the last 5 months with records.
+        :return: Returns a dictionary containing 
+            - Operational expenses
+            - Offices expenses
+            - Staff expenses
+        """
+        print(f"(ID-{self.local_index}) Updating expenses of {self.profile['first_name']} {self.profile['first_surname']}, This may take few minutes...")
+    
+        op_exp = self.update_expenses_category(OperationalExpensesParser, driver=driver)
+        if save: insert_operational_expenses(op_exp, self.real_index)
+
+        of_exp = self.update_expenses_category(OfficesExpensesParser, driver=driver)
+        if save: insert_office_expenses(of_exp, self.real_index)
+
+        st_exp = self.update_expenses_category(StaffExpensesParser, driver=driver)
+        if save: insert_staff_expenses(st_exp, self.real_index)
+
+        print(f"(ID-{self.local_index}) Expenses of {self.profile['first_name']} {self.profile['first_surname']} successfully updated.")
+
+
+    def update_expenses_category(self, expenses_parser, driver=None):
+        """
+        Gets the operational expenses of a deputy in the last 5 months with records.
+        :return: Returns a dictionary containing the expenses of the deputy.
+        """
+        if not driver:
+            driver = get_driver()
+
+        expenses_parser = expenses_parser(self.profile, driver=driver)
+        expenses_data = expenses_parser.get_deputy_expenses()
+        return expenses_data
 
 
 
@@ -118,80 +164,3 @@ class DeputyParser:
     #     print('[Voting] Elapsed time: ', round(perf_counter() - t_init, 3), 's', end='\n\n')
 
     #     return voting
-
-
-    # def get_deputy_expenses(self):
-    #     """
-    #     Method used to get the expenses of a deputy for all the chamber sessions of the
-    #     current legislature.
-    #     :return: Returns a dictionary containing last 6 months deputy expenses.
-    #     """
-    #     json_data = get_json_data(json_file=JsonFiles.EXPENSES)
-
-    #     average_expenses = json_data['average_expenses']
-        
-    #     expenses_data = json_data['expenses']
-    #     deputy_data = expenses_data[self.local_index]
-
-    #     deputy_operational_expenses = deputy_data['expenses']['operational']
-    #     avg_operational_expenses_list = average_expenses['operational']
-
-    #     for month_data in deputy_operational_expenses:
-    #         avg_expenses_filtered_by_month = filter(
-    #             lambda avg_data: avg_data['month'] == month_data['month'],
-    #             avg_operational_expenses_list,
-    #         )
-
-    #         avg_expenses_month_list = list(avg_expenses_filtered_by_month)
-
-    #         if not avg_expenses_month_list:
-    #             # If there is no data for the month, set all values to -1
-    #             for expense_category in OP_EXPENSES_TYPES:
-    #                 month_data[expense_category] = {
-    #                     'amount': -1,
-    #                     'mean': -1,
-    #                     'stdev': -1,
-    #                 }
-    #             continue
-
-    #         avg_expenses_month = avg_expenses_month_list[0]
-    #         avg_expenses_detail = avg_expenses_month['detail']
-
-    #         for expense_category in OP_EXPENSES_TYPES:
-    #             deputy_amount = month_data[expense_category]
-    #             month_data[expense_category] = {
-    #                 'amount': deputy_amount,
-    #                 'mean': avg_expenses_detail[expense_category]['total'],
-    #                 'stdev': avg_expenses_detail[expense_category]['total_std'],
-    #             }
-
-    #         month_data['mean'] = avg_expenses_month['total']
-    #         month_data['stdev'] = avg_expenses_month['total_std']
-        
-    #     deputy_offices_expenses = deputy_data['expenses']['offices']
-    #     avg_offices_expenses_list = average_expenses['offices']
-    #     self._join_avg_expenses(deputy_offices_expenses, avg_offices_expenses_list)
-        
-    #     deputy_staff_expenses = deputy_data['expenses']['staff']
-    #     avg_staff_expenses_list = average_expenses['staff']
-    #     self._join_avg_expenses(deputy_staff_expenses, avg_staff_expenses_list)
-
-    #     return deputy_data['expenses']
-
-
-    # def _join_avg_expenses(self, expenses_data, avg_expenses_list):
-    #     for month_data in expenses_data:
-    #         avg_expenses_filtered_by_month = filter(
-    #             lambda avg_data: avg_data['month'] == month_data['month'],
-    #             avg_expenses_list,
-    #         )
-
-    #         avg_expenses_month_list = list(avg_expenses_filtered_by_month)
-    #         if not avg_expenses_month_list:
-    #             month_data['mean'] = -1
-    #             month_data['stdev'] = -1
-    #             continue
-
-    #         avg_expenses_month = avg_expenses_month_list[0]
-    #         month_data['mean'] = avg_expenses_month['total']
-    #         month_data['stdev'] = avg_expenses_month['total_std']
