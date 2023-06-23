@@ -29,43 +29,41 @@ class CustomParser(ArgumentParser):
             help="Actualizar la información de gastos de los diputados indicados.",
             type=valid_range,
         )
-
-
-
-
+        self.add_argument(
+            "-d",
+            "--date",
+            help=(
+                "Establece la fecha para obtener el registro que permitirá escoger al diputado, "
+                "si no se especifica una hora se asume por defecto las 00:00hrs (zona horaria de Santiago de Chile)."
+                "Formato dd-mm-YYYY"
+            ),
+            type=valid_date
+        )
+        self.add_argument(
+            "-t",
+            "--time",
+            help=(
+                "Establece la hora para obtener el registro que permitirá escoger al diputado. "
+                "Formato HH:MM"
+            ),
+            type=valid_time
+        )
+        self.add_argument(
+            "-e",
+            "--epoch",
+            help=(
+                "Sets the date and time to the given epoch. If date or time are given, will prioritize"
+                "the epoch argument."
+            ),
+            type=int
+        )
+        self.add_argument(
+            "-v",
+            "--verify",
+            help="¿Quieres verificar un resultado? Indícalo con esta opción.",
+        )
         
-        # self.add_argument(
-        #     "-v",
-        #     "--verify",
-        #     help="Verificar un resultado",
-        # )
-        # self.add_argument(
-        #     "-d",
-        #     "--date",
-        #     help=(
-        #         "Sets the date to get the record, by default at 00:00 hrs, if hour isn't specified. "
-        #         "Format must be YYYY-mm-dd"
-        #     ),
-        #     type=valid_date
-        # )
-        # self.add_argument(
-        #     "-t",
-        #     "--time",
-        #     help=(
-        #         "Sets the hour to get the record, by default using the current date if date isn't "
-        #         "specified. Format must be HH:MM",
-        #     ),
-        #     type=valid_hour
-        # )
-        # self.add_argument(
-        #     "-e",
-        #     "--epoch",
-        #     help=(
-        #         "Sets the date and time to the given epoch. If date or time are given, will prioritize"
-        #         "the epoch argument."
-        #     ),
-        #     type=int
-        # )
+        
 
 def valid_range(range):
     """
@@ -83,4 +81,30 @@ def valid_range(range):
         return (start-1, end)
     except ValueError:
         msg = "Invalid deputies id range: '{0}'.".format(range)
+        raise ArgumentTypeError(msg)
+
+
+def valid_date(date):
+    """
+    Checks if a date is valid according to the argument parser.
+    :param date: String representing a date. Format must be dd-mm-YYYY.
+    :return: Datetime object representing the given string.
+    """
+    try:
+        return datetime.strptime(date, "%d-%m-%Y")
+    except ValueError:
+        msg = "Not a valid date: '{0}'.".format(date)
+        raise ArgumentTypeError(msg)
+
+
+def valid_time(time):
+    """
+    Checks if an hour is valid according to the argument parser.
+    :param hour: String representing an hour. Format must be HH:MM.
+    :return: Datetime object representing te given string.
+    """
+    try:
+        return datetime.strptime(time, "%H:%M")
+    except ValueError:
+        msg = "Not a valid hour: '{0}'.".format(time)
         raise ArgumentTypeError(msg)
