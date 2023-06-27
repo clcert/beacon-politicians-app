@@ -116,6 +116,11 @@ class DeputyParser:
             'office_expenses': self.of_exp,
             'staff_expenses': self.st_exp,
         }
+    
+
+    def update_legislative_activity(self, save=True):
+        pass
+
 
 
     def update_expenses_category(self, expenses_parser, driver=None):
