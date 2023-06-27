@@ -1,9 +1,7 @@
-from datetime import datetime
 from utils.drivers import get_driver
 from utils.utils import get_number_of_deputies, showSummary
 from utils.beacon import get_index, get_pulse_data
-from deputies.deputy_parser import DeputyParser
-import requests
+from deputies.parser import DeputyParser
 
 
 def update_all_profiles():
@@ -13,7 +11,7 @@ def update_all_profiles():
     print("Updating main profiles...")
     for local_id in range(get_number_of_deputies()):
         deputy_parser = DeputyParser(local_id)
-        main_profile_dict = deputy_parser.update_profile()
+        deputy_parser.update_profile()
     print("Main profiles updated.")
 
 

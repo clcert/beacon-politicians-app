@@ -1,11 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
 
-from deputies.utils import get_current_legislature
-from settings import (
+from utils.utils import get_current_legislature
+from utils.data import (
     BASE_SESSIONS_IN_LEGISLATURE_URL,
     BASE_ATTENDANCES_URL,
-    CURRENT_LEGISLATURE_URL,
     JUSTIFICATIONS_URL,
 )
 

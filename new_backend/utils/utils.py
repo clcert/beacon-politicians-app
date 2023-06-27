@@ -1,7 +1,30 @@
-from utils.data import CURRENT_DEPUTIES_URL
+from utils.data import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
 from datetime import datetime, date, timedelta
 from bs4 import BeautifulSoup
 import requests
+
+CURRENT_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarLegislaturaActual'
+
+def get_current_legislature():
+    """
+    Obtains the information from the latest legislature.
+    :return: Returns a dictionary containing the id of the latest legislature, and the date of end and start
+        as a datetime object.
+    """
+    response = requests.get(CURRENT_LEGISLATURE_URL)
+    soup = BeautifulSoup(response.content, 'xml')
+
+    legislature_id = int(soup.find('Id').get_text().strip())
+
+    start = soup.find('FechaInicio').get_text()
+    start = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S")
+
+    end = soup.find('FechaTermino').get_text()
+    end = datetime.strptime(end, "%Y-%m-%dT%H:%M:%S")
+
+    legislature = dict(id=legislature_id, start=start, end=end)
+
+    return legislature
 
 def get_number_of_deputies():
     """

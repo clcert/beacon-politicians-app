@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
 
-from deputies.parsers.profile import parse_deputy_profile
-from deputies.parsers.expenses import (
+from deputies.profile import parse_deputy_profile
+from deputies.expenses import (
     OfficesExpensesParser,
     OperationalExpensesParser,
     StaffExpensesParser,
