@@ -4,6 +4,7 @@ import requests
 
 from deputies.attendance import parse_deputy_attendance
 from deputies.profile import parse_deputy_profile
+from deputies.votings import parse_deputy_votings
 from deputies.expenses import (
     OfficesExpensesParser,
     OperationalExpensesParser,
@@ -19,6 +20,7 @@ from utils.db import (
     insert_office_expenses,
     insert_staff_expenses,
     insert_attendance_record,
+    insert_voting_record,
 )
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
@@ -100,16 +102,20 @@ class DeputyParser:
         """
         print(f"(ID-{self.local_index}) Updating expenses of {self.profile['first_name']} {self.profile['first_surname']}, This may take few minutes...")
     
-        op_exp = self.update_expenses_category(OperationalExpensesParser, driver=driver)
-        if save: insert_operational_expenses(op_exp, self.real_index)
+        self.op_exp = self.update_expenses_category(OperationalExpensesParser, driver=driver)
+        if save: insert_operational_expenses(self.op_exp, self.real_index)
 
-        of_exp = self.update_expenses_category(OfficesExpensesParser, driver=driver)
-        if save: insert_office_expenses(of_exp, self.real_index)
+        self.of_exp = self.update_expenses_category(OfficesExpensesParser, driver=driver)
+        if save: insert_office_expenses(self.of_exp, self.real_index)
 
-        st_exp = self.update_expenses_category(StaffExpensesParser, driver=driver)
-        if save: insert_staff_expenses(st_exp, self.real_index)
+        self.st_exp = self.update_expenses_category(StaffExpensesParser, driver=driver)
+        if save: insert_staff_expenses(self.st_exp, self.real_index)
 
-        print(f"(ID-{self.local_index}) Expenses of {self.profile['first_name']} {self.profile['first_surname']} successfully updated.")
+        return {
+            'operational_expenses': self.op_exp,
+            'office_expenses': self.of_exp,
+            'staff_expenses': self.st_exp,
+        }
 
 
     def update_expenses_category(self, expenses_parser, driver=None):
@@ -125,36 +131,27 @@ class DeputyParser:
         return expenses_data
 
 
-
     def update_attendance(self, save=True):
         """
         Method used to get the attendance of a deputy for all the chamber sessions of the
         current legislature.
-        :return: Returns a dictionary containing the number of days attended, unattended justified or not, the total
-        number of days and the official percentage of attended days.
         """
-        # Get attendance data
-        attendance = parse_deputy_attendance(self.real_index)
-        self.attendance = attendance
-        print(attendance)
-        if save: insert_attendance_record(attendance, self.real_index)
+        self.attendance = parse_deputy_attendance(self.real_index)
+        if save: 
+            insert_attendance_record(self.attendance, self.real_index)
+
+        return self.attendance
 
 
-    # def get_last_votes(self):
-    #     """
-    #     Method used to get vote information from all voting of the last legislature,
-    #     :return: Returns a list of dictionaries containing each one the name, description, date and the vote_option
-    #              for a voting.
-    #     """
+    def get_last_votes(self, save=True):
+        """
+        Method used to get vote information from all voting of the last legislature,
+        :return: Returns a list of dictionaries containing each one the name, description, date and the vote_option
+                 for a voting.
+        """
+        self.voting = parse_deputy_votings(self.real_index, votes_limit=20)
+        if save: 
+            for vote in self.voting:
+                insert_voting_record(vote, self.real_index)
 
-    #     # Measure elapsed time
-    #     t_init = perf_counter()
-
-    #     # Get voting data
-    #     voting = parse_deputy_votings(self.real_index, votes_limit=10)
-
-    #     # Show summary
-    #     print('[Voting] Obtained')
-    #     print('[Voting] Elapsed time: ', round(perf_counter() - t_init, 3), 's', end='\n\n')
-
-    #     return voting
+        return self.voting

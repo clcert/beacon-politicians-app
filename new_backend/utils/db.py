@@ -221,6 +221,7 @@ def insert_office_expenses(off_exp, deputy_id):
     cursor.close()
     db.close()
 
+
 def insert_attendance_record(attendance, deputy_id):
     """Insert attendance record of a deputy into the database."""
     db = sqlite3.connect("db.sqlite3")
@@ -232,6 +233,22 @@ def insert_attendance_record(attendance, deputy_id):
         VALUES (:deputy_id, :total, :present, :justified_absent, :unjustified_absent)
         """,
         attendance
+    )
+    db.commit()
+    db.close()
+
+
+def insert_voting_record(vote, deputy_id):
+    """Insert voting record of a deputy into the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    vote['deputy_id'] = deputy_id
+    cursor.execute(
+        """
+        INSERT OR REPLACE INTO votings (deputy_id, voting_id, voting_date, bulletin_number, document_title, article_text, voted_option, total_approved, total_rejected, total_abstention, result)
+        VALUES (:deputy_id, :voting_id, :date, :description, :name, :article, :vote_option, :total_yes, :total_no, :total_abstention, :result)
+        """,
+        vote
     )
     db.commit()
     db.close()
