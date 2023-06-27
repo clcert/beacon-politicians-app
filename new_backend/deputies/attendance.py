@@ -2,11 +2,11 @@ from bs4 import BeautifulSoup
 import requests
 
 from utils.utils import get_current_legislature
-from utils.data import (
-    BASE_SESSIONS_IN_LEGISLATURE_URL,
-    BASE_ATTENDANCES_URL,
-    JUSTIFICATIONS_URL,
-)
+from utils.data import OPENDATA_CAMARA_URL
+
+BASE_SESSIONS_IN_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionesXLegislatura?prmLegislaturaId='
+BASE_ATTENDANCES_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionAsistencia?prmSesionId='
+JUSTIFICATIONS_URL = OPENDATA_CAMARA_URL + 'WSComun.asmx/retornarTiposJustificacionesInasistencia'
 
 def parse_deputy_attendance(deputy_id):
     """
@@ -19,7 +19,7 @@ def parse_deputy_attendance(deputy_id):
     justifications = parse_justifications()
     sessions = get_camera_sessions()
 
-    deputy_attendance = dict(attended=0, justified=0, unjustified=0, total=0, percentage=100.0)
+    deputy_attendance = dict(present=0, justified_absent=0, unjustified_absent=0, total=0)
 
     for session in sessions:
         session_url = BASE_ATTENDANCES_URL + str(session)
@@ -59,13 +59,8 @@ def parse_deputy_attendance(deputy_id):
             else:
                 deputy_attendance['unjustified'] += 1
 
-    # Calculate percentage
-    justified = deputy_attendance['justified']
-    attended = deputy_attendance['attended']
-
-    percentage = round((justified + attended) / len(sessions), 2)    
+    # Add total number of sessions
     deputy_attendance['total'] = len(sessions)
-    deputy_attendance['percentage'] *= percentage
 
     return deputy_attendance
 

@@ -220,3 +220,18 @@ def insert_office_expenses(off_exp, deputy_id):
     db.commit()
     cursor.close()
     db.close()
+
+def insert_attendance_record(attendance, deputy_id):
+    """Insert attendance record of a deputy into the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    attendance['deputy_id'] = deputy_id
+    cursor.execute(
+        """
+        INSERT OR REPLACE INTO attendance (deputy_id, total, present, justified_absent, unjustified_absent)
+        VALUES (:deputy_id, :total, :present, :justified_absent, :unjustified_absent)
+        """,
+        attendance
+    )
+    db.commit()
+    db.close()

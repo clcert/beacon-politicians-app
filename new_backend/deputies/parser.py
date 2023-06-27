@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
 
+from deputies.attendance import parse_deputy_attendance
 from deputies.profile import parse_deputy_profile
 from deputies.expenses import (
     OfficesExpensesParser,
@@ -17,6 +18,7 @@ from utils.db import (
     insert_operational_expenses,
     insert_office_expenses,
     insert_staff_expenses,
+    insert_attendance_record,
 )
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
@@ -124,24 +126,18 @@ class DeputyParser:
 
 
 
-    # def get_attendance(self):
-    #     """
-    #     Method used to get the attendance of a deputy for all the chamber sessions of the
-    #     current legislature.
-    #     :return: Returns a dictionary containing the number of days attended, unattended justified or not, the total
-    #     number of days and the official percentage of attended days.
-    #     """
-    #     # Measure elapsed time
-    #     t_init = perf_counter()
-
-    #     # Get attendance data
-    #     attendance = parse_deputy_attendance(self.real_index)
-
-    #     # Show summary
-    #     print('[Attendance] Obtained')
-    #     print('[Attendance] Elapsed time: ', round(perf_counter() - t_init, 3), 's', end='\n\n')
-
-    #     return attendance
+    def update_attendance(self, save=True):
+        """
+        Method used to get the attendance of a deputy for all the chamber sessions of the
+        current legislature.
+        :return: Returns a dictionary containing the number of days attended, unattended justified or not, the total
+        number of days and the official percentage of attended days.
+        """
+        # Get attendance data
+        attendance = parse_deputy_attendance(self.real_index)
+        self.attendance = attendance
+        print(attendance)
+        if save: insert_attendance_record(attendance, self.real_index)
 
 
     # def get_last_votes(self):

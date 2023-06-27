@@ -45,6 +45,6 @@ def choose_deputy(timestamp, verify=False):
         return
 
     deputy_parser.update_profile()
-    # deputy_parser.update_attendance()
+    deputy_parser.update_attendance()
     # deputy_parser.update_votings()
     # deputy_parser.save_as_deputy_of_the_day(timestamp)
