@@ -64,6 +64,12 @@ class CustomParser(ArgumentParser):
             help="¿Quieres verificar un resultado? Indícalo con esta opción.",
             action="store_true"
         )
+        self.add_argument(
+            "-r",
+            "--run",
+            help="Obtiene el diputado del día indicado y lo actualiza en la base de datos.",
+            action="store_true"
+        )
         
         
 
