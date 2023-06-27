@@ -85,7 +85,7 @@ class DeputyParser:
         if db_profile_data:
             self.profile = db_profile_data
         else:
-            update_profile()
+            self.update_profile()
 
 
     def update_deputy_expenses(self, save=True, driver=None):

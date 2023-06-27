@@ -2,13 +2,25 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
 
-from deputies.utils import get_current_legislature
-from settings import (
-    BASE_VOTINGS_LEGISLATURE_URL,
-    BASE_VOTING_DETAIL_URL,
-    BASE_BULLETIN_LAW_PROJECT_URL,
+from utils.utils import get_current_legislature
+from utils.data import (
+    OPENDATA_CAMARA_URL,
     VOTING_BLACKLIST,
 )
+
+BASE_VOTINGS_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno='
+BASE_VOTING_DETAIL_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarVotacionDetalle?prmVotacionId='
+BASE_BULLETIN_LAW_PROJECT_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin='
+
+# Voting filter
+# Blacklist of keywords
+VOTING_BLACKLIST = [
+    'modifica',
+    'ley',
+    'n°',
+    'solicita',
+    'presidente'
+]
 
 def parse_deputy_votings(deputy_id, votes_limit=-1):
     """
