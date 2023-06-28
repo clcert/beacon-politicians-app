@@ -91,6 +91,27 @@ def init_db(db_name = "db.sqlite3"):
         "PRIMARY KEY(deputy_id, year, month)"+
         ")"
     )
+    cursor.execute("CREATE TABLE IF NOT EXISTS law_projects ("+
+        "deputy_id INTEGER,"+
+        "project_id INTEGER,"+
+        "project_name TEXT,"+
+        "project_type TEXT,"+
+        "project_status TEXT,"+
+        "project_date TEXT,"+
+        "FOREIGN KEY(deputy_id) REFERENCES main_profile(id) "+
+        "PRIMARY KEY(deputy_id, project_id)"+
+        ")"
+    )
+    cursor.execute("CREATE TABLE IF NOT EXISTS deputy_for_day ("+
+        "deputy_id INTEGER,"+
+        "date DATE,"+
+        "chain_id TEXT,"+
+        "pulse_id TEXT,"+
+        "rand_out TEXT,"+
+        "FOREIGN KEY(deputy_id) REFERENCES main_profile(id) "+
+        "PRIMARY KEY(deputy_id, date)"+
+        ")"
+    )
     print("[Init DB] Done!")
    
 def insert_deputy_profile(deputy_profile):
@@ -124,6 +145,27 @@ def insert_parlamentary_period(period):
     )
     db.commit()
     db.close()
+
+
+def get_real_index_from_db(local_index):
+    """Get the real index of a deputy from the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT id FROM main_profile WHERE local_id = :local_id
+        """,
+        {"local_id": local_index}
+    )
+    row = cursor.fetchone()
+    cursor.close()
+    db.close()
+
+    if row:
+        return row[0]
+
+    return None
+
 
 def find_profile_data_in_db(deputy_index):
     """Find a deputy profile in the database."""
@@ -249,6 +291,23 @@ def insert_voting_record(vote, deputy_id):
         VALUES (:deputy_id, :voting_id, :date, :description, :name, :article, :vote_option, :total_yes, :total_no, :total_abstention, :result)
         """,
         vote
+    )
+    db.commit()
+    db.close()
+
+
+def insert_law_project_record(law_proj, deputy_id):
+    """Insert law project record of a deputy into the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    law_proj['deputy_id'] = deputy_id
+    law_proj['project_type'] = "Moción"
+    cursor.execute(
+        """
+        INSERT OR REPLACE INTO law_projects (deputy_id, project_id, project_name, project_type, project_status, project_date)
+        VALUES (:deputy_id, :project_id, :project_name, :project_type, :project_status, :project_date)
+        """,
+        law_proj
     )
     db.commit()
     db.close()

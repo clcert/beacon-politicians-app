@@ -38,13 +38,15 @@ def choose_deputy(timestamp, verify=False):
     print("Choosing deputy for timestamp {} using Random UChile randomness beacon.".format(timestamp.strftime('%Y-%m-%d %H:%M')))
     (chainId, pulseId, randOut) = get_pulse_data(timestamp)
     local_index = get_index(randOut)
+
     deputy_parser = DeputyParser(local_index)
     if verify: 
         deputy_parser.update_profile(save=False)
         showSummary(deputy_parser.profile, timestamp, chainId, pulseId)
         return
 
-    deputy_parser.update_profile()
+    deputy_parser.load_or_update_profile()
     deputy_parser.update_attendance()
     deputy_parser.update_votings()
+    deputy_parser.update_legislative_activity() # maybe could be joined with update_expenses option
     # deputy_parser.save_as_deputy_of_the_day(timestamp)

@@ -5,7 +5,6 @@ import requests
 from utils.utils import get_current_legislature
 from utils.data import (
     OPENDATA_CAMARA_URL,
-    VOTING_BLACKLIST,
 )
 
 BASE_VOTINGS_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno='

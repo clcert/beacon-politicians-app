@@ -10,17 +10,20 @@ from deputies.expenses import (
     OperationalExpensesParser,
     StaffExpensesParser,
 )
+from deputies.activity import ActivityParser
 from utils.drivers import get_driver
 from utils.data import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
 from utils.db import (
     insert_deputy_profile,
     find_profile_data_in_db,
+    get_real_index_from_db,
     insert_parlamentary_period,
     insert_operational_expenses,
     insert_office_expenses,
     insert_staff_expenses,
     insert_attendance_record,
     insert_voting_record,
+    insert_law_project_record,
 )
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
@@ -45,13 +48,17 @@ class DeputyParser:
         Given a local index between 0 and the total number of deputies, returns the id of a deputy.
         :return: Returns the id of the deputy, used in the deputies chamber.
         """
-        response = requests.get(CURRENT_DEPUTIES_URL)
-        soup = BeautifulSoup(response.content, 'xml')
+        db_index = get_real_index_from_db(self.local_index)
+        if db_index:
+            return db_index
+        else: 
+            response = requests.get(CURRENT_DEPUTIES_URL)
+            soup = BeautifulSoup(response.content, 'xml')
 
-        deputies = soup.find_all('Diputado')
-        deputy = deputies[self.local_index]
-        real_index = int(deputy.find('Id').get_text())
-        return real_index
+            deputies = soup.find_all('Diputado')
+            deputy = deputies[self.local_index]
+            real_index = int(deputy.find('Id').get_text())
+            return real_index
 
 
     def update_profile(self, save=True):
@@ -119,8 +126,12 @@ class DeputyParser:
     
 
     def update_legislative_activity(self, save=True):
-        pass
-
+        parser = ActivityParser(self.real_index)
+        self.law_projects = parser.get_deputy_activity()
+        if save:
+            for law_project in self.law_projects:
+                insert_law_project_record(law_project, self.real_index)
+        return self.law_projects
 
 
     def update_expenses_category(self, expenses_parser, driver=None):
