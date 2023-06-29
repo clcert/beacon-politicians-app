@@ -229,6 +229,45 @@ def insert_operational_expenses(op_exp, deputy_id):
     db.close()
 
 
+def find_operational_expenses_for_deputy(deputy_id):
+    """
+    Find operational expenses of a deputy in the database.
+    Returns a list of dictionaries.
+    """
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT * FROM expenses_operational WHERE deputy_id = :deputy_id
+        """,
+        {"deputy_id": deputy_id}
+    )
+    rows = cursor.fetchall()
+    cursor.close()
+    db.close()
+
+    return rows
+
+
+def find_operative_indicators_by_category_and_month(category, year, month):
+    """
+    Given a operative expenses category, a year and a month,
+    find the average amount spent by deputies in that category.
+    """
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT AVG(amount), MIN(amount), MAX(amount) FROM expenses_operational WHERE expense_type = :category AND year = :year AND month = :month
+        """,
+        {"category": category, "year": year, "month": month}
+    )
+    row = cursor.fetchone()
+    cursor.close()
+    db.close()
+    return row
+
+
 def insert_staff_expenses(st_exp, deputy_id):
     """Insert staff expenses of a deputy into the database."""
     db = sqlite3.connect("db.sqlite3")
@@ -246,6 +285,45 @@ def insert_staff_expenses(st_exp, deputy_id):
     db.commit()
     cursor.close()
     db.close()
+
+
+def find_staff_expenses_for_deputy(deputy_id):
+    """
+    Find staff expenses of a deputy in the database.
+    Returns a list of dictionaries.
+    """
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT * FROM expenses_support_staff WHERE deputy_id = :deputy_id
+        """,
+        {"deputy_id": deputy_id}
+    )
+    rows = cursor.fetchall()
+    cursor.close()
+    db.close()
+
+    return rows
+
+
+def find_support_staff_indicators_by_month(year, month):
+    """
+    Given a year and a month, find the average amount spent by deputies
+    in support staff.
+    """
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT AVG(total_amount), MIN(total_amount), MAX(total_amount) FROM expenses_support_staff WHERE year = :year AND month = :month
+        """,
+        {"year": year, "month": month}
+    )
+    row = cursor.fetchone()
+    cursor.close()
+    db.close()
+    return row
 
 
 def insert_office_expenses(off_exp, deputy_id):
@@ -314,6 +392,24 @@ def insert_law_project_record(law_proj, deputy_id):
     )
     db.commit()
     db.close()
+
+
+def find_law_projects_for_deputy(deputy_id):
+    """
+    Find law projects for a deputy in the database.
+    """
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT * FROM law_projects WHERE deputy_id = :deputy_id
+        """,
+        {"deputy_id": deputy_id}
+    )
+    rows = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return rows
 
 
 def insert_deputy_of_the_day(record):

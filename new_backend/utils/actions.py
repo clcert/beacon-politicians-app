@@ -1,6 +1,7 @@
 from utils.drivers import get_driver
 from utils.utils import get_number_of_deputies, showSummary
 from utils.beacon import get_index, get_pulse_data
+from utils.webutils import generate_deputy_json_data
 from deputies.parser import DeputyParser
 
 
@@ -39,7 +40,7 @@ def choose_deputy(timestamp, verify=False):
     :param verify: If True, only shows the chosen deputy without updating its data.
     :return: Returns the id of the chosen deputy.
     """
-    print("Choosing deputy for timestamp {} using Random UChile randomness beacon.".format(timestamp.strftime('%Y-%m-%d %H:%M')))
+    print("[Manager] Choosing deputy for timestamp {} using Random UChile randomness beacon.".format(timestamp.strftime('%Y-%m-%d %H:%M')))
     (chainId, pulseId, randOut) = get_pulse_data(timestamp)
     local_index = get_index(randOut)
 
@@ -55,11 +56,13 @@ def choose_deputy(timestamp, verify=False):
         showSummary(deputy_parser.profile, timestamp, chainId, pulseId)
         return
 
-    print("Loading deputy profile...")
+    print("[Manager] Loading deputy profile...")
     deputy_parser.load_or_update_profile()
-    print("Updating deputy attendance...")
+    print("[Manager] Updating deputy attendance...")
     deputy_parser.update_attendance()
-    print("Updating deputy votings...")    
+    print("[Manager] Updating deputy votings...")    
     deputy_parser.get_last_votes()
-    print("Saving as #DiputadxDelDia...")
+    print("[Manager] Saving as #DiputadxDelDia...")
     deputy_parser.save_as_deputy_of_the_day(timestamp)
+    print("[Manager] Deputy updated, generating JSON data...")
+    generate_deputy_json_data(deputy_parser, timestamp, chainId, pulseId)

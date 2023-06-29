@@ -1,6 +1,9 @@
-from utils.data import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
+from utils.data import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL, DEPUTIES_JSON_PATH
 from datetime import datetime, date, timedelta
 from bs4 import BeautifulSoup
+from os import path, stat
+
+import json
 import requests
 
 CURRENT_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarLegislaturaActual'
@@ -72,6 +75,23 @@ def get_today_timestamp():
     timestamp = datetime(year=int(year), month=int(month), day=int(day), hour=0, minute=0)
 
     return timestamp
+
+
+def get_json_data(file_path=DEPUTIES_JSON_PATH):
+    """
+    Returns an ordered list of dictionaries containing the date, index from the deputies list and the beacon id,
+    ordered according to the date.
+    :return:
+    """    
+    if path.exists(file_path) and stat(file_path).st_size != 0:
+        with open(file_path, 'r', encoding='utf-8') as infile:
+            try:
+                json_data = json.load(infile)
+                return json_data
+            except (json.decoder.JSONDecodeError, ValueError) as err:
+                print(err)
+                return None
+    return None
 
 
 def showSummary(profile, datetime, chainId, pulseId):
