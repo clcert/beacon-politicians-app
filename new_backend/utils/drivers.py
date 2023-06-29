@@ -3,12 +3,12 @@ from selenium import webdriver
 
 def chromium_driver(options):
     try: 
-        print('Attempting to run chromium driver...')
+        print('[WebDriver] Attempting to run chromium driver...')
         options.binary_location = '/usr/bin/chromium-browser'
-        driver = webdriver.Chrome('chromedriver', options=options)
-        print('Chromium driver successfully loaded.')
+        driver = webdriver.Chrome(options=options)
+        print('[WebDriver] Chromium driver successfully loaded.')
     except Exception as e:
-        print('Error: Failed to run chromium chrome driver.')
+        print('[WebDriver] Error: Failed to run chromium web driver.')
         driver = None
     finally:
         return driver
@@ -16,12 +16,12 @@ def chromium_driver(options):
 
 def google_chrome_driver(options):
     try: 
-        print('Attempting to run google chrome driver...')
+        print('[WebDriver] Attempting to run google chrome driver...')
         options.binary_location = '/usr/bin/google-chrome-stable'
-        driver = webdriver.Chrome('chromedriver', options=options)
-        print('Google chrome driver successfully loaded.')
+        driver = webdriver.Chrome(options=options)
+        print('[WebDriver] Google chrome driver successfully loaded.')
     except Exception as e:
-        print('Error: Failed to run chromium chrome driver.')
+        print('[WebDriver] Error: Failed to run google chrome web driver.')
         driver = None
     finally:
         return driver

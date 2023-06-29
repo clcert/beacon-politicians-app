@@ -80,23 +80,34 @@ class CustomParser(ArgumentParser):
         
         
 
-def valid_range(range):
+def valid_range(input_range):
     """
     Checks if the given range is valid.
     A range is considered valid if it has the following format:
-        <start>-<end>
+        <start>-<end> or just <start>
     Where <start> and <end> are integers and <start> is less than <end>.
     Also, <start> and <end> must be in {1,...,155}.
     """
+    def is_in_range(number):
+        return number >= 1 and number <= 155
+
+    err_msg = "Invalid deputies id range: '{0}'.".format(input_range)
+    splitted = input_range.split("-")
+
     try:
-        start, end = range.split("-")
-        start, end = int(start), int(end)
-        if start < 1 or start > 155 or end < 1 or end > 155 or start > end:
-            raise ValueError
-        return (start-1, end)
+        if len(splitted) == 1:
+            start = int(splitted[0])
+            if not is_in_range(start):
+                raise ArgumentTypeError(err_msg)
+            return start-1, start
+        else:
+            start, end = splitted
+            start, end = int(start), int(end)
+            if not is_in_range(start) or not is_in_range(end) or start > end:
+                raise ArgumentTypeError(err_msg)
+            return start-1, end
     except ValueError:
-        msg = "Invalid deputies id range: '{0}'.".format(range)
-        raise ArgumentTypeError(msg)
+        raise ArgumentTypeError(err_msg)
 
 
 def valid_date(date):

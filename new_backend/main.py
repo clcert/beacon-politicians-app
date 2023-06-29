@@ -21,8 +21,8 @@ if __name__ == '__main__':
 
     if args.expenses_activity_update:
         update_expenses(
-            from_id=args.update_expenses[0],
-            to_id=args.update_expenses[1]
+            from_id=args.expenses_activity_update[0],
+            to_id=args.expenses_activity_update[1]
         )
 
     if args.verify or args.run:

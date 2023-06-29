@@ -112,7 +112,7 @@ class DeputyParser:
             - Offices expenses
             - Staff expenses
         """
-        print(f"(ID-{self.local_index}) Updating expenses of {self.profile['first_name']} {self.profile['first_surname']}, This may take few minutes...")
+        print(f"[Parser] Updating expenses of {self.profile['first_name']} {self.profile['first_surname']} ({self.local_index+1}), this may take few minutes...")
     
         self.op_exp = self.update_expenses_category(OperationalExpensesParser, driver=driver)
         if save: insert_operational_expenses(self.op_exp, self.real_index)

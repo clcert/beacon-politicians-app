@@ -8,25 +8,28 @@ def update_all_profiles():
     """
     Updates all deputy profiles.
     """
-    print("Updating main profiles...")
+    print("[Manager] Updating main profiles...")
     for local_id in range(get_number_of_deputies()):
         deputy_parser = DeputyParser(local_id)
         deputy_parser.update_profile()
-    print("Main profiles updated.")
+    print("[Manager] Main profiles updated.")
 
 
 def update_expenses(from_id=0, to_id=get_number_of_deputies()):
     """
     Updates all deputy expenses.
     """
-    print("Updating expenses...")
     driver = get_driver()
     for local_id in range(from_id, to_id):
         deputy_parser = DeputyParser(local_id)
         deputy_parser.load_or_update_profile()
+        print("[Manager] Updating expenses...")
         deputy_parser.update_deputy_expenses(driver=driver)
+        print("[Manager] Expenses updated.")
+        print("[Manager] Updating legislative activity...")
         deputy_parser.update_legislative_activity(driver=driver)
-    print("Expenses updated.")
+        print("[Manager] Legislative activity updated.")
+    driver.close()
 
 
 def choose_deputy(timestamp, verify=False):
