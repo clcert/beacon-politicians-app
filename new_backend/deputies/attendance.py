@@ -40,7 +40,7 @@ def parse_deputy_attendance(deputy_id):
 
         # If deputy has gone to the session, we count it
         if attendance_type == '1':
-            deputy_attendance['attended'] += 1
+            deputy_attendance['present'] += 1
 
         # If not, check the justification
         else:
@@ -55,9 +55,9 @@ def parse_deputy_attendance(deputy_id):
                 is_justified = 0
 
             if is_justified:
-                deputy_attendance['justified'] += 1
+                deputy_attendance['justified_absent'] += 1
             else:
-                deputy_attendance['unjustified'] += 1
+                deputy_attendance['unjustified_absent'] += 1
 
     # Add total number of sessions
     deputy_attendance['total'] = len(sessions)

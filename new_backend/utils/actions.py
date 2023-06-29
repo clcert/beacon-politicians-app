@@ -25,6 +25,7 @@ def update_expenses(from_id=0, to_id=get_number_of_deputies()):
         deputy_parser = DeputyParser(local_id)
         deputy_parser.load_or_update_profile()
         deputy_parser.update_deputy_expenses(driver=driver)
+        deputy_parser.update_legislative_activity(driver=driver)
     print("Expenses updated.")
 
 
@@ -39,14 +40,23 @@ def choose_deputy(timestamp, verify=False):
     (chainId, pulseId, randOut) = get_pulse_data(timestamp)
     local_index = get_index(randOut)
 
-    deputy_parser = DeputyParser(local_index)
+    deputy_parser = DeputyParser(
+        index=local_index,
+        chain_id=chainId,
+        pulse_id=pulseId,
+        rand_out=randOut,
+    )
+    
     if verify: 
         deputy_parser.update_profile(save=False)
         showSummary(deputy_parser.profile, timestamp, chainId, pulseId)
         return
 
+    print("Loading deputy profile...")
     deputy_parser.load_or_update_profile()
+    print("Updating deputy attendance...")
     deputy_parser.update_attendance()
-    deputy_parser.update_votings()
-    deputy_parser.update_legislative_activity() # maybe could be joined with update_expenses option
-    # deputy_parser.save_as_deputy_of_the_day(timestamp)
+    print("Updating deputy votings...")    
+    deputy_parser.get_last_votes()
+    print("Saving as #DiputadxDelDia...")
+    deputy_parser.save_as_deputy_of_the_day(timestamp)

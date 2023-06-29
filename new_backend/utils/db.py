@@ -1,15 +1,16 @@
 import sqlite3
 
-def init_db(db_name = "db.sqlite3"):
-    """Initialize the database."""
-
-    # Create the file
-    print("[Init DB] Creating database file...")
+def create_db(db_name = "db.sqlite3"):
+    """Creates the database file."""
+    print("Creating database file...")
     with open(db_name, "w") as db_file:
         db_file.close()
+    print("Database file created.")
 
-    # Create the tables
-    print("[Init DB] Creating tables...")
+def init_db(db_name = "db.sqlite3"):
+    """Initializes the database."""
+
+    print("Creating tables...")
     db = sqlite3.connect(db_name)
     cursor = db.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS main_profile ("+
@@ -97,12 +98,12 @@ def init_db(db_name = "db.sqlite3"):
         "project_name TEXT,"+
         "project_type TEXT,"+
         "project_status TEXT,"+
-        "project_date TEXT,"+
+        "project_date DATE,"+
         "FOREIGN KEY(deputy_id) REFERENCES main_profile(id) "+
         "PRIMARY KEY(deputy_id, project_id)"+
         ")"
     )
-    cursor.execute("CREATE TABLE IF NOT EXISTS deputy_for_day ("+
+    cursor.execute("CREATE TABLE IF NOT EXISTS deputy_of_the_day ("+
         "deputy_id INTEGER,"+
         "date DATE,"+
         "chain_id TEXT,"+
@@ -112,7 +113,9 @@ def init_db(db_name = "db.sqlite3"):
         "PRIMARY KEY(deputy_id, date)"+
         ")"
     )
-    print("[Init DB] Done!")
+    db.commit()
+    db.close()
+    print("Done!")
    
 def insert_deputy_profile(deputy_profile):
     """Insert a deputy profile into the database."""
@@ -308,6 +311,21 @@ def insert_law_project_record(law_proj, deputy_id):
         VALUES (:deputy_id, :project_id, :project_name, :project_type, :project_status, :project_date)
         """,
         law_proj
+    )
+    db.commit()
+    db.close()
+
+
+def insert_deputy_of_the_day(record):
+    """Insert deputy of the day into the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        INSERT OR REPLACE INTO deputy_of_the_day (deputy_id, date, chain_id, pulse_id, rand_out)
+        VALUES (:deputy_id, :date, :chain_id, :pulse_id, :rand_out)
+        """,
+        record
     )
     db.commit()
     db.close()

@@ -22,9 +22,9 @@ MONTH_TRANSLATE = {
 
 class ActivityParser:
 
-    def __init__(self, deputy_id):
+    def __init__(self, deputy_id, driver=None):
         self.url = "https://www.camara.cl/legislacion/ProyectosDeLey/proyectos_ley.aspx"
-        self.driver = get_driver()
+        self.driver = driver if driver else get_driver()
         self.deputy_id = deputy_id
 
         self.type_selector_id = "ContentPlaceHolder1_ContentPlaceHolder1_ddlTipo"

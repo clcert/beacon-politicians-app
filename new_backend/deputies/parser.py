@@ -24,6 +24,7 @@ from utils.db import (
     insert_attendance_record,
     insert_voting_record,
     insert_law_project_record,
+    insert_deputy_of_the_day,
 )
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
@@ -32,9 +33,13 @@ BASE_DEPUTY_INFO_URL = OPENDATA_CAMARA_URL + 'WSDiputado.asmx/retornarDiputado?p
 
 
 class DeputyParser:
-    def __init__(self, index=0):
+    def __init__(self, index=0, chain_id=None, pulse_id=None, rand_out=None):
         self.local_index = index # Belongs to the interval [0, count_deputies-1]
         self.real_index = self.get_real_index()
+
+        self.chain_id = chain_id
+        self.pulse_id = pulse_id
+        self.rand_out = rand_out
 
         self.profile_html_url = BASE_PROFILES_URL + str(self.real_index)
         self.profile_pic_url = BASE_PROFILE_PIC_URL + str(self.real_index)
@@ -125,8 +130,8 @@ class DeputyParser:
         }
     
 
-    def update_legislative_activity(self, save=True):
-        parser = ActivityParser(self.real_index)
+    def update_legislative_activity(self, save=True, driver=None):
+        parser = ActivityParser(self.real_index, driver=driver)
         self.law_projects = parser.get_deputy_activity()
         if save:
             for law_project in self.law_projects:
@@ -171,3 +176,16 @@ class DeputyParser:
                 insert_voting_record(vote, self.real_index)
 
         return self.voting
+
+
+    def save_as_deputy_of_the_day(self, timestamp):
+        """
+        Method used to save the deputy of the day in the database.
+        """
+        insert_deputy_of_the_day({
+            "deputy_id": self.real_index,
+            "chain_id": self.chain_id,
+            "pulse_id": self.pulse_id,
+            "rand_out": self.rand_out,
+            "date": timestamp,
+        })

@@ -14,20 +14,27 @@ class CustomParser(ArgumentParser):
     
     def add_custom_args(self):
         self.add_argument(
+            "-c",
+            "--create_db",
+            help="Crear la base de datos.",
+            action="store_true"
+        )
+        self.add_argument(
             "-i",
             "--init",
             help="Inicializar la base de datos.",
             action="store_true"
         )
         self.add_argument(
+            "-U",
             "--update_profiles",
-            help="Actualizar la información básica de los diputados.",
+            help="Actualizar la información básica de todos los diputados.",
             action="store_true"
         )
         self.add_argument(
-            "-u",
-            "--update_expenses",
-            help="Actualizar la información de gastos de los diputados indicados.",
+            "-X",
+            "--expenses_activity_update",
+            help="Actualizar la información de gastos y proyectos de ley propuestos por los diputados indicados.",
             type=valid_range,
         )
         self.add_argument(
