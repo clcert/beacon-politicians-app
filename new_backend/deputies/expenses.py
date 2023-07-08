@@ -57,7 +57,7 @@ class ExpensesParser:
                 current_expenses = self.parse_and_filter_table(month_expenses_table) # Obtain table with expenses
 
                 if current_expenses != None:
-                    current_expenses['month'] = month
+                    current_expenses['month'] = month_index + 1
                     current_expenses['year'] = year
                     expenses.append(current_expenses)
 

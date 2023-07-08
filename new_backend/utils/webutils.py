@@ -1,7 +1,7 @@
 from utils.db import (
 	find_law_projects_for_deputy,
 	find_operational_expenses_for_deputy,
-	find_operative_indicators_by_category_and_month,
+	find_operational_indicators_by_category_and_month,
 	find_staff_expenses_for_deputy,
 	find_support_staff_indicators_by_month,
 )
@@ -55,7 +55,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 		},
 		"expenses": {
 			"description": "Expenses of the last 6 months with records.",
-			"operative": load_operative_expenses(deputy_index),
+			"operational": load_operational_expenses(deputy_index),
 			"staff": load_staff_expenses(deputy_index),
 		},
 		"activity": {
@@ -95,21 +95,30 @@ def load_law_projects(deputy_id):
 	return law_projects
 
 
-def load_operative_expenses(deputy_id):
+def load_operational_expenses(deputy_id):
 	op_exp = find_operational_expenses_for_deputy(deputy_id)
 	registered_months = []
 	expenses = {}
+
+	months_limit = 6
+	months_to_be_shown = []
 
 	for register in op_exp:
 		year, month = register[1], register[2]
 		category = register[3]
 
-		month_reg = "{}-{:02d}".format(year, MONTHS.index(month) + 1)
+		# Only show the last 6 months with records
+		if (year,month) not in months_to_be_shown and len(months_to_be_shown) >= months_limit:
+			continue
+		elif (year,month) not in months_to_be_shown:
+			months_to_be_shown.append((year,month))
+
+		month_reg = "{}-{:02d}".format(year, month)
 		if month_reg not in registered_months:
 			registered_months.append(month_reg)
 			expenses[month_reg] = {}
 
-		average, minimum, maximum = find_operative_indicators_by_category_and_month(category, year, month)
+		average, minimum, maximum = find_operational_indicators_by_category_and_month(category, year, month)
 		expenses[month_reg][category] = {
 			"amount": register[4],
 			"deputies_avg": average,
@@ -122,10 +131,19 @@ def load_operative_expenses(deputy_id):
 def load_staff_expenses(deputy_id):
 	st_exp = find_staff_expenses_for_deputy(deputy_id)
 	expenses = {}
+	months_limit = 6
+	months_to_be_shown = []
 
 	for register in st_exp:
 		year, month = register[1], register[2]
-		month_reg = "{}-{:02d}".format(year, MONTHS.index(month) + 1)
+
+		# Only show the last 6 months with records
+		if (year,month) not in months_to_be_shown and len(months_to_be_shown) >= months_limit:
+			continue
+		elif (year,month) not in months_to_be_shown:
+			months_to_be_shown.append((year,month))
+
+		month_reg = "{}-{:02d}".format(year, month)
 		average, minimum, maximum = find_support_staff_indicators_by_month(year, month)
 		expenses[month_reg] = {
 			"total_amount": register[4],

@@ -65,7 +65,7 @@ def init_db(db_name = "db.sqlite3"):
     cursor.execute("CREATE TABLE IF NOT EXISTS expenses_operational ("+
         "deputy_id INTEGER,"+
         "year INTEGER,"+
-        "month TEXT,"+
+        "month INTEGER,"+
         "expense_type TEXT,"+
         "amount INTEGER, "+
         "FOREIGN KEY(deputy_id) REFERENCES main_profile(id) "+
@@ -75,7 +75,7 @@ def init_db(db_name = "db.sqlite3"):
     cursor.execute("CREATE TABLE IF NOT EXISTS expenses_offices ("+
         "deputy_id INTEGER,"+
         "year INTEGER,"+
-        "month TEXT,"+
+        "month INTEGER,"+
         "offices_number INTEGER,"+
         "total_amount INTEGER, "+
         "FOREIGN KEY(deputy_id) REFERENCES main_profile(id) "+
@@ -85,7 +85,7 @@ def init_db(db_name = "db.sqlite3"):
     cursor.execute("CREATE TABLE IF NOT EXISTS expenses_support_staff ("+
         "deputy_id INTEGER,"+
         "year INTEGER,"+
-        "month TEXT,"+
+        "month INTEGER,"+
         "hired_staff INTEGER,"+
         "total_amount INTEGER, "+
         "FOREIGN KEY(deputy_id) REFERENCES main_profile(id) "+
@@ -238,7 +238,9 @@ def find_operational_expenses_for_deputy(deputy_id):
     cursor = db.cursor()
     cursor.execute(
         """
-        SELECT * FROM expenses_operational WHERE deputy_id = :deputy_id
+        SELECT * FROM expenses_operational 
+        WHERE deputy_id = :deputy_id
+        ORDER BY year DESC, month DESC
         """,
         {"deputy_id": deputy_id}
     )
@@ -249,16 +251,17 @@ def find_operational_expenses_for_deputy(deputy_id):
     return rows
 
 
-def find_operative_indicators_by_category_and_month(category, year, month):
+def find_operational_indicators_by_category_and_month(category, year, month):
     """
-    Given a operative expenses category, a year and a month,
+    Given a operational expenses category, a year and a month,
     find the average amount spent by deputies in that category.
     """
     db = sqlite3.connect("db.sqlite3")
     cursor = db.cursor()
     cursor.execute(
         """
-        SELECT AVG(amount), MIN(amount), MAX(amount) FROM expenses_operational WHERE expense_type = :category AND year = :year AND month = :month
+        SELECT AVG(amount), MIN(amount), MAX(amount) FROM expenses_operational 
+        WHERE expense_type = :category AND year = :year AND month = :month
         """,
         {"category": category, "year": year, "month": month}
     )
@@ -297,6 +300,7 @@ def find_staff_expenses_for_deputy(deputy_id):
     cursor.execute(
         """
         SELECT * FROM expenses_support_staff WHERE deputy_id = :deputy_id
+        ORDER BY year DESC, month DESC
         """,
         {"deputy_id": deputy_id}
     )
@@ -366,6 +370,14 @@ def insert_voting_record(vote, deputy_id):
     db = sqlite3.connect("db.sqlite3")
     cursor = db.cursor()
     vote['deputy_id'] = deputy_id
+
+    cursor.execute( # Delete previous records
+        """
+        DELETE FROM votings WHERE deputy_id = :deputy_id
+        """,
+        {"deputy_id": deputy_id}
+    )
+
     cursor.execute(
         """
         INSERT OR REPLACE INTO votings (deputy_id, voting_id, voting_date, bulletin_number, document_title, article_text, voted_option, total_approved, total_rejected, total_abstention, result)
