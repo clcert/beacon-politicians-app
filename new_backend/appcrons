@@ -1,0 +1,5 @@
+01 04 * * * python3 /app/manager.py -r | tee /app/logs/daily_updater.txt
+00 00 01 * * python3 /app/manager.py -X 1-40 | tee /app/logs/monthly_updater.txt
+00 00 02 * * python3 /app/manager.py -X 41-80 | tee /app/logs/monthly_updater.txt
+00 00 03 * * python3 /app/manager.py -X 81-120 | tee /app/logs/monthly_updater.txt
+00 00 04 * * python3 /app/manager.py -X 120-155 | tee /app/logs/monthly_updater.txt
