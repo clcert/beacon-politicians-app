@@ -26,10 +26,16 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 
 	current_deputies = get_json_data()
 	if not current_deputies:
-		current_deputies = {"records": {}}
+		current_deputies = {"records": []}
+
+	# Check if the deputy is already in the JSON file
+	current_deputies["records"] = list(
+		filter(lambda x: x["date"] != timestamp.strftime('%Y-%m-%d'), current_deputies["records"])
+	)
 
 	record = {
 		"index": deputy_index,
+		"date": timestamp.strftime('%Y-%m-%d'),
 		"beacon": {
 			"chainId": chain_id,
 			"pulseId": pulse_id,
@@ -73,7 +79,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 			},
 		},
 	}
-	current_deputies["records"][timestamp.strftime("%Y-%m-%d")] = record
+	current_deputies["records"].append(record)
 
 	with open(DEPUTIES_JSON_PATH, "w", encoding="utf-8") as outfile:
 		json.dump(current_deputies, outfile, indent=4, ensure_ascii=False)
