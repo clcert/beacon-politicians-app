@@ -14,7 +14,7 @@ const DeputyOverview = ({profile, date}) => {
   const shortName = `${ profile.first_name } ${ profile.first_surname }`;
   const fullName = `${ profile.first_name } ${ profile.first_surname } ${ profile.second_surname }`;
   const age = new Date().getFullYear() - bornDate.getFullYear();
-  const lastPeriod = profile.periods[profile.periods.length].split('-');
+  const lastPeriod = profile.periods[0];
 
   return (
     <>
@@ -40,7 +40,7 @@ const DeputyOverview = ({profile, date}) => {
         <div className='parlamentary-periods'>
           <h4>Periodos Parlamentarios</h4>
           <div className='periods'>
-            { profile.periods.map((period, index) => <div key={index} className='period'>{period}</div>) }
+            { profile.periods.map((period, index) => <div key={index} className='period'>{ period[0] } a { period[1] }</div>) }
           </div>
         </div>
       </div>

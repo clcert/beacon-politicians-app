@@ -6,8 +6,10 @@ from utils.db import (
 	find_support_staff_indicators_by_month,
 	find_deputy_periods, # TODO
 )
-from utils.data import MONTHS, DEPUTIES_JSON_PATH
+from utils.data import DEPUTIES_JSON_PATH
 from utils.utils import get_json_data
+
+from datetime import datetime
 
 import json
 
@@ -37,6 +39,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 	record = {
 		"index": deputy_index,
 		"date": timestamp.strftime('%Y-%m-%d'),
+		"update_timestamp": datetime.today().strftime('%Y-%m-%d %H:%M:%S'),
 		"beacon": {
 			"chainId": chain_id,
 			"pulseId": pulse_id,
@@ -82,6 +85,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 		},
 	}
 	current_deputies["records"].append(record)
+	current_deputies["records"].sort(key=lambda dep: dep['date'])
 
 	with open(DEPUTIES_JSON_PATH, "w", encoding="utf-8") as outfile:
 		json.dump(current_deputies, outfile, indent=4, ensure_ascii=False)

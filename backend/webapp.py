@@ -32,7 +32,7 @@ def all_deputies():
     deputies = get_sorted_by_date_deputies()
     if not deputies:
         abort(404)
-    return jsonify(deputies)
+    return jsonify({ 'records': deputies })
 
 
 @app.route('/deputies/archive/<string:selection_date>')

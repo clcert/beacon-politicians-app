@@ -135,6 +135,7 @@ def insert_deputy_profile(deputy_profile):
     db.commit()
     db.close()
 
+
 def insert_parlamentary_period(period):
     """Insert a parlamentary period of a deputy into the database."""
     db = sqlite3.connect("db.sqlite3")
@@ -148,6 +149,24 @@ def insert_parlamentary_period(period):
     )
     db.commit()
     db.close()
+
+
+def find_deputy_periods(deputy_index):
+    """Find the parlamentary periods of a deputy in the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT period_from, period_to FROM parlamentary_periods WHERE deputy_id = :id
+        ORDER BY period_from DESC
+        """,
+        {"id": deputy_index}
+    )
+    rows = cursor.fetchall()
+    cursor.close()
+    db.close()
+
+    return rows
 
 
 def get_real_index_from_db(local_index):
