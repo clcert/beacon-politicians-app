@@ -25,6 +25,9 @@ from utils.db import (
     insert_voting_record,
     insert_law_project_record,
     insert_deputy_of_the_day,
+    find_operational_expenses_for_deputy,
+    find_staff_expenses_for_deputy,
+    find_law_projects_for_deputy,
 )
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
@@ -102,6 +105,23 @@ class DeputyParser:
             self.profile = db_profile_data
         else:
             self.update_profile()
+    
+
+    def saved_deputy_expenses(self) -> bool:
+        """
+        Checks if the expenses of a deputy are already saved in the database.
+        """
+        self.op_exp = find_operational_expenses_for_deputy(self.real_index)
+        self.st_exp = find_staff_expenses_for_deputy(self.real_index)
+        return self.op_exp and self.st_exp
+    
+
+    def saved_legislative_activity(self) -> bool:
+        """
+        Checks if the activity of a deputy is already saved in the database.
+        """
+        self.law_projects = find_law_projects_for_deputy(self.real_index)
+        return self.law_projects
 
 
     def update_deputy_expenses(self, save=True, driver=None):

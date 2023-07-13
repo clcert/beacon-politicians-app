@@ -4,6 +4,7 @@ from flask_cors import CORS
 from utils.utils import get_json_data
 
 app = Flask(__name__)
+app.json.sort_keys = False
 CORS(app)
 
 def get_sorted_by_date_deputies():
