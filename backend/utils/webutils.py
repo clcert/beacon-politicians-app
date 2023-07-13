@@ -59,7 +59,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 			"periods": find_deputy_periods(deputy_index),
 		},
 		"attendance": {
-			"assisted": attendance["present"],
+			"attended": attendance["present"],
 			"justified_absent": attendance["justified_absent"],
 			"unjustified_absent": attendance["unjustified_absent"],
 			"total": attendance["total"],
