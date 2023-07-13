@@ -54,7 +54,7 @@ def parse_deputy_profile(html_url, xml_url):
         soup.find('FechaNacimiento').get_text(),
         '%Y-%m-%dT%H:%M:%S'
     )
-    profile['birthdate'] = datetime.strftime(raw_birthday, '%d/%m/%Y')
+    profile['birthdate'] = datetime.strftime(raw_birthday, '%Y-%m-%d')
 
     profile['gender'] = 'MALE' if soup.find('Sexo')['Valor'] == '1' else 'FEMALE' if soup.find('Sexo')['Valor'] == '0' else 'OTHER'
 

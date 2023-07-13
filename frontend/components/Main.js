@@ -69,7 +69,7 @@ export default function Main ({date}) {
 
         <div id="main">
           <DeputySelection
-            deputyName={`${deputyData.profile.first_name} ${deputyData.profile.first_surname}`}
+            deputyName={`${deputyData.profile.name} ${deputyData.profile.first_surname}`}
             selectionDate={deputyData.date}
             gender={deputyData.gender}
             pulseId={deputyData.beacon.pulseId}
@@ -85,7 +85,7 @@ export default function Main ({date}) {
             </section>
           </div>
 
-          <div id="expenses" className="box container">
+          {/* <div id="expenses" className="box container">
             <header>
               <h2>Dieta Parlamentaria y Asignaciones { deputyData.sex == '1' ? 'del diputado' : 'de la diputada'}</h2>
             </header>
@@ -98,11 +98,11 @@ export default function Main ({date}) {
             <section className="feature right">
               <HistoryMonths data={deputyData} />
             </section>
-          </div>
+          </div> */}
 
-          <div id="votings" className="box container">
+          {/* <div id="votings" className="box container">
             <DeputyVotings data={deputyData} />
-          </div>
+          </div> */}
 
           <footer id="about" className="major container medium">
             <About />

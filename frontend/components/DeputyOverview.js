@@ -3,6 +3,7 @@ import React from 'react'
 const DeputyOverview = ({profile, date}) => {
   const selectionDate = new Date(date);
   const bornDate = new Date(profile.birthdate);
+  console.log(bornDate)
   const selectionDateStr = selectionDate.toLocaleDateString('es-ES', {
     day: "numeric", 
     month: "long",
@@ -11,8 +12,8 @@ const DeputyOverview = ({profile, date}) => {
   const isMale = profile.gender === 'MALE';
   const deputyTitle = isMale ? 'Diputado' : 'Diputada';
   const titleWithPronoun = isMale ? 'El diputado' : 'La diputada';
-  const shortName = `${ profile.first_name } ${ profile.first_surname }`;
-  const fullName = `${ profile.first_name } ${ profile.first_surname } ${ profile.second_surname }`;
+  const shortName = `${ profile.name } ${ profile.first_surname }`;
+  const fullName = `${ profile.name } ${ profile.first_surname } ${ profile.second_surname }`;
   const age = new Date().getFullYear() - bornDate.getFullYear();
   const lastPeriod = profile.periods[0];
 
