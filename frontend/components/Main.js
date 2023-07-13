@@ -64,6 +64,7 @@ export default function Main ({date}) {
           <DeputyOverview 
             profile={ deputyData.profile }
             date={ deputyData.date }
+            deputy_id={ deputyData.index }
           />
         </div>
 
@@ -71,7 +72,7 @@ export default function Main ({date}) {
           <DeputySelection
             deputyName={`${deputyData.profile.name} ${deputyData.profile.first_surname}`}
             selectionDate={deputyData.date}
-            gender={deputyData.gender}
+            gender={deputyData.profile.gender}
             pulseId={deputyData.beacon.pulseId}
             chainId={deputyData.beacon.chainId}
           />
@@ -81,7 +82,10 @@ export default function Main ({date}) {
               <h2>Asistencia</h2>
             </header>
             <section className="feature left">
-              <DeputyAttendance data={deputyData }/>
+              <DeputyAttendance 
+                attendance={deputyData.attendance}
+                gender={deputyData.profile.gender}
+              />
             </section>
           </div>
 

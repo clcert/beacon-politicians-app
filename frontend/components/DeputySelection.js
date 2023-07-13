@@ -8,6 +8,14 @@ const DeputySelection = ({deputyName, selectionDate, gender, chainId, pulseId}) 
     year: "numeric", 
     timeZone: "America/Santiago"
   });
+  const updateDateStr = new Date().toLocaleDateString('es-ES', {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    timeZone: "America/Santiago"
+  });
   const depPronoun = gender === 'MALE' ? 'el diputado del día' : 'la diputada del día';
   const selected = gender === 'MALE' ? 'seleccionado' : 'seleccionada';
 
@@ -16,9 +24,11 @@ const DeputySelection = ({deputyName, selectionDate, gender, chainId, pulseId}) 
       <h4>
         {deputyName} fue { selected } como { depPronoun } { dateStr } en base al Pulso&nbsp;
         <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/${ chainId }/pulse/${ pulseId }`} target='_blank' rel="noreferrer">
-          #{ chainId }.{ pulseId }
+          #{ chainId }-{ pulseId }
         </a>{' '}
         del faro de aleatoriedad de Random UChile.
+        <br/>
+        <small className="update-timestamp">Los datos fueron consultados el {updateDateStr}.</small>
       </h4>
       <p className='verification-text'>
         Puedes comprobar la selección utilizando nuestro script (Python)&nbsp;

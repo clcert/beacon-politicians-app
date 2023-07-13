@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DeputyOverview = ({profile, date}) => {
+const DeputyOverview = ({profile, date, deputy_id}) => {
   const selectionDate = new Date(date);
   const bornDate = new Date(profile.birthdate);
   console.log(bornDate)
@@ -15,27 +15,26 @@ const DeputyOverview = ({profile, date}) => {
   const shortName = `${ profile.name } ${ profile.first_surname }`;
   const fullName = `${ profile.name } ${ profile.first_surname } ${ profile.second_surname }`;
   const age = new Date().getFullYear() - bornDate.getFullYear();
-  const lastPeriod = profile.periods[0];
+  const profileUrl = `https://www.camara.cl/diputados/detalle/biografia.aspx?prmID=${deputy_id}`
 
   return (
     <>
       <a href={profile.picture} target='_blank' rel="noreferrer" className='image deputy-pic'>
         <img src={profile.picture} alt={`${ deputyTitle } ${ shortName }`} />
       </a>
-      <h1>{ deputyTitle } <strong>{ shortName }</strong></h1>
+      <h1><a href={profileUrl} target='_blank'>{ deputyTitle } { shortName }</a></h1>
       <h2>{ profile.party }</h2>
       <div className='deputy-overview'>
         <p>
           { titleWithPronoun } del día <strong>{ selectionDateStr }</strong> es{' '}
           <strong>{ fullName }</strong>. Con <strong>{ age } años</strong> de edad,{' '}
-          {
+          {/* {
             profile.profession === 'Sin Información' ? '' : (
               <>es de profesión <strong>{ profile.profession }</strong> y{' '}</>
             )
-          }
+          } */}
           actualmente es { deputyTitle.toLocaleLowerCase() } por el <strong>distrito { profile.district }</strong>{' '}
-          que forma parte de la <strong>{ profile.region }</strong>,{' '}
-          durante el período { lastPeriod[0] } a { lastPeriod[1] }.
+          que forma parte de la <strong>{ profile.region }</strong>.
         </p>
         <hr />
         <div className='parlamentary-periods'>
