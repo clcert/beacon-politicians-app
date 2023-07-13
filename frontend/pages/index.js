@@ -13,7 +13,7 @@ export default function Home() {
     setLoading(true);
     setTimeout(async () => {
 			let dateCandidate;
-			const jsonData = await getData(`${BACKEND_URL}/api/dates`);
+			const jsonData = await getData(`${BACKEND_URL}/dates`);
 			if (jsonData) {
 				const dates = jsonData.dates;
 				const lastDate = dates[dates.length - 1];

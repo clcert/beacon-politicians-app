@@ -35,7 +35,7 @@ const CustomDatePicker = ({pageDate}) => {
 
   const getAvailableDates = useCallback(() => {
     setTimeout(async () => {
-      const jsonData = await getData(`${BACKEND_URL}/api/dates`);
+      const jsonData = await getData(`${BACKEND_URL}/dates`);
       if (!jsonData) {
         setDatesError(true);
       } else {
