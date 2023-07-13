@@ -61,16 +61,19 @@ export default function Main ({date}) {
       <div>
         <Navbar date={date} />
         <div id="header">
-          <DeputyOverview data={ deputyData }/>
+          <DeputyOverview 
+            profile={ deputyData.profile }
+            date={ deputyData.date }
+          />
         </div>
 
         <div id="main">
           <DeputySelection
-            deputyName={`${deputyData.first_name} ${deputyData.first_surname}`}
+            deputyName={`${deputyData.profile.first_name} ${deputyData.profile.first_surname}`}
             selectionDate={deputyData.date}
-            termination={deputyData.termination}
-            pulseId={deputyData.record}
-            deputyData={deputyData} 
+            gender={deputyData.gender}
+            pulseId={deputyData.beacon.pulseId}
+            chainId={deputyData.beacon.chainId}
           />
 
           <div id="attendance" className="box container">

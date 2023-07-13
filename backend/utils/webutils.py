@@ -4,6 +4,7 @@ from utils.db import (
 	find_operational_indicators_by_category_and_month,
 	find_staff_expenses_for_deputy,
 	find_support_staff_indicators_by_month,
+	find_deputy_periods, # TODO
 )
 from utils.data import MONTHS, DEPUTIES_JSON_PATH
 from utils.utils import get_json_data
@@ -52,6 +53,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 			"region": profile["district_region"],
 			"party": profile["party"],
 			"party_alias": profile["party_alias"],
+			"periods": find_deputy_periods(deputy_index),
 		},
 		"attendance": {
 			"assisted": attendance["present"],

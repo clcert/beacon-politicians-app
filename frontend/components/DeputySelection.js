@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeputySelection = ({deputyName, selectionDate, termination, pulseId}) => {
+const DeputySelection = ({deputyName, selectionDate, gender, chainId, pulseId}) => {
   const datetime = new Date(selectionDate);
   const dateStr = datetime.toLocaleDateString('es-ES', {
     day: "numeric", 
@@ -8,15 +8,15 @@ const DeputySelection = ({deputyName, selectionDate, termination, pulseId}) => {
     year: "numeric", 
     timeZone: "America/Santiago"
   });
-  const depPronoun = termination === 'o' ? 'el diputado del día' : 'la diputada del día';
-  const selected = termination === 'o' ? 'seleccionado' : 'seleccionada';
+  const depPronoun = gender === 'MALE' ? 'el diputado del día' : 'la diputada del día';
+  const selected = gender === 'MALE' ? 'seleccionado' : 'seleccionada';
 
   return (
     <header className="major container medium">
       <h4>
         {deputyName} fue { selected } como { depPronoun } { dateStr } en base al Pulso&nbsp;
-        <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/1/pulse/${ pulseId }`} target='_blank' rel="noreferrer">
-          #{ pulseId }
+        <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/${ chainId }/pulse/${ pulseId }`} target='_blank' rel="noreferrer">
+          #{ chainId }.{ pulseId }
         </a>{' '}
         del faro de aleatoriedad de Random UChile.
       </h4>
