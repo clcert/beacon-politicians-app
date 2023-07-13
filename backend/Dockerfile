@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.11-alpine
 
 RUN apk update
 RUN apk add chromium chromium-chromedriver
@@ -10,9 +10,9 @@ RUN pip3 install -r requirements.txt
 
 COPY . /app
 
-COPY updater-cron /var/spool/cron/crontabs/root
+COPY appcrons /var/spool/cron/crontabs/root
 
-RUN mkdir log
-RUN python3 populate_json.py 2
+RUN mkdir logs
+RUN python3 manager.py --create_db --init --update_profiles --run
 
 CMD crond -b && python webapp.py

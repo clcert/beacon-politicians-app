@@ -1,51 +1,56 @@
-#######################################################################################################################
-# Python 3.5 o superior
-# otros requerimientos en requirents.txt
-#######################################################################################################################
 from flask import Flask, jsonify, abort
 from flask_cors import CORS
 
-from deputies.utils import get_sorted_deputies
+from utils.utils import get_json_data
 
 app = Flask(__name__)
+app.json.sort_keys = False
 CORS(app)
 
+def get_sorted_by_date_deputies():
+    """
+    Returns an ordered dictionary of deputies sorted by date.
+    :return:
+    """
+    json_data = get_json_data()
+    deputies = json_data['records']
+    deputies.sort(key=lambda dep: dep['date'])
+    return deputies
 
-@app.route('/api/diputadodeldia')
-def main_page():
-    deputies_list = get_sorted_deputies()
-    if len(deputies_list) == 0:
+
+@app.route('/deputies/last')
+def last_deputy():
+    deputies = get_sorted_by_date_deputies()
+    if not deputies:
         abort(404)
-        return
-    last_deputy = deputies_list[-1]
+    last_deputy = deputies[-1]
     return jsonify(last_deputy)
 
 
-@app.route('/api/diputados')
+@app.route('/deputies')
 def all_deputies():
-    deputies_list = get_sorted_deputies()
-    if len(deputies_list) == 0:
+    deputies = get_sorted_by_date_deputies()
+    if not deputies:
         abort(404)
-        return
-    return jsonify(deputies_list)
+    return jsonify(deputies)
 
 
-@app.route('/api/diputado/date/<string:selection_date>')
+@app.route('/deputies/archive/<string:selection_date>')
 def dateRecord(selection_date):
-    deputies_list = get_sorted_deputies()
-    deputy = list(filter(lambda d: d['date'].split(' ')[0] == selection_date, deputies_list))
-    if len(deputy) == 0:
+    deputies = get_sorted_by_date_deputies()
+    try:
+        deputy = next(dep for dep in deputies if dep['date'] == selection_date)
+        return jsonify(deputy)
+    except KeyError:
         abort(404)
-        return
-    return jsonify(deputy[0])
 
 
-@app.route('/api/dates')
+@app.route('/dates')
 def dates():
-    deputies_list = get_sorted_deputies()
-    dates = list(map(lambda x: x['date'], deputies_list))
-    dates.sort()
-    return jsonify({'dates': dates})
+    deputies = get_sorted_by_date_deputies()
+    if not deputies:
+        abort(404)
+    return jsonify({'dates': [dep['date'] for dep in deputies]})
 
 
 if __name__ == '__main__':
