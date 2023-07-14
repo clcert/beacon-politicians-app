@@ -92,7 +92,7 @@ const Navbar = ({date}) => {
   return (
     <div className="navbar-container">
       <nav className="topnav" id="myTopnav">
-        <a href="#" className='logo-container' onClick={closeMenu}>
+        <a href="/" className='logo-container' onClick={closeMenu}>
           <img src="/logo.png" alt="Logo" className='app-logo'/>
         </a>
         <a href="#attendance" onClick={closeMenu}>Asistencia</a>

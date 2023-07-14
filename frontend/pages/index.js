@@ -17,7 +17,7 @@ export default function Home() {
 			if (jsonData) {
 				const dates = jsonData.dates;
 				const lastDate = dates[dates.length - 1];
-				dateCandidate = new Date(lastDate);
+				dateCandidate = new Date(lastDate + 'T05:00:00');
 			}
 			// If we still don't have a date, raise an error
 			if (dateCandidate) {
