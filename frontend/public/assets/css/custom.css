@@ -105,7 +105,7 @@
 	font-weight: bold;
 }
 
-.green-vote{
+.green-vote {
 	color: #06c96e;
 }
 
@@ -122,7 +122,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px; 
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .votes-info {
@@ -198,22 +199,17 @@ ol li {
 }
 
 @media screen and (max-width: 768px) {
-  .moreInfo {
+  .more-info {
     flex-direction: column;
     justify-content: bottom;
     align-items: stretch;
+    width: 100%;
+    min-width: 200px;
   }
-  .votesInfo {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  .linkInfo {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+  .deputy-vote-text {
+    width: 100%;
+    min-width: 200px;
+    margin-bottom: 20px;
   }
   .chart-container-2, .chart-container-3, .chart-container-4 {
     border-radius: 15px 15px 0 0;

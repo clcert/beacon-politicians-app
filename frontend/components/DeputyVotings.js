@@ -48,7 +48,7 @@ const SingleVote = ({vote, isMale}) => {
         <p className='article-text'>{vote.article_text}</p>
       }
       <div className='outcome-info'>
-        <div>
+        <div className='deputy-vote-text'>
           <span className='vote'>
             {
               isMale ?
