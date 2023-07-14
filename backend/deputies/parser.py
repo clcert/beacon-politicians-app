@@ -29,6 +29,7 @@ from utils.db import (
     find_staff_expenses_for_deputy,
     find_law_projects_for_deputy,
     find_deputy_periods,
+    delete_previous_voting_records,
 )
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
@@ -193,7 +194,8 @@ class DeputyParser:
                  for a voting.
         """
         self.voting = parse_deputy_votings(self.real_index, votes_limit=20)
-        if save: 
+        if save:
+            delete_previous_voting_records(self.real_index)
             for vote in self.voting:
                 insert_voting_record(vote, self.real_index)
 

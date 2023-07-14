@@ -384,18 +384,25 @@ def insert_attendance_record(attendance, deputy_id):
     db.close()
 
 
-def insert_voting_record(vote, deputy_id):
-    """Insert voting record of a deputy into the database."""
+def delete_previous_voting_records(deputy_id):
+    """Delete previous voting records of a deputy."""
     db = sqlite3.connect("db.sqlite3")
     cursor = db.cursor()
-    vote['deputy_id'] = deputy_id
-
-    cursor.execute( # Delete previous records
+    cursor.execute(
         """
         DELETE FROM votings WHERE deputy_id = :deputy_id
         """,
         {"deputy_id": deputy_id}
     )
+    db.commit()
+    db.close()
+
+
+def insert_voting_record(vote, deputy_id):
+    """Insert voting record of a deputy into the database."""
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    vote['deputy_id'] = deputy_id
 
     cursor.execute(
         """
@@ -406,6 +413,27 @@ def insert_voting_record(vote, deputy_id):
     )
     db.commit()
     db.close()
+
+
+def find_deputy_votings(deputy_id):
+    """
+    Find votings of a deputy in the database.
+    Returns a list of dictionaries.
+    """
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT * FROM votings WHERE deputy_id = :deputy_id
+        ORDER BY voting_date DESC
+        """,
+        {"deputy_id": deputy_id}
+    )
+    rows = cursor.fetchall()
+    cursor.close()
+    db.close()
+
+    return rows
 
 
 def insert_law_project_record(law_proj, deputy_id):

@@ -4,7 +4,8 @@ from utils.db import (
 	find_operational_indicators_by_category_and_month,
 	find_staff_expenses_for_deputy,
 	find_support_staff_indicators_by_month,
-	find_deputy_periods, # TODO
+	find_deputy_periods,
+	find_deputy_votings,
 )
 from utils.data import DEPUTIES_JSON_PATH
 from utils.utils import get_json_data
@@ -65,24 +66,20 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 			"total": attendance["total"],
 		},
 		"expenses": {
-			"description": "Expenses of the last 6 months with records.",
 			"operational": load_operational_expenses(deputy_index),
 			"staff": load_staff_expenses(deputy_index),
 		},
 		"activity": {
-			"description": "Law projects presented by the deputy.",
-			# "law_projects": law_projects,
-			"statistics": {
-				"in_process": len(list(filter(lambda x: x["status"] == "En tramitación", law_projects))),
-				"published": len(list(filter(lambda x: x["status"] == "Publicado", law_projects))),
-				"archived": len(list(filter(lambda x: x["status"] == "Archivado", law_projects))),
-				"withdrawn": len(list(filter(lambda x: x["status"] == "Retirado", law_projects))),
-				"rejected": len(list(filter(lambda x: x["status"] == "Rechazado", law_projects))),
-				"unadmissible": len(list(filter(lambda x: x["status"] == "Inadmisible", law_projects))),
-				"unconstitutional": len(list(filter(lambda x: x["status"] == "Inconstitucional", law_projects))),
-				"all": len(law_projects),
-			},
+			"in_process": len(list(filter(lambda x: x["status"] == "En tramitación", law_projects))),
+			"published": len(list(filter(lambda x: x["status"] == "Publicado", law_projects))),
+			"archived": len(list(filter(lambda x: x["status"] == "Archivado", law_projects))),
+			"withdrawn": len(list(filter(lambda x: x["status"] == "Retirado", law_projects))),
+			"rejected": len(list(filter(lambda x: x["status"] == "Rechazado", law_projects))),
+			"unadmissible": len(list(filter(lambda x: x["status"] == "Inadmisible", law_projects))),
+			"unconstitutional": len(list(filter(lambda x: x["status"] == "Inconstitucional", law_projects))),
+			"all": len(law_projects),
 		},
+		"votings": load_deputy_votings(deputy_index),
 	}
 	current_deputies["records"].append(record)
 	current_deputies["records"].sort(key=lambda dep: dep['date'])
@@ -138,6 +135,26 @@ def load_operational_expenses(deputy_id):
 			"deputies_max": maximum,
 		}
 	return expenses
+
+
+def load_deputy_votings(deputy_id):
+	rows = find_deputy_votings(deputy_id)
+	votings = []
+	for row in rows:
+		voting = {
+			"voting_id": row[1],
+			"voting_date": row[2],
+			"bulletin_number": row[3],
+			"document_title": row[4],
+			"article_text": row[5],
+			"voted": row[6],
+			"total_approved": row[7], 
+			"total_rejected": row[8],
+			"total_abstention": row[9],
+			"result": row[10],
+		}
+		votings.append(voting)
+	return votings
 
 
 def load_staff_expenses(deputy_id):
