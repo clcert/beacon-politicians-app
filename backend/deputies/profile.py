@@ -29,7 +29,7 @@ def parse_deputy_profile(html_url, xml_url):
     main_info = general_section.find('div', attrs={'class': 'grid-3'}).getText().strip()
     main_info_list = list(map(str.strip, main_info.split('\r\n')))
 
-    comunas = main_info_list[0].split(':')[1].strip()
+    # comunas = main_info_list[0].split(':')[1].strip()
     profile['district'] = int(main_info_list[1].split(':')[1].strip().replace('Nº ', ''))
     profile['district_region'] = main_info_list[2].split(':')[1].strip()
 

@@ -28,6 +28,7 @@ from utils.db import (
     find_operational_expenses_for_deputy,
     find_staff_expenses_for_deputy,
     find_law_projects_for_deputy,
+    find_deputy_periods,
 )
 
 BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
@@ -152,7 +153,8 @@ class DeputyParser:
 
     def update_legislative_activity(self, save=True, driver=None):
         parser = ActivityParser(self.real_index, driver=driver)
-        self.law_projects = parser.get_deputy_activity()
+        year_init_period = find_deputy_periods(self.real_index)[0][0]
+        self.law_projects = parser.get_deputy_activity(from_date=datetime(year_init_period, 3, 10))
         if save:
             for law_project in self.law_projects:
                 insert_law_project_record(law_project, self.real_index)
