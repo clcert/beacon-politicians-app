@@ -9,7 +9,7 @@ def update_all_profiles():
     """
     Updates all deputy profiles.
     """
-    print("[Manager] Updating main profiles. This may took a while...")
+    print("[Manager] Updating main profiles. This may take a while...")
     n_deputies = get_number_of_deputies()
     for local_id in range(n_deputies):
         if local_id % 10 == 0: print("[Manager] Progress: {}%".format(round(local_id/n_deputies*100,2)))

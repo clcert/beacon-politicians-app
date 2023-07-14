@@ -2,15 +2,15 @@ import sqlite3
 
 def create_db(db_name = "db.sqlite3"):
     """Creates the database file."""
-    print("Creating database file...")
+    print("[DB] Creating database file...")
     with open(db_name, "w") as db_file:
         db_file.close()
-    print("Database file created.")
+    print("[DB] Database file created.")
 
 def init_db(db_name = "db.sqlite3"):
     """Initializes the database."""
 
-    print("Creating tables...")
+    print("[DB] Creating tables...")
     db = sqlite3.connect(db_name)
     cursor = db.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS main_profile ("+
@@ -115,7 +115,7 @@ def init_db(db_name = "db.sqlite3"):
     )
     db.commit()
     db.close()
-    print("Done!")
+    print("[DB] Done!")
    
 def insert_deputy_profile(deputy_profile):
     """Insert a deputy profile into the database."""
@@ -456,3 +456,22 @@ def insert_deputy_of_the_day(record):
     )
     db.commit()
     db.close()
+
+
+def find_deputy_for_date(date):
+    """
+    Find deputy of the day for a given date.
+    """
+    db = sqlite3.connect("db.sqlite3")
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT deputy_id, chain_id, pulse_id, rand_out FROM deputy_of_the_day WHERE date = :date
+        """,
+        {"date": date}
+    )
+    row = cursor.fetchone()
+    cursor.close()
+    db.close()
+    return row
+

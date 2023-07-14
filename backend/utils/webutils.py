@@ -71,7 +71,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 		},
 		"activity": {
 			"description": "Law projects presented by the deputy.",
-			"law_projects": law_projects,
+			# "law_projects": law_projects,
 			"statistics": {
 				"in_process": len(list(filter(lambda x: x["status"] == "En tramitación", law_projects))),
 				"published": len(list(filter(lambda x: x["status"] == "Publicado", law_projects))),
