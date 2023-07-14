@@ -96,7 +96,7 @@ export default function Main ({date}) {
             </header>
             <section className="feature left">
               <DeputyActivity 
-                activity={deputyData.activity.statistics}
+                activity={deputyData.activity}
                 gender={deputyData.profile.gender}
                 deputyId={deputyData.index}
               />
@@ -118,9 +118,9 @@ export default function Main ({date}) {
             </section>
           </div> */}
 
-          {/* <div id="votings" className="box container">
-            <DeputyVotings data={deputyData} />
-          </div> */}
+          <div id="votings" className="box container">
+            <DeputyVotings voting={deputyData.votings} gender={deputyData.profile.gender} />
+          </div>
 
           <footer id="about" className="major container medium">
             <About />

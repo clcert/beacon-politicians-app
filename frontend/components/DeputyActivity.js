@@ -81,12 +81,15 @@ const DeputyActivity = ({activity, gender, deputyId}) => {
       </div>
       <div className="content">
         <p>
-          A lo largo de su período parlamentario, { depPronoun } ha presentado <strong>{ activity.all } proyectos de ley</strong>,
-          de las cuales <strong>{ activity.published } han sido publicadas</strong> y <strong>{ activity.in_process } se encuentran en trámite</strong>
+          A lo largo de su período parlamentario, { depPronoun } (en conjunto con los integrantes de sus respectivas comisiones),
+          han presentado <strong>{ activity.all } proyectos de ley</strong>, de los cuales
+          <strong> { activity.published } han sido publicados</strong> y 
+          <strong> { activity.in_process } se encuentran en trámite</strong>
           <sup><a id='text-attendance' href='#ref-1'>2</a></sup>.
         </p>
         <p>
-          Puedes revisar el detalle de los proyectos de ley presentados por { depPronoun } en el siguiente <a href={activityUrl} target='_blank'>enlace</a>.
+          Puedes revisar el detalle de los proyectos de ley presentados por { depPronoun } en el siguiente{' '}
+          <a href={activityUrl} target='_blank'>enlace</a>.
         </p>
       </div>
     </>

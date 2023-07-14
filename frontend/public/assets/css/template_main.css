@@ -3100,10 +3100,6 @@ input, select, textarea {
 				margin-bottom: 2em;
 			}
 
-				header.major br {
-					display: none;
-				}
-
 				header.major p {
 					font-size: 0.8em;
 				}
