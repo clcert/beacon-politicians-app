@@ -3,7 +3,6 @@ import React from 'react'
 const DeputyOverview = ({profile, date, deputy_id}) => {
   const selectionDate = new Date(date);
   const bornDate = new Date(profile.birthdate);
-  console.log(bornDate)
   const selectionDateStr = selectionDate.toLocaleDateString('es-ES', {
     day: "numeric", 
     month: "long",

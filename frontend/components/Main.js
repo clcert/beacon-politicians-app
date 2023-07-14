@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 // Components
 import DeputyOverview from '../components/DeputyOverview';
 import DeputyAttendance from '../components/DeputyAttendance';
+import DeputyActivity from '../components/DeputyActivity';
 import ExpensesSummary from '../components/expenses/ExpensesSummary';
 import OperationalDistribuition from '../components/expenses/OperationalDistribuition';
 import HistoryMonths from '../components/expenses/HistoryMonths';
@@ -85,6 +86,19 @@ export default function Main ({date}) {
               <DeputyAttendance 
                 attendance={deputyData.attendance}
                 gender={deputyData.profile.gender}
+              />
+            </section>
+          </div>
+
+          <div id="attendance" className="box container">
+            <header>
+              <h2>Actividad Parlamentaria</h2>
+            </header>
+            <section className="feature left">
+              <DeputyActivity 
+                activity={deputyData.activity.statistics}
+                gender={deputyData.profile.gender}
+                deputyId={deputyData.index}
               />
             </section>
           </div>

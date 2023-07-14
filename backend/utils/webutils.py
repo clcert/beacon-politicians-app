@@ -99,7 +99,7 @@ def load_law_projects(deputy_id):
 	law_projects = []
 	for project in projects:
 		project_dict = {
-			"date": project[1],
+			"bulletin": project[1],
 			"title": project[2],
 			"status": project[4],
 		}
