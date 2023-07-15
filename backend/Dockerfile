@@ -8,11 +8,16 @@ WORKDIR /app
 COPY requirements.txt /app
 RUN pip3 install -r requirements.txt
 
+RUN mkdir data
+RUN mkdir logs
+
 COPY . /app
 
 COPY appcrons /var/spool/cron/crontabs/root
 
-RUN mkdir logs
-RUN python3 manager.py --create_db --init --update_profiles --run
+RUN touch data/last_deputies.json
+RUN python3 manager.py --create_db --init 
+RUN python3 manager.py --update_profiles 
+RUN python3 manager.py --run
 
 CMD crond -b && python webapp.py

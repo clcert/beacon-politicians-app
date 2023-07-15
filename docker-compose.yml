@@ -2,18 +2,18 @@ version: "3.8"
 
 services:
   diputadodeldia-back:
-    container_name: diputadodeldia-back
+    container_name: ddd-back
     build: ./backend
     ports:
       - "5000:5000"
     volumes:
-      - diputados-list:/app/deputies.json
-  
+      - app-data:/app/data
+
   diputadodeldia-front:
-    container_name: diputadodeldia-front
+    container_name: ddd-front
     build: ./frontend
     ports:
       - "3000:3000"
 
 volumes:
-  diputados-list:
+  app-data:

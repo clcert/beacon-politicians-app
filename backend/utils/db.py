@@ -1,13 +1,15 @@
 import sqlite3
 
-def create_db(db_name = "db.sqlite3"):
+DB_PATH = "data/db.sqlite3"
+
+def create_db(db_name = DB_PATH):
     """Creates the database file."""
     print("[DB] Creating database file...")
     with open(db_name, "w") as db_file:
         db_file.close()
     print("[DB] Database file created.")
 
-def init_db(db_name = "db.sqlite3"):
+def init_db(db_name = DB_PATH):
     """Initializes the database."""
 
     print("[DB] Creating tables...")
@@ -119,7 +121,7 @@ def init_db(db_name = "db.sqlite3"):
    
 def insert_deputy_profile(deputy_profile):
     """Insert a deputy profile into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -138,7 +140,7 @@ def insert_deputy_profile(deputy_profile):
 
 def insert_parlamentary_period(period):
     """Insert a parlamentary period of a deputy into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -153,7 +155,7 @@ def insert_parlamentary_period(period):
 
 def find_deputy_periods(deputy_index):
     """Find the parlamentary periods of a deputy in the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -171,7 +173,7 @@ def find_deputy_periods(deputy_index):
 
 def get_real_index_from_db(local_index):
     """Get the real index of a deputy from the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -191,7 +193,7 @@ def get_real_index_from_db(local_index):
 
 def find_profile_data_in_db(deputy_index):
     """Find a deputy profile in the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -227,7 +229,7 @@ def find_profile_data_in_db(deputy_index):
 
 def insert_operational_expenses(op_exp, deputy_id):
     """Insert operational expenses of a deputy into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
 
     for record in op_exp:
@@ -253,7 +255,7 @@ def find_operational_expenses_for_deputy(deputy_id):
     Find operational expenses of a deputy in the database.
     Returns a list of dictionaries.
     """
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -275,7 +277,7 @@ def find_operational_indicators_by_category_and_month(category, year, month):
     Given a operational expenses category, a year and a month,
     find the average amount spent by deputies in that category.
     """
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -292,7 +294,7 @@ def find_operational_indicators_by_category_and_month(category, year, month):
 
 def insert_staff_expenses(st_exp, deputy_id):
     """Insert staff expenses of a deputy into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
 
     for record in st_exp:
@@ -314,7 +316,7 @@ def find_staff_expenses_for_deputy(deputy_id):
     Find staff expenses of a deputy in the database.
     Returns a list of dictionaries.
     """
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -335,7 +337,7 @@ def find_support_staff_indicators_by_month(year, month):
     Given a year and a month, find the average amount spent by deputies
     in support staff.
     """
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -351,7 +353,7 @@ def find_support_staff_indicators_by_month(year, month):
 
 def insert_office_expenses(off_exp, deputy_id):
     """Insert office expenses of a deputy into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
 
     for record in off_exp:
@@ -370,7 +372,7 @@ def insert_office_expenses(off_exp, deputy_id):
 
 def insert_attendance_record(attendance, deputy_id):
     """Insert attendance record of a deputy into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     attendance['deputy_id'] = deputy_id
     cursor.execute(
@@ -386,7 +388,7 @@ def insert_attendance_record(attendance, deputy_id):
 
 def delete_previous_voting_records(deputy_id):
     """Delete previous voting records of a deputy."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -400,7 +402,7 @@ def delete_previous_voting_records(deputy_id):
 
 def insert_voting_record(vote, deputy_id):
     """Insert voting record of a deputy into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     vote['deputy_id'] = deputy_id
 
@@ -420,7 +422,7 @@ def find_deputy_votings(deputy_id):
     Find votings of a deputy in the database.
     Returns a list of dictionaries.
     """
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -438,7 +440,7 @@ def find_deputy_votings(deputy_id):
 
 def insert_law_project_record(law_proj, deputy_id):
     """Insert law project record of a deputy into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     law_proj['deputy_id'] = deputy_id
     law_proj['project_type'] = "Moción"
@@ -457,7 +459,7 @@ def find_law_projects_for_deputy(deputy_id):
     """
     Find law projects for a deputy in the database.
     """
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -473,7 +475,7 @@ def find_law_projects_for_deputy(deputy_id):
 
 def insert_deputy_of_the_day(record):
     """Insert deputy of the day into the database."""
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """
@@ -490,7 +492,7 @@ def find_deputy_for_date(date):
     """
     Find deputy of the day for a given date.
     """
-    db = sqlite3.connect("db.sqlite3")
+    db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute(
         """

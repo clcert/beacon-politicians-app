@@ -40,4 +40,4 @@ OP_EXPENSES_OTHERS = [
     'COVID-19 PERSONAL DE APOYO',
 ]
 
-DEPUTIES_JSON_PATH = 'last_deputies.json'
+DEPUTIES_JSON_PATH = 'data/last_deputies.json'
