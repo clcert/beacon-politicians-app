@@ -1,4 +1,5 @@
 import React, { forwardRef, useState, useCallback, useEffect } from 'react';
+import { Link } from 'next/link';
 
 // Date Picker
 import DatePicker from 'react-datepicker';
@@ -92,9 +93,9 @@ const Navbar = ({date}) => {
   return (
     <div className="navbar-container">
       <nav className="topnav" id="myTopnav">
-        <a href="/" className='logo-container' onClick={closeMenu}>
+        <Link href="/" className='logo-container' onClick={closeMenu}>
           <img src="/logo.png" alt="Logo" className='app-logo'/>
-        </a>
+        </Link>
         <a href="#attendance" onClick={closeMenu}>Asistencia</a>
         <a href="#expenses" onClick={closeMenu}>Gastos</a>
         <a href="#votings" onClick={closeMenu}>Votaciones</a>
