@@ -7,7 +7,7 @@ const DeputyVotings = ({voting, gender}) => {
     <>
       <header>
         <h2>Últimas Votaciones</h2>
-        <p>Se listan las votaciones en sala más recientes.</p>
+        <p>Se listan las { voting.length } votaciones en sala más recientes.</p>
       </header>
       { 
         voting.map((vote, index) => {
@@ -77,20 +77,15 @@ const SingleVote = ({vote, isMale}) => {
             <br/>
             {
               vote.result === 'Aprobado' ?
-                <b className='vote-count green-vote'>{ vote.result }</b>
+                <b className='vote-count green-vote'>Aprobado</b>
                 :
               vote.result === 'Unánime' ?
-                <b className='vote-count red-vote'>{ vote.result }</b>
+                <b className='vote-count red-vote'>Rechazado</b>
                 :
                 <b className='vote-count'>{ vote.result }</b>
             }
           </div>
         </div>
-        {/* <div className='link-info'>
-          <a href={``} target='_blank' rel="noreferrer">
-            Ver detalle
-          </a>
-        </div> */}
       </div>
     </div>
   )

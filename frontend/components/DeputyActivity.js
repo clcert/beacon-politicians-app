@@ -84,8 +84,7 @@ const DeputyActivity = ({activity, gender, deputyId}) => {
           A lo largo de su período parlamentario, { depPronoun } (en conjunto con los integrantes de sus respectivas comisiones),
           han presentado <strong>{ activity.all } proyectos de ley</strong>, de los cuales
           <strong> { activity.published } han sido publicados</strong> y 
-          <strong> { activity.in_process } se encuentran en trámite</strong>
-          <sup><a id='text-attendance' href='#ref-1'>2</a></sup>.
+          <strong> { activity.in_process } se encuentran en trámite</strong>.
         </p>
         <p>
           Puedes revisar el detalle de los proyectos de ley presentados por { depPronoun } en el siguiente{' '}
