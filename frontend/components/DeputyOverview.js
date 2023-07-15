@@ -15,6 +15,7 @@ const DeputyOverview = ({profile, date, deputy_id}) => {
   const fullName = `${ profile.name } ${ profile.first_surname } ${ profile.second_surname }`;
   const age = new Date().getFullYear() - bornDate.getFullYear();
   const profileUrl = `https://www.camara.cl/diputados/detalle/biografia.aspx?prmID=${deputy_id}`
+  const ordered_periods = profile.periods.sort()
 
   return (
     <>
@@ -39,7 +40,7 @@ const DeputyOverview = ({profile, date, deputy_id}) => {
         <div className='parlamentary-periods'>
           <h4>Periodos Parlamentarios</h4>
           <div className='periods'>
-            { profile.periods.map((period, index) => <div key={index} className='period'>{ period[0] } a { period[1] }</div>) }
+            { ordered_periods.map((period, index) => <div key={index} className='period'>{ period[0] } a { period[1] }</div>) }
           </div>
         </div>
       </div>
