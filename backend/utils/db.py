@@ -505,3 +505,23 @@ def find_deputy_for_date(date):
     db.close()
     return row
 
+
+def find_last_N_months_with_records(N, table, deputy_id):
+    """
+    Find the last N months with records in a given table.
+    """
+    db = sqlite3.connect(DB_PATH)
+    cursor = db.cursor()
+    cursor.execute(
+        """
+        SELECT DISTINCT year, month FROM {}
+        WHERE deputy_id = :deputy_id
+        ORDER BY year DESC, month DESC
+        LIMIT :N
+        """.format(table),
+        {"N": N, "deputy_id": deputy_id}
+    )
+    rows = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return rows

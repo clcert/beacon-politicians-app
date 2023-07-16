@@ -118,7 +118,7 @@ class OfficesExpensesParser(ExpensesParser):
         num_offices = 0
 
         for line in lines[1:]:
-            [city, region, amount, deputy] = line.split('   ')
+            [_, _, amount, deputy] = line.split('   ')
             if deputy.strip() == self.deputy_name:
                 num_offices += 1
                 total += int(amount.strip().replace('.', ''))
