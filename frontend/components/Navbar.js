@@ -93,9 +93,9 @@ const Navbar = ({date}) => {
   return (
     <div className="navbar-container">
       <nav className="topnav" id="myTopnav">
-        <Link href="/" className='logo-container' onClick={closeMenu}>
+        <a href="/" className='logo-container' onClick={closeMenu}>
           <img src="/logo.png" alt="Logo" className='app-logo'/>
-        </Link>
+        </a>
         <a href="#attendance" onClick={closeMenu}>Asistencia</a>
         <a href="#expenses" onClick={closeMenu}>Gastos</a>
         <a href="#votings" onClick={closeMenu}>Votaciones</a>

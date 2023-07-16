@@ -103,20 +103,24 @@ export default function Main ({date}) {
             </section>
           </div>
 
-          {/* <div id="expenses" className="box container">
+          <div id="expenses" className="box container">
             <header>
-              <h2>Dieta Parlamentaria y Asignaciones { deputyData.sex == '1' ? 'del diputado' : 'de la diputada'}</h2>
+              <h2>Dieta Parlamentaria y Asignaciones</h2>
             </header>
             <section className="feature right">
-              <ExpensesSummary data={deputyData} />
+              <ExpensesSummary 
+                expenses={deputyData.expenses} 
+                gender={deputyData.profile.gender}
+                deputyName={`${deputyData.profile.name} ${deputyData.profile.first_surname}`}
+              />
             </section>
-            <section className="feature left">
+            {/* <section className="feature left">
               <OperationalDistribuition data={deputyData} />
             </section>
             <section className="feature right">
               <HistoryMonths data={deputyData} />
-            </section>
-          </div> */}
+            </section> */}
+          </div>
 
           <div id="votings" className="box container">
             <DeputyVotings voting={deputyData.votings} gender={deputyData.profile.gender} />
@@ -140,31 +144,25 @@ export default function Main ({date}) {
                     </a>.
                   </li>
                   <li id='ref-2'>
-                    Documento que acredita la dieta parlamentaria desde agosto 2022:<br />
-                    <a href='https://www.camara.cl/transparencia/doc/dieta_actualizada.pdf' target='_blank' rel='noreferrer'>
-                      https://www.camara.cl/transparencia/doc/dieta_actualizada.pdf
-                    </a>.
-                  </li>
-                  <li id='ref-3'>
-                    Los datos acerca de los gastos operacionales fueron obtenidos desde:<br />
-                    <a href={`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyData.deputy_id}`} target='_blank' rel='noreferrer'>
-                      {`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyData.deputy_id}`}
-                    </a>.
-                  </li>
-                  <li id='ref-4'>
-                    Los datos acerca de los gastos en oficinas parlamentarias fueron obtenidos desde:<br />
-                    <a href='https://www.camara.cl/transparencia/oficinasparlamentarias.aspx' target='_blank' rel='noreferrer'>
-                      https://www.camara.cl/transparencia/oficinasparlamentarias.aspx
-                    </a>.
-                  </li>
-                  <li id='ref-5'>
                     Los datos acerca de los gastos de personal de apoyo fueron obtenidos desde:<br />
                     <a href='https://www.camara.cl/transparencia/personalapoyogral.aspx' target='_blank' rel='noreferrer'>
                       https://www.camara.cl/transparencia/personalapoyogral.aspx
                     </a>.
                   </li>
+                  <li id='ref-3'>
+                    Los datos acerca de los gastos operacionales fueron obtenidos desde:<br />
+                    <a href={`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyData.index}`} target='_blank' rel='noreferrer'>
+                      {`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyData.index}`}
+                    </a>.
+                  </li>
+                  <li id='ref-4'>
+                    Documento que acredita la dieta parlamentaria desde agosto de 2022:<br />
+                    <a href='https://www.camara.cl/transparencia/doc/dieta_actualizada.pdf' target='_blank' rel='noreferrer'>
+                      https://www.camara.cl/transparencia/doc/dieta_actualizada.pdf
+                    </a>.
+                  </li>
                   <li id='ref-6'>
-                    Existen desfases con respecto a los meses con gastos declarados en cada categoría.
+                    Existen desfases con respecto a los meses con gastos declarados.
                   </li>
                 </ol>
             </header>
