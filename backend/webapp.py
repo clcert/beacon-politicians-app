@@ -39,9 +39,9 @@ def all_deputies():
 def dateRecord(selection_date):
     deputies = get_sorted_by_date_deputies()
     try:
-        deputy = next(dep for dep in deputies if dep['date'] == selection_date)
+        deputy = [dep for dep in deputies if dep['date'] == selection_date][0]
         return jsonify(deputy)
-    except KeyError:
+    except Exception:
         abort(404)
 
 
