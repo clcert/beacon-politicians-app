@@ -114,12 +114,11 @@ export default function Main ({date}) {
                 deputyName={`${deputyData.profile.name} ${deputyData.profile.first_surname}`}
               />
             </section>
-            {/* <section className="feature left">
-              <OperationalDistribuition data={deputyData} />
+            <section className="feature left">
+              <HistoryMonths 
+                expenses={deputyData.expenses}
+              />
             </section>
-            <section className="feature right">
-              <HistoryMonths data={deputyData} />
-            </section> */}
           </div>
 
           <div id="votings" className="box container">

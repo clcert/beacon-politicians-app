@@ -45,6 +45,11 @@ const ExpensesSummary = ({expenses, gender, deputyName}) => {
           type: 'shadow'
         }
       },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
       legend: {
         top: 25,
         align: 'right',
@@ -84,6 +89,7 @@ const ExpensesSummary = ({expenses, gender, deputyName}) => {
         }
       ]
     });
+    return () => setOptions({});
   }, []);
 
   return (
