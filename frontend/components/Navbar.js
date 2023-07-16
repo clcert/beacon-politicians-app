@@ -93,13 +93,14 @@ const Navbar = ({date}) => {
   return (
     <div className="navbar-container">
       <nav className="topnav" id="myTopnav">
-        <a href="/" className='logo-container' onClick={closeMenu}>
+        <a href="#" className='logo-container' onClick={closeMenu}>
           <img src="/logo.png" alt="Logo" className='app-logo'/>
         </a>
         <a href="#attendance" onClick={closeMenu}>Asistencia</a>
+        <a href="#activity" onClick={closeMenu}>Actividad</a>
         <a href="#expenses" onClick={closeMenu}>Gastos</a>
         <a href="#votings" onClick={closeMenu}>Votaciones</a>
-        <a href="#about" onClick={closeMenu}>Método de Elección</a>
+        <a href="#about" onClick={closeMenu}>FAQ</a>
         <a><CustomDatePicker pageDate={date}/></a>
         <a className="icon" onClick={showMobileMenu}>
           <i className="fa fa-bars"></i>

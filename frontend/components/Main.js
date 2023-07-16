@@ -90,7 +90,7 @@ export default function Main ({date}) {
             </section>
           </div>
 
-          <div id="attendance" className="box container">
+          <div id="activity" className="box container">
             <header>
               <h2>Actividad Parlamentaria</h2>
             </header>
