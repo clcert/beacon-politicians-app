@@ -46,6 +46,7 @@ def init_db(db_name = DB_PATH):
         "period_from INTEGER,"+
         "period_to INTEGER, "+
         "FOREIGN KEY (deputy_id) REFERENCES main_profile(id)"+
+        "PRIMARY KEY (deputy_id, period_from, period_to)"+
         ")"
     )
     cursor.execute("CREATE TABLE IF NOT EXISTS votings ("+
