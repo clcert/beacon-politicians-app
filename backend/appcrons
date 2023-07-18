@@ -1,6 +1,19 @@
 01 04 * * * python3 /app/manager.py -r | tee /app/logs/daily_updater.txt
 00 10 * * * python3 /app/notifier.py | tee /app/logs/daily_notifier.txt
-00 00 01 * * python3 /app/manager.py -X 1-40 | tee /app/logs/monthly_updater.txt
-00 00 02 * * python3 /app/manager.py -X 41-80 | tee /app/logs/monthly_updater.txt
-00 00 03 * * python3 /app/manager.py -X 81-120 | tee /app/logs/monthly_updater.txt
-00 00 04 * * python3 /app/manager.py -X 120-155 | tee /app/logs/monthly_updater.txt
+00 06 01 * * python3 /app/manager.py -X 1-10 | tee /app/logs/monthly_updater.txt
+00 07 01 * * python3 /app/manager.py -X 11-20 | tee /app/logs/monthly_updater.txt
+00 08 01 * * python3 /app/manager.py -X 21-30 | tee /app/logs/monthly_updater.txt
+00 09 01 * * python3 /app/manager.py -X 31-40 | tee /app/logs/monthly_updater.txt
+00 10 01 * * python3 /app/manager.py -X 41-50 | tee /app/logs/monthly_updater.txt
+00 11 01 * * python3 /app/manager.py -X 51-60 | tee /app/logs/monthly_updater.txt
+00 12 01 * * python3 /app/manager.py -X 61-70 | tee /app/logs/monthly_updater.txt
+00 13 01 * * python3 /app/manager.py -X 71-80 | tee /app/logs/monthly_updater.txt
+00 06 02 * * python3 /app/manager.py -X 81-90 | tee /app/logs/monthly_updater.txt
+00 07 02 * * python3 /app/manager.py -X 91-100 | tee /app/logs/monthly_updater.txt
+00 08 02 * * python3 /app/manager.py -X 101-110 | tee /app/logs/monthly_updater.txt
+00 09 02 * * python3 /app/manager.py -X 111-120 | tee /app/logs/monthly_updater.txt
+00 10 02 * * python3 /app/manager.py -X 121-130 | tee /app/logs/monthly_updater.txt
+00 11 02 * * python3 /app/manager.py -X 131-140 | tee /app/logs/monthly_updater.txt
+00 12 02 * * python3 /app/manager.py -X 141-150 | tee /app/logs/monthly_updater.txt
+00 13 02 * * python3 /app/manager.py -X 151-155 | tee /app/logs/monthly_updater.txt
+
