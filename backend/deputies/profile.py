@@ -29,9 +29,9 @@ def parse_deputy_profile(html_url, xml_url):
     main_info = general_section.find('div', attrs={'class': 'grid-3'}).getText().strip()
     main_info_list = list(map(str.strip, main_info.split('\r\n')))
 
-    comunas = main_info_list[0].split(':')[1].strip()
-    profile['district'] = main_info_list[1].split(':')[1].strip()
-    profile['districtregion'] = main_info_list[2].split(':')[1].strip()
+    # comunas = main_info_list[0].split(':')[1].strip()
+    profile['district'] = int(main_info_list[1].split(':')[1].strip().replace('Nº ', ''))
+    profile['district_region'] = main_info_list[2].split(':')[1].strip()
 
     raw_periods = general_section.findAll('div', attrs={'class': 'grid-2 aleft m-left14'})[-1].findAll('li')[1:]
     profile['periods'] = list(map(BeautifulSoup.getText, raw_periods))
@@ -54,8 +54,8 @@ def parse_deputy_profile(html_url, xml_url):
         soup.find('FechaNacimiento').get_text(),
         '%Y-%m-%dT%H:%M:%S'
     )
-    profile['birthday'] = datetime.strftime(raw_birthday, '%d/%m/%Y')
+    profile['birthdate'] = datetime.strftime(raw_birthday, '%Y-%m-%d')
 
-    profile['sex'] = soup.find('Sexo')['Valor']
+    profile['gender'] = 'MALE' if soup.find('Sexo')['Valor'] == '1' else 'FEMALE' if soup.find('Sexo')['Valor'] == '0' else 'OTHER'
 
     return profile

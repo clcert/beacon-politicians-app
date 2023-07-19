@@ -35,6 +35,7 @@
 
 .chart-container-1 {
   background: unset !important;
+  overflow: unset !important;
 }
 
 .chart-container-2 {
@@ -42,6 +43,7 @@
   border: solid 3px #f5f5f5;
   border-radius: 0 30px 30px 0;
   padding: 10px;
+  overflow: unset !important;
 }
 
 .chart-container-3 {
@@ -49,6 +51,7 @@
   border: solid 3px #f5f5f5;
   border-radius: 30px 0 0 30px;
   padding: 10px;
+  overflow: unset !important;
 }
 
 .chart-container-4 {
@@ -56,6 +59,7 @@
   border: solid 3px #f5f5f5;
   border-radius: 0 30px 30px 0;
   padding: 10px;
+  overflow: unset !important;
 }
 
 .vote-container {
@@ -77,12 +81,19 @@
 }
 
 .date {
-  font-size: 1em;
+  font-size: 0.9em;
+  font-weight: 300;
 }
 
 .matters {
-  font-weight: 400;
-  font-size: 1.2em;
+  font-weight: 300;
+  font-size: 1.1em;
+}
+
+.article-text {
+  font-size: 0.9em;
+  font-weight: 300;
+  margin: 10px 0 !important;
 }
 
 .more-info {
@@ -90,16 +101,15 @@
   flex-direction: row;
   justify-content: right;
   align-items: stretch;
-  margin-top: 20px;
 }
 
 .vote {
 	margin: 10px 0;
-	font-size: 1.2em;
+	font-size: 1.1em;
 	font-weight: bold;
 }
 
-.green-vote{
+.green-vote {
 	color: #06c96e;
 }
 
@@ -111,11 +121,20 @@
 	font-size: 0.8rem;
 }
 
+.outcome-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
 .votes-info {
   background-color: #f5f5f5;
   border: 1px solid #5f5f5f;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-radius: 5px;
+  /* border-bottom-left-radius: 5px; */
   text-align: center;
   padding: 5px 8px;
   font-size: 0.9rem;
@@ -179,23 +198,22 @@ ol li {
   padding-left: 0.25em;
 }
 
+.update-timestamp {
+  font-size: 0.6em;
+}
+
 @media screen and (max-width: 768px) {
-  .moreInfo {
+  .more-info {
     flex-direction: column;
     justify-content: bottom;
     align-items: stretch;
+    width: 100%;
+    min-width: 200px;
   }
-  .votesInfo {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  .linkInfo {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+  .deputy-vote-text {
+    width: 100%;
+    min-width: 200px;
+    margin-bottom: 20px;
   }
   .chart-container-2, .chart-container-3, .chart-container-4 {
     border-radius: 15px 15px 0 0;
@@ -278,7 +296,15 @@ ol li {
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
   display: none;
-} 
+}
+
+.chart-container-2 > div {
+  height: 100% !important;
+}
+
+.feature .content {
+  padding: 0 20px !important;
+}
 
  /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 768px) {

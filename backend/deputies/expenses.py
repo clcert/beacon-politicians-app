@@ -4,13 +4,13 @@ from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
-from settings import (
+from utils.data import (
     MONTHS,
     OP_EXPENSES_OFFICE,
     OP_EXPENSES_OTHERS,
     OP_EXPENSES_WEB,
 )
-from deputies.utils import get_current_month, get_current_year
+from utils.utils import get_current_month, get_current_year
 
 class ExpensesParser:
 
@@ -57,7 +57,7 @@ class ExpensesParser:
                 current_expenses = self.parse_and_filter_table(month_expenses_table) # Obtain table with expenses
 
                 if current_expenses != None:
-                    current_expenses['month'] = month
+                    current_expenses['month'] = month_index + 1
                     current_expenses['year'] = year
                     expenses.append(current_expenses)
 
@@ -75,7 +75,7 @@ class OperationalExpensesParser(ExpensesParser):
 
     def __init__(self, profile, **kwargs):
         super().__init__(**kwargs)
-        deputy_id = profile['deputy_id']
+        deputy_id = profile['id']
         self.url = f'https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId={deputy_id}'
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_DetallePlaceHolder_ddlMes'
         self.year_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_DetallePlaceHolder_ddlAno'
@@ -100,7 +100,6 @@ class OperationalExpensesParser(ExpensesParser):
                 expenses['Otros'] += integer_amount
             else:
                 expenses[title.lower().capitalize()] = integer_amount
-        expenses['total'] = total
         return expenses
 
 
@@ -119,7 +118,7 @@ class OfficesExpensesParser(ExpensesParser):
         num_offices = 0
 
         for line in lines[1:]:
-            [city, region, amount, deputy] = line.split('   ')
+            [_, _, amount, deputy] = line.split('   ')
             if deputy.strip() == self.deputy_name:
                 num_offices += 1
                 total += int(amount.strip().replace('.', ''))

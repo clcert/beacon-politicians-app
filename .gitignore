@@ -2,7 +2,12 @@
 __pycache__/
 *.pyc
 .idea
+.env
+data
 .venv
 launch.json
 .vscode
 deputies.json
+db.sqlite3
+last_deputies.json
+__old-backend

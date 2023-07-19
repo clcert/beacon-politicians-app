@@ -1,27 +1,18 @@
 import React from 'react';
 
-const DeputyVotings = ({data}) => {
+const DeputyVotings = ({voting, gender}) => {
+  const isMale = gender === 'MALE';
+
   return (
     <>
       <header>
         <h2>Últimas Votaciones</h2>
-        <p>Se listan las votaciones en sala más recientes.</p>
+        <p>Se listan las { voting.length } votaciones en sala más recientes.</p>
       </header>
       { 
-        data.voting.map((vote, index) => {
+        voting.map((vote, index) => {
           return (
-            <SingleVote key={index} vote={vote} sex={data.sex} />
-            // <section key={index}>
-            //   <header>
-            //     <h3>{ vote.description }</h3>
-            //     <p>{ vote.name }</p>
-            //   </header>
-            //   { 
-            //     vote.article !== '' && 
-            //     vote.article !== 'No se encontró el artículo' && 
-            //     <p>{vote.article}</p>
-            //   }
-            // </section>
+            <SingleVote key={index} vote={vote} isMale={isMale} />
           )
         })
       }
@@ -29,59 +20,71 @@ const DeputyVotings = ({data}) => {
   )
 }
 
-const SingleVote = ({vote, sex}) => {
+const SingleVote = ({vote, isMale}) => {
+  const votingDate = new Date(vote.voting_date);
+  const dateStr = votingDate.toLocaleDateString('es-ES', {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "America/Santiago"
+  });
+  const articleTitle = vote.document_title.replaceAll('&quot;', '"')
+  const articleTitleAsTxt = articleTitle.split("\n").filter((content) => content!== '').map((item, key) => {
+    return <span key={key}>{item}<br/></span>
+  });
+  const bulletinUrl = `https://www.camara.cl/legislacion/sala_sesiones/votacion_detalle.aspx?prmIdVotacion=${vote.voting_id}`
+
   return (
     <div className='vote-container'>
       <div className='head'>
-        <h3>{ vote.description }</h3>
-        <div className='date'><i>{ vote.date }</i></div>
+        <h3><a href={ bulletinUrl } target='_blank'>{ vote.bulletin_number }</a></h3>
+        <div className='date'><i>{ dateStr }</i></div>
       </div>
       
-      <div className='matters'>{ vote.name }</div>
+      <div className='matters'>{ articleTitleAsTxt }</div>
       { 
-        vote.article !== '' && 
-        vote.article !== 'No se encontró el artículo' && 
-        <p>{vote.article}</p>
+        vote.article_text !== '' && 
+        vote.article_text !== 'No se encontró el artículo' && 
+        <p className='article-text'>{vote.article_text}</p>
       }
-      <span className='vote'>
-        {
-          sex === '0' ?
-            'La diputada votó '
-            :
-            'El diputado votó '
-        }
-      </span>
-      {
-        vote.vote_option === 'Afirmativo' ?
-          <span className='vote green-vote'>{ vote.vote_option }</span>
-          :
-        vote.vote_option === 'En Contra' ?
-          <span className='vote red-vote'>{ vote.vote_option }</span>
-          :
-          <span className='vote'>{ vote.vote_option }</span>
-      }
-      <div className='more-info'>
-        <div className='votes-info'>
-          <b style={{'color': 'gray'}}>Resultado Votación</b>
-          <br/>
-          <b style={{'color': 'limegreen'}}>{ vote.total_yes }</b> &nbsp;
-          <b style={{'color': 'red'}}>{ vote.total_no }</b> &nbsp;
-          <b style={{'color': 'gray'}}>{ vote.total_abstention }</b>&nbsp;
-          <br/>
+      <div className='outcome-info'>
+        <div className='deputy-vote-text'>
+          <span className='vote'>
+            {
+              isMale ?
+                'El diputado '
+                :
+                'La diputada '
+            }
+          </span>
           {
-            vote.result === 'Aprobado' ?
-              <b className='vote-count green-vote'>{ vote.result }</b>
+            vote.voted === 'Afirmativo' ?
+              <span className='vote green-vote'>votó a favor</span>
               :
-            vote.result === 'Unánime' ?
-              <b className='vote-count red-vote'>{ vote.result }</b>
+            vote.voted === 'En Contra' ?
+              <span className='vote red-vote'>votó en contra</span>
               :
-              <b className='vote-count'>{ vote.result }</b>
+              <span className='vote'>se abstuvo</span>
           }
         </div>
-        <div className='link-info'>
-          <a href={`https://www.camara.cl/legislacion/sala_sesiones/votacion_detalle.aspx?prmIdVotacion=${vote.voting_id}`} target='_blank' rel="noreferrer">
-            Ver detalle
-          </a>
+        <div className='more-info'>
+          <div className='votes-info'>
+            <b style={{'color': 'gray'}}>Resultado Votación</b>
+            <br/>
+            <b style={{'color': 'limegreen'}}>{ vote.total_approved }</b> &nbsp;
+            <b style={{'color': 'red'}}>{ vote.total_rejected }</b> &nbsp;
+            <b style={{'color': 'gray'}}>{ vote.total_abstention }</b>&nbsp;
+            <br/>
+            {
+              vote.result === 'Aprobado' ?
+                <b className='vote-count green-vote'>Aprobado</b>
+                :
+              vote.result === 'Unánime' ?
+                <b className='vote-count red-vote'>Rechazado</b>
+                :
+                <b className='vote-count'>{ vote.result }</b>
+            }
+          </div>
         </div>
       </div>
     </div>

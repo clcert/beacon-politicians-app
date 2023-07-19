@@ -1,24 +1,28 @@
 import React, { useEffect } from 'react';
-import Chart from 'chart.js/auto';
+import Chart, { Utils } from 'chart.js/auto';
 
-const DeputyAttendance = ({data}) => {
+const DeputyAttendance = ({attendance, gender}) => {
 
-  const depPronoun = data.termination === 'o' ? 'el diputado' : 'la diputada';
+  const depPronoun = gender === 'MALE' ? 'el diputado' : 'la diputada';
+  const percentage = Math.round(((attendance.attended + attendance.justified_absent) / attendance.total) * 100);
 
   useEffect(() => {
     var container = document.getElementById('attendances-chart').getContext('2d');
     var attendances_data = [
-      data.attendance.attended, 
-      data.attendance.justified, 
-      data.attendance.unjustified
+      attendance.attended, 
+      attendance.justified_absent, 
+      attendance.unjustified_absent,
     ];
     var myChart = new Chart(container, {
       type: 'doughnut',
       data: {
-        labels: ["Días Asistidos", "Días no asistidos justificados", "Días no asistidos no justificados"],
+        labels: ["Asistidos", "Inasistencias Justificadas", "Inasistencias no Justificadas"],
         datasets: [{
-          label: "Attendance",
+          label: "Días",
+          borderColor: "#FFFFFF",
           backgroundColor: ["#3cba9f", "#3e95cd", "#FF0000"],
+          borderRadius: 3,
+          borderWidth: 2,
           data: attendances_data,
         }]
       },
@@ -36,7 +40,7 @@ const DeputyAttendance = ({data}) => {
           },
           title: {
             display: true,
-            text: 'Asistencia',
+            text: 'Registro de Asistencia',
             font: {
               size: 20,
             }
@@ -47,7 +51,7 @@ const DeputyAttendance = ({data}) => {
 
     return () => myChart.destroy();
   
-  }, [data])
+  }, [attendance])
 
   return (
     <>
@@ -56,8 +60,8 @@ const DeputyAttendance = ({data}) => {
       </div>
       <div className="content">
         <p>
-          A la fecha, { depPronoun } ha asistido a <strong>{ data.attendance.attended } sesiones de cámara</strong>, 
-          de un total de { data.attendance.total } sesiones dentro de la legislatura. Esto significa un <strong>{ data.attendance.percentage }% 
+          A la fecha, { depPronoun } ha asistido a <strong>{ attendance.attended } sesiones de cámara</strong>, 
+          de un total de { attendance.total } sesiones dentro de la legislatura. Esto significa un <strong>{ percentage }% 
           de asistencia justificada</strong> (considerando las inasistencias justificadas y las no justificadas)
           <sup><a id='text-attendance' href='#ref-1'>1</a></sup>.
         </p>

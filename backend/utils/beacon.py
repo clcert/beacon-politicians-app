@@ -1,7 +1,7 @@
 from random import seed, randint
 import requests
 
-from deputies.utils import get_number_of_deputies
+from utils.utils import get_number_of_deputies
 
 def get_index(pulse_randout):
     """

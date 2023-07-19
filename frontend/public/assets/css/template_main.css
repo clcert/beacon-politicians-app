@@ -2992,13 +2992,7 @@ input, select, textarea {
 
 		/* Feature */
 
-			.feature {
-				height: 20em;
-			}
-
-				.feature .content {
-					padding: 2.5em;
-				}
+			
 
 		/* Header */
 
@@ -3099,10 +3093,6 @@ input, select, textarea {
 			header.major {
 				margin-bottom: 2em;
 			}
-
-				header.major br {
-					display: none;
-				}
 
 				header.major p {
 					font-size: 0.8em;

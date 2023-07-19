@@ -1,4 +1,5 @@
 import React, { forwardRef, useState, useCallback, useEffect } from 'react';
+import { Link } from 'next/link';
 
 // Date Picker
 import DatePicker from 'react-datepicker';
@@ -35,7 +36,7 @@ const CustomDatePicker = ({pageDate}) => {
 
   const getAvailableDates = useCallback(() => {
     setTimeout(async () => {
-      const jsonData = await getData(`${BACKEND_URL}/api/dates`);
+      const jsonData = await getData(`${BACKEND_URL}/dates`);
       if (!jsonData) {
         setDatesError(true);
       } else {
@@ -96,9 +97,10 @@ const Navbar = ({date}) => {
           <img src="/logo.png" alt="Logo" className='app-logo'/>
         </a>
         <a href="#attendance" onClick={closeMenu}>Asistencia</a>
+        <a href="#activity" onClick={closeMenu}>Actividad</a>
         <a href="#expenses" onClick={closeMenu}>Gastos</a>
         <a href="#votings" onClick={closeMenu}>Votaciones</a>
-        <a href="#about" onClick={closeMenu}>Método de Elección</a>
+        <a href="#about" onClick={closeMenu}>FAQ</a>
         <a><CustomDatePicker pageDate={date}/></a>
         <a className="icon" onClick={showMobileMenu}>
           <i className="fa fa-bars"></i>

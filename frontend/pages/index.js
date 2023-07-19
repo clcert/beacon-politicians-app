@@ -13,11 +13,11 @@ export default function Home() {
     setLoading(true);
     setTimeout(async () => {
 			let dateCandidate;
-			const jsonData = await getData(`${BACKEND_URL}/api/dates`);
+			const jsonData = await getData(`${BACKEND_URL}/dates`);
 			if (jsonData) {
 				const dates = jsonData.dates;
 				const lastDate = dates[dates.length - 1];
-				dateCandidate = new Date(lastDate);
+				dateCandidate = new Date(lastDate + 'T05:00:00');
 			}
 			// If we still don't have a date, raise an error
 			if (dateCandidate) {
