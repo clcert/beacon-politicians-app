@@ -1,5 +1,4 @@
 <h1>
-  <img src="https://www.clcert.cl/img/clcert_oscuro.svg" style="width: 150px; padding-right: 20px"/>
   <a href="https://diputado.labs.clcert.cl">#DiputadxDelDia</a>
 </h1>
 
@@ -9,7 +8,8 @@ La aplicación **#DiputadxDelDia** elige al azar un(a) Diputado(a) del Congreso 
 * Circunscripción y Región que representa.
 * Partido que milita.
 * Porcentaje de Asistencia (considerando inasistencias justificadas e injustificadas).
-* Distribución de Asignaciones (gastos operativos y en personal de apoyo)
+* Distribución de Asignaciones (gastos operativos y en personal de apoyo).
+* Actividad Parlamentaria (Proyectos de Ley que ha presentado).
 * Votaciones en los últimos 10 boletines publicados.
 
 Toda la información anterior se obtiene a partir de los datos entregados por la página oficial de la Cámara de Diputados [www.camara.cl](https://www.camara.cl).
@@ -23,10 +23,12 @@ Dentro del presente repositorio se dispone de un script de verificación, el cua
 * Python 3.0+
 * Instalar requerimientos: `$ pip3 install -r backend/requirements.txt`
 
-### Ejecutar Script de Verificación
+_**Nota:** Sugerimos utilizar un ambiente virtual._
 
+### Ejecutar Script de Verificación
+El _script_ se encuentra dentro de la carpeta `backend`, y es llamado `manager.py`. El _script_ recibe los siguientes parámetros:
 ```
-$ python updater.py --verify [opciones] [valores]
+$ python manager.py --verify [opcion] [valor]
 
 Opciones:
 -d [date]   Establece la fecha de generación del valor aleatorio a utilizar (formato DD-MM-AAAA).
@@ -39,10 +41,10 @@ Opciones:
 Si quiere verificar el #DiputadxDelDia del **20 de Enero de 2023** puede ejecutar uno de los siguientes dos comandos:
 
 ```
-$ python3 updater.py --verify -d 2023-01-30 -t 00:00
+$ python3 manager.py --verify -d 2023-01-30 -t 00:00
 ```
 ```
-$ python3 updater.py --verify -e 1675047600000
+$ python3 manager.py --verify -e 1675047600000
 ```
 
 ## Levantar Proyecto Completo
@@ -69,11 +71,14 @@ $ cd backend
 # Instalación de requisitos
 $ pip3 install -r requirements.txt
 
+# Inicializar base de datos
+$ python3 manager.py -c -i
+
 # Obtener data del último diputado.
-$ python3 updater.py
+$ python3 manager.py -r
 
 # Servir el Backend
-$ python3 app.py
+$ python3 webapp.py
 ```
 #### Frontend
 Para levantar el frontend, habrá que usar *node package manager*:
