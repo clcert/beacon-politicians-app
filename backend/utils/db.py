@@ -1,6 +1,7 @@
 import sqlite3
+from utils.data import PROJECT_DIR
 
-DB_PATH = "data/db.sqlite3"
+DB_PATH = PROJECT_DIR + "/data/db.sqlite3"
 
 def create_db(db_name = DB_PATH):
     """Creates the database file."""

@@ -1,3 +1,7 @@
+from pathlib import Path
+
+PROJECT_DIR = str(Path().absolute())
+
 OPENDATA_CAMARA_URL = 'http://opendata.camara.cl/camaradiputados/WServices/'
 CURRENT_DEPUTIES_URL = OPENDATA_CAMARA_URL + 'WSDiputado.asmx/retornarDiputadosPeriodoActual'
 
@@ -40,4 +44,4 @@ OP_EXPENSES_OTHERS = [
     'COVID-19 PERSONAL DE APOYO',
 ]
 
-DEPUTIES_JSON_PATH = 'data/last_deputies.json'
+DEPUTIES_JSON_PATH = PROJECT_DIR + '/data/last_deputies.json'
