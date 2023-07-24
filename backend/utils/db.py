@@ -1,14 +1,18 @@
 import sqlite3
 from utils.data import PROJECT_DIR
+from os import path
 
 DB_PATH = PROJECT_DIR + "/data/db.sqlite3"
 
 def create_db(db_name = DB_PATH):
     """Creates the database file."""
     print("[DB] Creating database file...")
-    with open(db_name, "w") as db_file:
-        db_file.close()
-    print("[DB] Database file created.")
+    if path.exists(db_name):
+        print("[DB] A pre-existent database was found.")
+    else:
+        with open(db_name, "w") as db_file:
+            db_file.close()
+        print("[DB] Database file created.")
 
 def init_db(db_name = DB_PATH):
     """Initializes the database."""
