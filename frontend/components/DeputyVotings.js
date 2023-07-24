@@ -7,10 +7,10 @@ const DeputyVotings = ({voting, gender}) => {
     <>
       <header>
         <h2>Últimas Votaciones</h2>
-        <p>Se listan las { voting.length } votaciones en sala más recientes.</p>
+        <p>Se listan las 10 votaciones en sala más recientes.</p>
       </header>
       { 
-        voting.map((vote, index) => {
+        voting.slice(0, 10).map((vote, index) => {
           return (
             <SingleVote key={index} vote={vote} isMale={isMale} />
           )
