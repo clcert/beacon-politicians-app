@@ -5,19 +5,19 @@ RUN apk add chromium chromium-chromedriver
 
 WORKDIR /app
 
-COPY requirements.txt /app
-RUN pip3 install -r requirements.txt
-
 RUN mkdir data
 RUN mkdir logs
 
+RUN touch data/last_deputies.json
+RUN touch data/db.sqlite3
+
+COPY requirements.txt /app
+RUN pip3 install -r requirements.txt
+
 COPY . /app
+
+RUN python3 manager.py --init
 
 COPY appcrons /var/spool/cron/crontabs/root
 
-RUN touch data/last_deputies.json
-RUN python3 manager.py --create_db --init 
-RUN python3 manager.py --update_profiles 
-RUN python3 manager.py --run
-
-CMD crond -b && python webapp.py
+CMD crond -b && gunicorn --bind 0.0.0.0:80 wsgi:app
