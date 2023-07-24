@@ -73,7 +73,7 @@ export default function Main ({date}) {
           <DeputySelection
             deputyName={`${deputyData.profile.name} ${deputyData.profile.first_surname}`}
             date={deputyData.date}
-            selectionDate={deputyData.update_timestam}
+            selectionDate={deputyData.update_timestamp}
             gender={deputyData.profile.gender}
             pulseId={deputyData.beacon.pulseId}
             chainId={deputyData.beacon.chainId}
