@@ -62,6 +62,10 @@
   overflow: unset !important;
 }
 
+.echarts-for-react {
+  height: 100% !important;
+}
+
 .vote-container {
   padding: 30px 30px;
   border-radius: 10px;
@@ -218,6 +222,7 @@ ol li {
   .chart-container-2, .chart-container-3, .chart-container-4 {
     border-radius: 15px 15px 0 0;
     padding: 5px;
+    height: 28em !important;
   }
 }
 

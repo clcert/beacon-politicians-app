@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
-const HistoryMonths = ({expenses}) => {
+const HistoryOperational = ({expenses}) => {
   const [ options, setOptions ] = useState({});
   const sorted_expenses = expenses.sort((a, b) => a.code > b.code ? 1 : -1);
 
@@ -16,29 +16,29 @@ const HistoryMonths = ({expenses}) => {
       });
     });
     const shortLabels = [
-      'Web y Almacenamiento',
-      'Traspaso a Personal de Apoyo',
+      'Web',
+      'Traspaso a Personal',
       'Traslación y Bencina',
       'Telefonía',
       'Seguros',
-      'Otros Gastos Oficina',
+      'Otros Oficina',
       'Otros',
       'Difusión',
       'Correspondencia',
       'Consumos Básicos',
-      'Arriendo de Oficina',
+      'Arriendo Oficinas',
       'Interacción Comunidad',
     ]
     const chartColors = [
       '#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00',
       '#FF3F00', '#FFD500', '#008E00', '#00AAAA', '#AA00AA',
       '#5574A6', '#FF0022'
-  ]
+    ]
 
     setOptions({
       color: chartColors,
       title: {
-        text: 'Gastos Operacionales',
+        text: 'Historial Gastos Operacionales',
         left: 'center',
       },
       tooltip: {
@@ -52,7 +52,12 @@ const HistoryMonths = ({expenses}) => {
       },
       legend: {
         data: shortLabels,
-        show: false,
+        show: true,
+        bottom: -5,
+        align: 'left',
+        left: 0,
+        // type: 'scroll',
+        orient: 'horizontal',
       },
       toolbox: {
         feature: {
@@ -62,7 +67,8 @@ const HistoryMonths = ({expenses}) => {
       grid: {
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        top: '10%',
+        bottom: '30%',
         containLabel: true
       },
       xAxis: [
@@ -123,4 +129,4 @@ const HistoryMonths = ({expenses}) => {
   )
 }
 
-export default HistoryMonths
+export default HistoryOperational

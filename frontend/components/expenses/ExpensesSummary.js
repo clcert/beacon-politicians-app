@@ -10,16 +10,16 @@ const ExpensesSummary = ({expenses, gender, deputyName}) => {
   const depTitle = isMale ? 'el diputado ' : 'la diputada ';
 
   const sorted_expenses = expenses.sort((a, b) => a.code < b.code ? 1 : -1);
-  const last_month_exp = sorted_expenses[0];
+  const last_month_exp = sorted_expenses[2];
 
   const [options, setOptions] = useState({});
 
   useEffect(() => {
-    const expenses_labels = Object.keys(sorted_expenses[0]).filter(key => key !== 'month' && key !== 'year' && key !== 'total' && key !== 'code');
-    const expenses_values = expenses_labels.map(label => sorted_expenses[0][label].amount);
-    const expenses_average = expenses_labels.map(label => sorted_expenses[0][label].deputies_avg);
+    const expenses_labels = Object.keys(last_month_exp).filter(key => key !== 'month' && key !== 'year' && key !== 'total' && key !== 'code' && key !== 'Personal de Apoyo');
+    const expenses_values = expenses_labels.map(label => Math.round(last_month_exp[label].amount));
+    const expenses_average = expenses_labels.map(label => Math.round(last_month_exp[label].deputies_avg));
     const short_labels = [
-      'Personal de Apoyo',
+      // 'Personal de Apoyo',
       'Web y Almacenamiento',
       'Traspaso a Personal de Apoyo',
       'Traslación y Bencina',
@@ -36,7 +36,7 @@ const ExpensesSummary = ({expenses, gender, deputyName}) => {
 
     setOptions({
       title: {
-        text: `Gastos de ${last_month_exp.month}, ${last_month_exp.year}`,
+        text: `Gastos Operacionales\n${last_month_exp.month}, ${last_month_exp.year}`,
         left: 'center',
       },
       tooltip: {
@@ -51,8 +51,9 @@ const ExpensesSummary = ({expenses, gender, deputyName}) => {
         }
       },
       legend: {
-        top: 25,
+        bottom: 15,
         align: 'right',
+        right: 10,
       },
       grid: {
         left: '3%',

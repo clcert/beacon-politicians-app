@@ -4,20 +4,15 @@ export const formatAmount = (amount) => {
   return '$'+amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-export const getMonthsForHistoryChart = (expenses) => {
-  const operational_months = expenses.operational.map((expense) => expense.month).reverse()
-  const offices_months = expenses.offices.map((expense) => expense.month).reverse()
-  const staff_months = expenses.staff.map((expense) => expense.month).reverse()
-  const months = [...new Set([...operational_months, ...staff_months])]
-  return months
-}
+export const convertUTCDateToLocalDate = (date) => {
+  var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
 
-export const getExpensesForHistoryChart = (expenses, months) => {
-  let expenses_by_month = {}
-  for (let expense of expenses) {
-    expenses_by_month[expense.month] = expense.total
-  }
-  return months.map((month) => expenses_by_month[month] || undefined)
+  var offset = date.getTimezoneOffset() / 60;
+  var hours = date.getHours();
+
+  newDate.setHours(hours - offset);
+
+  return newDate;   
 }
 
 export const getData = async (url) => {

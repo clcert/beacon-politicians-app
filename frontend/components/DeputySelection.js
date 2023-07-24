@@ -1,14 +1,15 @@
 import React from 'react';
+import { convertUTCDateToLocalDate } from '../utils/utils';
 
-const DeputySelection = ({deputyName, selectionDate, gender, chainId, pulseId}) => {
-  const datetime = new Date(selectionDate);
+const DeputySelection = ({deputyName, date, selectionDate, gender, chainId, pulseId}) => {
+  const datetime = convertUTCDateToLocalDate(new Date(date + ' 04:02:00'));
   const dateStr = datetime.toLocaleDateString('es-ES', {
     day: "numeric", 
     month: "long", 
     year: "numeric", 
     timeZone: "America/Santiago"
   });
-  const updateDateStr = new Date().toLocaleDateString('es-ES', {
+  const updateDateStr = convertUTCDateToLocalDate(new Date(selectionDate)).toLocaleDateString('es-ES', {
     day: "numeric",
     month: "long",
     year: "numeric",

@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { convertUTCDateToLocalDate } from '../utils/utils';
 
 const DeputyOverview = ({profile, date, deputy_id}) => {
-  const selectionDate = new Date(date);
+  const selectionDate = convertUTCDateToLocalDate(new Date(date + ' 05:00:00'));
   const bornDate = new Date(profile.birthdate);
   const selectionDateStr = selectionDate.toLocaleDateString('es-ES', {
     day: "numeric", 
@@ -13,9 +14,11 @@ const DeputyOverview = ({profile, date, deputy_id}) => {
   const titleWithPronoun = isMale ? 'El diputado' : 'La diputada';
   const shortName = `${ profile.name } ${ profile.first_surname }`;
   const fullName = `${ profile.name } ${ profile.first_surname } ${ profile.second_surname }`;
-  const age = new Date().getFullYear() - bornDate.getFullYear();
   const profileUrl = `https://www.camara.cl/diputados/detalle/biografia.aspx?prmID=${deputy_id}`
   const ordered_periods = profile.periods.sort()
+  
+  const delta = new Date(selectionDate - bornDate);
+  const age = delta.getUTCFullYear() - 1970;
 
   return (
     <>
@@ -33,7 +36,7 @@ const DeputyOverview = ({profile, date, deputy_id}) => {
               <>es de profesión <strong>{ profile.profession }</strong> y{' '}</>
             )
           } */}
-          actualmente es { deputyTitle.toLocaleLowerCase() } por el <strong>distrito { profile.district }</strong>{' '}
+          actualmente es { deputyTitle.toLocaleLowerCase() } por el <strong>distrito { profile.district }</strong>{', '}
           que forma parte de la <strong>{ profile.region }</strong>.
         </p>
         <hr />
