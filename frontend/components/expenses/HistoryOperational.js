@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
+import { formatAmount } from '../../utils/utils';
 
 const HistoryOperational = ({expenses}) => {
   const [ options, setOptions ] = useState({});
@@ -106,7 +107,12 @@ const HistoryOperational = ({expenses}) => {
         emphasis: {
           focus: 'series'
         },
-        data: catMonthsData[index]
+        data: catMonthsData[index],
+        tooltip: {
+          valueFormatter: function (value) {
+            return formatAmount(value);
+          }
+        },
       })),
     });
 
@@ -119,10 +125,10 @@ const HistoryOperational = ({expenses}) => {
         <ReactECharts option={options} />
       </div>
       <div className='content'>
-        <h3>Progresión de Gastos Operacionales</h3>
+        <h3>Gastos Operacionales</h3>
         <p>
           Se presenta además la evolución de los gastos operacionales en los 
-          <strong> últimos 6 meses</strong><a href='#ref-6'><sup>6</sup></a> con registro.
+          <strong> últimos 6 meses</strong><a href='#ref-3'><sup>3</sup></a> con registro.
         </p>
       </div>
     </>

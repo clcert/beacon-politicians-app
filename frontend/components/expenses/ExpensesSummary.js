@@ -81,12 +81,22 @@ const ExpensesSummary = ({expenses, gender, deputyName}) => {
         {
           name: 'Gastos '+deputy,
           type: 'bar',
-          data: expenses_values
+          data: expenses_values,
+          tooltip: {
+            valueFormatter: function (value) {
+              return formatAmount(value);
+            }
+          },
         },
         {
           name: 'Promedio Diputados',
           type: 'bar',
-          data: expenses_average
+          data: expenses_average,
+          tooltip: {
+            valueFormatter: function (value) {
+              return formatAmount(value);
+            }
+          },
         }
       ]
     });
@@ -101,7 +111,7 @@ const ExpensesSummary = ({expenses, gender, deputyName}) => {
       <div className='content'>
         <h3>Más Reciente</h3>
         <p>
-          El último mes donde existe un registro de los gastos { depPronoun } <strong>{ deputyName }</strong>
+          El último mes donde existe un registro completo de los gastos { depPronoun } <strong>{ deputyName }</strong>
           {' '}corresponde a <strong>{last_month_exp.month} de {last_month_exp.year}</strong>. En dicho mes,
           {' '+depTitle} destinó <strong>{formatAmount(last_month_exp.total)}</strong> entre gastos operacionales
           {' '}y personal de apoyo<a href='#ref-2'><sup>2,3</sup></a>.

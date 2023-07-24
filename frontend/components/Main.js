@@ -6,8 +6,8 @@ import DeputyOverview from '../components/DeputyOverview';
 import DeputyAttendance from '../components/DeputyAttendance';
 import DeputyActivity from '../components/DeputyActivity';
 import ExpensesSummary from '../components/expenses/ExpensesSummary';
-import OperationalDistribuition from '../components/expenses/OperationalDistribuition';
 import HistoryOperational from './expenses/HistoryOperational';
+import HistoryStaff from './expenses/HistoryStaff';
 import DeputyVotings from '../components/DeputyVotings';
 import About from '../components/About';
 import Navbar from '../components/Navbar';
@@ -73,7 +73,7 @@ export default function Main ({date}) {
           <DeputySelection
             deputyName={`${deputyData.profile.name} ${deputyData.profile.first_surname}`}
             date={deputyData.date}
-            selectionDate={deputyData.update_timestamp}
+            selectionDate={deputyData.update_timestam}
             gender={deputyData.profile.gender}
             pulseId={deputyData.beacon.pulseId}
             chainId={deputyData.beacon.chainId}
@@ -117,6 +117,11 @@ export default function Main ({date}) {
             </section>
             <section className="feature left">
               <HistoryOperational 
+                expenses={deputyData.expenses}
+              />
+            </section>
+            <section className="feature right">
+              <HistoryStaff
                 expenses={deputyData.expenses}
               />
             </section>
