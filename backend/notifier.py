@@ -51,7 +51,7 @@ def get_message_for_deputy(deputy):
     projects_total = projects["all"]
     projects_published = projects["published"] if projects["published"] > 0 else "ninguno"
     
-    published = "han sido publicados" if projects_published > 1 else "ha sido publicado"
+    published = "han sido publicados" if projects["published"] > 1 else "ha sido publicado"
     [_ , month, day] = deputy["date"].split('-')
     month = MONTHS[int(month) - 1]
     date_str = f'{day} de {month}'
