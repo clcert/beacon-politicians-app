@@ -23,12 +23,18 @@ class Notifier:
     def notify_error(self, message: str):
         print(f"ERROR: {message}")
         for diffuser in self.diffusers:
-            diffuser.share(diffuser.format_error(message))
+            try:
+                diffuser.share(diffuser.format_error(message))
+            except Exception:
+                print(f"Error at {diffuser.name}")
 
     def notify(self, message: str):
         print(f"NOTIFY: {message}")
         for diffuser in self.diffusers:
-            diffuser.share(diffuser.format_msg(message))
+            try:
+                diffuser.share(diffuser.format_msg(message))
+            except Exception:
+                print(f"Error at {diffuser.name}")
     
 
 class TelegramDiffuser(Diffuser):
