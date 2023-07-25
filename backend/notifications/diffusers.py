@@ -22,8 +22,8 @@ class Notifier:
 
     def notify_error(self, message: str):
         print(f"ERROR: {message}")
-        # for diffuser in self.diffusers:
-        #     diffuser.share(diffuser.format_error(message))
+        for diffuser in self.diffusers:
+            diffuser.share(diffuser.format_error(message))
 
     def notify(self, message: str):
         print(f"NOTIFY: {message}")
@@ -36,6 +36,12 @@ class TelegramDiffuser(Diffuser):
         super().__init__(name)
         self.url = f'https://api.telegram.org/bot{token}/sendMessage'
         self.chat_id = chat_id
+
+    def format_msg(self, message):
+        message = message.replace('diputado del día', '*diputado del día*')
+        message = message.replace('diputada del día', '*diputada del día*')
+        message += '\nPara más información, puedes visitar la página diputado.labs.clcert.cl.'
+        return message
 
     def share(self, message):
         data = {
@@ -51,6 +57,12 @@ class DiscordDiffuser(Diffuser):
         super().__init__(name)
         self.url = f'https://discord.com/api/webhooks/{webhook_id}'
         self.username = bot_username
+
+    def format_msg(self, message):
+        message = message.replace('diputado del día', '**diputado del día**')
+        message = message.replace('diputada del día', '**diputada del día**')
+        message += '\nPara más información, puedes visitar la página https://diputado.labs.clcert.cl.'
+        return message
 
     def share(self, message):
         data = {
@@ -69,8 +81,8 @@ class TwitterDiffuser(Diffuser):
         self.access_token_secret = access_token_secret
 
     def format_msg(self, message):
-        message.replace('diputado del día', '#DiputadoDelDía')
-        message.replace('diputada del día', '#DiputadaDelDía')
+        message = message.replace('diputado del día', '#DiputadoDelDía')
+        message = message.replace('diputada del día', '#DiputadaDelDía')
         return message[:280]
     
     def share(self, message):
@@ -98,7 +110,11 @@ class TwitterDiffuser(Diffuser):
         tweet_id = json_response['data']['id']
         
         reply_payload = {
-            "text": "Toda esta información y más la puedes encontrar en diputado.labs.clcert.cl.\nInformación obtenida desde www.camara.cl",
+            "text": (
+                "Para más información, puedes visitar la página diputado.labs.clcert.cl. " +
+                "Utilizamos la aleatoriedad pública y verificable de #RandomUChile para elegir al (a la) #DiputadxDelDia. " +
+                "Toda la información es obtenida desde la página oficial de la cámara de diputados 😉."
+            ),
             "reply": {
                 "in_reply_to_tweet_id": tweet_id
             }
