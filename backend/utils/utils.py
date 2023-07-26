@@ -7,6 +7,7 @@ import json
 import requests
 
 CURRENT_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarLegislaturaActual'
+GMT_CHILE = -4
 
 def get_current_legislature():
     """
@@ -51,11 +52,21 @@ def get_datetime_from_epoch(epoch):
 
 def get_datetime_from_date_and_time(date, time):
     if not time:
-        return datetime(year=date.year, month=date.month, day=date.day)
+        return datetime(year=date.year, month=date.month, day=date.day, hour=get_hrs_diff(), minute=0)
     return datetime(
         year=date.year, month=date.month, day=date.day,
         hour=time.hour, minute=time.minute
     )
+
+def get_hrs_diff():
+    """
+    Gets the difference between the local time and the UTC time.
+    :return: Returns the difference in hours as an integer.
+    """
+    dt_utc = datetime.utcnow()
+    dt_local = datetime.now()
+
+    return (dt_local.hour - dt_utc.hour - GMT_CHILE) % 24
 
 def get_today_timestamp():
     """
@@ -66,13 +77,13 @@ def get_today_timestamp():
     dt_local = datetime.now()
 
     today_pulse = dt_utc.day > dt_local.day or (
-        dt_utc.day == dt_local.day and dt_utc.hour >= 4
+        dt_utc.day == dt_local.day and dt_utc.hour >= (-GMT_CHILE)
     )
 
     today = date.today() if today_pulse else date.today() - timedelta(days=1)
 
     [year, month, day] = str(today).split('-')
-    timestamp = datetime(year=int(year), month=int(month), day=int(day), hour=0, minute=0)
+    timestamp = datetime(year=int(year), month=int(month), day=int(day), hour=get_hrs_diff(), minute=0)
 
     return timestamp
 
