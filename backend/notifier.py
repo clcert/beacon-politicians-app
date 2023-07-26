@@ -57,10 +57,10 @@ def get_message_for_deputy(deputy):
     date_str = f'{day} de {month}'
 
     msg = (
-        f"{dep_pronoun} del día de hoy ({date_str}) es {deputy_name} ({political_party}). " +
+        f"{dep_pronoun} del día {date_str} es {deputy_name} ({political_party}). " +
         f"Su porcentaje de asistencia es del {attendance_percentage}%. " +
-        f"En el último mes con registro, sus gastos ascienden a " +
-        f"${total_amount:,} ({amount_comment} el promedio). ".replace(',','.') +
+        f"En el último mes con registro gastó ${total_amount:,} ".replace(',','.') +
+        f"({amount_comment} el promedio de la Cámara). " +
         f"Ha presentado {projects_total} proyectos de ley, de los cuales {projects_published} {published}."
     )
     return msg
