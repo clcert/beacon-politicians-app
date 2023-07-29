@@ -81,6 +81,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 	}
 	current_deputies["records"].append(record)
 	current_deputies["records"].sort(key=lambda dep: dep['date'])
+	current_deputies["records"] = current_deputies["records"][-14:]
 
 	with open(DEPUTIES_JSON_PATH, "w", encoding="utf-8") as outfile:
 		json.dump(current_deputies, outfile, indent=4, ensure_ascii=False)
