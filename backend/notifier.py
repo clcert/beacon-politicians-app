@@ -41,10 +41,13 @@ def get_message_for_deputy(deputy):
     expenses.sort(key=lambda x: x["code"], reverse=True)
     expenses_last_month = expenses[0]
     total_amount = expenses_last_month["total"]
+
+    average_month_amount = 0
     ignore_keys = ["total", "month", "year", "code"]
     for (key, value) in expenses_last_month.items():
         if key not in ignore_keys:
-            average_month_amount = value["deputies_avg"]
+            cat_avg = value["deputies_avg"] if value["deputies_avg"] else 0
+            average_month_amount += cat_avg
     amount_comment = "sobre" if total_amount > average_month_amount else "bajo"
 
     projects = deputy["activity"]
