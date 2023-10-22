@@ -1,9 +1,8 @@
 from datetime import datetime
 from random import seed, randint
 from utils.db import find_deputy_for_date
-from utils.utils import get_number_of_deputies
-from utils.utils import get_json_data
 from utils.data import MONTHS
+from utils.utils import get_number_of_deputies, get_today_timestamp, get_json_data
 from notifications.diffusers import Notifier, TelegramDiffuser, DiscordDiffuser, TwitterDiffuser
 from deputies.parser import DeputyParser
 
@@ -22,8 +21,8 @@ def check_todays_deputy_in_db():
     """
     Checks if the deputy of the day is already saved in the database.
     """
-    today = datetime.today().strftime('%Y-%m-%d')
-    return find_deputy_for_date( today + ' 00:00:00')
+    today = get_today_timestamp().strftime('%Y-%m-%d %H:%M:%S')
+    return find_deputy_for_date(today)
 
 def get_message_for_deputy(deputy):
     """
