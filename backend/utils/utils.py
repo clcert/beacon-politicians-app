@@ -106,7 +106,7 @@ def get_json_data(file_path=DEPUTIES_JSON_PATH):
 
 
 def showSummary(profile, datetime, chainId, pulseId):
-    pulseUri = f"https://random.uchile.cl/beacon/2.0-beta1/chain/{chainId}/pulse/{pulseId}"
+    pulseUri = f"https://random.uchile.cl/beacon/2.1-beta/chain/{chainId}/pulse/{pulseId}"
     print("----------------------------------------")
     print("Resultados para el día", datetime.strftime("%d/%m/%Y"))
     print("Diputado Escogido:", profile['first_name'], profile['first_surname'])

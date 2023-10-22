@@ -4,6 +4,9 @@ from utils.beacon import get_index, get_pulse_data
 from utils.webutils import generate_deputy_json_data
 from deputies.parser import DeputyParser
 
+# from urllib3.exceptions import MaxRetryError, ConnectTimeoutError
+# from ssl import SSLCertVerificationError
+from requests.exceptions import SSLError, ConnectTimeout
 
 def update_all_profiles():
     """
@@ -60,24 +63,38 @@ def choose_deputy(timestamp, verify=False):
 
     print("[Manager] Loading deputy profile...")
     deputy_parser.load_or_update_profile()
-    print("[Manager] Updating deputy attendance...")
-    deputy_parser.update_attendance()
-    print("[Manager] Updating deputy votings...")    
-    deputy_parser.get_last_votes()
+    try:
+        print("[Manager] Updating deputy attendance...")
+        deputy_parser.update_attendance()
+        print("[Manager] Updating deputy votings...")    
+        deputy_parser.get_last_votes()
+    except ConnectTimeout:
+        print("[Manager] Connection Timeout with deputies chamber API. Skipping attendance and votings update...")
+    # except MaxRetryError:
+    #     print("[Manager] Max retries exceeded with deputies chamber API. Skipping attendance and votings update...")
+    except SSLError:
+        print("[Manager] SSL Certificate Verification Error in deputies chamber API. Skipping attendance and votings update...")
+    except Exception as e:
+        print("[Manager] Unknown error. Skipping attendance and votings update...")
+        print(e)
+
     print("[Manager] Saving as #DiputadxDelDia...")
     deputy_parser.save_as_deputy_of_the_day(timestamp)
 
     expenses_recorded = deputy_parser.saved_deputy_expenses()
     activity_recorded = deputy_parser.saved_legislative_activity()
     if not expenses_recorded or not activity_recorded:
-        driver = get_driver()
-        if not expenses_recorded:
-            print("[Manager] No expenses found for this deputy. Scraping expenses...")
-            deputy_parser.update_deputy_expenses(driver=driver)
-        if not activity_recorded:
-            print("[Manager] No legislative activity found for this deputy. Scraping activity...")
-            deputy_parser.update_legislative_activity(driver=driver)
-        driver.close()
-
+        try:
+            driver = get_driver()
+            if not expenses_recorded:
+                print("[Manager] No expenses found for this deputy. Scraping expenses...")
+                deputy_parser.update_deputy_expenses(driver=driver)
+            if not activity_recorded:
+                print("[Manager] No legislative activity found for this deputy. Scraping activity...")
+                deputy_parser.update_legislative_activity(driver=driver)
+            driver.close()
+        except Exception as e:
+            print("[Manager] Unknown error. Skipping expenses and activity update...")
+            print(e)
     print("[Manager] Deputy updated, generating JSON data...")
     generate_deputy_json_data(deputy_parser, timestamp, chainId, pulseId)

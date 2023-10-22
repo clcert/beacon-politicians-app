@@ -24,7 +24,7 @@ const DeputySelection = ({deputyName, date, selectionDate, gender, chainId, puls
     <header className="major container medium">
       <h4>
         {deputyName} fue { selected } como { depPronoun } { dateStr } en base al Pulso&nbsp;
-        <a href={`https://random.uchile.cl/beacon/2.0-beta1/chain/${ chainId }/pulse/${ pulseId }`} target='_blank' rel="noreferrer">
+        <a href={`https://random.uchile.cl/beacon/2.1-beta/chain/${ chainId }/pulse/${ pulseId }`} target='_blank' rel="noreferrer">
           #{ chainId }-{ pulseId }
         </a>{' '}
         del faro de aleatoriedad de Random UChile.

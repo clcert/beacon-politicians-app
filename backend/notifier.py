@@ -77,7 +77,7 @@ def checkout_deputy(success_notifier, failure_notifier):
         exit(1)
 
     (deputy_id, chain_id, pulse_id, randOut) = db_data
-    response = requests.get(f'https://random.uchile.cl/beacon/2.0-beta1/chain/{chain_id}/pulse/{pulse_id}').json()
+    response = requests.get(f'https://random.uchile.cl/beacon/2.1-beta/chain/{chain_id}/pulse/{pulse_id}').json()
     pulse = response['pulse']
     pulseRandOut = pulse['outputValue']
 

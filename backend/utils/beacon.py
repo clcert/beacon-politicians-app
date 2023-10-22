@@ -19,7 +19,7 @@ def get_pulse_data(timestamp):
     :param date_hour: Datetime object used to get the record and output value.
     :return:
     """
-    url = 'https://random.uchile.cl/beacon/2.0-beta1/pulse?time=' + str(int(timestamp.timestamp()) * 1000)
+    url = 'https://random.uchile.cl/beacon/2.1-beta/pulse?timeGE=' + str(int(timestamp.timestamp()) * 1000)
     page = requests.get(url)
     json_page = page.json()
 
