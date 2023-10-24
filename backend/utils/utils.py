@@ -7,7 +7,7 @@ import json
 import requests
 
 CURRENT_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarLegislaturaActual'
-GMT_CHILE = -4
+UTC_CHILE = -3 # UTC-3 summer time
 
 def get_current_legislature():
     """
@@ -66,7 +66,7 @@ def get_hrs_diff():
     dt_utc = datetime.utcnow()
     dt_local = datetime.now()
 
-    return (dt_local.hour - dt_utc.hour - GMT_CHILE) % 24
+    return (dt_local.hour - dt_utc.hour - UTC_CHILE) % 24
 
 def get_today_timestamp():
     """
@@ -77,7 +77,7 @@ def get_today_timestamp():
     dt_local = datetime.now()
 
     today_pulse = dt_utc.day > dt_local.day or (
-        dt_utc.day == dt_local.day and dt_utc.hour >= (-GMT_CHILE)
+        dt_utc.day == dt_local.day and dt_utc.hour >= (-UTC_CHILE)
     )
 
     today = date.today() if today_pulse else date.today() - timedelta(days=1)
