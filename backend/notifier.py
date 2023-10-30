@@ -98,7 +98,7 @@ def checkout_deputy(success_notifier, failure_notifier):
 
     json_data = get_json_data()
     deputies = json_data['records']
-    deputy = list(filter(lambda x: x['index'] == deputy_id, deputies))
+    deputy = list(filter(lambda x: x['date'] == get_today_timestamp().strftime('%Y-%m-%d'), deputies))
     if not deputy:
         failure_notifier.notify_error(
             f'El diputado de hoy no se encuentra en el archivo JSON.'
