@@ -17,7 +17,7 @@ class Diffuser:
     
 
 class Notifier:
-    def __init__(self, diffusers: list[Diffuser]):
+    def __init__(self, diffusers: "list[Diffuser]"):
         self.diffusers = diffusers
 
     def notify_error(self, message: str):
