@@ -1,4 +1,4 @@
-from datetime import datetime
+from notifications.make_post import DeputiesPost
 from random import seed, randint
 from utils.db import find_deputy_for_date
 from utils.data import MONTHS
@@ -65,6 +65,20 @@ def get_message_for_deputy(deputy):
         f"({amount_comment} el promedio de la Cámara). " +
         f"Ha presentado {projects_total} proyectos de ley, de los cuales {projects_published} {published}."
     )
+
+    DeputiesPost(
+        name=deputy_name,
+        party=profile['party'],
+        district=profile['district'],
+        picture_url=profile['photo_url'],
+        communes='',
+        attendance_percentage=attendance_percentage,
+        expenses=total_amount,
+        proposed_law_projects=projects['all'],
+        published_law_projects=projects['published'],
+        pulse=deputy['record']
+    ).generate_post()
+
     return msg
 
 def checkout_deputy(success_notifier, failure_notifier):
@@ -104,7 +118,7 @@ def checkout_deputy(success_notifier, failure_notifier):
             f'El diputado de hoy no se encuentra en el archivo JSON.'
         )
         exit(1)
-    
+
     message = get_message_for_deputy(deputy[0])
     success_notifier.notify(message)
 

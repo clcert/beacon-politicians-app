@@ -23,17 +23,17 @@ font_ml_bold = ImageFont.truetype("./OpenSans-Bold.ttf", 42)
 font_l = ImageFont.truetype("./OpenSans-Bold.ttf", 48)
 font_xl = ImageFont.truetype("./OpenSans-Bold.ttf", 60)
 
-class DiputadosPost:
-    def __init__(self, deputy_name, deputy_party, deputy_district, deputy_picture, communes):
-        self.deputy_name = deputy_name
-        self.deputy_party = deputy_party
-        self.deputy_district = deputy_district
-        self.deputy_picture_url = deputy_picture
-        self.attendance_percentage = 98.23
-        self.expenses = 10221323
-        self.proposed_law_projects = 73
-        self.published_law_projects = 2
-        self.pulse = "2-218937"
+class DeputiesPost:
+    def __init__(self, name, party, district, picture_url, communes, attendance_percentage, expenses, proposed_law_projects, published_law_projects, pulse):
+        self.deputy_name = name
+        self.deputy_party = party
+        self.deputy_district = district
+        self.deputy_picture_url = picture_url
+        self.attendance_percentage = attendance_percentage
+        self.expenses = expenses
+        self.proposed_law_projects = proposed_law_projects
+        self.published_law_projects = published_law_projects
+        self.pulse = pulse
 
         self.communes = []
         communes_list = communes.split(",")
@@ -97,7 +97,7 @@ class DiputadosPost:
         self.template_img.save('todays_deputy.png')
 
 if __name__ == "__main__":
-    post = DiputadosPost(
+    post = DeputiesPost(
         "Pamela Jiles Moreno", 
         "Partido Humanista", 
         "Distrito 12", 
