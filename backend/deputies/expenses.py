@@ -130,7 +130,7 @@ class StaffExpensesParser(ExpensesParser):
 
     def __init__(self, profile, **kwargs):
         super().__init__(**kwargs)
-        self.deputy_name = f'{profile["first_surname"]} {profile["second_surname"]}, {profile["first_name"]}'
+        self.deputy_name = f'{profile["first_surname"]} {profile["second_surname"][0]}., {profile["first_name"]}'
         self.url = 'https://www.camara.cl/transparencia/personalapoyogral.aspx'
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlMes'
         self.year_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlAno'
