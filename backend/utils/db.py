@@ -36,7 +36,9 @@ def init_db(db_name = DB_PATH):
         "party_alias TEXT,"+
         "twitter_username TEXT,"+
         "instagram_username TEXT,"+
-        "last_update DATE)"
+        "last_update DATE," +
+        "district_communes TEXT"+
+        ")"
     )
     cursor.execute("CREATE TABLE IF NOT EXISTS attendance ("+
         "deputy_id INTEGER PRIMARY KEY,"+
@@ -133,10 +135,10 @@ def insert_deputy_profile(deputy_profile):
     cursor.execute(
         """
         INSERT OR REPLACE INTO main_profile (id, local_id, first_name, first_surname, second_surname,
-            profile_picture, gender, birthdate, profession, district, district_region, party, party_alias,
-            twitter_username, instagram_username, last_update)
-        VALUES (:id, :local_id, :first_name, :first_surname, :second_surname,
-            :profile_picture, :gender, :birthdate, :profession, :district, :district_region, :party, :party_alias,
+            profile_picture, gender, birthdate, profession, district, district_region, district_communes,
+            party, party_alias, twitter_username, instagram_username, last_update)
+        VALUES (:id, :local_id, :first_name, :first_surname, :second_surname, :profile_picture, :gender, 
+            :birthdate, :profession, :district, :district_region, :district_communes, :party, :party_alias,
             :twitter_username, :instagram_username, :last_update)
         """,
         deputy_profile
@@ -229,7 +231,8 @@ def find_profile_data_in_db(deputy_index):
             'party_alias': row[12],
             'twitter_username': row[13],
             'instagram_username': row[14],
-            'last_update': row[15]
+            'last_update': row[15],
+            'district_communes': row[16],
         }
 
     return None

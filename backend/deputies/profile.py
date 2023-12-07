@@ -40,8 +40,11 @@ def parse_deputy_profile(html_url, xml_url):
     contact_info = general_section.findAll('a')
     twitter_info = list(filter(lambda x: 'twitter.com' in x['href'].lower() or 'x.com' in x['href'].lower(), contact_info))
     instagram_info = list(filter(lambda x: 'instagram.com' in x['href'].lower(), contact_info))
-    profile['twitter_username'] = twitter_info[0]['href'].split('/')[-1].strip().replace('@','').replace('Twitter.com','') if len(twitter_info) > 0 else ''
-    profile['instagram_username'] = instagram_info[0]['href'].split('/')[-1].strip() if len(instagram_info) > 0 else ''
+    twitter_username = twitter_info[0]['href'].split('/')[-1].strip().replace('@','').replace('Twitter.com','') if len(twitter_info) > 0 else ''
+    instagram_username = instagram_info[0]['href'].split('/')[-1].strip() if len(instagram_info) > 0 else ''
+
+    profile['twitter_username'] = twitter_username if twitter_username.lower() != 'no' else ''
+    profile['instagram_username'] = instagram_username if instagram_username.lower() != 'no' else ''
     
     response = requests.get(xml_url)
     soup = BeautifulSoup(response.content, 'xml')

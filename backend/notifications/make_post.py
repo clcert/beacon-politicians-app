@@ -14,7 +14,8 @@ FONT_THIN_PATH = "./OpenSans-Light.ttf"
 FONT_REGULAR_PATH = "./OpenSans-Regular.ttf"
 FONT_BOLD_PATH = "./OpenSans-Bold.ttf"
 
-TEMPLATE_PATH = os.path.dirname(os.path.abspath(__file__)) + "/template.png"
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+TEMPLATE_PATH = f"{CURRENT_PATH}/template.png"
 
 font_xs = ImageFont.truetype("./OpenSans-Light.ttf", 24)
 font_s = ImageFont.truetype("./OpenSans-Light.ttf", 32)
@@ -43,7 +44,7 @@ class DeputiesPost:
         for commune in communes_list:
             commune = commune.strip()
             text_length += len(commune) + 2
-            if text_length < 50:
+            if text_length < 60:
                 content += f"{commune}, "
             else:
                 self.communes.append(content)
@@ -78,23 +79,22 @@ class DeputiesPost:
 
         self.write_text(self.deputy_party, 420, 500)
 
-        self.write_text(f"Asistencia", 130, 730, font_size=font_ml_bold, font_color=APP_WHITE)
-        self.write_text(f"{self.attendance_percentage}%".replace('.',','), 140, 780, font_size=font_xl, font_color=APP_WHITE)
+        self.write_text(f"Asistencia", 115, 710, font_size=font_ml_bold, font_color=APP_WHITE)
+        self.write_text(f"{self.attendance_percentage}%".replace('.',','), 120, 760, font_size=font_xl, font_color=APP_WHITE)
 
-        self.write_text(f"Gastos", 470, 700, font_size=font_m_bold, font_color=APP_WHITE)
-        self.write_text(f"Operacionales", 400, 740, font_size=font_m_bold, font_color=APP_WHITE)
+        self.write_text(f"Promedio", 445, 700, font_size=font_m_bold, font_color=APP_WHITE)
+        self.write_text(f"de Gastos", 445, 740, font_size=font_m_bold, font_color=APP_WHITE)
         self.write_text(f"${self.expenses:,}".replace(',','.'), 405, 790, font_size=font_ml_bold, font_color=APP_WHITE)
 
-        self.write_text(f"Proyectos", 740, 700, font_size=font_m_bold, font_color=APP_WHITE)
-        self.write_text(f"de Ley", 760, 740, font_size=font_m_bold, font_color=APP_WHITE)
+        self.write_text(f"Proyectos", 760, 700, font_size=font_m_bold, font_color=APP_WHITE)
+        self.write_text(f"de Ley", 790, 740, font_size=font_m_bold, font_color=APP_WHITE)
         self.write_text(f"{self.proposed_law_projects} propuestos", 710, 790, font_size=font_m_bold, font_color=APP_WHITE)
         self.write_text(f"{self.published_law_projects} publicados", 720, 835, font_size=font_m_bold, font_color=APP_WHITE)
 
         self.write_text(f"Pulso de Aleatoriedad: {self.pulse}", 340, 1030, font_size=font_s, font_color=APP_WHITE)
 
-        
-
-        self.template_img.save('todays_deputy.png')
+        POST_PATH = f"{CURRENT_PATH}/todays_deputy.png"
+        self.template_img.save(POST_PATH)
 
 if __name__ == "__main__":
     post = DeputiesPost(

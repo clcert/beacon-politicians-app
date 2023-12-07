@@ -56,6 +56,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 			"profession": profile["profession"],
 			"district": profile["district"],
 			"region": profile["district_region"],
+			"communes": profile["district_communes"],
 			"party": profile["party"],
 			"party_alias": profile["party_alias"],
 			"twitter_username": profile["twitter_username"],
