@@ -502,7 +502,6 @@ def find_deputy_for_date(date):
     """
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
-    print(date)
     cursor.execute(
         """
         SELECT deputy_id, chain_id, pulse_id, rand_out FROM deputy_of_the_day WHERE date = :date

@@ -4,6 +4,7 @@ from PIL import ImageDraw
 
 from io import BytesIO
 import requests
+import os
 
 APP_RED = (213,28,25)
 APP_BLUE = (17,34,51)
@@ -13,7 +14,7 @@ FONT_THIN_PATH = "./OpenSans-Light.ttf"
 FONT_REGULAR_PATH = "./OpenSans-Regular.ttf"
 FONT_BOLD_PATH = "./OpenSans-Bold.ttf"
 
-
+TEMPLATE_PATH = os.path.dirname(os.path.abspath(__file__)) + "/template.png"
 
 font_xs = ImageFont.truetype("./OpenSans-Light.ttf", 24)
 font_s = ImageFont.truetype("./OpenSans-Light.ttf", 32)
@@ -53,7 +54,7 @@ class DeputiesPost:
 
         self.communes[-1] = self.communes[-1][:-2]+"."
 
-        self.template_img = Image.open("template.png")
+        self.template_img = Image.open(TEMPLATE_PATH)
         self.draw = ImageDraw.Draw(self.template_img)
 
     def write_text(self, text, x, y, font_size=font_m, font_color=APP_BLUE):
@@ -72,7 +73,6 @@ class DeputiesPost:
         self.write_text(self.deputy_name, 420, 280, font_size=font_l, font_color=APP_RED)
 
         self.write_text(f"Diputada por el {self.deputy_district}", 420, 360, font_size=font_s)
-        print(self.communes)
         for i in range(len(self.communes)):
             self.write_text(self.communes[i], 420, 405 + i * 35, font_size=font_xs)
 

@@ -70,13 +70,13 @@ def get_message_for_deputy(deputy):
         name=deputy_name,
         party=profile['party'],
         district=profile['district'],
-        picture_url=profile['photo_url'],
+        picture_url=profile['picture'],
         communes='',
         attendance_percentage=attendance_percentage,
         expenses=total_amount,
         proposed_law_projects=projects['all'],
         published_law_projects=projects['published'],
-        pulse=deputy['record']
+        pulse=f"{deputy['beacon']['pulseId']}-{deputy['beacon']['chainId']}",
     ).generate_post()
 
     return msg
