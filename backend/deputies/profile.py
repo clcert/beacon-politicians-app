@@ -29,14 +29,20 @@ def parse_deputy_profile(html_url, xml_url):
     main_info = general_section.find('div', attrs={'class': 'grid-3'}).getText().strip()
     main_info_list = list(map(str.strip, main_info.split('\r\n')))
 
-    # comunas = main_info_list[0].split(':')[1].strip()
     profile['district'] = int(main_info_list[1].split(':')[1].strip().replace('Nº ', ''))
     profile['district_region'] = main_info_list[2].split(':')[1].strip()
+    profile['district_communes'] = main_info_list[0].split(':')[1].strip()
 
     raw_periods = general_section.findAll('div', attrs={'class': 'grid-2 aleft m-left14'})[-1].findAll('li')[1:]
     profile['periods'] = list(map(BeautifulSoup.getText, raw_periods))
     profile['lastperiod'] = profile['periods'][-1]
 
+    contact_info = general_section.findAll('a')
+    twitter_info = list(filter(lambda x: 'twitter.com' in x['href'].lower() or 'x.com' in x['href'].lower(), contact_info))
+    instagram_info = list(filter(lambda x: 'instagram.com' in x['href'].lower(), contact_info))
+    profile['twitter_username'] = twitter_info[0]['href'].split('/')[-1].strip().replace('@','').replace('Twitter.com','') if len(twitter_info) > 0 else ''
+    profile['instagram_username'] = instagram_info[0]['href'].split('/')[-1].strip() if len(instagram_info) > 0 else ''
+    
     response = requests.get(xml_url)
     soup = BeautifulSoup(response.content, 'xml')
 

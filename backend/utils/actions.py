@@ -4,8 +4,6 @@ from utils.beacon import get_index, get_pulse_data
 from utils.webutils import generate_deputy_json_data
 from deputies.parser import DeputyParser
 
-# from urllib3.exceptions import MaxRetryError, ConnectTimeoutError
-# from ssl import SSLCertVerificationError
 from requests.exceptions import SSLError, ConnectTimeout
 
 def update_all_profiles():

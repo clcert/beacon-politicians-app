@@ -58,6 +58,8 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 			"region": profile["district_region"],
 			"party": profile["party"],
 			"party_alias": profile["party_alias"],
+			"twitter_username": profile["twitter_username"],
+			"instagram_username": profile["instagram_username"],
 			"periods": find_deputy_periods(deputy_index),
 		},
 		"attendance": None if not attendance else {

@@ -24,7 +24,6 @@ def init_db(db_name = DB_PATH):
         "id INTEGER PRIMARY KEY,"+
         "local_id INTEGER,"+
         "first_name TEXT,"+
-        "second_name TEXT,"+
         "first_surname TEXT,"+
         "second_surname TEXT,"+
         "profile_picture TEXT,"+
@@ -35,6 +34,8 @@ def init_db(db_name = DB_PATH):
         "district_region TEXT,"+
         "party TEXT,"+
         "party_alias TEXT,"+
+        "twitter_username TEXT,"+
+        "instagram_username TEXT,"+
         "last_update DATE)"
     )
     cursor.execute("CREATE TABLE IF NOT EXISTS attendance ("+
@@ -131,12 +132,12 @@ def insert_deputy_profile(deputy_profile):
     cursor = db.cursor()
     cursor.execute(
         """
-        INSERT OR REPLACE INTO main_profile (id, local_id, first_name, second_name, first_surname, second_surname,
+        INSERT OR REPLACE INTO main_profile (id, local_id, first_name, first_surname, second_surname,
             profile_picture, gender, birthdate, profession, district, district_region, party, party_alias,
-            last_update)
-        VALUES (:id, :local_id, :first_name, :second_name, :first_surname, :second_surname,
+            twitter_username, instagram_username, last_update)
+        VALUES (:id, :local_id, :first_name, :first_surname, :second_surname,
             :profile_picture, :gender, :birthdate, :profession, :district, :district_region, :party, :party_alias,
-            :last_update)
+            :twitter_username, :instagram_username, :last_update)
         """,
         deputy_profile
     )
@@ -216,18 +217,19 @@ def find_profile_data_in_db(deputy_index):
             'id': row[0],
             'local_id': row[1],
             'first_name': row[2],
-            'second_name': row[3],
-            'first_surname': row[4],
-            'second_surname': row[5],
-            'profile_picture': row[6],
-            'gender': row[7],
-            'birthdate': row[8],
-            'profession': row[9],
-            'district': row[10],
-            'district_region': row[11],
-            'party': row[12],
-            'party_alias': row[13],
-            'last_update': row[14]
+            'first_surname': row[3],
+            'second_surname': row[4],
+            'profile_picture': row[5],
+            'gender': row[6],
+            'birthdate': row[7],
+            'profession': row[8],
+            'district': row[9],
+            'district_region': row[10],
+            'party': row[11],
+            'party_alias': row[12],
+            'twitter_username': row[13],
+            'instagram_username': row[14],
+            'last_update': row[15]
         }
 
     return None
@@ -500,6 +502,7 @@ def find_deputy_for_date(date):
     """
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
+    print(date)
     cursor.execute(
         """
         SELECT deputy_id, chain_id, pulse_id, rand_out FROM deputy_of_the_day WHERE date = :date
