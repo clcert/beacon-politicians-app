@@ -68,8 +68,6 @@ def choose_deputy(timestamp, verify=False):
         deputy_parser.get_last_votes()
     except ConnectTimeout:
         print("[Manager] Connection Timeout with deputies chamber API. Skipping attendance and votings update...")
-    # except MaxRetryError:
-    #     print("[Manager] Max retries exceeded with deputies chamber API. Skipping attendance and votings update...")
     except SSLError:
         print("[Manager] SSL Certificate Verification Error in deputies chamber API. Skipping attendance and votings update...")
     except Exception as e:
