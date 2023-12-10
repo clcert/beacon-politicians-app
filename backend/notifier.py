@@ -69,9 +69,9 @@ def get_message_for_deputy(deputy):
     DeputiesPost(
         name=deputy_name,
         party=profile['party'],
-        district=profile['district'],
+        district=f"Distrito {profile['district']}",
         picture_url=profile['picture'],
-        communes='',
+        communes=profile['communes'],
         attendance_percentage=attendance_percentage,
         expenses=total_amount,
         proposed_law_projects=projects['all'],
