@@ -131,6 +131,7 @@ class StaffExpensesParser(ExpensesParser):
     def __init__(self, profile, **kwargs):
         super().__init__(**kwargs)
         self.deputy_name = f'{profile["first_surname"]} {profile["second_surname"][0]}., {profile["first_name"]}'
+        self.deputy_full_name = f'{profile["first_name"]} {profile["first_surname"]}, {profile["second_surname"]}'
         self.url = 'https://www.camara.cl/transparencia/personalapoyogral.aspx'
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlMes'
         self.year_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlAno'
@@ -143,7 +144,7 @@ class StaffExpensesParser(ExpensesParser):
         for line in lines[2:]:
             fields = line.split('   ')
             curr_dep_name = fields[0][2:].strip()
-            if curr_dep_name == self.deputy_name:
+            if curr_dep_name == self.deputy_name or curr_dep_name == self.deputy_full_name:
                 staff_num += 1
                 if fields[1].strip() != '(*)' and fields[1].strip() != '(**)':
                     total += int(fields[3].strip().replace('.', ''))
