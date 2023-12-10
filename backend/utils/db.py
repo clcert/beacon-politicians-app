@@ -7,7 +7,7 @@ DB_PATH = PROJECT_DIR + "/data/db.sqlite3"
 logging.basicConfig(
     format='%(asctime)s [DB: %(levelname)s] %(message)s', 
     datefmt='%Y-%m-%d %H:%M:%S',
-    level=logging.DEBUG
+    level=logging.INFO
 )
 
 class DatabaseConnection:
@@ -35,7 +35,8 @@ class DatabaseConnection:
             logging.info("database file created")
 
     def create_tables(self):
-        with self as db, db.cursor() as cursor:
+        with self as db:
+            cursor = db.cursor()
             logging.info("creating tables if not exists")
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS main_profile (
@@ -156,7 +157,8 @@ class DatabaseConnection:
 
 def insert_deputy_profile(deputy_profile):
     """Insert a deputy profile into the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "inserting deputy profile {} {} ({}) into database".format(
                 deputy_profile['first_name'], 
@@ -180,7 +182,8 @@ def insert_deputy_profile(deputy_profile):
 
 def insert_parlamentary_period(period):
     """Insert a parlamentary period of a deputy into the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "inserting parlamentary period for deputy {} into database".format(
                 period['deputy_id']
@@ -198,7 +201,8 @@ def insert_parlamentary_period(period):
 
 def find_deputy_periods(deputy_index):
     """Find the parlamentary periods of a deputy in the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding parlamentary periods for deputy {deputy_index} in database")
         cursor.execute(
             """
@@ -214,7 +218,8 @@ def find_deputy_periods(deputy_index):
 
 def get_real_index_from_db(local_index):
     """Get the real index of a deputy from the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding real index for deputy with local index {local_index}")
         cursor.execute(
             """
@@ -233,7 +238,8 @@ def get_real_index_from_db(local_index):
 
 def find_profile_data_in_db(deputy_index):
     """Find a deputy profile in the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding profile for deputy with index {deputy_index}")
         cursor.execute(
             """
@@ -264,7 +270,8 @@ def find_profile_data_in_db(deputy_index):
 
 def insert_operational_expenses(op_exp, deputy_id):
     """Insert operational expenses of a deputy into the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "inserting operational expenses for deputy {} into database".format(
                 deputy_id
@@ -293,7 +300,8 @@ def find_operational_expenses_for_deputy(deputy_id):
     Find operational expenses of a deputy in the database.
     Returns a list of dictionaries.
     """
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding operational expenses for deputy {deputy_id} in database")
         cursor.execute(
             """
@@ -313,7 +321,8 @@ def find_operational_indicators_by_category_and_month(category, year, month):
     Given a operational expenses category, a year and a month,
     find the average amount spent by deputies in that category.
     """
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding operational indicators for category {category} in database")
         cursor.execute(
             """
@@ -338,7 +347,8 @@ def find_operational_ranking_by_month(deputy_id, year, month):
     Given a year and a month, find the ranking position
     from deputies with the highest operational expenses.
     """
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             f"finding operational ranking for deputy {deputy_id} at month {year}-{month}"
         )
@@ -376,7 +386,8 @@ def find_operational_ranking_by_month(deputy_id, year, month):
 
 def insert_staff_expenses(st_exp, deputy_id):
     """Insert staff expenses of a deputy into the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "inserting staff expenses for deputy {} into database".format(
                 deputy_id
@@ -399,7 +410,8 @@ def find_staff_expenses_for_deputy(deputy_id):
     Find staff expenses of a deputy in the database.
     Returns a list of dictionaries.
     """
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding staff expenses for deputy {deputy_id} in database")
         cursor.execute(
             """
@@ -418,7 +430,8 @@ def find_support_staff_indicators_by_month(year, month):
     Given a year and a month, find the average amount spent by deputies
     in support staff.
     """
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding support staff indicators for month {year}-{month} in database")
         cursor.execute(
             """
@@ -443,7 +456,8 @@ def find_support_staff_ranking_by_month(deputy_id, year, month):
     Given a year and a month, find the ranking position
     from deputies with the highest support staff expenses.
     """
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             f"finding support staff ranking for deputy {deputy_id} at month {year}-{month}"
         )
@@ -481,7 +495,8 @@ def find_support_staff_ranking_by_month(deputy_id, year, month):
 
 def insert_office_expenses(off_exp, deputy_id):
     """Insert office expenses of a deputy into the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "inserting office expenses for deputy {} into database".format(
                 deputy_id
@@ -501,7 +516,8 @@ def insert_office_expenses(off_exp, deputy_id):
 
 def insert_attendance_record(attendance, deputy_id):
     """Insert attendance record of a deputy into the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "inserting attendance record for deputy {} into database".format(
                 deputy_id
@@ -520,7 +536,8 @@ def insert_attendance_record(attendance, deputy_id):
 
 def delete_previous_voting_records(deputy_id):
     """Delete previous voting records of a deputy."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "deleting previous voting records for deputy {} from database".format(
                 deputy_id
@@ -537,7 +554,8 @@ def delete_previous_voting_records(deputy_id):
 
 def insert_voting_record(vote, deputy_id):
     """Insert voting record of a deputy into the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         vote['deputy_id'] = deputy_id
 
         cursor.execute(
@@ -555,7 +573,8 @@ def find_deputy_votings(deputy_id):
     Find votings of a deputy in the database.
     Returns a list of dictionaries.
     """
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding votings for deputy {deputy_id} in database")
         cursor.execute(
             """
@@ -571,7 +590,8 @@ def find_deputy_votings(deputy_id):
 
 def insert_law_project_record(law_proj, deputy_id):
     """Insert law project record of a deputy into the database."""
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "inserting law project record for deputy {} into database".format(
                 deputy_id
@@ -593,7 +613,8 @@ def find_law_projects_for_deputy(deputy_id):
     """
     Find law projects for a deputy in the database.
     """
-    with DatabaseConnection() as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding law projects for deputy {deputy_id} in database")
         cursor.execute(
             """
@@ -608,7 +629,8 @@ def find_law_projects_for_deputy(deputy_id):
 
 def insert_deputy_of_the_day(record):
     """Insert deputy of the day into the database."""
-    with DatabaseConnection as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(
             "inserting deputy of the day record for deputy {} into database".format(
                 record['deputy_id']
@@ -627,7 +649,8 @@ def find_deputy_for_date(date):
     """
     Find deputy of the day for a given date.
     """
-    with DatabaseConnection as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding deputy of the day for date {date} in database")
         cursor.execute(
             """
@@ -644,7 +667,8 @@ def find_last_N_months_with_records(N, table, deputy_id):
     """
     Find the last N months with records in a given table.
     """
-    with DatabaseConnection as db, db.cursor() as cursor:
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
         logging.debug(f"finding last {N} months with records for deputy {deputy_id} in database")
         cursor.execute(
             """
