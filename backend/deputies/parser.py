@@ -193,7 +193,7 @@ class DeputyParser:
         :return: Returns a list of dictionaries containing each one the name, description, date and the vote_option
                  for a voting.
         """
-        self.voting = parse_deputy_votings(self.real_index, votes_limit=20)
+        self.voting = parse_deputy_votings(self.real_index, votes_limit=10)
         if save:
             delete_previous_voting_records(self.real_index)
             for vote in self.voting:
