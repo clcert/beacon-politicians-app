@@ -342,6 +342,35 @@ def find_operational_indicators_by_category_and_month(category, year, month):
     return row
 
 
+def find_operational_indicators_by_month(year, month):
+    """
+    Given a year and a month, find the average amount spent by deputies.
+    """
+    with DatabaseConnection() as db:
+        cursor = db.cursor()
+        logging.debug(f"finding operational indicators in database")
+        cursor.execute(
+            """
+            WITH expenses_operational_by_deputy AS (
+                SELECT SUM(amount) AS amount, deputy_id
+                FROM expenses_operational
+                WHERE year = :year AND month = :month
+                GROUP BY deputy_id
+            )
+            SELECT 
+                AVG(amount), 
+                MIN(amount), 
+                MAX(amount)
+            FROM 
+                expenses_operational_by_deputy
+            """,
+            {"year": year, "month": month}
+        )
+        row = cursor.fetchone()
+        cursor.close()
+    return row
+
+
 def find_operational_ranking_by_month(deputy_id, year, month):
     """
     Given a year and a month, find the ranking position
@@ -365,7 +394,7 @@ def find_operational_ranking_by_month(deputy_id, year, month):
                         year = :year AND 
                         month = :month
                 ORDER BY
-                    total_amount DESC
+                    amount DESC
             )
             SELECT
                 deputy_id,
@@ -489,7 +518,7 @@ def find_support_staff_ranking_by_month(deputy_id, year, month):
         )
         rows = cursor.fetchone()
         cursor.close()
-    expenses_rank = rows[2]
+    expenses_rank = rows[2] if rows else None
     return expenses_rank
 
 

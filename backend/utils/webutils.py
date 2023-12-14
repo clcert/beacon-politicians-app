@@ -7,6 +7,9 @@ from utils.db import (
 	find_deputy_periods,
 	find_deputy_votings,
 	find_last_N_months_with_records,
+	find_operational_ranking_by_month,
+	find_operational_indicators_by_month,
+	find_support_staff_ranking_by_month,
 )
 from utils.data import DEPUTIES_JSON_PATH, MONTHS
 from utils.utils import get_json_data
@@ -41,15 +44,15 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 	record = {
 		"index": deputy_index,
 		"date": timestamp.strftime('%Y-%m-%d'),
-		"update_timestamp": datetime.today().strftime('%Y-%m-%d %H:%M:%S'),
+		"updateTimestamp": datetime.today().strftime('%Y-%m-%d %H:%M:%S'),
 		"beacon": {
 			"chainId": chain_id,
 			"pulseId": pulse_id,
 		},
 		"profile": {
 			"name": profile["first_name"],
-			"first_surname": profile["first_surname"],
-			"second_surname": profile["second_surname"],
+			"firstSurname": profile["first_surname"],
+			"secondSurname": profile["second_surname"],
 			"picture": profile["profile_picture"],
 			"gender": profile["gender"],
 			"birthdate": profile["birthdate"],
@@ -58,20 +61,20 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 			"region": profile["district_region"],
 			"communes": profile["district_communes"],
 			"party": profile["party"],
-			"party_alias": profile["party_alias"],
-			"twitter_username": profile["twitter_username"],
-			"instagram_username": profile["instagram_username"],
+			"partyAlias": profile["party_alias"],
+			"twitterUsername": profile["twitter_username"],
+			"instagramUsername": profile["instagram_username"],
 			"periods": find_deputy_periods(deputy_index),
 		},
 		"attendance": None if not attendance else {
 			"attended": attendance["present"],
-			"justified_absent": attendance["justified_absent"],
-			"unjustified_absent": attendance["unjustified_absent"],
+			"justifiedAbsent": attendance["justified_absent"],
+			"unjustifiedAbsent": attendance["unjustified_absent"],
 			"total": attendance["total"],
 		},
 		"expenses": build_expenses_by_month(deputy_index),
 		"activity": {
-			"in_process": len(list(filter(lambda x: x["status"] == "En tramitación", law_projects))),
+			"inProcess": len(list(filter(lambda x: x["status"] == "En tramitación", law_projects))),
 			"published": len(list(filter(lambda x: x["status"] == "Publicado", law_projects))),
 			"archived": len(list(filter(lambda x: x["status"] == "Archivado", law_projects))),
 			"withdrawn": len(list(filter(lambda x: x["status"] == "Retirado", law_projects))),
@@ -111,15 +114,15 @@ def load_deputy_votings(deputy_id):
 	votings = []
 	for row in rows:
 		voting = {
-			"voting_id": row[1],
-			"voting_date": row[2],
-			"bulletin_number": row[3],
-			"document_title": row[4],
-			"article_text": row[5],
+			"votingId": row[1],
+			"votingDate": row[2],
+			"bulletinNumber": row[3],
+			"documentTitle": row[4],
+			"articleText": row[5],
 			"voted": row[6],
-			"total_approved": row[7], 
-			"total_rejected": row[8],
-			"total_abstention": row[9],
+			"totalApproved": row[7], 
+			"totalRejected": row[8],
+			"totalAbstention": row[9],
 			"result": row[10],
 		}
 		votings.append(voting)
@@ -128,11 +131,15 @@ def load_deputy_votings(deputy_id):
 
 def build_expenses_by_month(deputy_id: int):
 	months_limit = 6
+	months_limit = 8
+	# Obtain the last N months with records
 	months = find_last_N_months_with_records(months_limit, 'expenses_operational', deputy_id)
+	# Obtain saved expenses for deputy
 	op_exp = find_operational_expenses_for_deputy(deputy_id)
 	st_exp = find_staff_expenses_for_deputy(deputy_id)
 	expenses = []
 
+	# Build expenses JSON by month
 	for month in months:
 		[year, month_num] = month[0:2]
 		month_total = 0
@@ -141,6 +148,7 @@ def build_expenses_by_month(deputy_id: int):
 			"code": int("{}{:02d}{}".format(year, month_num, deputy_id)),
 			"year": year,
 			"month": MONTHS[month_num-1],
+			"detail" : []
 		}
 		month_filtered_op_exp = list(
 			filter(lambda x: x[1] == year and x[2] == month_num, op_exp)
@@ -148,39 +156,64 @@ def build_expenses_by_month(deputy_id: int):
 		month_filtered_st_exp = list(
 			filter(lambda x: x[1] == year and x[2] == month_num, st_exp)
 		)
+
+		# Staff expenses for deputy
 		average, minimum, maximum = find_support_staff_indicators_by_month(year, month_num)
+		ranking = find_support_staff_ranking_by_month(deputy_id, year, month_num)
+		staff_amount = 0
+
 		if month_filtered_st_exp:
 			register = month_filtered_st_exp[0]
 			[quantity, amount] = register[3:5]
+			staff_amount = amount
 			month_total += amount
-			month_record["Personal de Apoyo"] = {
+			month_record["detail"].append({
+				"type": "Personal de Apoyo",
 				"amount": amount,
-				"support_staff": quantity,
-				"deputies_avg": average,
-				"deputies_min": minimum,
-				"deputies_max": maximum,
-			}
+				"supportStaff": quantity,
+				"deputiesRanking": ranking,
+				"deputiesAvg": round(average),
+				"deputiesMin": minimum,
+				"deputiesMax": maximum,
+			})
 		else:
-			month_record["Personal de Apoyo"] = {
+			month_record["detail"].append({
+				"type": "Personal de Apoyo",
 				"amount": None,
-				"support_staff": None,
-				"deputies_avg": average,
-				"deputies_min": minimum,
-				"deputies_max": maximum,
-			}
+				"supportStaff": None,
+				"deputiesRanking": ranking,
+				"deputiesAvg": round(average) if average else None,
+				"deputiesMin": minimum if minimum else None,
+				"deputiesMax": maximum if maximum else None,
+			})
 		
+		# Operational expenses for deputy
+		operational_expenses = []
 		for op_exp_record in month_filtered_op_exp:
 			[category, amount] = op_exp_record[3:5]
 			month_total += amount
 			average, minimum, maximum = find_operational_indicators_by_category_and_month(category, year, month_num)
-			month_record[category] = {
+			operational_expenses.append({
+				"subtype": category,
 				"amount": amount,
-				"deputies_avg": average,
-				"deputies_min": minimum,
-				"deputies_max": maximum,
-			}
+				"deputiesAvg": round(average),
+				"deputiesMin": minimum,
+				"deputiesMax": maximum,
+			})
+		operational_ranking = find_operational_ranking_by_month(deputy_id, year, month_num)
+		op_avg, op_min, op_max = find_operational_indicators_by_month(year, month_num)
+		month_record["detail"].append({
+			"type": "Operacional",
+			"amount": month_total - staff_amount,
+			"deputiesRanking": operational_ranking,
+			"deputiesAvg": round(op_avg),
+			"deputiesMin": op_min,
+			"deputiesMax": op_max,
+			"expenses": operational_expenses,
+		})
 
+		month_record["totalOperational"] = month_total - staff_amount
 		month_record["total"] = month_total
 		expenses.append(month_record)
-	
+
 	return expenses
