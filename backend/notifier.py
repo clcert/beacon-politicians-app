@@ -24,30 +24,61 @@ def check_todays_deputy_in_db():
     today = get_today_timestamp().strftime('%Y-%m-%d %H:%M:%S')
     return find_deputy_for_date(today)
 
-def get_message_for_deputy(deputy):
+def make_post(deputy, message_content):
+    profile = deputy['profile']
+    DeputiesPost(
+        name=f"{profile['name']} {profile['firstSurname']}",
+        date=message_content['date'],
+        gender=profile["gender"],
+        party=message_content['party'],
+        district=f"Distrito {profile['district']}",
+        picture_url=profile['picture'],
+        communes=profile['communes'],
+        attendance_percentage=message_content['attendance'],
+        expenses=message_content['exp_operational'],
+        proposed_law_projects=deputy['activity']['all'],
+        published_law_projects=deputy['activity']['published'],
+        pulse=f"{deputy['beacon']['pulseId']}-{deputy['beacon']['chainId']}",
+    ).generate_post()
+
+
+def get_message_content_for_deputy(deputy):
     """
     Returns the message to be shared for the given deputy.
     """
+    # Basic Info
     profile = deputy["profile"]
-    deputy_name = f'{profile["name"]} {profile["first_surname"]} {profile["second_surname"]}'
+    deputy_name = "{} {} {}".format(
+        profile["name"],
+        profile["firstSurname"],
+        profile["secondSurname"]
+    )
     dep_pronoun = "El diputado" if profile["gender"] == "MALE" else "La diputada"
-    political_party = profile["party_alias"]
+    political_party = profile["party"]
 
+    # Attendance
     attendance = deputy["attendance"]
-    attendance_percentage = round((attendance["attended"] + attendance["justified_absent"]) / attendance["total"] * 100, 2)
+    attendance_percentage = 1 - (attendance["unjustifiedAbsent"] / attendance["total"])
+    attendance_percentage = round(attendance_percentage * 100, 2)
 
+    # Expenses
     expenses = deputy["expenses"]
     expenses.sort(key=lambda x: x["code"], reverse=True)
     expenses_last_month = expenses[0]
-    total_amount = expenses_last_month["total"]
 
-    average_month_amount = 0
-    ignore_keys = ["total", "month", "year", "code"]
-    for (key, value) in expenses_last_month.items():
-        if key not in ignore_keys:
-            cat_avg = value["deputies_avg"] if value["deputies_avg"] else 0
-            average_month_amount += cat_avg
-    amount_comment = "sobre" if total_amount > average_month_amount else "bajo"
+    # Operational Expenses
+    operational_expenses = expenses_last_month["detail"][1]
+    total_operational = operational_expenses["amount"]
+    mean_operational = operational_expenses["deputiesAvg"]
+    ranking_operational = operational_expenses["deputiesRanking"]
+    operational_comment = "sobre" if total_operational > mean_operational else "bajo"
+
+    # Staff Expenses
+    staff_expenses = expenses_last_month["detail"][0]
+    total_staff = staff_expenses["amount"]
+    mean_staff = staff_expenses["deputiesAvg"]
+    ranking_staff = staff_expenses["deputiesRanking"]
+    staff_comment = "sobre" if total_staff and total_staff > mean_staff else "bajo"
 
     projects = deputy["activity"]
     projects_total = projects["all"]
@@ -58,28 +89,24 @@ def get_message_for_deputy(deputy):
     month = MONTHS[int(month) - 1]
     date_str = f'{day} de {month}'
 
-    msg = (
-        f"{dep_pronoun} del día {date_str} es {deputy_name} ({political_party}). " +
-        f"Su porcentaje de asistencia es del {attendance_percentage}%. " +
-        f"En el último mes con registro gastó ${total_amount:,} ".replace(',','.') +
-        f"({amount_comment} el promedio de la Cámara). " +
-        f"Ha presentado {projects_total} proyectos de ley, de los cuales {projects_published} {published}."
-    )
+    message_content = {
+        "date": date_str,
+        "name": deputy_name,
+        "party": political_party,
+        "pronoun": dep_pronoun,
+        "twitter": profile["twitterUsername"],
+        "attendance": attendance_percentage,
+        "exp_operational": total_operational,
+        "exp_support_staff": total_staff,
+        "exp_operational_comment": operational_comment,
+        "exp_support_staff_comment": staff_comment,
+        "exp_operational_ranking": ranking_operational,
+        "exp_support_staff_ranking": ranking_staff,
+        "projects_total": projects_total,
+        "projects_published": f"{projects_published} {published}",
+    }
 
-    DeputiesPost(
-        name=deputy_name,
-        party=profile['party'],
-        district=f"Distrito {profile['district']}",
-        picture_url=profile['picture'],
-        communes=profile['communes'],
-        attendance_percentage=attendance_percentage,
-        expenses=total_amount,
-        proposed_law_projects=projects['all'],
-        published_law_projects=projects['published'],
-        pulse=f"{deputy['beacon']['pulseId']}-{deputy['beacon']['chainId']}",
-    ).generate_post()
-
-    return msg
+    return message_content
 
 def checkout_deputy(success_notifier, failure_notifier):
     db_data = check_todays_deputy_in_db()
@@ -119,8 +146,9 @@ def checkout_deputy(success_notifier, failure_notifier):
         )
         exit(1)
 
-    message = get_message_for_deputy(deputy[0])
-    success_notifier.notify(message)
+    message_content_dict = get_message_content_for_deputy(deputy[0])
+    make_post(deputy[0], message_content_dict)
+    success_notifier.notify(message_content_dict)
 
 if __name__ == '__main__':
     diffDc = DiscordDiffuser('DcBot', 'Diputados Bot', DISCORD_WEBHOOK_ID)

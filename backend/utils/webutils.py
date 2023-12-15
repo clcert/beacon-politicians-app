@@ -212,7 +212,6 @@ def build_expenses_by_month(deputy_id: int):
 			"expenses": operational_expenses,
 		})
 
-		month_record["totalOperational"] = month_total - staff_amount
 		month_record["total"] = month_total
 		expenses.append(month_record)
 
