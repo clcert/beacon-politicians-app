@@ -1,4 +1,5 @@
 from requests_oauthlib import OAuth1Session
+from io import BytesIO
 import requests
 
 class Diffuser:
@@ -56,15 +57,16 @@ class Notifier:
         for diffuser in self.diffusers:
             try:
                 message = diffuser.format_msg(message_content_dict)
-                # diffuser.share(message)
-            except Exception:
+                diffuser.share(message)
+            except Exception as e:
+                print(e)
                 print(f"Error at {diffuser.name}")
     
 
 class TelegramDiffuser(Diffuser):
     def __init__(self, name, token, chat_id):
         super().__init__(name)
-        self.url = f'https://api.telegram.org/bot{token}/sendMessage'
+        self.url = f'https://api.telegram.org/bot{token}/sendPhoto'
         self.chat_id = chat_id
 
     def format_msg(self, message_content_dict: dict):
@@ -75,13 +77,17 @@ class TelegramDiffuser(Diffuser):
         return message
 
     def share(self, message):
+        dep_pic = open('./todays_deputy.png', 'rb')
+        pic = BytesIO(dep_pic.read())
         data = {
             'chat_id': self.chat_id,
-            'text': message,
-            'parse_mode': 'Markdown'
+            'caption': message,
+            'parse_mode': 'Markdown',
         }
-        requests.post(self.url, data=data)
-    
+        media = {
+            'photo': pic
+        }
+        requests.post(self.url, data=data, files=media)    
 
 class DiscordDiffuser(Diffuser):
     def __init__(self, name, bot_username, webhook_id):
