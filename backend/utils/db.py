@@ -382,34 +382,30 @@ def find_operational_ranking_by_month(deputy_id, year, month):
             f"finding operational ranking for deputy {deputy_id} at month {year}-{month}"
         )
         cursor.execute(
-            """
+        """
             WITH expenses_op_rank AS (
-                SELECT
+                SELECT 
                     deputy_id,
-                    amount,
-                    RANK() OVER (ORDER BY amount DESC) AS amount_rank
-                FROM 
-                    expenses_operational 
-                    WHERE 
-                        year = :year AND 
-                        month = :month
-                ORDER BY
-                    amount DESC
+                    SUM(amount) AS month_amount,
+                    RANK() OVER (ORDER BY SUM(amount) DESC) AS month_amount_rank
+                FROM expenses_operational
+                WHERE year = :year AND month = :month
+                GROUP BY deputy_id
             )
             SELECT
                 deputy_id,
-                amount,
-                amount_rank
+                month_amount,
+                month_amount_rank
             FROM
                 expenses_op_rank
             WHERE
                 deputy_id = :deputy_id  
             """,
-            {"year": year, "month": month, "deputy_id": deputy_id}
+            {"year": 2023, "month": 8, "deputy_id": 990}
         )
         rows = cursor.fetchone()
         cursor.close()
-    expenses_rank = rows[2]
+    expenses_rank = rows[2] if rows else None
     return expenses_rank
 
 
