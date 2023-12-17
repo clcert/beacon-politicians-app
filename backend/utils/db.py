@@ -401,7 +401,7 @@ def find_operational_ranking_by_month(deputy_id, year, month):
             WHERE
                 deputy_id = :deputy_id  
             """,
-            {"year": 2023, "month": 8, "deputy_id": 990}
+            {"year": year, "month": month, "deputy_id": deputy_id}
         )
         rows = cursor.fetchone()
         cursor.close()
