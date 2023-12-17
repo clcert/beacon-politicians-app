@@ -3,6 +3,7 @@ from PIL import ImageFont
 from PIL import ImageDraw 
 
 from io import BytesIO
+from datetime import datetime
 import requests
 import os
 
@@ -116,7 +117,8 @@ class DeputiesPost:
 
         self.write_text(f"Pulso de Aleatoriedad: {self.pulse}", 340, 1030, font_size=LightFonts.S, font_color=APP_WHITE)
 
-        POST_PATH = f"{CURRENT_PATH}/todays_deputy.png"
+        current_date = datetime.now().strftime("%Y%m%d")
+        POST_PATH = f"{CURRENT_PATH}/post{current_date}.png"
         self.template_img.save(POST_PATH)
 
 if __name__ == "__main__":
