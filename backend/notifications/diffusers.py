@@ -69,6 +69,7 @@ class Notifier:
         for diffuser in self.diffusers:
             try:
                 message = diffuser.format_msg(message_content_dict)
+                #print(message)
                 diffuser.share(message)
             except Exception as e:
                 print(e)
@@ -170,7 +171,7 @@ class TwitterDiffuser(Diffuser):
 
         message_4 = (
             f"Para más información, puedes visitar nuestra página diputado.labs.clcert.cl. " +
-            f"Utilizamos la aleatoriedad pública y verificable de #RandomUChile para elegir al (a la) #DiputadxDelDia. " +
+            f"Utilizamos la aleatoriedad pública y verificable de #RandomUChile para elegir al (a la) #DiputadxDelDia. \n" +
             f"Toda la información es obtenida desde la página oficial de la cámara de diputados 😉. (4/4)"
         )
 
@@ -186,8 +187,17 @@ class TwitterDiffuser(Diffuser):
             resource_owner_secret=self.access_token_secret,
         )
 
+        # Upload post
+        # post_io = self.get_todays_post()
+        # bytes_length = len(post_io.getvalue())
+        # resource_url = "https://upload.twitter.com/1.1/media/upload.json"
+        # init_url = resource_url + f"?command=INIT&media_type=image/png&total_bytes={bytes_length}"
+        # response = oauth.post(init_url)
+
         messages = message.split("\n\n\n")
-        payload = { "text": "[TEST] "+messages[0] }
+        payload = {
+            "text": messages[0],
+        }
 
         # Making the request
         response = oauth.post(
@@ -205,7 +215,7 @@ class TwitterDiffuser(Diffuser):
         # Publish replies
         for message in messages[1:]:
             reply_payload = {
-                "text": "[TEST] "+message,
+                "text": message,
                 "reply": {
                     "in_reply_to_tweet_id": tweet_id
                 }

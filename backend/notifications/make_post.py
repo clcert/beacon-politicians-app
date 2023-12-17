@@ -44,7 +44,7 @@ class LightFonts:
 
 
 class DeputiesPost:
-    def __init__(self, name, gender, date, party, district, picture_url, communes, attendance_percentage, expenses, proposed_law_projects, published_law_projects, pulse):
+    def __init__(self, name, gender, date, party, district, picture_url, communes, attendance_percentage, expenses, ranking, proposed_law_projects, published_law_projects, pulse):
         self.deputy_name = name
         self.date = date
         self.deputy_gender = gender
@@ -53,6 +53,7 @@ class DeputiesPost:
         self.deputy_picture_url = picture_url
         self.attendance_percentage = attendance_percentage
         self.expenses = expenses
+        self.expenses_ranking = ranking
         self.proposed_law_projects = proposed_law_projects
         self.published_law_projects = published_law_projects
         self.pulse = pulse
@@ -106,9 +107,23 @@ class DeputiesPost:
         self.write_text(f"Asistencia", 115, 710, font_size=BoldFonts.L, font_color=APP_WHITE)
         self.write_text(f"{self.attendance_percentage}%".replace('.',','), 120, 760, font_size=RegularFonts.XXL, font_color=APP_WHITE)
 
-        self.write_text(f"Gastos", 475, 700, font_size=BoldFonts.M, font_color=APP_WHITE)
-        self.write_text(f"Operacionales", 405, 740, font_size=BoldFonts.M, font_color=APP_WHITE)
-        self.write_text(f"${self.expenses:,}".replace(',','.'), 425, 790, font_size=RegularFonts.L, font_color=APP_WHITE)
+        self.write_text(f"Gastos", 475, 680, font_size=BoldFonts.M, font_color=APP_WHITE)
+        self.write_text(f"Operacionales", 405, 720, font_size=BoldFonts.M, font_color=APP_WHITE)
+        self.write_text(f"${self.expenses:,}".replace(',','.'), 425, 770, font_size=RegularFonts.L, font_color=APP_WHITE)
+
+        if self.expenses_ranking < 10:
+            place_x = 445
+            text_x = 500
+        elif self.expenses_ranking < 100:
+            place_x = 435
+            text_x = 510
+        else:
+            place_x = 425
+            text_x = 520
+        
+        self.write_text(f"{self.expenses_ranking}°", place_x, 845, font_size=BoldFonts.L, font_color=APP_WHITE)
+        self.write_text(f"Ranking de", text_x, 845, font_size=RegularFonts.XS, font_color=APP_WHITE)
+        self.write_text(f"más gastos", text_x, 875, font_size=RegularFonts.XS, font_color=APP_WHITE)
 
         self.write_text(f"Proyectos", 760, 700, font_size=BoldFonts.M, font_color=APP_WHITE)
         self.write_text(f"de Ley", 790, 740, font_size=BoldFonts.M, font_color=APP_WHITE)

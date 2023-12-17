@@ -36,6 +36,7 @@ def make_post(deputy, message_content):
         communes=profile['communes'],
         attendance_percentage=message_content['attendance'],
         expenses=message_content['exp_operational'],
+        ranking=message_content['exp_operational_ranking'],
         proposed_law_projects=deputy['activity']['all'],
         published_law_projects=deputy['activity']['published'],
         pulse=f"{deputy['beacon']['pulseId']}-{deputy['beacon']['chainId']}",
