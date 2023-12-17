@@ -1,10 +1,22 @@
 from requests_oauthlib import OAuth1Session
+from datetime import datetime
 from io import BytesIO
+from os import path
 import requests
 
 class Diffuser:
     def __init__(self, name: str):
         self.name = name
+
+    def get_todays_url(self):
+        return f'diputado.labs.clcert.cl/archivo/diputado?date={datetime.now().strftime("%Y-%m-%d")}'
+    
+    def get_todays_post(self):
+        current_path = path.dirname(path.abspath(__file__))
+        current_date = datetime.now().strftime("%Y%m%d")
+        dep_post = open(f"{current_path}/post{current_date}.png", 'rb')
+        io_post = BytesIO(dep_post.read())
+        return io_post
 
     def format_msg(self, message_content_dict: dict):
         date_str = message_content_dict['date']
@@ -19,7 +31,7 @@ class Diffuser:
         projects_published = message_content_dict['projects_published']
 
         msg = (
-            f"[MENSAJE DE PRUEBA] {dep_pronoun} del día {date_str} es {deputy_name} ({political_party}). \n\n" +
+            f"{dep_pronoun} del día {date_str} es {deputy_name} ({political_party}). \n\n" +
             f"Cuenta con un porcentaje de asistencia del {attendance_percentage}% "+
             f"en el presente período legislativo. \n\n" +
             f"En el último mes con información, destinó la suma de " +
@@ -73,19 +85,17 @@ class TelegramDiffuser(Diffuser):
         message = super().format_msg(message_content_dict)
         message = message.replace('diputada del día', '*diputada del día*')
         message = message.replace('diputado del día', '*diputado del día*')
-        message += '\nPara más información, puedes visitar la página diputado.labs.clcert.cl.'
+        message += '\nPara más información, puedes visitar la página:\n' + self.get_todays_url()
         return message
 
     def share(self, message):
-        dep_pic = open('./todays_deputy.png', 'rb')
-        pic = BytesIO(dep_pic.read())
         data = {
             'chat_id': self.chat_id,
             'caption': message,
             'parse_mode': 'Markdown',
         }
         media = {
-            'photo': pic
+            'photo': self.get_todays_post()
         }
         requests.post(self.url, data=data, files=media)    
 
@@ -99,15 +109,19 @@ class DiscordDiffuser(Diffuser):
         message = super().format_msg(message_content_dict)
         message = message.replace('diputada del día', '**diputada del día**')
         message = message.replace('diputado del día', '**diputado del día**')
-        message += '\nPara más información, puedes visitar la página https://diputado.labs.clcert.cl.'
+        message += '\nPara más información, puedes visitar la página:\nhttps://' + self.get_todays_url()
         return message
 
     def share(self, message):
         data = {
             'content': message,
-            'username': self.username
+            'username': self.username,
         }
-        requests.post(self.url, data=data)
+        response = requests.post(self.url, data=data, files=[('diputado.jpg', self.get_todays_post())])
+        if response.status_code != 200:
+            raise Exception(
+                "Request returned an error: {} {}".format(response.status_code, response.text)
+            )
 
 
 class TwitterDiffuser(Diffuser):
