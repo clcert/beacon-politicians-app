@@ -21,31 +21,31 @@ const DeputyVotings = ({voting, gender}) => {
 }
 
 const SingleVote = ({vote, isMale}) => {
-  const votingDate = new Date(vote.voting_date);
+  const votingDate = new Date(vote.votingDate);
   const dateStr = votingDate.toLocaleDateString('es-ES', {
     day: "numeric",
     month: "long",
     year: "numeric",
     timeZone: "America/Santiago"
   });
-  const articleTitle = vote.document_title.replaceAll('&quot;', '"')
+  const articleTitle = vote.documentTitle.replaceAll('&quot;', '"')
   const articleTitleAsTxt = articleTitle.split("\n").filter((content) => content!== '').map((item, key) => {
     return <span key={key}>{item}<br/></span>
   });
-  const bulletinUrl = `https://www.camara.cl/legislacion/sala_sesiones/votacion_detalle.aspx?prmIdVotacion=${vote.voting_id}`
+  const bulletinUrl = `https://www.camara.cl/legislacion/sala_sesiones/votacion_detalle.aspx?prmIdVotacion=${vote.votingId}`
 
   return (
     <div className='vote-container'>
       <div className='head'>
-        <h3><a href={ bulletinUrl } target='_blank'>{ vote.bulletin_number }</a></h3>
+        <h3><a href={ bulletinUrl } target='_blank'>{ vote.bulletinNumber }</a></h3>
         <div className='date'><i>{ dateStr }</i></div>
       </div>
       
       <div className='matters'>{ articleTitleAsTxt }</div>
       { 
-        vote.article_text !== '' && 
-        vote.article_text !== 'No se encontró el artículo' && 
-        <p className='article-text'>{vote.article_text}</p>
+        vote.articleText !== '' && 
+        vote.articleText !== 'No se encontró el artículo' && 
+        <p className='article-text'>{vote.articleText}</p>
       }
       <div className='outcome-info'>
         <div className='deputy-vote-text'>
@@ -71,9 +71,9 @@ const SingleVote = ({vote, isMale}) => {
           <div className='votes-info'>
             <b style={{'color': 'gray'}}>Resultado Votación</b>
             <br/>
-            <b style={{'color': 'limegreen'}}>{ vote.total_approved }</b> &nbsp;
-            <b style={{'color': 'red'}}>{ vote.total_rejected }</b> &nbsp;
-            <b style={{'color': 'gray'}}>{ vote.total_abstention }</b>&nbsp;
+            <b style={{'color': 'limegreen'}}>{ vote.totalApproved }</b> &nbsp;
+            <b style={{'color': 'red'}}>{ vote.totalRejected }</b> &nbsp;
+            <b style={{'color': 'gray'}}>{ vote.totalAbstention }</b>&nbsp;
             <br/>
             {
               vote.result === 'Aprobado' ?

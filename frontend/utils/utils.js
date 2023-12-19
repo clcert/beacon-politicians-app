@@ -28,3 +28,22 @@ export const getData = async (url) => {
     });
   return dataJson;
 }
+
+export function shortOpExpSubtype (subtype) {
+  switch (subtype) {
+    case 'Web y Almacenamiento':
+      return 'Web y Almacenamiento';
+    case 'Traspaso desde gastos operacionales a asignación personal de apoyo':
+      return 'Traspaso a P.A.';
+    case 'Traslación':
+      return 'Traslación y Bencina';
+    case 'Seguros de bienes':
+      return 'Seguros';
+    case 'Otros gastos de oficina parlamentaria':
+      return 'Otros Oficina';
+    case 'Actividades destinadas a la interacción con la comunidad':
+      return 'Interacción Comunidad';
+    default:
+      return subtype;
+  }
+}
