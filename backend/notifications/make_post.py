@@ -129,7 +129,7 @@ class DeputiesPost:
         self.write_text(f"Proyectos", 760, 700, font_size=BoldFonts.M, font_color=APP_WHITE)
         self.write_text(f"de Ley", 790, 740, font_size=BoldFonts.M, font_color=APP_WHITE)
         self.write_text(f"{self.proposed_law_projects} propuestos", 730, 790, font_size=RegularFonts.M, font_color=APP_WHITE)
-        self.write_text(f"{self.published_law_projects} publicados", 740, 835, font_size=RegularFonts.M, font_color=APP_WHITE)
+        self.write_text(f"{self.published_law_projects} aprobados", 745, 835, font_size=RegularFonts.M, font_color=APP_WHITE)
 
         self.write_text(f"Pulso de Aleatoriedad: {self.pulse}", 340, 1030, font_size=LightFonts.S, font_color=APP_WHITE)
 
