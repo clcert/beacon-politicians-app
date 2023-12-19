@@ -75,6 +75,7 @@ def parse_deputy_votings(deputy_id, votes_limit=-1):
         voting['total_abstention'] = doc['total_abstention']
 
         votes_limit -= 1
+        ans.append(voting)
 
     return ans
 
