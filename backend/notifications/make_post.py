@@ -97,6 +97,7 @@ class DeputiesPost:
         self.write_text(self.deputy_name, 420, 280, font_size=BoldFonts.XL, font_color=APP_RED)
         self.write_text(self.deputy_party, 420, 340, font_size=BoldFonts.M)
 
+        deputy_title = "Diputado" if self.deputy_gender == "MALE" else "Diputada"
         charge_text = "Diputado por el " if self.deputy_gender == "MALE" else "Diputada por el "
         charge_text += self.deputy_district
         self.write_text(charge_text, 420, 400, font_size=BoldFonts.S)
@@ -122,8 +123,8 @@ class DeputiesPost:
             text_x = 520
         
         self.write_text(f"{self.expenses_ranking}°", place_x, 845, font_size=BoldFonts.L, font_color=APP_WHITE)
-        self.write_text(f"Ranking de", text_x, 845, font_size=RegularFonts.XS, font_color=APP_WHITE)
-        self.write_text(f"más gastos", text_x, 875, font_size=RegularFonts.XS, font_color=APP_WHITE)
+        self.write_text(f"Dip. que", text_x, 845, font_size=RegularFonts.XS, font_color=APP_WHITE)
+        self.write_text(f"más gasta", text_x, 875, font_size=RegularFonts.XS, font_color=APP_WHITE)
 
         self.write_text(f"Proyectos", 760, 700, font_size=BoldFonts.M, font_color=APP_WHITE)
         self.write_text(f"de Ley", 790, 740, font_size=BoldFonts.M, font_color=APP_WHITE)
