@@ -7,6 +7,8 @@ from utils.data import (
     OPENDATA_CAMARA_URL,
 )
 
+VOTINGS_TIMEOUT = 3
+
 BASE_VOTINGS_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno='
 BASE_VOTING_DETAIL_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarVotacionDetalle?prmVotacionId='
 BASE_BULLETIN_LAW_PROJECT_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin='
@@ -14,11 +16,11 @@ BASE_BULLETIN_LAW_PROJECT_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retorn
 # Voting filter
 # Blacklist of keywords
 VOTING_BLACKLIST = [
-    'modifica',
-    'ley',
-    'n°',
-    'solicita',
-    'presidente'
+    # 'modifica',
+    # 'ley',
+    # 'n°',
+    # 'solicita',
+    # 'presidente'
 ]
 
 def parse_deputy_votings(deputy_id, votes_limit=-1):
@@ -47,7 +49,7 @@ def parse_deputy_votings(deputy_id, votes_limit=-1):
         try:
             doc = parse_vote_info(voting_id)
         except:
-            # Error al obtener la votación
+            # Error al obtener la votación o el documento no es un proyecto de ley
             continue
 
         voting = dict()
@@ -72,14 +74,8 @@ def parse_deputy_votings(deputy_id, votes_limit=-1):
         voting['total_no'] = doc['total_no']
         voting['total_abstention'] = doc['total_abstention']
 
-        blacklist_matches = list(filter(
-            lambda word: word in voting['name'].lower(), 
-            VOTING_BLACKLIST
-        ))
-
-        if len(blacklist_matches) == 0:
-            ans.append(voting)
-            votes_limit -= 1
+        votes_limit -= 1
+        ans.append(voting)
 
     return ans
 
@@ -154,8 +150,11 @@ def parse_vote_info(voting_id):
     """
 
     url = BASE_VOTING_DETAIL_URL + str(voting_id)
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'xml')
+    try:
+        response = requests.get(url, timeout=VOTINGS_TIMEOUT)
+        soup = BeautifulSoup(response.content, 'xml')
+    except:
+        raise Exception('Error al obtener la votación')
 
     document = dict(voting_id=voting_id)
 
@@ -183,29 +182,33 @@ def parse_vote_info(voting_id):
         bulletin = document['description'][11:]
 
         url = BASE_BULLETIN_LAW_PROJECT_URL + bulletin
-        response = requests.get(url)
-        soup = BeautifulSoup(response.content, 'xml')
+        try:
+            response = requests.get(url, timeout=VOTINGS_TIMEOUT)
+            soup = BeautifulSoup(response.content, 'xml')
+        except:
+            raise Exception('Error al obtener el boletín del proyecto de ley')
 
         document['name'] = soup.find('Nombre').get_text()
+        blacklist_matches = list(filter(
+            lambda word: word in document['name'].lower(), 
+            VOTING_BLACKLIST
+        ))
+
+        if len(blacklist_matches) != 0:
+            raise Exception('Voting name contains blacklisted words')
+
         voting_instance = list(filter(
             lambda voting: voting.find('Id').get_text() == str(voting_id), 
             soup.findAll('VotacionProyectoLey')
         ))
+        
         if len(voting_instance) > 0:
             document['article'] = voting_instance[0].find('Articulo').get_text().replace('\n', '')
-
-    # elif document['type'] == 2: # Implement if necessary
-    # elif document['type'] == 3: # Implement if necessary
 
     elif document['type'] == 4: # Otro documento
         document['name'] = document['description']
         if document['description'].startswith('OTROS-'):
             document['name'] = document['description'][6:]
         document['description'] = 'Otros'
-
-    # name_length = len(document['name'])
-
-    # if name_length > 200:
-    #     document['name'] = document['name'][0:200] + "..."
 
     return document

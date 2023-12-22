@@ -1,125 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import ReactECharts from 'echarts-for-react';
+import React from 'react';
 
 import { formatAmount } from '../../utils/utils';
 
 const ExpensesSummary = ({expenses, gender, deputyName}) => {
   const isMale = gender === 'MALE';
-  const deputy = isMale ? 'Diputado' : 'Diputada';
-  const depPronoun = isMale ? 'del diputado ' : 'de la diputada ';
   const depTitle = isMale ? 'el diputado ' : 'la diputada ';
 
-  const sorted_expenses = expenses.sort((a, b) => a.code < b.code ? 1 : -1);
-  const last_month_exp = sorted_expenses[0];
+  const expSorted = expenses.sort((a, b) => a.code < b.code ? 1 : -1);
+  const expLastMonth = expSorted[0];
+  const expLastMonthSt = expLastMonth.detail[0];
+  const expLastMonthOp = expLastMonth.detail[1];
+  const parlamentarySalary = 7012388;
 
-  const [options, setOptions] = useState({});
-
-  useEffect(() => {
-    const expenses_labels = Object.keys(last_month_exp).filter(key => key !== 'month' && key !== 'year' && key !== 'total' && key !== 'code' && key !== 'Personal de Apoyo');
-    const expenses_values = expenses_labels.map(label => Math.round(last_month_exp[label].amount));
-    const expenses_average = expenses_labels.map(label => Math.round(last_month_exp[label].deputies_avg));
-    const short_labels = [
-      // 'Personal de Apoyo',
-      'Web y Almacenamiento',
-      'Traspaso a Personal de Apoyo',
-      'Traslación y Bencina',
-      'Telefonía',
-      'Seguros',
-      'Otros Gastos Oficina',
-      'Otros',
-      'Difusión',
-      'Correspondencia',
-      'Consumos Básicos',
-      'Arriendo de Oficina',
-      'Interacción Comunidad',
-    ]
-
-    setOptions({
-      title: {
-        text: `Gastos Operacionales\n${last_month_exp.month}, ${last_month_exp.year}`,
-        left: 'center',
-      },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        }
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
-      },
-      legend: {
-        bottom: 15,
-        align: 'right',
-        right: 10,
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      yAxis: {
-        type: 'value',
-        boundaryGap: [0, 0.01],
-        axisLabel: {
-          formatter: function (value, index) {
-            return value/1000000 + 'M';
-          },
-        }
-      },
-      xAxis: {
-        type: 'category',
-        data: short_labels,
-        axisLabel: {
-          rotate: 70,
-        }
-      },
-      series: [
-        {
-          name: 'Gastos '+deputy,
-          type: 'bar',
-          data: expenses_values,
-          tooltip: {
-            valueFormatter: function (value) {
-              return formatAmount(value);
-            }
-          },
-        },
-        {
-          name: 'Promedio Diputados',
-          type: 'bar',
-          data: expenses_average,
-          tooltip: {
-            valueFormatter: function (value) {
-              return formatAmount(value);
-            }
-          },
-        }
-      ]
-    });
-    return () => setOptions({});
-  }, []);
+  const centered = {
+    'textAlign': 'center',
+  }
 
   return (
     <>
-      <div className='image chart-container-2'>
-        <ReactECharts option={options} />
-      </div>
-      <div className='content'>
-        <h3>Más Reciente</h3>
-        <p>
-          El último mes en el que { depTitle } <strong>{ deputyName }</strong> tiene gastos registrados
-          {' '}corresponde a <strong>{last_month_exp.month} de {last_month_exp.year}</strong>. En dicho mes,
-          {' '+depTitle} destinó <strong>{formatAmount(last_month_exp.total)}</strong> entre gastos operacionales
-          {' '}y personal de apoyo<a href='#ref-2'><sup>2,3</sup></a>.
-          <br/>
-          Estas asignaciones son adicionales a la dieta parlamentaria, cuyo monto bruto corresponde a 
-          <strong> $7.012.388</strong> mensuales<a href='#ref-2'><sup>4</sup></a>.
-        </p>
-      </div>
+      <p style={centered}>
+        El último mes en el que { depTitle } <strong>{ deputyName }</strong> tiene gastos registrados
+        {' '}corresponde a <strong>{expLastMonth.month} de {expLastMonth.year}</strong>.
+        {' '}En dicho mes, {depTitle} destinó <strong>{formatAmount(expLastMonthOp.amount)}
+        {' '}en gastos operacionales</strong><a href='#ref-3-operational'><sup>3</sup></a> y
+        {' '}<strong>{formatAmount(expLastMonthSt.amount)} en personal de apoyo</strong>
+        <a href='#ref-2-staff'><sup>2</sup></a>. Estas asignaciones son adicionales a la dieta parlamentaria, 
+        {' '}cuyo monto bruto corresponde a <strong>{formatAmount(parlamentarySalary)}</strong> mensuales
+        <a href='#ref-4-sallary'><sup>4</sup></a>. 
+      </p>
+      <p style={centered}>
+        Sumando dieta y asignaciones, {deputyName} ha significado un gasto de
+        {' '}<strong>{formatAmount(expLastMonth.total + parlamentarySalary)}</strong> en el mes 
+        {' '}de {expLastMonth.month} de {expLastMonth.year}.
+      </p>
     </>
   )
 }

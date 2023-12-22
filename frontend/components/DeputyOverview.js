@@ -12,8 +12,8 @@ const DeputyOverview = ({profile, date, deputy_id}) => {
   const isMale = profile.gender === 'MALE';
   const deputyTitle = isMale ? 'Diputado' : 'Diputada';
   const titleWithPronoun = isMale ? 'El diputado' : 'La diputada';
-  const shortName = `${ profile.name } ${ profile.first_surname }`;
-  const fullName = `${ profile.name } ${ profile.first_surname } ${ profile.second_surname }`;
+  const shortName = `${ profile.name } ${ profile.firstSurname }`;
+  const fullName = `${ profile.name } ${ profile.firstSurname } ${ profile.secondSurname }`;
   const profileUrl = `https://www.camara.cl/diputados/detalle/biografia.aspx?prmID=${deputy_id}`
   const ordered_periods = profile.periods.sort()
   
@@ -31,11 +31,6 @@ const DeputyOverview = ({profile, date, deputy_id}) => {
         <p>
           { titleWithPronoun } del día <strong>{ selectionDateStr }</strong> es{' '}
           <strong>{ fullName }</strong>. Con <strong>{ age } años</strong> de edad,{' '}
-          {/* {
-            profile.profession === 'Sin Información' ? '' : (
-              <>es de profesión <strong>{ profile.profession }</strong> y{' '}</>
-            )
-          } */}
           actualmente es { deputyTitle.toLocaleLowerCase() } por el <strong>distrito { profile.district }</strong>{', '}
           que forma parte de la <strong>{ profile.region }</strong>.
         </p>

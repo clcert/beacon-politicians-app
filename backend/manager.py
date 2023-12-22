@@ -1,5 +1,5 @@
 from utils.custom_parser import CustomParser
-from utils.db import init_db, create_db
+from utils.db import DatabaseConnection
 from utils.actions import update_all_profiles, update_expenses, choose_deputy
 from utils.utils import (
     get_datetime_from_epoch,
@@ -10,11 +10,13 @@ from utils.utils import (
 if __name__ == '__main__':
     args = CustomParser().parse_args()
 
+    db = DatabaseConnection()
+
     if args.create_db:
-        create_db()
+        db.create_database()
 
     if args.init:
-        init_db()
+        db.create_tables()
         
     if args.update_profiles:
         update_all_profiles()

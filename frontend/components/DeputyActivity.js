@@ -10,7 +10,7 @@ const DeputyActivity = ({activity, gender, deputyId}) => {
     var container = document.getElementById('activity-chart').getContext('2d');
     var activity_data = [
       activity.published, 
-      activity.in_process, 
+      activity.inProcess, 
       activity.rejected,
       activity.unadmissible,
       activity.inconstitutional,
@@ -84,7 +84,7 @@ const DeputyActivity = ({activity, gender, deputyId}) => {
           A lo largo de su período parlamentario, { depPronoun } (en conjunto con los integrantes de sus respectivas comisiones),
           han presentado <strong>{ activity.all } proyectos de ley</strong>, de los cuales
           <strong> { activity.published } han sido publicados</strong> y 
-          <strong> { activity.in_process } se encuentran en trámite</strong>.
+          <strong> { activity.inProcess } se encuentran en trámite</strong>.
         </p>
         <p>
           Puedes revisar el detalle de los proyectos de ley presentados por { depPronoun } en el siguiente{' '}

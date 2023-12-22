@@ -6,6 +6,7 @@ import DeputyOverview from '../components/DeputyOverview';
 import DeputyAttendance from '../components/DeputyAttendance';
 import DeputyActivity from '../components/DeputyActivity';
 import ExpensesSummary from '../components/expenses/ExpensesSummary';
+import ExpensesOperational from '../components/expenses/ExpensesOperational';
 import HistoryOperational from './expenses/HistoryOperational';
 import HistoryStaff from './expenses/HistoryStaff';
 import DeputyVotings from '../components/DeputyVotings';
@@ -71,9 +72,9 @@ export default function Main ({date}) {
 
         <div id="main">
           <DeputySelection
-            deputyName={`${deputyData.profile.name} ${deputyData.profile.first_surname}`}
+            deputyName={`${deputyData.profile.name} ${deputyData.profile.firstSurname}`}
             date={deputyData.date}
-            selectionDate={deputyData.update_timestamp}
+            selectionDate={deputyData.updateTimestamp}
             gender={deputyData.profile.gender}
             pulseId={deputyData.beacon.pulseId}
             chainId={deputyData.beacon.chainId}
@@ -108,11 +109,18 @@ export default function Main ({date}) {
             <header>
               <h2>Dieta Parlamentaria y Asignaciones</h2>
             </header>
-            <section className="feature right">
+            <section>
               <ExpensesSummary 
                 expenses={deputyData.expenses} 
                 gender={deputyData.profile.gender}
-                deputyName={`${deputyData.profile.name} ${deputyData.profile.first_surname}`}
+                deputyName={`${deputyData.profile.name} ${deputyData.profile.firstSurname}`}
+              />
+            </section>
+            <section className="feature right">
+              <ExpensesOperational 
+                expenses={deputyData.expenses} 
+                gender={deputyData.profile.gender}
+                deputyName={`${deputyData.profile.name} ${deputyData.profile.firstSurname}`}
               />
             </section>
             <section className="feature left">
@@ -123,6 +131,7 @@ export default function Main ({date}) {
             <section className="feature right">
               <HistoryStaff
                 expenses={deputyData.expenses}
+                gender={deputyData.profile.gender}
               />
             </section>
           </div>
@@ -148,19 +157,19 @@ export default function Main ({date}) {
                       https://opendata.camara.cl/camaradiputados/WServices/WSSala.asmx
                     </a>.
                   </li>
-                  <li id='ref-2'>
+                  <li id='ref-2-staff'>
                     Los datos acerca de los gastos de personal de apoyo fueron obtenidos desde:<br />
                     <a href='https://www.camara.cl/transparencia/personalapoyogral.aspx' target='_blank' rel='noreferrer'>
                       https://www.camara.cl/transparencia/personalapoyogral.aspx
                     </a>.
                   </li>
-                  <li id='ref-3'>
+                  <li id='ref-3-operational'>
                     Los datos acerca de los gastos operacionales fueron obtenidos desde:<br />
                     <a href={`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyData.index}`} target='_blank' rel='noreferrer'>
                       {`https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId=${deputyData.index}`}
                     </a>.
                   </li>
-                  <li id='ref-4'>
+                  <li id='ref-4-sallary'>
                     Documento que acredita la dieta parlamentaria desde agosto de 2022:<br />
                     <a href='https://www.camara.cl/transparencia/doc/dieta_actualizada.pdf' target='_blank' rel='noreferrer'>
                       https://www.camara.cl/transparencia/doc/dieta_actualizada.pdf

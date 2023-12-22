@@ -1,35 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
-import { formatAmount } from '../../utils/utils';
+import { formatAmount, shortOpExpSubtype } from '../../utils/utils';
 
 const HistoryOperational = ({expenses}) => {
   const [ options, setOptions ] = useState({});
-  const sorted_expenses = expenses.sort((a, b) => a.code > b.code ? 1 : -1);
+  const expSorted = expenses.sort((a, b) => a.code < b.code ? 1 : -1);
+  const expLastMonthOp = expSorted[0].detail[1];
 
   useEffect(() => {
-    const monthsAxis = sorted_expenses.map(exp => exp.month.substring(0,3)+"-"+exp.year%100);
-    let keys = Object.keys(sorted_expenses[0]).filter(
-      key => key !== 'month' && key !== 'year' && key !== 'total' && key !== 'code' && key !== 'Personal de Apoyo'
-    );
-    let catMonthsData = keys.map(key => {
-      return sorted_expenses.map(month => {
-        return month[key].amount;
+    const months = expSorted.map(exp => exp.month.substring(0,3)+"-"+exp.year%100);
+    const subtypes = expLastMonthOp.expenses.map(data => shortOpExpSubtype(data.subtype));
+    let subtypesAmountByMonth = subtypes.map((_, typeIndex) => {
+      return months.map((_, monthIndex) => {
+        return expSorted[monthIndex].detail[1].expenses[typeIndex].amount;
       });
     });
-    const shortLabels = [
-      'Web',
-      'Traspaso a Personal',
-      'Traslación y Bencina',
-      'Telefonía',
-      'Seguros',
-      'Otros Oficina',
-      'Otros',
-      'Difusión',
-      'Correspondencia',
-      'Consumos Básicos',
-      'Arriendo Oficinas',
-      'Interacción Comunidad',
-    ]
     const chartColors = [
       '#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00',
       '#FF3F00', '#FFD500', '#008E00', '#00AAAA', '#AA00AA',
@@ -52,7 +37,7 @@ const HistoryOperational = ({expenses}) => {
         }
       },
       legend: {
-        data: shortLabels,
+        data: subtypes,
         show: true,
         bottom: -5,
         align: 'left',
@@ -76,7 +61,7 @@ const HistoryOperational = ({expenses}) => {
         {
           type: 'category',
           boundaryGap: false,
-          data: monthsAxis,
+          data: months,
           axisLabel: {
             rotate: 70,
           }
@@ -92,8 +77,8 @@ const HistoryOperational = ({expenses}) => {
           }
         }
       ],
-      series: keys.map((_, index) => ({
-        name: shortLabels[index],
+      series: subtypes.map((_, index) => ({
+        name: subtypes[index],
         type: 'line',
         stack: 'Total',
         smooth: true,
@@ -107,7 +92,7 @@ const HistoryOperational = ({expenses}) => {
         emphasis: {
           focus: 'series'
         },
-        data: catMonthsData[index],
+        data: subtypesAmountByMonth[index],
         tooltip: {
           valueFormatter: function (value) {
             return formatAmount(value);

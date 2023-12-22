@@ -4,14 +4,14 @@ import Chart, { Utils } from 'chart.js/auto';
 const DeputyAttendance = ({attendance, gender}) => {
 
   const depPronoun = gender === 'MALE' ? 'el diputado' : 'la diputada';
-  const percentage = Math.round(((attendance.attended + attendance.justified_absent) / attendance.total) * 100);
+  const percentage = Math.round(((attendance.attended + attendance.justifiedAbsent) / attendance.total) * 100);
 
   useEffect(() => {
     var container = document.getElementById('attendances-chart').getContext('2d');
     var attendances_data = [
       attendance.attended, 
-      attendance.justified_absent, 
-      attendance.unjustified_absent,
+      attendance.justifiedAbsent, 
+      attendance.unjustifiedAbsent,
     ];
     var myChart = new Chart(container, {
       type: 'doughnut',
@@ -62,7 +62,7 @@ const DeputyAttendance = ({attendance, gender}) => {
         <p>
           A la fecha, { depPronoun } ha asistido a <strong>{ attendance.attended } sesiones de cámara</strong>, 
           de un total de { attendance.total } sesiones dentro de la legislatura. Esto significa un <strong>{ percentage }% 
-          de asistencia justificada</strong> (considerando las inasistencias justificadas y las no justificadas)
+          de asistencia justificada</strong> (es decir, considerando las sesiones asistidas y aquellas con inasistencia justificada)
           <sup><a id='text-attendance' href='#ref-1'>1</a></sup>.
         </p>
       </div>
