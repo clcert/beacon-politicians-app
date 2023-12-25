@@ -1,9 +1,8 @@
 import sqlite3
-from utils.data import PROJECT_DIR
+from utils.settings import DB_PATH
 from os import path
 import logging
 
-DB_PATH = PROJECT_DIR + "/data/db.sqlite3"
 logging.basicConfig(
     format='%(asctime)s [DB: %(levelname)s] %(message)s', 
     datefmt='%Y-%m-%d %H:%M:%S',
@@ -192,7 +191,7 @@ def insert_parlamentary_period(period):
         cursor.execute(
             """
             INSERT OR REPLACE INTO parlamentary_periods (deputy_id, period_from, period_to)
-            VALUES (:id, :period_from, :period_to)
+            VALUES (:deputy_id, :period_from, :period_to)
             """,
             period
         )

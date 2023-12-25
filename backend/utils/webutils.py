@@ -11,7 +11,7 @@ from utils.db import (
 	find_operational_indicators_by_month,
 	find_support_staff_ranking_by_month,
 )
-from utils.data import DEPUTIES_JSON_PATH, MONTHS
+from utils.settings import DEPUTIES_JSON_PATH, MONTHS
 from utils.utils import get_json_data
 
 from datetime import datetime

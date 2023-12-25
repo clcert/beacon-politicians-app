@@ -1,4 +1,4 @@
-from utils.data import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL, DEPUTIES_JSON_PATH
+from utils.settings import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL, DEPUTIES_JSON_PATH
 from datetime import datetime, date, timedelta
 from bs4 import BeautifulSoup
 from os import path, stat

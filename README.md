@@ -26,9 +26,9 @@ Dentro del presente repositorio se dispone de un script de verificación, el cua
 _**Nota:** Sugerimos utilizar un ambiente virtual._
 
 ### Ejecutar Script de Verificación
-El _script_ se encuentra dentro de la carpeta `backend`, y es llamado `manager.py`. El _script_ recibe los siguientes parámetros:
+El _script_ se encuentra dentro de la carpeta `backend`, y es llamado `updater.py`. El _script_ recibe los siguientes parámetros:
 ```
-$ python manager.py --verify [opcion] [valor]
+$ python updater.py --verify [opcion] [valor]
 
 Opciones:
 -d [date]   Establece la fecha de generación del valor aleatorio a utilizar (formato DD-MM-AAAA).
@@ -41,10 +41,10 @@ Opciones:
 Si quiere verificar el #DiputadxDelDia del **20 de Enero de 2023** puede ejecutar uno de los siguientes dos comandos:
 
 ```
-$ python3 manager.py --verify -d 2023-01-30 -t 00:00
+$ python3 updater.py --verify -d 2023-01-30 -t 00:00
 ```
 ```
-$ python3 manager.py --verify -e 1675047600000
+$ python3 updater.py --verify -e 1675047600000
 ```
 
 ## Levantar Proyecto Completo
@@ -72,16 +72,16 @@ $ cd backend
 $ pip3 install -r requirements.txt
 
 # Inicializar base de datos
-$ python3 manager.py -c -i
+$ python3 updater.py -c -i
 
 # Obtener data del último diputado.
-$ python3 manager.py -r
+$ python3 updater.py -r
 
 # Servir el Backend
 $ python3 webapp.py
 ```
 #### Frontend
-Para levantar el frontend, habrá que usar *node package manager*:
+Para levantar el frontend, habrá que usar *node package updater*:
 ```
 # Cambio de directorio
 $ cd frontend

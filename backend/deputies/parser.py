@@ -12,7 +12,7 @@ from deputies.expenses import (
 )
 from deputies.activity import ActivityParser
 from utils.drivers import get_driver
-from utils.data import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
+from utils.settings import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
 from utils.db import (
     insert_deputy_profile,
     find_profile_data_in_db,
@@ -90,7 +90,7 @@ class DeputyParser:
             for period in self.profile['periods']:
                 period_from, period_to = period.split('-')
                 insert_parlamentary_period({
-                    'id': self.profile['id'],
+                    'deputy_id': self.profile['id'],
                     'period_from': int(period_from),
                     'period_to': int(period_to),
                 })

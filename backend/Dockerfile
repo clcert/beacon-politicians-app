@@ -14,7 +14,7 @@ RUN pip3 install -r requirements.txt
 
 COPY . /app
 
-RUN python3 manager.py --create_db --init
+RUN python3 updater.py --create_db --init
 
 COPY appcrons /var/spool/cron/crontabs/root
 

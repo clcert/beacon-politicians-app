@@ -10,13 +10,13 @@ def update_all_profiles():
     """
     Updates all deputy profiles.
     """
-    print("[Manager] Updating main profiles. This may take a while...")
+    print("[Updater] Updating main profiles. This may take a while...")
     n_deputies = get_number_of_deputies()
     for local_id in range(n_deputies):
-        if local_id % 10 == 0: print("[Manager] Progress: {}%".format(round(local_id/n_deputies*100,2)))
+        if local_id % 10 == 0: print("[Updater] Progress: {}%".format(round(local_id/n_deputies*100,2)))
         deputy_parser = DeputyParser(local_id)
         deputy_parser.update_profile()
-    print("[Manager] Main profiles updated.")
+    print("[Updater] Main profiles updated.")
 
 
 def update_expenses(from_id=0, to_id=get_number_of_deputies()):
@@ -27,12 +27,12 @@ def update_expenses(from_id=0, to_id=get_number_of_deputies()):
     for local_id in range(from_id, to_id):
         deputy_parser = DeputyParser(local_id)
         deputy_parser.load_or_update_profile()
-        print("[Manager] Updating expenses...")
+        print("[Updater] Updating expenses...")
         deputy_parser.update_deputy_expenses(driver=driver)
-        print("[Manager] Expenses updated.")
-        print("[Manager] Updating legislative activity...")
+        print("[Updater] Expenses updated.")
+        print("[Updater] Updating legislative activity...")
         deputy_parser.update_legislative_activity(driver=driver)
-        print("[Manager] Legislative activity updated.")
+        print("[Updater] Legislative activity updated.")
     driver.close()
 
 
@@ -43,7 +43,7 @@ def choose_deputy(timestamp, verify=False):
     :param verify: If True, only shows the chosen deputy without updating its data.
     :return: Returns the id of the chosen deputy.
     """
-    print("[Manager] Choosing deputy for timestamp {} using Random UChile randomness beacon.".format(timestamp.strftime('%Y-%m-%d %H:%M')))
+    print("[Updater] Choosing deputy for timestamp {} using Random UChile randomness beacon.".format(timestamp.strftime('%Y-%m-%d %H:%M')))
     (chainId, pulseId, randOut) = get_pulse_data(timestamp)
     local_index = get_index(randOut)
 
@@ -59,22 +59,22 @@ def choose_deputy(timestamp, verify=False):
         showSummary(deputy_parser.profile, timestamp, chainId, pulseId)
         return
 
-    print("[Manager] Loading deputy profile...")
+    print("[Updater] Loading deputy profile...")
     deputy_parser.load_or_update_profile()
     try:
-        print("[Manager] Updating deputy attendance...")
+        print("[Updater] Updating deputy attendance...")
         deputy_parser.update_attendance()
-        print("[Manager] Updating deputy votings...")    
+        print("[Updater] Updating deputy votings...")    
         deputy_parser.get_last_votes()
     except ConnectTimeout:
-        print("[Manager] Connection Timeout with deputies chamber API. Skipping attendance and votings update...")
+        print("[Updater] Connection Timeout with deputies chamber API. Skipping attendance and votings update...")
     except SSLError:
-        print("[Manager] SSL Certificate Verification Error in deputies chamber API. Skipping attendance and votings update...")
+        print("[Updater] SSL Certificate Verification Error in deputies chamber API. Skipping attendance and votings update...")
     except Exception as e:
-        print("[Manager] Unknown error. Skipping attendance and votings update...")
+        print("[Updater] Unknown error. Skipping attendance and votings update...")
         print(e)
 
-    print("[Manager] Saving as #DiputadxDelDia...")
+    print("[Updater] Saving as #DiputadxDelDia...")
     deputy_parser.save_as_deputy_of_the_day(timestamp)
 
     expenses_recorded = deputy_parser.saved_deputy_expenses()
@@ -83,14 +83,14 @@ def choose_deputy(timestamp, verify=False):
         try:
             driver = get_driver()
             if not expenses_recorded:
-                print("[Manager] No expenses found for this deputy. Scraping expenses...")
+                print("[Updater] No expenses found for this deputy. Scraping expenses...")
                 deputy_parser.update_deputy_expenses(driver=driver)
             if not activity_recorded:
-                print("[Manager] No legislative activity found for this deputy. Scraping activity...")
+                print("[Updater] No legislative activity found for this deputy. Scraping activity...")
                 deputy_parser.update_legislative_activity(driver=driver)
             driver.close()
         except Exception as e:
-            print("[Manager] Unknown error. Skipping expenses and activity update...")
+            print("[Updater] Unknown error. Skipping expenses and activity update...")
             print(e)
-    print("[Manager] Deputy updated, generating JSON data...")
+    print("[Updater] Deputy updated, generating JSON data...")
     generate_deputy_json_data(deputy_parser, timestamp, chainId, pulseId)
