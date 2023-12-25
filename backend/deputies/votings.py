@@ -3,7 +3,7 @@ from datetime import datetime
 import requests
 
 from utils.utils import get_current_legislature
-from utils.settings import (
+from settings import (
     OPENDATA_CAMARA_URL,
 )
 

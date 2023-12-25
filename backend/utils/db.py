@@ -1,5 +1,5 @@
 import sqlite3
-from utils.settings import DB_PATH
+from settings import DB_PATH
 from os import path
 import logging
 

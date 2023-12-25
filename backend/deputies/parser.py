@@ -12,7 +12,7 @@ from deputies.expenses import (
 )
 from deputies.activity import ActivityParser
 from utils.drivers import get_driver
-from utils.settings import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
+from settings import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
 from utils.db import (
     insert_deputy_profile,
     find_profile_data_in_db,

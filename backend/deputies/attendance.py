@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 
 from utils.utils import get_current_legislature
-from utils.settings import OPENDATA_CAMARA_URL
+from settings import OPENDATA_CAMARA_URL
 
 BASE_SESSIONS_IN_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionesXLegislatura?prmLegislaturaId='
 BASE_ATTENDANCES_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionAsistencia?prmSesionId='

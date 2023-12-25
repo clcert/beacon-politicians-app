@@ -1,7 +1,7 @@
 from notifications.make_post import DeputiesPost
 from random import seed, randint
 from utils.db import find_deputy_for_date
-from utils.settings import MONTHS
+from settings import MONTHS
 from utils.utils import get_number_of_deputies, get_today_timestamp, get_json_data
 from notifications.diffusers import Notifier, TelegramDiffuser, DiscordDiffuser, TwitterDiffuser
 from deputies.parser import DeputyParser

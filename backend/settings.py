@@ -6,6 +6,7 @@ PROJECT_DIR = CURR_PATH.replace("/utils", "")
 config = dotenv_values(f"{PROJECT_DIR}/.env")
 
 DB_PATH = "{}/{}".format(PROJECT_DIR, config["DB_PATH"])
+JSON_PATH = "{}/{}".format(PROJECT_DIR, config["JSON_PATH"])
 
 OPENDATA_CAMARA_URL = "http://opendata.camara.cl/camaradiputados/WServices/"
 CURRENT_DEPUTIES_URL = OPENDATA_CAMARA_URL + "WSDiputado.asmx/retornarDiputadosPeriodoActual"
@@ -47,5 +48,3 @@ OP_EXPENSES_OTHERS = [
     "SERVICIOS MENORES",
     "COVID-19 PERSONAL DE APOYO",
 ]
-
-DEPUTIES_JSON_PATH = PROJECT_DIR + "/data/last_deputies.json"

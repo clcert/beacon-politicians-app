@@ -11,7 +11,7 @@ from utils.db import (
 	find_operational_indicators_by_month,
 	find_support_staff_ranking_by_month,
 )
-from utils.settings import DEPUTIES_JSON_PATH, MONTHS
+from settings import JSON_PATH, MONTHS
 from utils.utils import get_json_data
 
 from datetime import datetime
@@ -89,7 +89,7 @@ def generate_deputy_json_data(deputy, timestamp, chain_id, pulse_id):
 	current_deputies["records"].sort(key=lambda dep: dep['date'])
 	current_deputies["records"] = current_deputies["records"][-14:]
 
-	with open(DEPUTIES_JSON_PATH, "w", encoding="utf-8") as outfile:
+	with open(JSON_PATH, "w", encoding="utf-8") as outfile:
 		json.dump(current_deputies, outfile, indent=4, ensure_ascii=False)
 		outfile.close()
 	

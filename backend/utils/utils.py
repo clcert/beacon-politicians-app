@@ -1,4 +1,4 @@
-from utils.settings import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL, DEPUTIES_JSON_PATH
+from settings import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL, JSON_PATH
 from datetime import datetime, date, timedelta
 from bs4 import BeautifulSoup
 from os import path, stat
@@ -88,7 +88,7 @@ def get_today_timestamp():
     return timestamp
 
 
-def get_json_data(file_path=DEPUTIES_JSON_PATH):
+def get_json_data(file_path=JSON_PATH):
     """
     Returns an ordered list of dictionaries containing the date, index from the deputies list and the beacon id,
     ordered according to the date.
