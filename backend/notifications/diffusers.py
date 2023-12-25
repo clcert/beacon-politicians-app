@@ -9,7 +9,7 @@ class Diffuser:
         self.name = name
 
     def get_todays_url(self):
-        return f'diputado.labs.clcert.cl/archivo/diputado?date={datetime.now().strftime("%Y-%m-%d")}'
+        return f'diputado.labs.clcert.cl/archivo/diputado?fecha={datetime.now().strftime("%Y-%m-%d")}'
     
     def get_todays_post(self):
         current_path = path.dirname(path.abspath(__file__))
