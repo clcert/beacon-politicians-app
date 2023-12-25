@@ -109,7 +109,7 @@ const HistoryStaff = ({expenses, gender}) => {
           Según el número de personas contratadas como personal de apoyo,
           se destina un monto cada mes. En el gráfico adjunto se 
           presenta la evolución de los gastos en personal de apoyo para los
-          <strong> últimos 8 meses</strong><a href='#ref-2-staff'><sup>2</sup></a> con información.
+          <strong> últimos 6 meses</strong><a href='#ref-2-staff'><sup>2</sup></a> con información.
         </p>
       </div>
     </>

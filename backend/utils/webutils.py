@@ -131,7 +131,6 @@ def load_deputy_votings(deputy_id):
 
 def build_expenses_by_month(deputy_id: int):
 	months_limit = 6
-	months_limit = 8
 	# Obtain the last N months with records
 	months = find_last_N_months_with_records(months_limit, 'expenses_operational', deputy_id)
 	# Obtain saved expenses for deputy
