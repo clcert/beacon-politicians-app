@@ -2,11 +2,11 @@ from bs4 import BeautifulSoup
 import requests
 
 from utils.utils import get_current_legislature
-from settings import OPENDATA_CAMARA_URL
-
-BASE_SESSIONS_IN_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionesXLegislatura?prmLegislaturaId='
-BASE_ATTENDANCES_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionAsistencia?prmSesionId='
-JUSTIFICATIONS_URL = OPENDATA_CAMARA_URL + 'WSComun.asmx/retornarTiposJustificacionesInasistencia'
+from settings import (
+    BASE_SESSIONS_IN_LEGISLATURE_URL,
+    BASE_ATTENDANCES_URL,
+    JUSTIFICATIONS_URL,
+)
 
 def parse_deputy_attendance(deputy_id):
     """
@@ -22,7 +22,7 @@ def parse_deputy_attendance(deputy_id):
     deputy_attendance = dict(present=0, justified_absent=0, unjustified_absent=0, total=0)
 
     for session in sessions:
-        session_url = BASE_ATTENDANCES_URL + str(session)
+        session_url = f"{BASE_ATTENDANCES_URL}?prmSesionId={session}"
         response = requests.get(session_url)
         soup = BeautifulSoup(response.content, 'xml')
 
@@ -92,7 +92,10 @@ def get_camera_sessions():
     Obtains a list containing the id for every session of the deputies chamber.
     :return: A list of integers, where each one represents the session id.
     """
-    url = BASE_SESSIONS_IN_LEGISLATURE_URL + str(get_current_legislature()['id'])
+    url = "{}?prmLegislaturaId={}".format(
+        BASE_SESSIONS_IN_LEGISLATURE_URL, 
+        get_current_legislature()['id']
+    )
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'xml')
 

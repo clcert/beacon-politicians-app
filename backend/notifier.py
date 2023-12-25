@@ -1,21 +1,21 @@
 from notifications.make_post import DeputiesPost
 from random import seed, randint
 from utils.db import find_deputy_for_date
-from settings import MONTHS
 from utils.utils import get_number_of_deputies, get_today_timestamp, get_json_data
 from notifications.diffusers import Notifier, TelegramDiffuser, DiscordDiffuser, TwitterDiffuser
 from deputies.parser import DeputyParser
+from settings import (
+    MONTHS,
+    TELEGRAM_TOKEN,
+    TELEGRAM_CHAT_ID,
+    DISCORD_WEBHOOK_ID,
+    TWITTER_CONSUMER_KEY,
+    TWITTER_CONSUMER_SECRET,
+    TWITTER_ACCESS_TOKEN,
+    TWITTER_ACCESS_TOKEN_SECRET,
+)
 
 import requests
-
-TELEGRAM_TOKEN = 'TELEGRAM_TOKEN'
-TELEGRAM_CHAT_ID = 'TELEGRAM_CHAT_ID'
-DISCORD_WEBHOOK_ID = 'DISCORD_WEBHOOK_ID'
-TWITTER_CONSUMER_KEY = 'TWITTER_CONSUMER_KEY'
-TWITTER_CONSUMER_SECRET = 'TWITTER_CONSUMER_SECRET'
-TWITTER_ACCESS_TOKEN = 'TWITTER_ACCESS_TOKEN'
-TWITTER_ACCESS_TOKEN_SECRET = 'TWITTER_ACCESS_TOKEN_SECRET'
-
 
 def check_todays_deputy_in_db():
     """
