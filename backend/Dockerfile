@@ -2,6 +2,7 @@ FROM python:3.11-alpine
 
 RUN apk update
 RUN apk add chromium chromium-chromedriver
+RUN apk add openssh
 RUN pip install --upgrade pip
 
 WORKDIR /app
