@@ -18,4 +18,4 @@ RUN python3 updater.py --create_db --init
 
 COPY appcrons /var/spool/cron/crontabs/root
 
-CMD crond -b && gunicorn --bind 0.0.0.0:80 wsgi:app
+CMD crond -b && gunicorn --bind 0.0.0.0:80 _wsgi:app
