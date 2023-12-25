@@ -2,14 +2,25 @@
 __pycache__/
 *.pyc
 .idea
+
+# Environments
 .env*
-data
 .venv
+
+# Database
+data
+db.sqlite3
+
+# Static files
+deputies.json
+last_deputies.json
+post*.png
+
+# VS Code
 launch.json
 .vscode
-deputies.json
-db.sqlite3
-last_deputies.json
-__old-backend
-todays_deputy.png
-post*.png
+
+# Production
+Caddyfile
+Dockerfile.prod
+docker-compose.prod.yml
