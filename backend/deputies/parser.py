@@ -12,7 +12,7 @@ from deputies.expenses import (
 )
 from deputies.activity import ActivityParser
 from utils.drivers import get_driver
-from settings import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL
+from settings import OpenDataAPI, CamaraCL
 from utils.db import (
     insert_deputy_profile,
     find_profile_data_in_db,
@@ -32,10 +32,6 @@ from utils.db import (
     delete_previous_voting_records,
 )
 
-BASE_PROFILES_URL = 'https://www.camara.cl/diputados/detalle/biografia.aspx?prmId='
-BASE_PROFILE_PIC_URL = 'https://www.camara.cl/img.aspx?prmID=GRCL'
-BASE_DEPUTY_INFO_URL = OPENDATA_CAMARA_URL + 'WSDiputado.asmx/retornarDiputado?prmDiputadoId='
-
 
 class DeputyParser:
     def __init__(self, index=0, chain_id=None, pulse_id=None, rand_out=None):
@@ -46,9 +42,9 @@ class DeputyParser:
         self.pulse_id = pulse_id
         self.rand_out = rand_out
 
-        self.profile_html_url = BASE_PROFILES_URL + str(self.real_index)
-        self.profile_pic_url = BASE_PROFILE_PIC_URL + str(self.real_index)
-        self.deputy_info_url = BASE_DEPUTY_INFO_URL + str(self.real_index) 
+        self.profile_html_url = f"{CamaraCL.biography}?prmId={self.real_index}"
+        self.profile_pic_url = f"{CamaraCL.picture}?prmID=GRCL{self.real_index}"
+        self.deputy_info_url = f"{OpenDataAPI.profile}?prmDiputadoId={self.real_index}"
 
         self.profile = None
 
@@ -62,7 +58,7 @@ class DeputyParser:
         if db_index:
             return db_index
         else: 
-            response = requests.get(CURRENT_DEPUTIES_URL)
+            response = requests.get(OpenDataAPI.current_deputies)
             soup = BeautifulSoup(response.content, 'xml')
 
             deputies = soup.find_all('Diputado')

@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
 from settings import (
+    CamaraCL,
     MONTHS,
     OP_EXPENSES_OFFICE,
     OP_EXPENSES_OTHERS,
@@ -76,7 +77,7 @@ class OperationalExpensesParser(ExpensesParser):
     def __init__(self, profile, **kwargs):
         super().__init__(**kwargs)
         deputy_id = profile['id']
-        self.url = f'https://www.camara.cl/diputados/detalle/gastosoperacionales.aspx?prmId={deputy_id}'
+        self.url = f'{CamaraCL.operational_expenses}?prmId={deputy_id}'
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_DetallePlaceHolder_ddlMes'
         self.year_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_DetallePlaceHolder_ddlAno'
 
@@ -108,7 +109,7 @@ class OfficesExpensesParser(ExpensesParser):
     def __init__(self, profile, **kwargs):
         super().__init__(**kwargs)
         self.deputy_name = f'{profile["first_surname"]} {profile["second_surname"][0]}., {profile["first_name"]}'
-        self.url = 'https://www.camara.cl/transparencia/oficinasparlamentarias.aspx'
+        self.url = CamaraCL.offices_expenses
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlMes'
         self.year_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlAno'
 
@@ -132,7 +133,7 @@ class StaffExpensesParser(ExpensesParser):
         super().__init__(**kwargs)
         self.deputy_name = f'{profile["first_surname"]} {profile["second_surname"][0]}., {profile["first_name"]}'
         self.deputy_full_name = f'{profile["first_name"]} {profile["first_surname"]}, {profile["second_surname"]}'
-        self.url = 'https://www.camara.cl/transparencia/personalapoyogral.aspx'
+        self.url = CamaraCL.staff_expenses
         self.month_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlMes'
         self.year_selector_id = 'ContentPlaceHolder1_ContentPlaceHolder1_ddlAno'
 

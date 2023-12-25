@@ -3,15 +3,9 @@ from datetime import datetime
 import requests
 
 from utils.utils import get_current_legislature
-from settings import (
-    OPENDATA_CAMARA_URL,
-)
+from settings import OpenDataAPI
 
 VOTINGS_TIMEOUT = 3
-
-BASE_VOTINGS_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno='
-BASE_VOTING_DETAIL_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarVotacionDetalle?prmVotacionId='
-BASE_BULLETIN_LAW_PROJECT_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin='
 
 # Voting filter
 # Blacklist of keywords
@@ -91,7 +85,7 @@ def get_legislature_votings():
     start = legislature['start']
     start_year = int(start.year)
 
-    url = BASE_VOTINGS_LEGISLATURE_URL + str(start_year)
+    url = f"{OpenDataAPI.votings_legislature}?prmAnno={start_year}"
     response = requests.get(url)
 
     soup = BeautifulSoup(response.content, 'xml')
@@ -107,7 +101,7 @@ def get_legislature_votings():
     end = legislature['end']
     end_year = int(end.year)
 
-    url = BASE_VOTINGS_LEGISLATURE_URL + str(end_year)
+    url = f"{OpenDataAPI.votings_legislature}?prmAnno={end_year}"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'xml')
 
@@ -149,7 +143,7 @@ def parse_vote_info(voting_id):
     :return: Returns a dictionary containing all the information for the voted document.
     """
 
-    url = BASE_VOTING_DETAIL_URL + str(voting_id)
+    url = f"{OpenDataAPI.voting_detail}?prmVotacionId={voting_id}"
     try:
         response = requests.get(url, timeout=VOTINGS_TIMEOUT)
         soup = BeautifulSoup(response.content, 'xml')
@@ -181,7 +175,7 @@ def parse_vote_info(voting_id):
         # Get bulletin string.
         bulletin = document['description'][11:]
 
-        url = BASE_BULLETIN_LAW_PROJECT_URL + bulletin
+        url = f"{OpenDataAPI.bulletin_law_project}?prmNumeroBoletin={bulletin}"
         try:
             response = requests.get(url, timeout=VOTINGS_TIMEOUT)
             soup = BeautifulSoup(response.content, 'xml')

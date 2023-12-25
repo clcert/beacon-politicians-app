@@ -26,15 +26,38 @@ TWITTER_ACCESS_TOKEN_SECRET = config["TWITTER_ACCESS_TOKEN_SECRET"]
 """
 URLS AND ENDPOINTS
 """
-# OpenData Camara main URL
-OPENDATA_CAMARA_URL = "http://opendata.camara.cl/camaradiputados/WServices/"
-
 # OpenData Camara API endpoints
-CURRENT_DEPUTIES_URL = OPENDATA_CAMARA_URL + "WSDiputado.asmx/retornarDiputadosPeriodoActual"
+class OpenDataAPI:
+    main_url = "http://opendata.camara.cl/camaradiputados/WServices"
+    current_deputies = f"{main_url}/WSDiputado.asmx/retornarDiputadosPeriodoActual"
+    current_legislature = f"{main_url}/WSLegislativo.asmx/retornarLegislaturaActual"
 
-BASE_SESSIONS_IN_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionesXLegislatura'
-BASE_ATTENDANCES_URL = OPENDATA_CAMARA_URL + 'WSSala.asmx/retornarSesionAsistencia'
-JUSTIFICATIONS_URL = OPENDATA_CAMARA_URL + 'WSComun.asmx/retornarTiposJustificacionesInasistencia'
+    # Profiles
+    profile = f"{main_url}/WSDiputado.asmx/retornarDiputado"
+
+    # Attendance
+    sessions_in_legislature = f"{main_url}/WSSala.asmx/retornarSesionesXLegislatura"
+    attendances = f"{main_url}/WSSala.asmx/retornarSesionAsistencia"
+    justifications = f"{main_url}/WSComun.asmx/retornarTiposJustificacionesInasistencia"
+
+    # Votings
+    bulletin_law_project = f"{main_url}/WSLegislativo.asmx/retornarProyectoLey"
+    votings_legislature = f"{main_url}/WSLegislativo.asmx/retornarVotacionesXAnno"
+    voting_detail = f"{main_url}/WSLegislativo.asmx/retornarVotacionDetalle"
+    
+
+# Camara.cl URLs
+class CamaraCL:
+    main_url = "https://www.camara.cl"
+    
+    # Main URL
+    biography = f"{main_url}/diputados/detalle/biografia.aspx"
+    picture = f"{main_url}/img.aspx"
+
+    # Expenses
+    operational_expenses = f"{main_url}/diputados/detalle/gastosoperacionales.aspx"
+    staff_expenses = f"{main_url}/transparencia/personalapoyogral.aspx"
+    offices_expenses = f"{main_url}/transparencia/oficinasparlamentarias.aspx"
 
 
 """

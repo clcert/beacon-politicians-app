@@ -2,11 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 
 from utils.utils import get_current_legislature
-from settings import (
-    BASE_SESSIONS_IN_LEGISLATURE_URL,
-    BASE_ATTENDANCES_URL,
-    JUSTIFICATIONS_URL,
-)
+from settings import OpenDataAPI
 
 def parse_deputy_attendance(deputy_id):
     """
@@ -22,7 +18,7 @@ def parse_deputy_attendance(deputy_id):
     deputy_attendance = dict(present=0, justified_absent=0, unjustified_absent=0, total=0)
 
     for session in sessions:
-        session_url = f"{BASE_ATTENDANCES_URL}?prmSesionId={session}"
+        session_url = f"{OpenDataAPI.attendances}?prmSesionId={session}"
         response = requests.get(session_url)
         soup = BeautifulSoup(response.content, 'xml')
 
@@ -71,7 +67,7 @@ def parse_justifications():
     :return: Returns a list containing dictionaries objects, where every dictionary contains the information for
     a time of attendance value, as name, reduction of days and the value (the id according to the site).
     """
-    response = requests.get(JUSTIFICATIONS_URL)
+    response = requests.get(OpenDataAPI.justifications)
     soup = BeautifulSoup(response.content, 'xml')
 
     justifications = soup.find_all('JustificacionInasistencia')
@@ -93,7 +89,7 @@ def get_camera_sessions():
     :return: A list of integers, where each one represents the session id.
     """
     url = "{}?prmLegislaturaId={}".format(
-        BASE_SESSIONS_IN_LEGISLATURE_URL, 
+        OpenDataAPI.sessions_in_legislature, 
         get_current_legislature()['id']
     )
     response = requests.get(url)

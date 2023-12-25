@@ -1,4 +1,4 @@
-from settings import OPENDATA_CAMARA_URL, CURRENT_DEPUTIES_URL, JSON_PATH
+from settings import OpenDataAPI, JSON_PATH
 from datetime import datetime, date, timedelta
 from bs4 import BeautifulSoup
 from os import path, stat
@@ -6,7 +6,6 @@ from os import path, stat
 import json
 import requests
 
-CURRENT_LEGISLATURE_URL = OPENDATA_CAMARA_URL + 'WSLegislativo.asmx/retornarLegislaturaActual'
 UTC_CHILE = -3 # UTC-3 summer time
 
 def get_current_legislature():
@@ -15,7 +14,7 @@ def get_current_legislature():
     :return: Returns a dictionary containing the id of the latest legislature, and the date of end and start
         as a datetime object.
     """
-    response = requests.get(CURRENT_LEGISLATURE_URL)
+    response = requests.get(OpenDataAPI.current_legislature)
     soup = BeautifulSoup(response.content, 'xml')
 
     legislature_id = int(soup.find('Id').get_text().strip())
@@ -35,7 +34,7 @@ def get_number_of_deputies():
     Method used to get the total number of deputies on the current legislature.
     :return: Returns the total number of deputies as an integer.
     """
-    response = requests.get(CURRENT_DEPUTIES_URL)
+    response = requests.get(OpenDataAPI.current_deputies)
     soup = BeautifulSoup(response.content, 'xml')
 
     deputies = soup.find_all('Diputado')
