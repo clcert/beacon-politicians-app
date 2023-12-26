@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+jobs:
+  run_deploy:
+    name: Update changes and run docker-compose
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: retrieve latest changes over ssh
+        uses: appleboy/ssh-action@v1.0.1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd ${{ secrets.WORKDIR }}
+            git fetch
+            git checkout ${{ secrets.BRANCH }}
+            git pull
+            docker compose -f docker-compose.prod.yml up --build -d
