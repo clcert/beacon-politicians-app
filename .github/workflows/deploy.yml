@@ -18,7 +18,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd ${{ secrets.WORKDIR }}
-            git fetch
-            git checkout ${{ secrets.BRANCH }}
-            git pull
+            git checkout master
+            git pull ${{ secrets.PROJECT_REPO }}
             docker compose -f docker-compose.prod.yml up --build -d
