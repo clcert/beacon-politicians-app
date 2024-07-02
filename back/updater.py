@@ -1,5 +1,6 @@
 from collectors.profile import ProfileCollector
 from collectors.expenses.operational import OperationalExpensesCollector
+from collectors.expenses.staff import StaffExpensesCollector
 
 DEPUTIES_NUM = 155
 
@@ -13,6 +14,12 @@ def update():
         exp_col.get_deputy_expenses()
         exp_col.close_driver()
         exp_col.save_expenses()
+
+        stf_col = StaffExpensesCollector(prof_col.profile)
+        stf_col.get_deputy_expenses()
+        stf_col.close_driver()
+        stf_col.save_expenses()
+
         break
 
 if __name__ == '__main__':

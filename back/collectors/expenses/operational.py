@@ -2,6 +2,11 @@ from collectors.expenses.expenses import ExpensesCollector
 from collectors.access_points import CamaraCL
 from models.models import OperationalExpense
 
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
 class OperationalExpensesCollector(ExpensesCollector):
     def __init__(self, profile, **kwargs):
         super().__init__(**kwargs)
