@@ -1,8 +1,11 @@
 from collectors.access_points import OpenDataAPI, CamaraCL
-from utils.custom_logging import logger
 from models.models import Deputy, DeputyPeriod
 from bs4 import BeautifulSoup
 import requests
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 class ProfileCollector:
     def __init__(self, local_id):

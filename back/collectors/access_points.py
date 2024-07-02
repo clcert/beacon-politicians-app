@@ -5,3 +5,5 @@ class OpenDataAPI:
 class CamaraCL:
     main_url = "https://www.camara.cl/"
     biography = f"{main_url}/diputados/detalle/biografia.aspx"
+    operational_expenses = f"{main_url}/diputados/detalle/gastosoperacionales.aspx"
+    staff_expenses = f"{main_url}/transparencia/personalapoyogral.aspx"
