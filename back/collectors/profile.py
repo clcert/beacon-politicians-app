@@ -90,7 +90,7 @@ class ProfileCollector:
         
     def save_profile(self):
         deputy = Deputy(**self.profile)
-        periods = list(map(lambda x: DeputyPeriod(**x), self.periods))
         Deputy.save_or_update(deputy)
+        periods = list(map(lambda x: DeputyPeriod(**x), self.periods))
         for period in periods:
             DeputyPeriod.save_or_update(period)

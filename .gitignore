@@ -12,6 +12,9 @@ data
 db.sqlite3
 *.db
 
+# log
+*.log
+
 # Static files
 deputies.json
 last_deputies.json

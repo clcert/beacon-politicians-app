@@ -12,7 +12,7 @@ def update():
         exp_col = OperationalExpensesCollector(prof_col.profile)
         exp_col.get_deputy_expenses()
         exp_col.close_driver()
-        print(exp_col.expenses)
+        exp_col.save_expenses()
         break
 
 if __name__ == '__main__':
