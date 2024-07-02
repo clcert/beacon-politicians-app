@@ -1,14 +1,7 @@
 from typing import List
 from typing import Optional
-from sqlalchemy import ForeignKey
-from sqlalchemy import String
-from sqlalchemy import Integer
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from sqlalchemy import ForeignKey, String, Integer, UniqueConstraint, create_engine
+from sqlalchemy.orm import sessionmaker, DeclarativeBase, Mapped, mapped_column, relationship
 from datetime import datetime
 
 def get_engine():
@@ -30,6 +23,16 @@ class Base(DeclarativeBase):
         else:
             session.add(new_obj)
         session.commit()
+        session.close()
+
+    @classmethod
+    def save_if_not_exists(cls, new_obj):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        qry_object = session.query(cls).filter(cls.id == new_obj.id).first()
+        if not qry_object:
+            session.add(new_obj)
+            session.commit()
         session.close()
 
 class DailyDeputy(Base):
@@ -98,6 +101,42 @@ class DeputyPeriod(Base):
         'Deputy', back_populates='deputy_periods'
     )
 
+    __table_args__ = (
+        UniqueConstraint('deputy_id', 'start_date', 'end_date', name='deputy_periods_unique'),
+    )
+
+    @classmethod
+    def save_or_update(cls, new_obj):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        qry_object = session.query(cls).filter(
+            cls.deputy_id == new_obj.deputy_id,
+            cls.start_date == new_obj.start_date,
+            cls.end_date == new_obj.end_date
+        ).first()
+        if qry_object:
+            for key, value in new_obj.__dict__.items():
+                if key != '_sa_instance_state':
+                    setattr(qry_object, key, value)
+        else:
+            session.add(self)
+        session.commit()
+        session.close()
+
+    @classmethod
+    def save_if_not_exists(cls, new_obj):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        qry_object = session.query(cls).filter(
+            cls.deputy_id == new_obj.deputy_id,
+            cls.start_date == new_obj.start_date,
+            cls.end_date == new_obj.end_date
+        ).first()
+        if not qry_object:
+            session.add(new_obj)
+            session.commit()
+        session.close()
+
 class Bulletin(Base):
     __tablename__ = 'bulletin'
 
@@ -132,9 +171,8 @@ class DeputyVoting(Base):
 class LawProject(Base):
     __tablename__ = 'law_project'
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[str] = mapped_column(String,primary_key=True)
     name: Mapped[str] = mapped_column(String)
-    type: Mapped[str] = mapped_column(String)
     status: Mapped[str] = mapped_column(String)
     creation_date: Mapped[str] = mapped_column(String)
 
@@ -145,9 +183,9 @@ class LawProject(Base):
 class DeputyProject(Base):
     __tablename__ = 'deputy_project'
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     deputy_id: Mapped[int] = mapped_column(ForeignKey('deputy.id'))
-    project_id: Mapped[int] = mapped_column(ForeignKey('law_project.id'))
+    project_id: Mapped[str] = mapped_column(ForeignKey('law_project.id'))
 
     deputy: Mapped['Deputy'] = relationship(
         'Deputy', back_populates='deputy_projects'

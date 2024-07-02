@@ -70,13 +70,15 @@ class ProfileCollector:
     
         raw_periods = general_section.findAll('div', attrs={'class': 'grid-2 aleft m-left14'})[-1].findAll('li')[1:]
         parlamentary_periods = list(map(BeautifulSoup.getText, raw_periods))
-        self.periods = map(
-            lambda x: {
-                'deputy_id': self.id,
-                'start_date': int(x.split('-')[0]),
-                'end_date': int(x.split('-')[1])
-            },
-            parlamentary_periods
+        self.periods = list(
+            map(
+                lambda x: {
+                    'deputy_id': self.id,
+                    'start_date': int(x.split('-')[0]),
+                    'end_date': int(x.split('-')[1])
+                },
+                parlamentary_periods
+            )
         )
 
         contact_info = general_section.findAll('a')
