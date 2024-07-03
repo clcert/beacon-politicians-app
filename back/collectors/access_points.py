@@ -1,7 +1,14 @@
 class OpenDataAPI:
-    main_url = "https://opendata.camara.cl/wscamaradiputados.asmx"
-    current_deputies = f"{main_url}/getDiputados_Vigentes"
-    current_legislature = f"{main_url}/getLegislaturaActual"
+    main_url = "https://opendata.camara.cl"
+
+    # Camara diputados ws
+    wschamber = f"{main_url}/wscamaradiputados.asmx"
+    current_deputies = f"{wschamber}/getDiputados_Vigentes"
+    current_legislature = f"{wschamber}/getLegislaturaActual"
+
+    # Diputado ws
+    wsdeputy = f"{main_url}/camaradiputados/WServices/WSDiputado.asmx"
+    deputy_data = f"{wsdeputy}/retornarDiputado"
 
 class CamaraCL:
     main_url = "https://www.camara.cl/"

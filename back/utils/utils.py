@@ -9,6 +9,8 @@ MONTHS = [
     "julio",    "agosto",   "septiembre",   "octubre",  "noviembre",    "diciembre",
 ]
 
+JSON_PATH = "deputies.json"
+
 def get_current_month():
     return datetime.now().month
 

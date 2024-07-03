@@ -119,7 +119,7 @@ class DeputyPeriod(Base):
                 if key != '_sa_instance_state':
                     setattr(qry_object, key, value)
         else:
-            session.add(self)
+            session.add(new_obj)
         session.commit()
         session.close()
 

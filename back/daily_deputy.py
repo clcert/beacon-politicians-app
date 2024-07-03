@@ -2,6 +2,7 @@ from datetime import datetime
 from models.models import Deputy, DailyDeputy, get_engine
 from utils.beacon import get_pulse_data, get_local_index
 from utils.utils import DEPUTIES_NUM, get_midnight_timestamp
+from utils.json_builder import generate_deputy_json_data
 from utils.argparser import CustomParser
 from collectors.profile import ProfileCollector
 from sqlalchemy.orm import sessionmaker
@@ -29,6 +30,7 @@ def choose_deputy(date: datetime, from_db=True) -> None:
             pulse_value=randOut
         )
         DailyDeputy.save_or_update(daily_deputy)
+        generate_deputy_json_data(daily_deputy)
     else: 
         pc = ProfileCollector(local_index)
         pc.get_profile()
