@@ -236,3 +236,18 @@ class Attendance(Base):
         'Deputy', back_populates='attendance'
     )
 
+    def save_or_update(self):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        qry_object = session.query(Attendance).filter(
+            Attendance.deputy_id == self.deputy_id
+        ).first()
+        if qry_object:
+            for key, value in self.__dict__.items():
+                if key != '_sa_instance_state':
+                    setattr(qry_object, key, value)
+        else:
+            session.add(self)
+        session.commit()
+        session.close()
+

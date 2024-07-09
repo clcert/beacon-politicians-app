@@ -24,12 +24,14 @@ class ProfileCollector:
         Given a local index between 0 and the total number of deputies, returns the id of a deputy.
         :return: Returns the id of the deputy, used in the deputies chamber.
         """
+        logger.info(f"getting real index for deputy {local_id}")
         try:
             response = requests.get(OpenDataAPI.current_deputies)
             soup = BeautifulSoup(response.content, 'xml')
             deputies = soup.find_all('Diputado')
             deputy = deputies[local_id]
-            real_id = int(deputy.find('DIPID').get_text())
+            real_id = int(deputy.find('Id').get_text())
+            logger.info(f"real index for deputy {local_id} is {real_id}")
             return real_id
         except Exception as e:
             logger.error(f"Error getting real index: {e}")

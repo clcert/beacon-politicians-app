@@ -1,0 +1,2 @@
+class VotingCollector:
+    pass
