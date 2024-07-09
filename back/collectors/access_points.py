@@ -21,6 +21,11 @@ class OpenDataAPI:
     attendance_justifications = f"{ws_common}/retornarTiposJustificacionesInasistencia"
     attendance_in_session = f"{ws_sala}/retornarSesionAsistencia"
 
+    # Votings
+    bulletin_law_project = f"{ws_legislative}/retornarProyectoLey"
+    votings_legislature = f"{ws_legislative}/retornarVotacionesXAnno"
+    voting_detail = f"{ws_legislative}/retornarVotacionDetalle"
+
 class CamaraCL:
     main_url = "https://www.camara.cl/"
     biography = f"{main_url}/diputados/detalle/biografia.aspx"

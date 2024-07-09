@@ -1,5 +1,6 @@
 from collectors.access_points import OpenDataAPI
 from models.models import Attendance
+from utils.utils import get_current_legislature
 from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
@@ -12,28 +13,6 @@ class AttendanceCollector:
     def __init__(self, deputy_id):
         self.deputy_id = deputy_id
 
-    def get_current_legislature(self):
-        """
-        Obtains the information from the latest legislature.
-        :return: Returns a dictionary containing the id of the latest legislature, and the date of end and start
-            as a datetime object.
-        """
-        logger.info("getting current legislature")
-        response = requests.get(OpenDataAPI.current_legislature)
-        soup = BeautifulSoup(response.content, 'xml')
-
-        legislature_id = int(soup.find('Id').get_text().strip())
-
-        start = soup.find('FechaInicio').get_text()
-        start = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S")
-
-        end = soup.find('FechaTermino').get_text()
-        end = datetime.strptime(end, "%Y-%m-%dT%H:%M:%S")
-
-        legislature = dict(id=legislature_id, start=start, end=end)
-
-        return legislature
-
 
     def get_camera_sessions_id(self, legislature_id=None):
         """
@@ -42,7 +21,7 @@ class AttendanceCollector:
         """
         logger.info("getting camera sessions")
         if not legislature_id:
-            legislature_id = self.get_current_legislature()['id']
+            legislature_id = get_current_legislature()['id']
 
         url = "{}?prmLegislaturaId={}".format(
             OpenDataAPI.sessions_in_legislature, 

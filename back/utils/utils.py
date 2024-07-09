@@ -1,5 +1,8 @@
+from collectors.access_points import OpenDataAPI
 from datetime import datetime
 from pytz import timezone, UTC
+from bs4 import BeautifulSoup
+import requests
 
 
 DEPUTIES_NUM = 155
@@ -29,3 +32,24 @@ def get_hrs_diff():
     dt_local = datetime.now(timezone("America/Santiago"))
 
     return (dt_utc.hour - dt_local.hour) % 24
+
+def get_current_legislature():
+    """
+    Obtains the information from the latest legislature.
+    :return: Returns a dictionary containing the id of the latest legislature, and the date of end and start
+        as a datetime object.
+    """
+    response = requests.get(OpenDataAPI.current_legislature)
+    soup = BeautifulSoup(response.content, 'xml')
+
+    legislature_id = int(soup.find('Id').get_text().strip())
+
+    start = soup.find('FechaInicio').get_text()
+    start = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S")
+
+    end = soup.find('FechaTermino').get_text()
+    end = datetime.strptime(end, "%Y-%m-%dT%H:%M:%S")
+
+    legislature = dict(id=legislature_id, start=start, end=end)
+
+    return legislature

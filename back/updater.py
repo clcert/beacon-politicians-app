@@ -2,6 +2,8 @@ from collectors.profile import ProfileCollector
 from collectors.expenses.operational import OperationalExpensesCollector
 from collectors.expenses.staff import StaffExpensesCollector
 from collectors.activity import ActivityCollector
+from collectors.attendance import AttendanceCollector
+from collectors.voting import VotingCollector
 from models.models import init_db
 from utils.utils import DEPUTIES_NUM
 from utils.drivers import get_driver
@@ -12,10 +14,21 @@ from datetime import datetime
 def update():
     init_db()
     #driver = get_driver()
-    for local_index in range(DEPUTIES_NUM):
-        prof_col = ProfileCollector(local_index)
-        prof_col.get_profile()
-        prof_col.save_profile()
+    #for local_index in range(DEPUTIES_NUM):
+    prof_col = ProfileCollector(12)
+    prof_col.get_profile()
+    prof_col.save_profile()
+
+    deputy_id = prof_col.profile['id']
+
+    att_col = AttendanceCollector(deputy_id)
+    att_col.get_attendance()
+    att_col.save_attendance()
+
+    vot_col = VotingCollector(deputy_id)
+    vot_col.get_votings()
+    vot_col.save_votings()
+
 
         # exp_col = OperationalExpensesCollector(prof_col.profile)
         # exp_col.get_deputy_expenses()
