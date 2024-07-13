@@ -39,11 +39,11 @@ def get_chrome_driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--headless") # We don't need a GUI
 
-    driver = chromium_driver(options)
+    driver = get_chromium_driver(options)
     if driver:
         return driver
     else:
-        return google_chrome_driver(options)
+        return get_google_chrome_driver(options)
 
 
 def get_chromium_driver(options):

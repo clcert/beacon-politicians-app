@@ -12,7 +12,7 @@ def init_db():
 
 class Base(DeclarativeBase):
     @classmethod
-    def save_or_update(cls, new_obj):
+    def save_or_update(cls, new_obj, refresh=False):
         Session = sessionmaker(bind=get_engine())
         session = Session()
         qry_object = session.query(cls).filter(cls.id == new_obj.id).first()
@@ -23,6 +23,8 @@ class Base(DeclarativeBase):
         else:
             session.add(new_obj)
         session.commit()
+        if refresh:
+            session.refresh(new_obj)
         session.close()
 
     @classmethod
@@ -89,6 +91,14 @@ class Deputy(Base):
         'Attendance', back_populates='deputy'
     )
 
+    @classmethod
+    def get_deputy_by_local_id(cls, local_id):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        deputy = session.query(cls).filter(cls.local_id == local_id).first()
+        session.close()
+        return deputy
+
 class DeputyPeriod(Base):
     __tablename__ = 'deputy_period'
 
@@ -137,32 +147,38 @@ class DeputyPeriod(Base):
             session.commit()
         session.close()
 
-class Bulletin(Base):
-    __tablename__ = 'bulletin'
+class DocumentTypes:
+    LAW_PROJECT = 'Proyecto de Ley'
+    OTHER = 'Otros'
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+class Document(Base):
+    __tablename__ = 'document'
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     date: Mapped[str] = mapped_column(String)
-    bulletin_title: Mapped[str] = mapped_column(String)
-    bulletin_description: Mapped[str] = mapped_column(String)
-    bulletin_status: Mapped[str] = mapped_column(String)
+    document_type: Mapped[str] = mapped_column(String)
+    bulletin_id: Mapped[int] = mapped_column(Integer, nullable=True)
+    title: Mapped[str] = mapped_column(String)
+    description: Mapped[str] = mapped_column(String)
+    status: Mapped[str] = mapped_column(String)
     approval_votes: Mapped[int] = mapped_column(Integer)
     rejection_votes: Mapped[int] = mapped_column(Integer)
     abstention_votes: Mapped[int] = mapped_column(Integer)
 
     deputy_votings: Mapped[List['DeputyVoting']] = relationship(
-        'DeputyVoting', back_populates='bulletin'
+        'DeputyVoting', back_populates='document'
     )
+
 
 class DeputyVoting(Base):
     __tablename__ = 'deputy_voting'
 
     id: Mapped[int] = mapped_column(primary_key=True)
     deputy_id: Mapped[int] = mapped_column(ForeignKey('deputy.id'))
-    bulletin_id: Mapped[int] = mapped_column(ForeignKey('bulletin.id'))
+    document_id: Mapped[int] = mapped_column(ForeignKey('document.id'))
     vote: Mapped[str] = mapped_column(String)
 
-    bulletin: Mapped['Bulletin'] = relationship(
-        'Bulletin', back_populates='deputy_votings'
+    document: Mapped['Document'] = relationship(
+        'Document', back_populates='deputy_votings'
     )
     deputy: Mapped['Deputy'] = relationship(
         'Deputy', back_populates='deputy_votings'

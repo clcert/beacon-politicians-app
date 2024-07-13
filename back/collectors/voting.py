@@ -1,6 +1,6 @@
 from utils.utils import get_current_legislature
 from collectors.access_points import OpenDataAPI
-from models.models import Bulletin, DeputyVoting
+from models.models import DocumentTypes, Document, DeputyVoting
 from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 VOTINGS_TIMEOUT = 3
+VOTING_BLACKLIST = []
 
 class VotingCollector:
     def __init__(self, deputy_id):
@@ -171,6 +172,8 @@ class VotingCollector:
         else:
             votes_limit = min(total_votes, votes_limit)
 
+        logging.info(f"Getting {votes_limit} votings for deputy {self.deputy_id}")
+
         votings = []
         
         for i in range(total_votes):
@@ -217,23 +220,30 @@ class VotingCollector:
         Method used to save the votings of the deputy in the database.
         """
         for voting in self.votings:
-            # TODO: there is a problem if no bulletin is found
-            bulletin = Bulletin(
-                id=bulletin_id,
+            if 'bulletin_id' in voting.keys():
+                bulletin_id = voting['bulletin_id']
+                document_type = DocumentTypes.LAW_PROJECT
+            else:
+                bulletin_id = None
+                document_type = DocumentTypes.OTHER
+
+            document = Document(
                 date=voting['date'],
-                bulletin_title=voting['name'],
-                bulletin_description=voting['description'],
-                bulletin_status=voting['result'],
+                bulletin_id=bulletin_id,
+                document_type=document_type,
+                title=voting['name'],
+                description=voting['description'],
+                status=voting['result'],
                 approval_votes=voting['total_yes'],
                 rejection_votes=voting['total_no'],
                 abstention_votes=voting['total_abstention']
             )
-            Bulletin.save_or_update(bulletin)
+            Document.save_or_update(document, refresh=True)
 
             deputy_voting = DeputyVoting(
                 id=voting['voting_id'],
                 deputy_id=self.deputy_id,
-                bulletin_id=bulletin_id,
+                document_id=document.id,
                 vote=voting['vote_option']
             )
             DeputyVoting.save_or_update(deputy_voting)

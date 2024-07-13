@@ -1,7 +1,7 @@
 from argparse import ArgumentParser, ArgumentTypeError
 from datetime import datetime
 
-class CustomParser(ArgumentParser):
+class CustomArgParser(ArgumentParser):
     def __init__(self, *args, **kwargs):
         if not kwargs.get("description"):
             kwargs["description"] = (
@@ -9,7 +9,15 @@ class CustomParser(ArgumentParser):
             )
         super().__init__(*args, **kwargs)
         self.add_custom_args()
-    
+
+    def add_custom_args(self):
+        self.add_argument(
+            "-h",
+            "--help",
+            help="Muestra la ayuda de este comando.",
+        )
+
+class SelectorArgParser(CustomArgParser):
     def add_custom_args(self):
         self.add_argument(
             "-d",
@@ -21,11 +29,54 @@ class CustomParser(ArgumentParser):
             ),
             type=valid_date
         )
+class UpdaterArgParser(CustomArgParser):
+    def add_custom_args(self):
         self.add_argument(
-            "-l",
-            "--load_from_db",
-            help="Obtiene el diputado del día indicado y lo actualiza en la base de datos.",
+            "-p",
+            "--update_profile",
+            help="Actualiza el perfil del diputado.",
             action="store_true"
+        )
+        self.add_argument(
+            "-a",
+            "--update_activity",
+            help="Actualiza la actividad del diputado.",
+            action="store_true"
+        )
+        self.add_argument(
+            "-t",
+            "--update_attendance",
+            help="Actualiza la asistencia del diputado.",
+            action="store_true"
+        )
+        self.add_argument(
+            "-v",
+            "--update_votings",
+            help="Actualiza las votaciones del diputado.",
+            action="store_true"
+        )
+        self.add_argument(
+            "-e",
+            "--update_expenses",
+            help="Actualiza los gastos del diputado.",
+            action="store_true"
+        )
+        self.add_argument(
+            "-r",
+            "--deputies_range",
+            help="Establece el rango índices de diputados a actualizar. " + \
+                "Formato: <from> <to>, con 0 <= <from> <= <to> <= 154.",
+            nargs=2,
+            type=valid_deputy_index,
+            default=None
+        )
+        self.add_argument(
+            "-d",
+            "--deputy_index",
+            help="Establece el índice del diputado a actualizar. " + \
+                "Formato: 0 <= <index> <= 154.",
+            type=valid_deputy_index,
+            default=None
         )
 
 
@@ -40,3 +91,14 @@ def valid_date(date):
     except ValueError:
         msg = "Not a valid date: '{0}'.".format(date)
         raise ArgumentTypeError(msg)
+    
+def valid_deputy_index(value):
+    try:
+        int_value = int(value)
+        if int_value < 0 or int_value > 154:
+            raise ValueError
+        return int_value
+    except ValueError:
+        msg = f"Indice de diputado no válido: '{value}'. Debe ser un número entre 0 y 154."
+        raise ArgumentTypeError(msg)
+
