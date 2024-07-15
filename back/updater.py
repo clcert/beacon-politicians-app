@@ -19,15 +19,15 @@ def update_deputy_profile(local_index):
     prof_col.get_profile()
     prof_col.save_profile()
 
-    deputy_id = prof_col.profile['id']
-    return deputy_id
+    deputy_profile = prof_col.profile
+    return deputy_profile
 
-def update_deputy_expenses(deputy_id, driver):
-    exp_col = OperationalExpensesCollector(deputy_id, driver=driver)
+def update_deputy_expenses(deputy_profile, driver):
+    exp_col = OperationalExpensesCollector(deputy_profile, driver=driver)
     exp_col.get_deputy_expenses()
     exp_col.save_expenses()
 
-    stf_col = StaffExpensesCollector(deputy_id, driver=driver)
+    stf_col = StaffExpensesCollector(deputy_profile, driver=driver)
     stf_col.get_deputy_expenses()
     stf_col.save_expenses()
 
@@ -54,20 +54,22 @@ def update(deputies_range, update_profile, update_activity, update_attendance, u
     for local_index in deputies_range:
         if update_profile:
             logging.info(f"Actualizando el perfil del diputado {local_index}")
-            deputy_id = update_deputy_profile(local_index)
+            deputy_profile = update_deputy_profile(local_index)
         else:
             logging.info(f"Obteniendo el id real del diputado {local_index}")
             try:
-                deputy_id = Deputy.get_deputy_by_local_id(local_index).id
+                deputy_profile = Deputy.get_deputy_by_local_id(local_index).as_dict()
             except AttributeError:
                 logging.error(f"El diputado {local_index} no existe en la base de datos.")
                 continue
         
+        deputy_id = deputy_profile['id']
+
         if update_activity:
             update_deputy_activity(deputy_id, driver)
 
         if update_expenses:
-            update_deputy_expenses(deputy_id, driver)
+            update_deputy_expenses(deputy_profile, driver)
         
         if update_attendance:
             update_deputy_attendance(deputy_id)

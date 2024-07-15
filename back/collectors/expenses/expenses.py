@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 
 from utils.utils import get_current_month, get_current_year, MONTHS
+from models.models import Deputy
 from utils.drivers import get_driver
 from time import sleep
 
@@ -14,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 MAX_MONTHS_LOOKUP = 6
 
 class ExpensesCollector:
-    def __init__(self, driver=None):        
+    def __init__(self, driver=None, **kwargs):
         self.driver = driver if driver else get_driver()
         self.url = ''
         self.month_selector_id = ''

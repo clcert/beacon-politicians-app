@@ -37,6 +37,9 @@ class Base(DeclarativeBase):
             session.commit()
         session.close()
 
+    def as_dict(self):
+        return { c.name: getattr(self, c.name) for c in self.__table__.columns }
+
 class DailyDeputy(Base):
     __tablename__ = 'daily_deputy'
 
