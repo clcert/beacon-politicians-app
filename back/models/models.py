@@ -2,6 +2,7 @@ from typing import List
 from typing import Optional
 from sqlalchemy import ForeignKey, String, Integer, UniqueConstraint, create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.sql import func
 from datetime import datetime
 
 import logging
@@ -16,6 +17,10 @@ def init_db():
     Base.metadata.create_all(bind=get_engine())
 
 class Base(DeclarativeBase):
+
+    created_at: Mapped[str] = mapped_column(String, default=func.now())
+    updated_at: Mapped[str] = mapped_column(String, default=func.now(), onupdate=func.now())
+
     def save_or_update(self, refresh=False):
         Session = sessionmaker(bind=get_engine())
         session = Session()
@@ -104,6 +109,14 @@ class Deputy(Base):
         deputy = session.query(cls).filter(cls.local_id == local_id).first()
         session.close()
         return deputy
+    
+    @classmethod
+    def get_by_id(cls, deputy_id):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        deputy = session.query(cls).filter(cls.id == deputy_id).first()
+        session.close()
+        return deputy
 
 class DeputyPeriod(Base):
     __tablename__ = 'deputy_period'
@@ -153,6 +166,16 @@ class DeputyPeriod(Base):
             session.commit()
         session.close()
 
+    @classmethod
+    def get_by_deputy_id(cls, deputy_id: int):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        elements = session.query(cls).filter(
+            cls.deputy_id == deputy_id
+        )
+        session.close()
+        return elements
+
 class DocumentTypes:
     LAW_PROJECT = 'Proyecto de Ley'
     OTHER = 'Otros'
@@ -190,6 +213,16 @@ class DeputyVoting(Base):
         'Deputy', back_populates='deputy_votings'
     )
 
+    @classmethod
+    def get_by_deputy_id(cls, deputy_id: int):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        elements = session.query(cls).filter(
+            cls.deputy_id == deputy_id
+        )
+        session.close()
+        return elements
+
 class LawProject(Base):
     __tablename__ = 'law_project'
 
@@ -216,6 +249,16 @@ class DeputyProject(Base):
         'LawProject', back_populates='authors'
     )
 
+    @classmethod
+    def get_by_deputy_id(cls, deputy_id: int):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        elements = session.query(cls).filter(
+            cls.deputy_id == deputy_id
+        )
+        session.close()
+        return elements
+
 class SupportStaffExpense(Base):
     __tablename__ = 'support_staff_expense'
 
@@ -229,6 +272,16 @@ class SupportStaffExpense(Base):
     deputy: Mapped['Deputy'] = relationship(
         'Deputy', back_populates='support_staff_expenses'
     )
+
+    @classmethod
+    def get_by_deputy_id(cls, deputy_id: int):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        elements = session.query(cls).filter(
+            cls.deputy_id == deputy_id
+        )
+        session.close()
+        return elements
 
 class OperationalExpense(Base):
     __tablename__ = 'operational_expense'
@@ -244,6 +297,16 @@ class OperationalExpense(Base):
         'Deputy', back_populates='operational_expenses'
     )
 
+    @classmethod
+    def get_by_deputy_id(cls, deputy_id: int):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        elements = session.query(cls).filter(
+            cls.deputy_id == deputy_id
+        )
+        session.close()
+        return elements
+
 class Attendance(Base):
     __tablename__ = 'attendance'
 
@@ -257,6 +320,16 @@ class Attendance(Base):
     deputy: Mapped['Deputy'] = relationship(
         'Deputy', back_populates='attendance'
     )
+
+    @classmethod
+    def get_by_deputy_id(cls, deputy_id: int):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        elements = session.query(cls).filter(
+            cls.deputy_id == deputy_id
+        )
+        session.close()
+        return elements
 
 class AppErrorLog(Base):
     __tablename__ = 'error'

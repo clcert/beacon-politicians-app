@@ -1,5 +1,5 @@
 from utils.utils import MONTHS, JSON_PATH
-from models.models import DailyDeputy, Deputy, DeputyPeriod, DeputyProject, OperationalExpense, SupportStaffExpense, get_engine
+from models.models import Attendance, DailyDeputy, DeputyVoting, Deputy, DeputyPeriod, DeputyProject, OperationalExpense, SupportStaffExpense, get_engine
 from datetime import datetime
 from os import path, stat
 import json
@@ -28,15 +28,14 @@ def generate_deputy_json_data(daily_deputy: DailyDeputy):
     to be used in the frontend application, without needing to load the
     entire database for each request.
     """
-
-    Session = sessionmaker(bind=get_engine())
-    session = Session()
-
-    deputy: Deputy = session.query(Deputy).filter(Deputy.id == daily_deputy.deputy_id).first()
-    deputy_projects = session.query(DeputyProject).filter(DeputyProject.deputy_id == daily_deputy.deputy_id).all()
-    operational_expenses = session.query(OperationalExpense).filter(OperationalExpense.deputy_id == daily_deputy.deputy_id).all()
-    support_staff_expenses = session.query(SupportStaffExpense).filter(SupportStaffExpense.deputy_id == daily_deputy.deputy_id).all()
-    legislative_periods = session.query(DeputyPeriod).filter(DeputyPeriod.deputy_id == daily_deputy.deputy_id).all()
+    deputy_id = daily_deputy.deputy_id
+    deputy = Deputy.get_by_id(deputy_id)
+    periods = DeputyPeriod.get_by_deputy_id(deputy_id)
+    votings = DeputyVoting.get_by_deputy_id(deputy_id)
+    projects = DeputyProject.get_by_deputy_id(deputy_id)
+    attendance = Attendance.get_by_deputy_id(deputy_id)
+    operational = OperationalExpense.get_by_deputy_id(deputy_id)
+    support_staff = SupportStaffExpense.get_by_deputy_id(deputy_id)
 
     current_deputies = get_json_data()
     if not current_deputies:
