@@ -3,7 +3,6 @@ from typing import Optional
 from sqlalchemy import ForeignKey, String, Integer, UniqueConstraint, create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
-from datetime import datetime
 
 import logging
 
@@ -78,7 +77,6 @@ class Deputy(Base):
     party_acronym: Mapped[str] = mapped_column(String, nullable=True)
     twitter_usr: Mapped[Optional[str]] = mapped_column(String)
     instagram_usr: Mapped[Optional[str]] = mapped_column(String)
-    last_update: Mapped[str] = mapped_column(String, default=datetime.today().strftime('%Y-%m-%d %H:%M:%S'))
 
     daily_deputy: Mapped[List['DailyDeputy']] = relationship(
         'DailyDeputy', back_populates='deputy'
@@ -338,7 +336,6 @@ class AppErrorLog(Base):
     code: Mapped[int] = mapped_column(Integer)
     description: Mapped[str] = mapped_column(String)
     source: Mapped[str] = mapped_column(String)
-    date: Mapped[str] = mapped_column(String, default=datetime.today().strftime('%Y-%m-%d %H:%M:%S'))
 
     @classmethod
     def create(cls, err_type, source, exception):

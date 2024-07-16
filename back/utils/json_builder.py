@@ -43,7 +43,7 @@ def generate_deputy_json_data(daily_deputy: DailyDeputy):
 
     # Check if the deputy is already in the JSON file
     current_deputies["records"] = list(
-        filter(lambda x: x["date"] != timestamp.strftime('%Y-%m-%d'), current_deputies["records"])
+        filter(lambda x: x["date"] != daily_deputy.date, current_deputies["records"])
     )
 
     record = {
@@ -69,19 +69,19 @@ def generate_deputy_json_data(daily_deputy: DailyDeputy):
             "partyAlias": deputy.party_acronym,
             "twitterUsername": deputy.twitter_usr,
             "instagramUsername": deputy.instagram_usr,
-            "periods": list(map(lambda period: [ period.period_from, period.period_to], deputy_periods)),
+            "periods": list(map(lambda period: [ period.period_from, period.period_to], periods)),
         },
         "attendance": None,
         "expenses": None,
         "activity": {
-            "inProcess": len(list(filter(lambda proj: proj.status == "En tramitación", deputy_projects))),
-            "published": len(list(filter(lambda proj: proj.status == "Publicado", deputy_projects))),
-            "archived": len(list(filter(lambda proj: proj.status == "Archivado", deputy_projects))),
-            "withdrawn": len(list(filter(lambda proj: proj.status == "Retirado", deputy_projects))),
-            "rejected": len(list(filter(lambda proj: proj.status == "Rechazado", deputy_projects))),
-            "unadmissible": len(list(filter(lambda proj: proj.status == "Inadmisible", deputy_projects))),
-            "unconstitutional": len(list(filter(lambda proj: proj.status == "Inconstitucional", deputy_projects))),
-            "all": len(law_projects),
+            "inProcess": len(list(filter(lambda proj: proj.status == "En tramitación", projects))),
+            "published": len(list(filter(lambda proj: proj.status == "Publicado", projects))),
+            "archived": len(list(filter(lambda proj: proj.status == "Archivado", projects))),
+            "withdrawn": len(list(filter(lambda proj: proj.status == "Retirado", projects))),
+            "rejected": len(list(filter(lambda proj: proj.status == "Rechazado", projects))),
+            "unadmissible": len(list(filter(lambda proj: proj.status == "Inadmisible", projects))),
+            "unconstitutional": len(list(filter(lambda proj: proj.status == "Inconstitucional", projects))),
+            "all": len(projects),
         },
         "votings": None,
     }
