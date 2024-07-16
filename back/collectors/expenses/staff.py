@@ -40,12 +40,11 @@ class StaffExpensesCollector(ExpensesCollector):
 
     def save_expenses(self):
         for expense in self.expenses:
-            staff_expense = SupportStaffExpense(
+            SupportStaffExpense(
                 deputy_id=self.deputy_id,
                 year=expense['year'],
                 month=expense['month'],
                 hired_staff=expense['num_personal'],
                 amount=expense['total']
-            )
-            SupportStaffExpense.save_or_update(staff_expense)
+            ).save_or_update()
         logger.info(f'staff expenses for deputy {self.deputy_id} were saved')

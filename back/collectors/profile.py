@@ -1,5 +1,6 @@
 from collectors.access_points import OpenDataAPI, CamaraCL
-from models.models import Deputy, DeputyPeriod
+from models.models import Deputy, DeputyPeriod, AppErrorLog
+from models.enums import ErrorType
 from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
@@ -34,13 +35,23 @@ class ProfileCollector:
             logger.info(f"real index for deputy {local_id} is {real_id}")
             return real_id
         except Exception as e:
-            logger.error(f"Error getting real index: {e}")
-            return 0
+            AppErrorLog.create(
+                err_type=ErrorType.REAL_INDEX_ERROR,
+                source=OpenDataAPI.current_deputies,
+                exception=e
+            )
 
     def get_profile(self):
-        logger.info(f"getting profile for deputy {self.id} ({self.local_id})")
-        response = requests.get(self.profile_url)
-        soup = BeautifulSoup(response.content, 'html.parser')
+        logger.info(f"getting profile for deputy {self.id}")
+        try:
+            response = requests.get(self.profile_url)
+            soup = BeautifulSoup(response.content, 'html.parser')
+        except Exception as e:
+            AppErrorLog.create(
+                err_type=ErrorType.PROFILE_HTML_ERROR,
+                source=self.profile_url,
+                exception=e
+            )
 
         title = soup.find('h2')
         title_text_list = title.getText().strip().split(' ')
@@ -57,7 +68,7 @@ class ProfileCollector:
             try:
                 profession = paragraph.getText().split('▪')[1].strip()
             except:
-                logger.error(f"Error parsing profession: {e}")
+                logger.error(f"Error parsing profession")
 
         self.profile['profession'] = profession.strip('.')
 
@@ -93,8 +104,16 @@ class ProfileCollector:
         self.profile['twitter_usr'] = twitter_username if twitter_username.lower() != 'no' else ''
         self.profile['instagram_usr'] = instagram_username if instagram_username.lower() != 'no' else ''
 
-        response_xml = requests.get(f'{OpenDataAPI.deputy_data}?prmDiputadoId={self.id}')
-        xml_soup = BeautifulSoup(response_xml.content, 'xml')
+        try:
+            profile_xml_url = f'{OpenDataAPI.deputy_data}?prmDiputadoId={self.id}'
+            response_xml = requests.get(profile_xml_url)
+            xml_soup = BeautifulSoup(response_xml.content, 'xml')
+        except Exception as e:
+            AppErrorLog(
+                err_type=ErrorType.PROFILE_XML_ERROR,
+                source=profile_xml_url,
+                exception=e
+            )
 
         raw_birthdate = datetime.strptime(
             xml_soup.find('FechaNacimiento').get_text(),
@@ -108,7 +127,7 @@ class ProfileCollector:
         
     def save_profile(self):
         deputy = Deputy(**self.profile)
-        Deputy.save_or_update(deputy)
+        deputy.save_or_update()
         periods = list(map(lambda x: DeputyPeriod(**x), self.periods))
         for period in periods:
-            DeputyPeriod.save_or_update(period)
+            period.save_or_update()

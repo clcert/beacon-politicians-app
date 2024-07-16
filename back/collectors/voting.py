@@ -1,6 +1,7 @@
 from utils.utils import get_current_legislature
 from collectors.access_points import OpenDataAPI
-from models.models import DocumentTypes, Document, DeputyVoting
+from models.models import DocumentTypes, Document, DeputyVoting, AppErrorLog
+from models.enums import ErrorType
 from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
@@ -28,9 +29,15 @@ class VotingCollector:
         start_year = int(start.year)
 
         url = f"{OpenDataAPI.votings_legislature}?prmAnno={start_year}"
-        response = requests.get(url)
-
-        soup = BeautifulSoup(response.content, 'xml')
+        try:
+            response = requests.get(url)
+            soup = BeautifulSoup(response.content, 'xml')
+        except Exception as e:
+            AppErrorLog.create(
+                err_type=ErrorType.LEGISLATURE_VOTING_ERROR,
+                source=url,
+                exception=e
+            )
 
         legislature_voting_start = list(filter(
             lambda v: datetime.strptime(
@@ -44,8 +51,15 @@ class VotingCollector:
         end_year = int(end.year)
 
         url = f"{OpenDataAPI.votings_legislature}?prmAnno={end_year}"
-        response = requests.get(url)
-        soup = BeautifulSoup(response.content, 'xml')
+        try:
+            response = requests.get(url)
+            soup = BeautifulSoup(response.content, 'xml')
+        except Exception as e:
+            AppErrorLog.create(
+                err_type=ErrorType.LEGISLATURE_VOTING_ERROR,
+                source=url,
+                exception=e
+            )
 
         legislature_voting_end = list(filter(
             lambda v: datetime.strptime(
@@ -238,12 +252,11 @@ class VotingCollector:
                 rejection_votes=voting['total_no'],
                 abstention_votes=voting['total_abstention']
             )
-            Document.save_or_update(document, refresh=True)
+            document.save_or_update(refresh=True)
 
-            deputy_voting = DeputyVoting(
+            DeputyVoting(
                 id=voting['voting_id'],
                 deputy_id=self.deputy_id,
                 document_id=document.id,
                 vote=voting['vote_option']
-            )
-            DeputyVoting.save_or_update(deputy_voting)
+            ).save_or_update()

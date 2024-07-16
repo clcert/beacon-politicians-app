@@ -4,6 +4,11 @@ from sqlalchemy import ForeignKey, String, Integer, UniqueConstraint, create_eng
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, Mapped, mapped_column, relationship
 from datetime import datetime
 
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
 def get_engine():
     return create_engine('sqlite:///deputies.db')
 
@@ -11,29 +16,27 @@ def init_db():
     Base.metadata.create_all(bind=get_engine())
 
 class Base(DeclarativeBase):
-    @classmethod
-    def save_or_update(cls, new_obj, refresh=False):
+    def save_or_update(self, refresh=False):
         Session = sessionmaker(bind=get_engine())
         session = Session()
-        qry_object = session.query(cls).filter(cls.id == new_obj.id).first()
+        qry_object = session.query(self.__class__).filter(self.__class__.id == self.id).first()
         if qry_object:
-            for key, value in new_obj.__dict__.items():
+            for key, value in self.__dict__.items():
                 if key != '_sa_instance_state':
                     setattr(qry_object, key, value)
         else:
-            session.add(new_obj)
+            session.add(self)
         session.commit()
         if refresh:
-            session.refresh(new_obj)
+            session.refresh(self)
         session.close()
 
-    @classmethod
-    def save_if_not_exists(cls, new_obj):
+    def save_if_not_exists(self):
         Session = sessionmaker(bind=get_engine())
         session = Session()
-        qry_object = session.query(cls).filter(cls.id == new_obj.id).first()
+        qry_object = session.query(self.__class__).filter(self.__class__.id == self.id).first()
         if not qry_object:
-            session.add(new_obj)
+            session.add(self)
             session.commit()
         session.close()
 
@@ -118,35 +121,35 @@ class DeputyPeriod(Base):
         UniqueConstraint('deputy_id', 'start_date', 'end_date', name='deputy_periods_unique'),
     )
 
-    @classmethod
-    def save_or_update(cls, new_obj):
+    def save_or_update(self):
         Session = sessionmaker(bind=get_engine())
         session = Session()
-        qry_object = session.query(cls).filter(
-            cls.deputy_id == new_obj.deputy_id,
-            cls.start_date == new_obj.start_date,
-            cls.end_date == new_obj.end_date
+        obj_class = self.__class__
+        qry_object = session.query(obj_class).filter(
+            obj_class.deputy_id == self.deputy_id,
+            obj_class.start_date == self.start_date,
+            obj_class.end_date == self.end_date
         ).first()
         if qry_object:
-            for key, value in new_obj.__dict__.items():
+            for key, value in self.__dict__.items():
                 if key != '_sa_instance_state':
                     setattr(qry_object, key, value)
         else:
-            session.add(new_obj)
+            session.add(self)
         session.commit()
         session.close()
 
-    @classmethod
-    def save_if_not_exists(cls, new_obj):
+    def save_if_not_exists(self):
         Session = sessionmaker(bind=get_engine())
         session = Session()
-        qry_object = session.query(cls).filter(
-            cls.deputy_id == new_obj.deputy_id,
-            cls.start_date == new_obj.start_date,
-            cls.end_date == new_obj.end_date
+        obj_class = self.__class__
+        qry_object = session.query(obj_class).filter(
+            obj_class.deputy_id == self.deputy_id,
+            obj_class.start_date == self.start_date,
+            obj_class.end_date == self.end_date
         ).first()
         if not qry_object:
-            session.add(new_obj)
+            session.add(self)
             session.commit()
         session.close()
 
@@ -255,18 +258,28 @@ class Attendance(Base):
         'Deputy', back_populates='attendance'
     )
 
-    def save_or_update(self):
+class AppErrorLog(Base):
+    __tablename__ = 'error'
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    code: Mapped[int] = mapped_column(Integer)
+    description: Mapped[str] = mapped_column(String)
+    source: Mapped[str] = mapped_column(String)
+    date: Mapped[str] = mapped_column(String, default=datetime.today().strftime('%Y-%m-%d %H:%M:%S'))
+
+    @classmethod
+    def create(cls, err_type, source, exception):
+        logger.error(f"error:\n{exception}")
+        AppErrorLog(
+            code=err_type.code,
+            description=err_type.description,
+            source=source
+        ).save()
+        exit(1)
+
+    def save(self):
         Session = sessionmaker(bind=get_engine())
         session = Session()
-        qry_object = session.query(Attendance).filter(
-            Attendance.deputy_id == self.deputy_id
-        ).first()
-        if qry_object:
-            for key, value in self.__dict__.items():
-                if key != '_sa_instance_state':
-                    setattr(qry_object, key, value)
-        else:
-            session.add(self)
+        session.add(self)
         session.commit()
         session.close()
-

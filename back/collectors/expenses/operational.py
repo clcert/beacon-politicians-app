@@ -45,14 +45,13 @@ class OperationalExpensesCollector(ExpensesCollector):
         for expense in self.expenses:
             for op_type in OP_EXPENSES_TYPES:
                 amount = expense[op_type]
-                operational_expense = OperationalExpense(
+                OperationalExpense(
                     deputy_id=self.deputy_id,
                     type=op_type,
                     year=expense['year'],
                     month=expense['month'],
                     amount=amount
-                )
-                OperationalExpense.save_or_update(operational_expense)
+                ).save_or_update()
         logger.info(f'operational expenses for deputy {self.deputy_id} were saved')
 
 

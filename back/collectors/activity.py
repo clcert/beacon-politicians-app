@@ -113,5 +113,5 @@ class ActivityCollector:
                 deputy_id=self.deputy_id,
                 project_id=law_project.id
             )
-            LawProject.save_or_update(law_project)
-            DeputyProject.save_or_update(deputy_project)
+            law_project.save_or_update()
+            deputy_project.save_or_update()

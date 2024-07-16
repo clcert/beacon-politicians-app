@@ -1,8 +1,8 @@
 from collectors.access_points import OpenDataAPI
-from models.models import Attendance
+from models.models import Attendance, AppErrorLog
+from models.enums import ErrorType
 from utils.utils import get_current_legislature
 from bs4 import BeautifulSoup
-from datetime import datetime
 import requests
 import logging
 
@@ -23,12 +23,19 @@ class AttendanceCollector:
         if not legislature_id:
             legislature_id = get_current_legislature()['id']
 
-        url = "{}?prmLegislaturaId={}".format(
-            OpenDataAPI.sessions_in_legislature, 
-            legislature_id
-        )
-        response = requests.get(url)
-        soup = BeautifulSoup(response.content, 'xml')
+        try:
+            url = "{}?prmLegislaturaId={}".format(
+                OpenDataAPI.sessions_in_legislature, 
+                legislature_id
+            )
+            response = requests.get(url)
+            soup = BeautifulSoup(response.content, 'xml')
+        except Exception as e:
+            AppErrorLog.create(
+                err_type=ErrorType.ATTENDANCE_ERROR,
+                source=url,
+                exception=e
+            )
 
         sessions = soup.find_all('Sesion')
 
@@ -54,8 +61,15 @@ class AttendanceCollector:
         :return: Returns a list containing dictionaries objects, where every dictionary contains the information for
         a time of attendance value, as name, reduction of days and the value (the id according to the site).
         """
-        response = requests.get(OpenDataAPI.attendance_justifications)
-        soup = BeautifulSoup(response.content, 'xml')
+        try:
+            response = requests.get(OpenDataAPI.attendance_justifications)
+            soup = BeautifulSoup(response.content, 'xml')
+        except Exception as e:
+            AppErrorLog.create(
+                err_type=ErrorType.ATTENDANCE_ERROR,
+                source=OpenDataAPI.attendance_justifications,
+                exception=e
+            )
 
         justifications = soup.find_all('JustificacionInasistencia')
         justifications_list = []
@@ -84,9 +98,16 @@ class AttendanceCollector:
         deputy_attendance = dict(present=0, justified_absent=0, unjustified_absent=0, total=0)
 
         for session in sessions:
-            session_url = f"{OpenDataAPI.attendance_in_session}?prmSesionId={session}"
-            response = requests.get(session_url)
-            soup = BeautifulSoup(response.content, 'xml')
+            try:
+                session_url = f"{OpenDataAPI.attendance_in_session}?prmSesionId={session}"
+                response = requests.get(session_url)
+                soup = BeautifulSoup(response.content, 'xml')
+            except Exception as e:
+                AppErrorLog.create(
+                    err_type=ErrorType.ATTENDANCE_ERROR,
+                    source=session_url,
+                    exception=e
+                )
 
             # If there is no register of attendance we skip this session
             if not soup.find('Asistencia'):
@@ -131,11 +152,10 @@ class AttendanceCollector:
         """
         Saves the attendance of a deputy in the database.
         """
-        attendance = Attendance(
+        Attendance(
             deputy_id=self.deputy_id,
             total_sessions=self.deputy_attendance['total'],
             total_attended=self.deputy_attendance['present'],
             total_justified=self.deputy_attendance['justified_absent'],
             total_unjustified=self.deputy_attendance['unjustified_absent']
-        )
-        attendance.save_or_update()
+        ).save_or_update()
