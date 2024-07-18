@@ -14,13 +14,14 @@ def get_local_index(pulse_randout):
     return index
 
 
-def get_pulse_data(datetime: datetime):
+def get_pulse_data(date_time: datetime):
     """
     Given a datetime object, gets its timestamp and return the beacon record and the output value.
     :param date_hour: Datetime object used to get the record and output value.
     :return:
     """
-    url = 'https://random.uchile.cl/beacon/2.1-beta/pulse?timeGE=' + str(int(datetime.timestamp()) * 1000)
+    formatted_date = f'{date_time.isoformat()}.000Z'
+    url = 'https://random.uchile.cl/beacon/2.1-beta/pulse?timeGE={}'.format(formatted_date)
     try:
         page = requests.get(url)
         json_page = page.json()

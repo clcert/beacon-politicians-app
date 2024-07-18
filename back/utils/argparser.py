@@ -20,6 +20,12 @@ class CustomArgParser(ArgumentParser):
 class SelectorArgParser(CustomArgParser):
     def add_custom_args(self):
         self.add_argument(
+            "-l",
+            "--load_from_db",
+            help="Carga el diputado del día desde la base de datos.",
+            action="store_true"
+        )
+        self.add_argument(
             "-d",
             "--date",
             help=(

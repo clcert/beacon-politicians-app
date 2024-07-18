@@ -1,11 +1,10 @@
 from datetime import datetime
 from models.models import Deputy, DailyDeputy, get_engine
 from utils.beacon import get_pulse_data, get_local_index
-from utils.utils import DEPUTIES_NUM, get_midnight_timestamp
+from utils.utils import get_midnight_timestamp
 from utils.json_builder import generate_deputy_json_data
-from utils.argparser import CustomParser
+from utils.argparser import SelectorArgParser
 from collectors.profile import ProfileCollector
-from sqlalchemy.orm import sessionmaker
 
 
 def choose_deputy(date: datetime, from_db=True) -> None:
@@ -18,18 +17,14 @@ def choose_deputy(date: datetime, from_db=True) -> None:
     local_index = get_local_index(randOut)
 
     if from_db:
-        Session = sessionmaker(bind=get_engine())
-        session = Session()
-        todays_deputy = session.query(Deputy).filter(Deputy.local_id == local_index).first()
-
+        todays_deputy = Deputy.get_deputy_by_local_id(local_index)
         daily_deputy = DailyDeputy(
             deputy_id=todays_deputy.id,
             date=midnight_datetime.strftime('%Y-%m-%d'),
             chain_index=chainId,
             pulse_index=pulseId,
             pulse_value=randOut
-        )
-        DailyDeputy.save_or_update(daily_deputy)
+        ).save_or_update()
         generate_deputy_json_data(daily_deputy)
     else: 
         pc = ProfileCollector(local_index)
@@ -42,7 +37,7 @@ def choose_deputy(date: datetime, from_db=True) -> None:
 
 
 if __name__ == '__main__':
-    args = CustomParser().parse_args()
+    args = SelectorArgParser().parse_args()
 
     if args.date:
         datetime_obj = args.date
