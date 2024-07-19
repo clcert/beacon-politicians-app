@@ -59,6 +59,28 @@ class DailyDeputy(Base):
 
     deputy: Mapped['Deputy'] = relationship('Deputy', back_populates='daily_deputy')
 
+    __table_args__ = (
+        UniqueConstraint('chain_index', 'pulse_index', name='daily_deputy_unique'),
+    )
+
+    def save_or_update(self, refresh=False):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        qry_object = session.query(self.__class__).filter(
+            self.__class__.chain_index == self.chain_index,
+            self.__class__.pulse_index == self.pulse_index
+        ).first()
+        if qry_object:
+            for key, value in self.__dict__.items():
+                if key != '_sa_instance_state':
+                    setattr(qry_object, key, value)
+        else:
+            session.add(self)
+        session.commit()
+        if refresh:
+            session.refresh(self)
+        session.close()
+
 class Deputy(Base):
     __tablename__ = 'deputy'
 
@@ -199,7 +221,8 @@ class Document(Base):
 class DeputyVoting(Base):
     __tablename__ = 'deputy_voting'
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    voting_id: Mapped[int] = mapped_column(Integer)
     deputy_id: Mapped[int] = mapped_column(ForeignKey('deputy.id'))
     document_id: Mapped[int] = mapped_column(ForeignKey('document.id'))
     vote: Mapped[str] = mapped_column(String)
@@ -211,15 +234,38 @@ class DeputyVoting(Base):
         'Deputy', back_populates='deputy_votings'
     )
 
+    __table_args__ = (
+        UniqueConstraint('deputy_id', 'voting_id', name='deputy_votes_unique'),
+    )
+
     @classmethod
     def get_by_deputy_id(cls, deputy_id: int):
         Session = sessionmaker(bind=get_engine())
         session = Session()
-        elements = session.query(cls).filter(
+        elements = session.query(cls).join(Document).filter(
             cls.deputy_id == deputy_id
         )
         session.close()
         return elements
+    
+    def save_or_update(self, refresh=False):
+        Session = sessionmaker(bind=get_engine())
+        session = Session()
+        qry_object = session.query(self.__class__).filter(
+            self.__class__.deputy_id == self.deputy_id,
+            self.__class__.voting_id == self.voting_id
+        ).first()
+        if qry_object:
+            for key, value in self.__dict__.items():
+                if key != '_sa_instance_state':
+                    setattr(qry_object, key, value)
+        else:
+            session.add(self)
+        session.commit()
+        if refresh:
+            session.refresh(self)
+        session.close()
+
 
 class LawProject(Base):
     __tablename__ = 'law_project'
@@ -251,7 +297,7 @@ class DeputyProject(Base):
     def get_by_deputy_id(cls, deputy_id: int):
         Session = sessionmaker(bind=get_engine())
         session = Session()
-        elements = session.query(cls).filter(
+        elements = session.query(cls).join(LawProject).filter(
             cls.deputy_id == deputy_id
         )
         session.close()

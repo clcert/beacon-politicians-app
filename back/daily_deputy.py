@@ -15,6 +15,7 @@ def choose_deputy(date: datetime, from_db=True) -> None:
     midnight_datetime = get_midnight_timestamp(date)
     (chainId, pulseId, randOut) = get_pulse_data(midnight_datetime)
     local_index = get_local_index(randOut)
+    local_index = 2
 
     if from_db:
         todays_deputy = Deputy.get_deputy_by_local_id(local_index)
@@ -24,7 +25,8 @@ def choose_deputy(date: datetime, from_db=True) -> None:
             chain_index=chainId,
             pulse_index=pulseId,
             pulse_value=randOut
-        ).save_or_update()
+        )
+        daily_deputy.save_or_update(refresh=True)
         generate_deputy_json_data(daily_deputy)
     else: 
         pc = ProfileCollector(local_index)

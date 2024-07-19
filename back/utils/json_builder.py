@@ -1,5 +1,5 @@
 from utils.utils import MONTHS, JSON_PATH
-from models.models import Attendance, DailyDeputy, DeputyVoting, Deputy, DeputyPeriod, DeputyProject, OperationalExpense, SupportStaffExpense, get_engine
+from models.models import Attendance, DailyDeputy, DeputyVoting, Deputy, DeputyPeriod, DeputyProject, OperationalExpense, SupportStaffExpense, LawProject
 from datetime import datetime
 from os import path, stat
 import json
@@ -32,8 +32,8 @@ def generate_deputy_json_data(daily_deputy: DailyDeputy):
     deputy = Deputy.get_by_id(deputy_id)
     periods = DeputyPeriod.get_by_deputy_id(deputy_id)
     votings = DeputyVoting.get_by_deputy_id(deputy_id)
-    projects = DeputyProject.get_by_deputy_id(deputy_id)
-    attendance = Attendance.get_by_deputy_id(deputy_id)
+    deputy_projects = DeputyProject.get_by_deputy_id(deputy_id)
+    attendance = Attendance.get_by_deputy_id(deputy_id).first()
     operational = OperationalExpense.get_by_deputy_id(deputy_id)
     support_staff = SupportStaffExpense.get_by_deputy_id(deputy_id)
 
@@ -46,45 +46,71 @@ def generate_deputy_json_data(daily_deputy: DailyDeputy):
         filter(lambda x: x["date"] != daily_deputy.date, current_deputies["records"])
     )
 
-    record = {
-        "index": deputy.id,
-        "date": daily_deputy.date,
-        "updateTimestamp": datetime.today().strftime('%Y-%m-%d %H:%M:%S'),
-        "beacon": {
-            "chainId": daily_deputy.chain_index,
-            "pulseId": daily_deputy.pulse_index,
-        },
-        "profile": {
-            "name": deputy.name,
-            "firstSurname": deputy.father_surname,
-            "secondSurname": deputy.mother_surname,
-            "picture": "",
-            "gender": deputy.gender,
-            "birthdate": deputy.birth_date,
-            "profession": deputy.profession,
-            "district": deputy.district_number,
-            "region": deputy.district_region,
-            "communes": deputy.district_communes,
-            "party": deputy.party_name,
-            "partyAlias": deputy.party_acronym,
-            "twitterUsername": deputy.twitter_usr,
-            "instagramUsername": deputy.instagram_usr,
-            "periods": list(map(lambda period: [ period.period_from, period.period_to], periods)),
-        },
-        "attendance": None,
-        "expenses": None,
-        "activity": {
-            "inProcess": len(list(filter(lambda proj: proj.status == "En tramitación", projects))),
-            "published": len(list(filter(lambda proj: proj.status == "Publicado", projects))),
-            "archived": len(list(filter(lambda proj: proj.status == "Archivado", projects))),
-            "withdrawn": len(list(filter(lambda proj: proj.status == "Retirado", projects))),
-            "rejected": len(list(filter(lambda proj: proj.status == "Rechazado", projects))),
-            "unadmissible": len(list(filter(lambda proj: proj.status == "Inadmisible", projects))),
-            "unconstitutional": len(list(filter(lambda proj: proj.status == "Inconstitucional", projects))),
-            "all": len(projects),
-        },
-        "votings": None,
+    record = {}
+
+    record["index"] = deputy.id
+    record["date"] = daily_deputy.date
+    record["updateTimestamp"] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+    record["beacon"] = {
+        "chainId": daily_deputy.chain_index,
+        "pulseId": daily_deputy.pulse_index,
     }
+    record["profile"] = {
+        "name": deputy.name,
+        "firstSurname": deputy.father_surname,
+        "secondSurname": deputy.mother_surname,
+        "picture": "",
+        "gender": deputy.gender,
+        "birthdate": deputy.birth_date,
+        "profession": deputy.profession,
+        "district": deputy.district_number,
+        "region": deputy.district_region,
+        "communes": deputy.district_communes,
+        "party": deputy.party_name,
+        "partyAlias": deputy.party_acronym,
+        "twitterUsername": deputy.twitter_usr,
+        "instagramUsername": deputy.instagram_usr,
+        "periods": list(map(lambda period: [ period.start_date, period.end_date], periods)),
+    }
+    record["attendance"] = {
+        "total": attendance.total_sessions,
+        "present": attendance.total_attended,
+        "justified": attendance.total_justified,
+        "unjustified": attendance.total_unjustified,
+        "lastUpdate": attendance.updated_at,
+    }
+
+    record["expenses"] = { }
+
+
+    filter_by_status = lambda status: deputy_projects.filter(LawProject.status == status)
+    record["activity"] = {
+        "inProcess": filter_by_status("En tramitación").count(),
+        "published": filter_by_status("Publicado").count(),
+        "archived": filter_by_status("Archivado").count(),
+        "withdrawn": filter_by_status("Retirado").count(),
+        "rejected": filter_by_status("Rechazado").count(),
+        "unadmissible": filter_by_status("Inadmisible").count(),
+        "unconstitutional": filter_by_status("Inconstitucional").count(),
+        "all": deputy_projects.count(),
+    }
+
+    print(votings.count())
+    record["votings"] = [
+        {
+            "votingId": voting.id,
+            "votingDate": voting.document.date,
+            "bulletinNumber": voting.document.bulletin_id,
+            "documentTitle": voting.document.title,
+			"articleText": voting.document.description,
+			"voted": voting.vote,
+			"totalApproved": voting.document.approval_votes, 
+			"totalRejected": voting.document.rejection_votes,
+			"totalAbstention": voting.document.abstention_votes,
+			"result": voting.document.status,
+        } for voting in votings
+    ]
+
     current_deputies["records"].append(record)
     current_deputies["records"].sort(key=lambda dep: dep['date'])
     current_deputies["records"] = current_deputies["records"][-14:]
